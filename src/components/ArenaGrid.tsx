@@ -25,12 +25,13 @@ function pointsFor(cell: ArenaCell): string {
 type Props = {
   cells: ArenaCell[]
   activePlayer: PlayerId | null
+  selectableKeys?: Set<string>
   lastCapturedKey: string | null
   onCapture: (row: number, col: number) => void
 }
 
-export function ArenaGrid({ cells, activePlayer, lastCapturedKey, onCapture }: Props) {
-  const available = activePlayer ? getAvailableCells(cells, activePlayer) : new Set<string>()
+export function ArenaGrid({ cells, activePlayer, selectableKeys, lastCapturedKey, onCapture }: Props) {
+  const available = selectableKeys ?? (activePlayer ? getAvailableCells(cells, activePlayer) : new Set<string>())
   const activeColor = activePlayer ? PLAYER_BY_ID[activePlayer].accent : '#ffffff'
 
   return (
@@ -60,6 +61,7 @@ export function ArenaGrid({ cells, activePlayer, lastCapturedKey, onCapture }: P
                 'arena-cell',
                 owner ? 'is-owned' : '',
                 isAvailable ? 'is-available' : '',
+                selectableKeys?.has(key) ? 'is-attack-target' : '',
                 isCaptured ? 'is-captured' : '',
                 hasBoundary ? 'has-boundary' : '',
               ].join(' ')}

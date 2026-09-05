@@ -51,6 +51,36 @@ input {
   gap: 12px;
 }
 
+.turn-indicator {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  min-width: 52px;
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+.turn-indicator svg {
+  width: 34px;
+  height: 34px;
+  overflow: visible;
+}
+
+.turn-indicator path {
+  opacity: 0.52;
+  stroke: var(--paper);
+  stroke-width: 1.2;
+  transition: opacity 180ms ease, transform 180ms ease;
+  transform-origin: 20px 20px;
+}
+
+.turn-indicator path.is-active {
+  opacity: 1;
+  stroke: var(--ink);
+  stroke-width: 2;
+  transform: scale(1.1);
+}
+
 .phase-badge {
   display: grid;
   gap: 2px;
@@ -292,29 +322,19 @@ h2 {
   color: var(--gold);
 }
 
-.target-list {
-  display: grid;
-  gap: 8px;
-  max-width: 520px;
-}
-
-.target-button {
-  padding: 11px 14px;
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  background: var(--paper-deep);
-  color: var(--ink);
-  cursor: pointer;
-  text-align: left;
-}
-
-.target-button:hover {
-  border-color: var(--gold);
-  background: var(--paper);
-}
-
 .battle-step {
   border-color: var(--gold);
+}
+
+.queue-status,
+.map-instruction {
+  margin: 0;
+  padding: 9px 12px;
+  border: 1px solid var(--gold);
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--gold) 12%, var(--paper));
+  color: var(--ink);
+  text-align: center;
 }
 
 .primary,
@@ -394,6 +414,19 @@ h2 {
 .arena-cell:focus-visible .arena-cell-fill {
   fill: color-mix(in srgb, var(--active-color) 42%, var(--paper));
   stroke: var(--wood);
+}
+
+.arena-cell.is-attack-target .arena-cell-fill {
+  stroke: #9b3f32;
+  stroke-width: 3;
+  stroke-dasharray: 5 3;
+}
+
+.arena-cell.is-attack-target:hover .arena-cell-fill,
+.arena-cell.is-attack-target:focus-visible .arena-cell-fill {
+  fill: color-mix(in srgb, #9b3f32 24%, var(--paper));
+  stroke: #7d2923;
+  stroke-width: 4;
 }
 
 .arena-ripple {
