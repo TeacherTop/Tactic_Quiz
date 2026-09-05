@@ -5,8 +5,11 @@ export function useCountdown(
   durationMs: number,
   onEnd: () => void,
   resetKey = '',
+  paused = false,
 ): number {
   const [remainingMs, setRemainingMs] = useState(durationMs)
+  const remainingRef = useRef(durationMs)
+  const resetKeyRef = useRef(resetKey)
   const ended = useRef(false)
   const onEndRef = useRef(onEnd)
 
@@ -15,13 +18,24 @@ export function useCountdown(
   }, [onEnd])
 
   useEffect(() => {
-    if (!running) return
+    if (resetKeyRef.current !== resetKey) {
+      resetKeyRef.current = resetKey
+      remainingRef.current = durationMs
+      setRemainingMs(durationMs)
+    }
+    if (!running) {
+      remainingRef.current = durationMs
+      setRemainingMs(durationMs)
+      return
+    }
+    if (paused) return
     ended.current = false
-    const endAt = performance.now() + durationMs
+    const endAt = performance.now() + remainingRef.current
 
     let frame = 0
     const tick = () => {
       const left = Math.max(0, endAt - performance.now())
+      remainingRef.current = left
       setRemainingMs(left)
       if (left <= 0) {
         if (!ended.current) {
@@ -34,7 +48,7 @@ export function useCountdown(
     }
     frame = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(frame)
-  }, [running, durationMs, resetKey])
+  }, [running, durationMs, resetKey, paused])
 
   return running ? remainingMs : durationMs
 }

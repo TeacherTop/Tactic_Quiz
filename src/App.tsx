@@ -1,4 +1,5 @@
-import { useEffect, useReducer, useState } from 'react'
+import { useEffect, useReducer, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import heroArena from './assets/hero.png'
 import { ArenaGrid } from './components/ArenaGrid'
 import { PlayerDock } from './components/PlayerDock'
@@ -22,8 +23,12 @@ import './styles.css'
 
 type Phase = 'home' | 'expansion' | 'expansion-capture' | 'expansion-final' | 'battle-select' | 'battle-warmup' | 'battle-number' | 'results'
 const MAX_BATTLE_ROUNDS = 10
+const ANNOUNCEMENT_MS = 2200
 const PLAYER_IDS: PlayerId[] = ['you', 'alex', 'marina']
 type Answers = Record<PlayerId, number | null>
+type RoundResult =
+  | { kind: 'quiz'; question: QuizQuestion; answers: Answers }
+  | { kind: 'numeric'; question: NumericQuestion; answers: Record<PlayerId, number | null> }
 
 type Match = {
   scores: Record<PlayerId, number>
@@ -307,10 +312,39 @@ export default function App() {
   const [state, dispatch] = useReducer(reducer, { phase: 'home', match: null })
   const [menuNotice, setMenuNotice] = useState('')
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [paused, setPaused] = useState(false)
+  const [announcement, setAnnouncement] = useState(true)
+  const [roundResult, setRoundResult] = useState<RoundResult | null>(null)
+  const previousRef = useRef<{ phase: Phase; match: Match | null }>({ phase: 'home', match: null })
   const { phase, match } = state
-  const startMatch = () => { setSettingsOpen(false); dispatch({ type: 'start' }) }
-  const exitGame = () => { setSettingsOpen(false); dispatch({ type: 'exit' }) }
-  const timedPhase = phase === 'expansion' || phase === 'expansion-final' || phase === 'battle-warmup' || phase === 'battle-number'
+  const startMatch = () => { setSettingsOpen(false); setPaused(false); setAnnouncement(true); dispatch({ type: 'start' }) }
+  const exitGame = () => { setSettingsOpen(false); setPaused(false); dispatch({ type: 'exit' }) }
+  const questionPhase = phase === 'expansion' || phase === 'expansion-final' || phase === 'battle-warmup' || phase === 'battle-number'
+  const shouldAnnounce = questionPhase && Boolean(match)
+  const timedPhase = questionPhase
+  const announcementKey = match ? `${phase}-${match.expansionRound}-${match.battleRound}-${match.target?.row ?? ''}-${match.target?.col ?? ''}` : 'home'
+  useEffect(() => {
+    if (!shouldAnnounce) return
+    setAnnouncement(true)
+    const id = window.setTimeout(() => setAnnouncement(false), ANNOUNCEMENT_MS)
+    return () => window.clearTimeout(id)
+  }, [announcementKey, shouldAnnounce])
+  useEffect(() => {
+    const previous = previousRef.current
+    if (previous.match && previous.phase !== phase) {
+      if (previous.phase === 'expansion' && previous.match.expansionAnswers.you !== null) {
+        setRoundResult({ kind: 'quiz', question: previous.match.expansionQuestion, answers: previous.match.expansionAnswers })
+      } else if (previous.phase === 'battle-warmup' && previous.match.warmupAnswers.you !== null) {
+        setRoundResult({ kind: 'quiz', question: previous.match.warmupQuestion, answers: previous.match.warmupAnswers })
+      } else if (previous.phase === 'battle-number' && previous.match.numericAnswers.you !== null) {
+        setRoundResult({ kind: 'numeric', question: previous.match.numericQuestion, answers: previous.match.numericAnswers })
+      }
+      const id = window.setTimeout(() => setRoundResult(null), 1900)
+      previousRef.current = { phase, match }
+      return () => window.clearTimeout(id)
+    }
+    previousRef.current = { phase, match }
+  }, [phase, match])
   const timerKey = match ? `${phase}-${match.expansionRound}-${match.battleRound}-${match.target?.row ?? ''}-${match.target?.col ?? ''}` : 'none'
   const remainingMs = useCountdown(timedPhase, QUIZ_TIME_MS, () => {
     dispatch({
@@ -322,10 +356,10 @@ export default function App() {
             ? 'finish-warmup'
             : 'finish-number',
     })
-  }, timerKey)
+  }, timerKey, paused || announcement)
 
   useEffect(() => {
-    if (!match) return
+    if (!match || paused || announcement) return
     if (phase === 'expansion') {
       const player = PLAYERS.find((candidate) => candidate.kind === 'bot' && match.expansionAnswers[candidate.id] === null)
       if (player) {
@@ -366,10 +400,15 @@ export default function App() {
         return () => window.clearTimeout(id)
       }
     }
-  }, [phase, match])
+  }, [phase, match, paused, announcement])
+
+  const togglePause = () => {
+    setSettingsOpen(false)
+    setPaused((value) => !value)
+  }
 
   const humanQuestion = (question: QuizQuestion, answers: Answers, type: 'expansion' | 'warmup') => (
-    <QuestionPanel question={question} remainingMs={remainingMs} locked={answers.you !== null} onChoose={(pick) => type === 'expansion'
+    <QuestionPanel question={question} remainingMs={remainingMs} locked={answers.you !== null || paused} onChoose={(pick) => type === 'expansion'
       ? dispatch({ type: 'answer-expansion', id: 'you', pick, answeredAt: performance.now() })
       : dispatch({ type: 'answer-warmup', id: 'you', pick })} />
   )
@@ -387,17 +426,24 @@ export default function App() {
   return <div className="arena">
     <header className="topbar">
       <div><p className="kicker">Арена</p><h1>Ближе всех</h1></div>
-      {match && phase !== 'home' ? <div className="topbar-tools"><TurnIndicator activePlayer={activeTurn} /><PhaseBadge phase={phase} match={match} /><PlayerDock scores={match.scores} badges={{ [match.attacker]: phase.startsWith('battle') ? 'атакует' : undefined }} /><div className={`settings-menu${settingsOpen ? ' is-open' : ''}`}><button type="button" className="settings-button" aria-label="Настройки" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((open) => !open)}><span aria-hidden="true">⚙</span></button>{settingsOpen ? <div className="settings-popover"><button type="button" className="exit-button" onClick={exitGame}>Выйти из игры</button></div> : null}</div></div> : null}
+      {match && phase !== 'home' ? <div className="topbar-tools"><TurnIndicator activePlayer={activeTurn} /><PhaseBadge phase={phase} match={match} /><PlayerDock scores={match.scores} badges={{ [match.attacker]: phase.startsWith('battle') ? 'атакует' : undefined }} /><div className={`settings-menu${settingsOpen ? ' is-open' : ''}`}><button type="button" className="settings-button" aria-label="Настройки" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((open) => !open)}><span aria-hidden="true">⚙</span></button>{settingsOpen ? <div className="settings-popover"><button type="button" className="pause-button" onClick={togglePause}>{paused ? 'Продолжить' : 'Приостановить игру'}</button><button type="button" className="exit-button" onClick={exitGame}>Выйти из игры</button></div> : null}</div></div> : null}
     </header>
     <main className="stage">
       {phase === 'home' ? <MenuScreen notice={menuNotice} onStart={startMatch} onStub={(label) => setMenuNotice(`${label} появится в следующем этапе.`)} /> : null}
-      {match && phase !== 'home' ? <ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /> : null}
-      {phase === 'expansion' && match ? <>{expansionQueuePosition >= 0 ? <p className="queue-status">Ты в очереди захвата: {expansionQueuePosition + 1}-й</p> : null}{humanQuestion(match.expansionQuestion, match.expansionAnswers, 'expansion')}</> : null}
+      <AnimatePresence mode="wait">
+        {match && phase !== 'home' && !questionPhase ? <motion.div key="map" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}><ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /></motion.div> : null}
+        {questionPhase && !announcement ? <motion.div key="question" className="question-stage" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.3 }}>
+          {phase === 'expansion' && match ? <>{expansionQueuePosition >= 0 ? <p className="queue-status">Ты в очереди захвата: {expansionQueuePosition + 1}-й</p> : null}{humanQuestion(match.expansionQuestion, match.expansionAnswers, 'expansion')}</> : null}
+          {phase === 'expansion-final' && match ? <FinalRoundPanel match={match} remainingMs={remainingMs} locked={finalHumanLocked || paused} onAnswer={(value) => dispatch({ type: 'answer-final', id: 'you', value, answeredAt: performance.now() })} /> : null}
+          {phase === 'battle-warmup' && match && match.defender ? <><section className="panel battle-step"><p className="kicker">Битва · шаг 1 из 2 · Разминка</p><p className="hint">{PLAYER_BY_ID[match.attacker].name} атакует {PLAYER_BY_ID[match.defender].name}.</p></section>{match.attacker === 'you' || match.defender === 'you' ? humanQuestion(match.warmupQuestion, match.warmupAnswers, 'warmup') : <BotWaiting remainingMs={remainingMs} />}</> : null}
+          {phase === 'battle-number' && match && match.defender ? <><section className="panel battle-step"><p className="kicker">Битва · шаг 2 из 2 · Числовая дуэль</p><h2>Ближе к правильному числу побеждает</h2><p className="hint">Скорость не влияет на результат.</p></section>{match.attacker === 'you' || match.defender === 'you' ? <NumberDuel match={match} remainingMs={remainingMs} paused={paused} onAnswer={(value) => dispatch({ type: 'answer-number', id: 'you', value })} /> : <BotWaiting remainingMs={remainingMs} />}</> : null}
+        </motion.div> : null}
+      </AnimatePresence>
+      {announcement && questionPhase ? <RoundAnnouncement phase={phase} match={match} /> : null}
+      {paused ? <PauseOverlay onResume={togglePause} /> : null}
+      {roundResult ? <RoundResultOverlay result={roundResult} /> : null}
       {phase === 'expansion-capture' && match ? <section className="panel"><p className="kicker">Завоевание · правильный ответ</p><h2>{isExpansionBreakthrough(match.arena, 'you') ? 'Прорыв блокады: выбери любую свободную соту' : 'Выбери свободную соседнюю соту'}</h2><p className="hint">{isExpansionBreakthrough(match.arena, 'you') ? 'Твоя территория окружена. Десант можно высадить в любой свободной точке карты.' : 'Только соседняя свободная сота доступна для расширения.'}</p></section> : null}
-      {phase === 'expansion-final' && match ? <FinalRoundPanel match={match} remainingMs={remainingMs} locked={finalHumanLocked} onAnswer={(value) => dispatch({ type: 'answer-final', id: 'you', value, answeredAt: performance.now() })} /> : null}
       {phase === 'battle-select' && match && match.attacker === 'you' ? <p className="map-instruction">Выбери подсвеченную вражескую соту на карте</p> : null}
-      {phase === 'battle-warmup' && match && match.defender ? <><section className="panel battle-step"><p className="kicker">Битва · шаг 1 из 2 · Разминка</p><p className="hint">{PLAYER_BY_ID[match.attacker].name} атакует {PLAYER_BY_ID[match.defender].name}.</p></section>{match.attacker === 'you' || match.defender === 'you' ? humanQuestion(match.warmupQuestion, match.warmupAnswers, 'warmup') : <BotWaiting remainingMs={remainingMs} />}</> : null}
-      {phase === 'battle-number' && match && match.defender ? <><section className="panel battle-step"><p className="kicker">Битва · шаг 2 из 2 · Числовая дуэль</p><h2>Ближе к правильному числу побеждает</h2><p className="hint">Скорость не влияет на результат.</p></section>{match.attacker === 'you' || match.defender === 'you' ? <NumberDuel match={match} remainingMs={remainingMs} onAnswer={(value) => dispatch({ type: 'answer-number', id: 'you', value })} /> : <BotWaiting remainingMs={remainingMs} />}</> : null}
       {phase === 'results' && match ? <ResultsScreen scores={match.scores} arena={match.arena} onAgain={startMatch} /> : null}
     </main>
   </div>
@@ -406,6 +452,29 @@ export default function App() {
 function PhaseBadge({ phase, match }: { phase: Phase; match: Match }) {
   const battle = phase.startsWith('battle') || phase === 'results'
   return <div className="phase-badge"><strong>{battle ? 'Битва' : 'Завоевание'}</strong><small>{battle ? `Раунд ${Math.min(match.battleRound + 1, MAX_BATTLE_ROUNDS)} / ${MAX_BATTLE_ROUNDS}` : `Раунд ${match.expansionRound}`}</small></div>
+}
+
+function RoundAnnouncement({ phase, match }: { phase: Phase; match: Match | null }) {
+  const battle = phase.startsWith('battle')
+  const numeric = phase === 'expansion-final' || phase === 'battle-number'
+  return <motion.section className="round-announcement" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}>
+    <p className="kicker">Новый раунд</p>
+    <h2>{battle ? `Раунд ${Math.min((match?.battleRound ?? 0) + 1, MAX_BATTLE_ROUNDS)} из ${MAX_BATTLE_ROUNDS}` : `Раунд ${match?.expansionRound ?? 1}`}</h2>
+    <p>{numeric ? 'Числовая дуэль' : 'Викторина'}</p>
+    <span className="announcement-mark">✦</span>
+  </motion.section>
+}
+
+function PauseOverlay({ onResume }: { onResume: () => void }) {
+  return <motion.div className="pause-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}><section className="pause-card"><p className="kicker">Игра приостановлена</p><h2>Пауза</h2><p>Таймер и ответы остановлены.</p><button type="button" className="primary" onClick={onResume}>Продолжить</button></section></motion.div>
+}
+
+function RoundResultOverlay({ result }: { result: RoundResult }) {
+  if (result.kind === 'quiz') {
+    return <motion.div className="round-result-overlay" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}><section className="round-result-card"><p className="kicker">Результаты викторины</p><h2>Правильный ответ: {['А', 'Б', 'В', 'Г'][result.question.correctIndex]}</h2><div className="result-options">{result.question.options.map((option, index) => <div key={option} className={`result-option ${index === result.question.correctIndex ? 'is-correct' : ''}`}><strong>{['А', 'Б', 'В', 'Г'][index]}</strong><span>{option}</span><div className="answer-players">{PLAYER_IDS.filter((id) => result.answers[id] === index).map((id) => <i key={id} style={{ background: PLAYER_BY_ID[id].accent }} title={PLAYER_BY_ID[id].name}>{PLAYER_BY_ID[id].name.slice(0, 1)}</i>)}</div></div>)}</div></section></motion.div>
+  }
+  const rows = PLAYER_IDS.map((id) => ({ id, value: result.answers[id], distance: result.answers[id] === null ? null : Math.abs(result.answers[id] - result.question.answer) })).sort((a, b) => (a.distance ?? Infinity) - (b.distance ?? Infinity))
+  return <motion.div className="round-result-overlay" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}><section className="round-result-card"><p className="kicker">Результаты числовой дуэли</p><h2>Правильный ответ: {result.question.answer}</h2><div className="numeric-result-cards">{rows.map((row, index) => <article key={row.id} className={`numeric-result-card ${index === 0 ? 'is-winner' : ''}`} style={{ ['--accent' as string]: PLAYER_BY_ID[row.id].accent }}><strong>{PLAYER_BY_ID[row.id].name}</strong><span>{row.value === null ? 'нет ответа' : row.value}</span><small>{row.distance === null ? '—' : `Отклонение: ${row.value! - result.question.answer > 0 ? '+' : ''}${row.value! - result.question.answer}`}</small></article>)}</div></section></motion.div>
 }
 
 function TurnIndicator({ activePlayer }: { activePlayer: PlayerId | null }) {
@@ -423,10 +492,10 @@ function QuestionPanel({ question, remainingMs, locked, onChoose }: { question: 
   return <section className="panel"><p className="kicker">Общий вопрос · отвечают все одновременно</p><h2>{question.prompt}</h2><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><div className="options">{question.options.map((option, index) => <button key={option} type="button" className="option" disabled={locked} onClick={() => onChoose(index)}><span className="opt-key">{['А', 'Б', 'В', 'Г'][index]}</span>{option}</button>)}</div><p className="hint">{locked ? 'Ответ принят. Ждём остальных игроков.' : 'На ответ есть 15 секунд.'}</p></section>
 }
 
-function NumberDuel({ match, remainingMs, onAnswer }: { match: Match; remainingMs: number; onAnswer: (value: number | null) => void }) {
+function NumberDuel({ match, remainingMs, paused, onAnswer }: { match: Match; remainingMs: number; paused: boolean; onAnswer: (value: number | null) => void }) {
   const [value, setValue] = useState('')
   const [locked, setLocked] = useState(false)
-  return <section className="panel"><p className="kicker">Одновременный ответ</p><p className="hint">{match.numericQuestion.prompt}</p><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><form className="guess-form" onSubmit={(event) => { event.preventDefault(); const parsed = Number(value.replace(',', '.')); if (!Number.isFinite(parsed)) return; setLocked(true); onAnswer(parsed) }}><input value={value} onChange={(event) => setValue(event.target.value)} disabled={locked} inputMode="decimal" placeholder="Твоё число" aria-label="Числовой ответ" /><button type="submit" disabled={locked}>{locked ? 'Принято' : 'Ответить'}</button></form><p className="hint">Сравнивается только абсолютное отклонение, без бонуса за скорость.</p></section>
+  return <section className="panel"><p className="kicker">Одновременный ответ</p><p className="hint">{match.numericQuestion.prompt}</p><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><form className="guess-form" onSubmit={(event) => { event.preventDefault(); const parsed = Number(value.replace(',', '.')); if (!Number.isFinite(parsed)) return; setLocked(true); onAnswer(parsed) }}><input value={value} onChange={(event) => setValue(event.target.value)} disabled={locked || paused} inputMode="decimal" placeholder="Твоё число" aria-label="Числовой ответ" /><button type="submit" disabled={locked || paused}>{locked ? 'Принято' : 'Ответить'}</button></form><p className="hint">Сравнивается только абсолютное отклонение, без бонуса за скорость.</p></section>
 }
 
 function FinalRoundPanel({ match, remainingMs, locked, onAnswer }: { match: Match; remainingMs: number; locked: boolean; onAnswer: (value: number | null) => void }) {
