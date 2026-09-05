@@ -30,6 +30,17 @@ type RoundResult =
   | { kind: 'quiz'; question: QuizQuestion; answers: Answers }
   | { kind: 'numeric'; question: NumericQuestion; answers: Record<PlayerId, number | null> }
 
+type PveStats = {
+  games: number
+  wins: number
+  mcCorrect: number
+  mcAnswered: number
+  numericDeviationTotal: number
+  numericAnswered: number
+}
+
+const STATS_STORAGE_KEY = 'strategi-quiz-pve-stats'
+
 type Match = {
   scores: Record<PlayerId, number>
   arena: ArenaCell[]
@@ -52,6 +63,7 @@ type Match = {
   finalQuestion: NumericQuestion
   finalAnswers: Record<PlayerId, number | null>
   finalAnsweredAt: Record<PlayerId, number | null>
+  pveStats: Omit<PveStats, 'games' | 'wins'>
 }
 
 type State = { phase: Phase; match: Match | null }
@@ -76,6 +88,24 @@ function blankAnswers(): Answers {
 
 function blankAnswerTimes(): Record<PlayerId, number | null> {
   return { you: null, alex: null, marina: null }
+}
+
+function emptyPveStats(): PveStats {
+  return { games: 0, wins: 0, mcCorrect: 0, mcAnswered: 0, numericDeviationTotal: 0, numericAnswered: 0 }
+}
+
+function readPveStats(): PveStats {
+  try {
+    const raw = localStorage.getItem(STATS_STORAGE_KEY)
+    if (!raw) return emptyPveStats()
+    return { ...emptyPveStats(), ...JSON.parse(raw) }
+  } catch {
+    return emptyPveStats()
+  }
+}
+
+function savePveStats(stats: PveStats): void {
+  localStorage.setItem(STATS_STORAGE_KEY, JSON.stringify(stats))
 }
 
 function freeCellCount(arena: ArenaCell[]): number {
@@ -117,6 +147,7 @@ function makeMatch(): Match {
     finalQuestion: pickRandom(NUMERIC_QUESTIONS, 1)[0],
     finalAnswers: blankAnswers(),
     finalAnsweredAt: blankAnswerTimes(),
+    pveStats: { mcCorrect: 0, mcAnswered: 0, numericDeviationTotal: 0, numericAnswered: 0 },
   }
 }
 
@@ -261,6 +292,9 @@ function reducer(state: State, action: Action): State {
         expansionAnswers: { ...match.expansionAnswers, [action.id]: action.pick },
         expansionAnsweredAt: { ...match.expansionAnsweredAt, [action.id]: action.answeredAt },
         expansionQueue: isCorrect ? [...match.expansionQueue, action.id] : match.expansionQueue,
+        pveStats: action.id === 'you'
+          ? { ...match.pveStats, mcCorrect: match.pveStats.mcCorrect + (isCorrect ? 1 : 0), mcAnswered: match.pveStats.mcAnswered + 1 }
+          : match.pveStats,
       }
       return allAnswered(next.expansionAnswers) ? resolveExpansion(next) : { ...state, match: next }
     }
@@ -284,6 +318,9 @@ function reducer(state: State, action: Action): State {
         ...match,
         finalAnswers: { ...match.finalAnswers, [action.id]: action.value },
         finalAnsweredAt: { ...match.finalAnsweredAt, [action.id]: action.answeredAt },
+        pveStats: action.id === 'you' && action.value !== null
+          ? { ...match.pveStats, numericDeviationTotal: match.pveStats.numericDeviationTotal + Math.abs(action.value - match.finalQuestion.answer), numericAnswered: match.pveStats.numericAnswered + 1 }
+          : match.pveStats,
       }
       return allAnswered(next.finalAnswers) ? resolveFinalExpansion(next) : { ...state, match: next }
     }
@@ -297,7 +334,14 @@ function reducer(state: State, action: Action): State {
     }
     case 'answer-warmup': {
       if (!match || state.phase !== 'battle-warmup' || match.warmupAnswers[action.id] !== null) return state
-      const next = { ...match, warmupAnswers: { ...match.warmupAnswers, [action.id]: action.pick } }
+      const isCorrect = action.pick === match.warmupQuestion.correctIndex
+      const next = {
+        ...match,
+        warmupAnswers: { ...match.warmupAnswers, [action.id]: action.pick },
+        pveStats: action.id === 'you'
+          ? { ...match.pveStats, mcCorrect: match.pveStats.mcCorrect + (isCorrect ? 1 : 0), mcAnswered: match.pveStats.mcAnswered + 1 }
+          : match.pveStats,
+      }
       return match.defender && next.warmupAnswers[match.attacker] !== null && next.warmupAnswers[match.defender] !== null
         ? resolveWarmup(next)
         : { ...state, match: next }
@@ -305,7 +349,13 @@ function reducer(state: State, action: Action): State {
     case 'finish-warmup': return match && state.phase === 'battle-warmup' ? resolveWarmup(match) : state
     case 'answer-number': {
       if (!match || state.phase !== 'battle-number' || match.numericAnswers[action.id] !== null) return state
-      const next = { ...match, numericAnswers: { ...match.numericAnswers, [action.id]: action.value } }
+      const next = {
+        ...match,
+        numericAnswers: { ...match.numericAnswers, [action.id]: action.value },
+        pveStats: action.id === 'you' && action.value !== null
+          ? { ...match.pveStats, numericDeviationTotal: match.pveStats.numericDeviationTotal + Math.abs(action.value - match.numericQuestion.answer), numericAnswered: match.pveStats.numericAnswered + 1 }
+          : match.pveStats,
+      }
       return match.defender && next.numericAnswers[match.attacker] !== null && next.numericAnswers[match.defender] !== null
         ? resolveNumber(next)
         : { ...state, match: next }
@@ -322,9 +372,11 @@ export default function App() {
   const [paused, setPaused] = useState(false)
   const [announcement, setAnnouncement] = useState(true)
   const [roundResult, setRoundResult] = useState<RoundResult | null>(null)
+  const [showStats, setShowStats] = useState(false)
+  const recordedMatch = useRef(false)
   const previousRef = useRef<{ phase: Phase; match: Match | null }>({ phase: 'home', match: null })
   const { phase, match } = state
-  const startMatch = () => { setSettingsOpen(false); setPaused(false); setAnnouncement(true); dispatch({ type: 'start' }) }
+  const startMatch = () => { setSettingsOpen(false); setShowStats(false); setPaused(false); setAnnouncement(true); recordedMatch.current = false; dispatch({ type: 'start' }) }
   const exitGame = () => { setSettingsOpen(false); setPaused(false); dispatch({ type: 'exit' }) }
   const questionPhase = phase === 'expansion' || phase === 'expansion-final' || phase === 'battle-warmup' || phase === 'battle-number'
   const shouldAnnounce = questionPhase && Boolean(match)
@@ -432,13 +484,30 @@ export default function App() {
     : null
   const finalHumanLocked = match?.finalAnswers.you !== null
 
+  useEffect(() => {
+    if (phase !== 'results' || !match || recordedMatch.current) return
+    const territory = PLAYER_IDS.map((id) => ({ id, count: match.arena.filter((cell) => cell.owner === id).length }))
+    const winner = territory.sort((a, b) => b.count - a.count)[0]?.id
+    const previous = readPveStats()
+    savePveStats({
+      games: previous.games + 1,
+      wins: previous.wins + (winner === 'you' ? 1 : 0),
+      mcCorrect: previous.mcCorrect + match.pveStats.mcCorrect,
+      mcAnswered: previous.mcAnswered + match.pveStats.mcAnswered,
+      numericDeviationTotal: previous.numericDeviationTotal + match.pveStats.numericDeviationTotal,
+      numericAnswered: previous.numericAnswered + match.pveStats.numericAnswered,
+    })
+    recordedMatch.current = true
+  }, [phase, match])
+
   return <div className={`arena ${phase === 'home' ? '' : 'game-shell'}`}>
     {phase !== 'home' ? <header className="topbar">
       <div><p className="kicker">Арена</p><h1>Ближе всех</h1></div>
       {match ? <div className="topbar-tools"><TurnIndicator activePlayer={activeTurn} /><PhaseBadge phase={phase} match={match} /><PlayerDock scores={match.scores} badges={{ [match.attacker]: phase.startsWith('battle') ? 'атакует' : undefined }} /><div className={`settings-menu${settingsOpen ? ' is-open' : ''}`}><button type="button" className="settings-button" aria-label="Настройки" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((open) => !open)}><span aria-hidden="true">⚙</span></button>{settingsOpen ? <div className="settings-popover"><button type="button" className="pause-button" onClick={togglePause}>{paused ? 'Продолжить' : 'Приостановить игру'}</button><button type="button" className="exit-button" onClick={exitGame}>Выйти из игры</button></div> : null}</div></div> : null}
     </header> : null}
     <main className="stage">
-      {phase === 'home' ? <MenuScreen notice={menuNotice} onStart={startMatch} onStub={(label) => setMenuNotice(`${label} появится в следующем этапе.`)} /> : null}
+      {phase === 'home' && showStats ? <StatsScreen stats={readPveStats()} onBack={() => setShowStats(false)} /> : null}
+      {phase === 'home' && !showStats ? <MenuScreen notice={menuNotice} onStart={startMatch} onStats={() => setShowStats(true)} onStub={(label) => setMenuNotice(`${label} появится в следующем этапе.`)} /> : null}
       <AnimatePresence mode="wait">
         {match && phase !== 'home' && !questionPhase ? <motion.div key="map" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}><ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /></motion.div> : null}
         {questionPhase && !announcement ? <motion.div key="question" className="question-stage" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.3 }}>
@@ -519,7 +588,29 @@ function ResultsScreen({ scores, arena, onAgain }: { scores: Record<PlayerId, nu
   return <section className="panel"><p className="kicker">Матч завершён</p><h2>Победитель: {PLAYER_BY_ID[territory[0].id].name}</h2><ol className="rank-list">{territory.map((row) => <li key={row.id} style={{ ['--accent' as string]: PLAYER_BY_ID[row.id].accent }}><span className="rank-place">{row.count}</span><span>{PLAYER_BY_ID[row.id].name}</span><span>{scores[row.id]} очков</span></li>)}</ol><button type="button" className="primary" onClick={onAgain}>Новая игра</button></section>
 }
 
-function MenuScreen({ notice, onStart, onStub }: { notice: string; onStart: () => void; onStub: (label: string) => void }) {
+function StatsScreen({ stats, onBack }: { stats: PveStats; onBack: () => void }) {
+  const mcAccuracy = stats.mcAnswered ? Math.round((stats.mcCorrect / stats.mcAnswered) * 100) : null
+  const numericAccuracy = stats.numericAnswered ? Math.max(0, Math.round(100 - (stats.numericDeviationTotal / stats.numericAnswered))) : null
+  return <section className="stats-screen">
+    <button type="button" className="stats-back" onClick={onBack}>← Главное меню</button>
+    <header className="stats-title"><p className="menu-eyebrow">Летопись сражений</p><h2>СТАТИСТИКА</h2><div className="title-rule" aria-hidden="true"><i /><b /><i /></div></header>
+    <div className="stats-dashboard">
+      <section className="stats-block stats-pvp"><p className="stats-block-kicker">Блок A · Рейтинговые игры (PvP)</p><div className="stats-columns"><StatsColumn title="Дуэль · 1v1" rows={[['Побед', '0'], ['Поражений', '0'], ['% правильных MC', '0%']]} /><StatsColumn title="Троица · 1v1v1" rows={[['1-е места', '0 🥇'], ['2-е места', '0 🥈'], ['3-е места', '0 🥉'], ['% правильных MC', '0%']]} /></div><p className="stats-empty-note">Рейтинговый режим пока не подключён</p></section>
+      <section className="stats-block stats-pve"><p className="stats-block-kicker">Блок B · Игра с ботами (PvE)</p><div className="pve-grid"><StatMetric label="Всего игр" value={stats.games} /><StatMetric label="Побед над ботами" value={stats.wins} /><StatMetric label="% правильных MC" value={mcAccuracy === null ? '0%' : `${mcAccuracy}%`} progress={mcAccuracy ?? 0} /><StatMetric label="Точность числовых ответов" value={numericAccuracy === null ? '—' : `${numericAccuracy}%`} progress={numericAccuracy ?? 0} /></div></section>
+    </div>
+    <p className="menu-version">Данные хранятся на этом устройстве · v1.0</p>
+  </section>
+}
+
+function StatsColumn({ title, rows }: { title: string; rows: string[][] }) {
+  return <div className="stats-column"><h3>{title}</h3>{rows.map(([label, value]) => <div className="stats-row" key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>
+}
+
+function StatMetric({ label, value, progress }: { label: string; value: number | string; progress?: number }) {
+  return <div className="stat-metric"><span>{label}</span><strong>{value}</strong>{progress !== undefined ? <i><b style={{ width: `${progress}%` }} /></i> : null}</div>
+}
+
+function MenuScreen({ notice, onStart, onStats, onStub }: { notice: string; onStart: () => void; onStats: () => void; onStub: (label: string) => void }) {
   return <section className="menu-map-screen">
     <div className="map-ornament map-ornament-top" aria-hidden="true" />
     <button type="button" className="menu-settings" aria-label="Настройки" title="Настройки" onClick={() => onStub('Настройки')}>
@@ -545,6 +636,7 @@ function MenuScreen({ notice, onStart, onStub }: { notice: string; onStart: () =
       <button type="button" className="wood-plaque plaque-light" onClick={onStart}><span>ИГРА С БОТАМИ</span><small>НАЧАТЬ</small></button>
       <button type="button" className="wood-plaque plaque-light" onClick={() => onStub('Игра с друзьями')}><span>ИГРА С ДРУЗЬЯМИ</span><small>СКОРО</small></button>
     </div>
+    <button type="button" className="stats-link" onClick={onStats}>ОТКРЫТЬ СТАТИСТИКУ</button>
     {notice ? <p className="menu-notice">{notice}</p> : null}
     <p className="menu-version">v1.0</p>
   </section>

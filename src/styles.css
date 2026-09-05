@@ -1101,6 +1101,184 @@ h2 {
 
 .menu-map-screen .menu-notice { position: relative; z-index: 3; margin: 12px auto 0; text-align: center; }
 .menu-version { position: relative; z-index: 2; margin: 18px 0 0; color: #8a7358; font-size: 0.72rem; text-align: center; letter-spacing: 0.12em; }
+.stats-link {
+  position: relative;
+  z-index: 3;
+  display: block;
+  margin: 18px auto 0;
+  border: 0;
+  background: transparent;
+  color: #815c2c;
+  cursor: pointer;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.stats-link:hover { color: #a0522d; }
+
+.stats-screen {
+  position: relative;
+  min-height: min(780px, calc(100dvh - 56px));
+  padding: 28px clamp(18px, 4vw, 52px) 24px;
+  border: 1px solid #9c7b45;
+  border-radius: 10px;
+  background:
+    linear-gradient(rgba(139, 115, 85, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 115, 85, 0.06) 1px, transparent 1px),
+    var(--paper);
+  background-size: 44px 44px;
+  box-shadow: inset 0 0 0 6px rgba(156, 123, 69, 0.1), inset 0 0 60px rgba(91, 56, 28, 0.12);
+}
+
+.stats-screen::before {
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(139, 105, 50, 0.36);
+  border-radius: 5px;
+  content: "";
+  pointer-events: none;
+}
+
+.stats-back {
+  position: relative;
+  z-index: 2;
+  border: 0;
+  background: transparent;
+  color: #815c2c;
+  cursor: pointer;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.stats-title {
+  position: relative;
+  z-index: 2;
+  margin: 20px auto 28px;
+  text-align: center;
+}
+
+.stats-title h2 {
+  margin: 0;
+  color: #a5792f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: 0.16em;
+  text-shadow: 1px 1px 0 #f9edcf, 2px 2px 0 #8d6323;
+}
+
+.stats-dashboard {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 18px;
+  width: min(100%, 900px);
+  margin: 0 auto;
+}
+
+.stats-block {
+  padding: 20px;
+  border: 2px solid #8d5c32;
+  border-radius: 6px;
+  background: rgba(245, 230, 200, 0.86);
+  box-shadow: inset 0 0 0 3px rgba(255, 239, 191, 0.42), 0 3px 0 rgba(112, 74, 35, 0.18);
+}
+
+.stats-block-kicker {
+  margin: 0 0 15px;
+  color: #815c2c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.stats-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.stats-column {
+  padding: 14px;
+  border: 1px solid #b08a55;
+  border-radius: 4px;
+  background: #ead7b5;
+}
+
+.stats-column h3 {
+  margin: 0 0 12px;
+  color: #5d4037;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+}
+
+.stats-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(139, 115, 85, 0.3);
+  color: #5d4037;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.88rem;
+}
+
+.stats-row strong {
+  color: #3e2723;
+  font-size: 1.18rem;
+}
+
+.stats-empty-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.pve-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.stat-metric {
+  display: grid;
+  gap: 8px;
+  min-height: 92px;
+  padding: 13px;
+  border: 1px solid #b08a55;
+  border-radius: 4px;
+  background: #ead7b5;
+}
+
+.stat-metric span {
+  color: #5d4037;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.78rem;
+}
+
+.stat-metric strong {
+  color: #3e2723;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.stat-metric i {
+  display: block;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #d1b98e;
+}
+
+.stat-metric i b {
+  display: block;
+  height: 100%;
+  background: #a0522d;
+}
 
 @media (max-width: 700px) {
   .menu-map-screen { min-height: calc(100dvh - 28px); padding: 30px 14px 18px; }
@@ -1111,6 +1289,9 @@ h2 {
   .token-right { right: 10%; }
   .menu-plaques { grid-template-columns: 1fr; width: min(100%, 380px); gap: 10px; }
   .wood-plaque { min-height: 58px; padding: 11px 14px; }
+  .stats-screen { min-height: calc(100dvh - 28px); padding: 22px 14px 18px; }
+  .stats-columns, .pve-grid { grid-template-columns: 1fr; }
+  .stats-title { margin-top: 16px; }
 }
 
 @media (max-width: 700px) and (max-height: 650px) {
