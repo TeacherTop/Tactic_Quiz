@@ -424,7 +424,7 @@ h2 {
 
 .arena-cell.is-attack-target:hover .arena-cell-fill,
 .arena-cell.is-attack-target:focus-visible .arena-cell-fill {
-  fill: color-mix(in srgb, #9b3f32 24%, var(--paper));
+  fill: color-mix(in srgb, var(--owner-color) 82%, #f5e6c8);
   stroke: #7d2923;
   stroke-width: 4;
 }

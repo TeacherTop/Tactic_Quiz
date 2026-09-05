@@ -47,6 +47,8 @@ export function ArenaGrid({ cells, activePlayer, selectableKeys, lastCapturedKey
           const key = cellKey(cell.row, cell.col)
           const owner = cell.owner ? PLAYER_BY_ID[cell.owner] : null
           const isAvailable = available.has(key)
+          const isAttackTarget = Boolean(selectableKeys?.has(key))
+          const isSelectable = isAvailable || isAttackTarget
           const isCaptured = lastCapturedKey === key
           const hasBoundary = owner
             ? getNeighbors(cell.row, cell.col).some(([row, col]) => {
@@ -60,21 +62,21 @@ export function ArenaGrid({ cells, activePlayer, selectableKeys, lastCapturedKey
               className={[
                 'arena-cell',
                 owner ? 'is-owned' : '',
-                isAvailable ? 'is-available' : '',
-                selectableKeys?.has(key) ? 'is-attack-target' : '',
+                isAvailable && !isAttackTarget ? 'is-available' : '',
+                isAttackTarget ? 'is-attack-target' : '',
                 isCaptured ? 'is-captured' : '',
                 hasBoundary ? 'has-boundary' : '',
               ].join(' ')}
               style={{ ['--owner-color' as string]: owner?.accent ?? activeColor }}
               role="gridcell"
-              tabIndex={isAvailable ? 0 : -1}
-              aria-disabled={!isAvailable}
+              tabIndex={isSelectable ? 0 : -1}
+              aria-disabled={!isSelectable}
               aria-label={`Сота ${cell.row}, ${cell.col}${owner ? `, ${owner.name}` : ''}`}
               onClick={() => {
-                if (isAvailable) onCapture(cell.row, cell.col)
+                if (isSelectable) onCapture(cell.row, cell.col)
               }}
               onKeyDown={(event) => {
-                if (isAvailable && (event.key === 'Enter' || event.key === ' ')) {
+                if (isSelectable && (event.key === 'Enter' || event.key === ' ')) {
                   event.preventDefault()
                   onCapture(cell.row, cell.col)
                 }
