@@ -23,7 +23,8 @@ import './styles.css'
 
 type Phase = 'home' | 'expansion' | 'expansion-capture' | 'expansion-final' | 'battle-select' | 'battle-warmup' | 'battle-number' | 'results'
 const MAX_BATTLE_ROUNDS = 10
-const ANNOUNCEMENT_MS = 2200
+const ANNOUNCEMENT_MS = 3500
+const ROUND_RESULT_MS = 4500
 const PLAYER_IDS: PlayerId[] = ['you', 'alex', 'marina']
 type Answers = Record<PlayerId, number | null>
 type RoundResult =
@@ -341,7 +342,7 @@ export default function App() {
       } else if (previous.phase === 'expansion-final') {
         setRoundResult({ kind: 'numeric', question: previous.match.finalQuestion, answers: previous.match.finalAnswers })
       }
-      const id = window.setTimeout(() => setRoundResult(null), 1900)
+      const id = window.setTimeout(() => setRoundResult(null), ROUND_RESULT_MS)
       previousRef.current = { phase, match }
       return () => window.clearTimeout(id)
     }
