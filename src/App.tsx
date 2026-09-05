@@ -336,8 +336,10 @@ export default function App() {
         setRoundResult({ kind: 'quiz', question: previous.match.expansionQuestion, answers: previous.match.expansionAnswers })
       } else if (previous.phase === 'battle-warmup' && previous.match.warmupAnswers.you !== null) {
         setRoundResult({ kind: 'quiz', question: previous.match.warmupQuestion, answers: previous.match.warmupAnswers })
-      } else if (previous.phase === 'battle-number' && previous.match.numericAnswers.you !== null) {
+      } else if (previous.phase === 'battle-number') {
         setRoundResult({ kind: 'numeric', question: previous.match.numericQuestion, answers: previous.match.numericAnswers })
+      } else if (previous.phase === 'expansion-final') {
+        setRoundResult({ kind: 'numeric', question: previous.match.finalQuestion, answers: previous.match.finalAnswers })
       }
       const id = window.setTimeout(() => setRoundResult(null), 1900)
       previousRef.current = { phase, match }
@@ -431,7 +433,7 @@ export default function App() {
     <main className="stage">
       {phase === 'home' ? <MenuScreen notice={menuNotice} onStart={startMatch} onStub={(label) => setMenuNotice(`${label} появится в следующем этапе.`)} /> : null}
       <AnimatePresence mode="wait">
-        {match && phase !== 'home' && !questionPhase ? <motion.div key="map" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}><ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /></motion.div> : null}
+        {match && phase !== 'home' && !questionPhase && !roundResult ? <motion.div key="map" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}><ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /></motion.div> : null}
         {questionPhase && !announcement ? <motion.div key="question" className="question-stage" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.3 }}>
           {phase === 'expansion' && match ? <>{expansionQueuePosition >= 0 ? <p className="queue-status">Ты в очереди захвата: {expansionQueuePosition + 1}-й</p> : null}{humanQuestion(match.expansionQuestion, match.expansionAnswers, 'expansion')}</> : null}
           {phase === 'expansion-final' && match ? <FinalRoundPanel match={match} remainingMs={remainingMs} locked={finalHumanLocked || paused} onAnswer={(value) => dispatch({ type: 'answer-final', id: 'you', value, answeredAt: performance.now() })} /> : null}
