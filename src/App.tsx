@@ -51,6 +51,7 @@ type State = {
 
 type Action =
   | { type: 'start'; startedAt: number }
+  | { type: 'exit' }
   | { type: 'lock-numeric'; value: number; timeMs: number }
   | { type: 'finish-numeric' }
   | { type: 'capture-cell'; row: number; col: number }
@@ -118,6 +119,8 @@ function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'start':
       return { phase: 'numeric', match: createMatch(action.startedAt) }
+    case 'exit':
+      return { phase: 'home', match: null }
     case 'lock-numeric': {
       if (!state.match || state.phase !== 'numeric') return state
       if (state.match.guesses.you.timeMs !== null) return state
@@ -242,8 +245,16 @@ function reducer(state: State, action: Action): State {
 export default function App() {
   const [state, dispatch] = useReducer(reducer, { phase: 'home', match: null })
   const [menuNotice, setMenuNotice] = useState('')
+  const [settingsOpen, setSettingsOpen] = useState(false)
   const { phase, match } = state
-  const startMatch = () => dispatch({ type: 'start', startedAt: performance.now() })
+  const startMatch = () => {
+    setSettingsOpen(false)
+    dispatch({ type: 'start', startedAt: performance.now() })
+  }
+  const exitGame = () => {
+    setSettingsOpen(false)
+    dispatch({ type: 'exit' })
+  }
   const nowMs = useElapsedMs(phase === 'numeric', match?.numericStartedAt ?? 0)
 
   const numericLeft = useCountdown(
@@ -310,11 +321,34 @@ export default function App() {
           <h1>Ближе всех</h1>
         </div>
         {match && phase !== 'home' ? (
-          <PlayerDock
-            scores={match.scores}
-            highlight={phase === 'quiz' ? currentTurn : null}
-            badges={badges}
-          />
+          <div className="topbar-tools">
+            <PlayerDock
+              scores={match.scores}
+              highlight={phase === 'quiz' ? currentTurn : null}
+              badges={badges}
+            />
+            <div className={`settings-menu${settingsOpen ? ' is-open' : ''}`}>
+              <button
+                type="button"
+                className="settings-button"
+                aria-label="Настройки"
+                aria-expanded={settingsOpen}
+                title="Настройки"
+                onClick={() => setSettingsOpen((open) => !open)}
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2Zm8.2 3.6c0-.5-.1-1-.2-1.5l2-1.5-2-3.4-2.4 1a9 9 0 0 0-2.6-1.5L14.7 2h-5.4L9 5.1a9 9 0 0 0-2.6 1.5l-2.4-1-2 3.4 2 1.5a8 8 0 0 0 0 3l-2 1.5 2 3.4 2.4-1A9 9 0 0 0 9 18.9l.3 3.1h5.4l.3-3.1a9 9 0 0 0 2.6-1.5l2.4 1 2-3.4-2-1.5c.1-.5.2-1 .2-1.5Z" />
+                </svg>
+              </button>
+              {settingsOpen ? (
+                <div className="settings-popover">
+                  <button type="button" className="exit-button" onClick={exitGame}>
+                    Выйти из игры
+                  </button>
+                </div>
+              ) : null}
+            </div>
+          </div>
         ) : null}
       </header>
 
