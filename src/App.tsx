@@ -3,7 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ArenaGrid } from './components/ArenaGrid'
 import { PlayerDock } from './components/PlayerDock'
 import { TimerRing } from './components/TimerRing'
-import { NUMERIC_QUESTIONS, QUIZ_QUESTIONS } from './data/questions'
+import { NUMERIC_QUESTIONS } from './data/questions'
+import { LOCALIZED_QUIZ_QUESTIONS } from './data/localizedQuestions'
 import {
   captureCell,
   captureOpponentCell,
@@ -129,7 +130,7 @@ function makeMatch(): Match {
     scores: emptyScores(),
     arena: createArena(),
     lastCapturedKey: null,
-    expansionQuestion: pickRandom(QUIZ_QUESTIONS, 1)[0],
+    expansionQuestion: pickRandom(LOCALIZED_QUIZ_QUESTIONS, 1)[0],
     expansionAnswers: blankAnswers(),
     expansionAnsweredAt: blankAnswerTimes(),
     expansionQueue: [],
@@ -140,7 +141,7 @@ function makeMatch(): Match {
     attacker: 'you',
     defender: null,
     target: null,
-    warmupQuestion: pickRandom(QUIZ_QUESTIONS, 1)[0],
+    warmupQuestion: pickRandom(LOCALIZED_QUIZ_QUESTIONS, 1)[0],
     warmupAnswers: blankAnswers(),
     numericQuestion: pickRandom(NUMERIC_QUESTIONS, 1)[0],
     numericAnswers: blankAnswers(),
@@ -201,7 +202,7 @@ function advanceCaptureQueue(match: Match): State {
     phase: 'expansion',
     match: {
       ...progressed,
-      expansionQuestion: pickRandom(QUIZ_QUESTIONS, 1)[0],
+      expansionQuestion: pickRandom(LOCALIZED_QUIZ_QUESTIONS, 1)[0],
       expansionAnswers: blankAnswers(),
       expansionAnsweredAt: blankAnswerTimes(),
       expansionQueue: [],
@@ -330,7 +331,7 @@ function reducer(state: State, action: Action): State {
       if (!match || state.phase !== 'battle-select') return state
       const target = getAttackTargets(match.arena, match.attacker).find((cell) => cell.row === action.row && cell.col === action.col)
       if (!target || !target.owner) return state
-      return { phase: 'battle-warmup', match: { ...match, target, defender: target.owner, warmupQuestion: pickRandom(QUIZ_QUESTIONS, 1)[0], warmupAnswers: blankAnswers() } }
+      return { phase: 'battle-warmup', match: { ...match, target, defender: target.owner, warmupQuestion: pickRandom(LOCALIZED_QUIZ_QUESTIONS, 1)[0], warmupAnswers: blankAnswers() } }
     }
     case 'answer-warmup': {
       if (!match || state.phase !== 'battle-warmup' || match.warmupAnswers[action.id] !== null) return state
