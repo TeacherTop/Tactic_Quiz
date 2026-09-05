@@ -1,6 +1,6 @@
 import type { ArenaCell, PlayerId } from './types'
 
-export const ARENA_RADIUS = 3
+export const ARENA_RADIUS = 2
 
 const DIRECTIONS: [number, number][] = [
   [1, 0],
