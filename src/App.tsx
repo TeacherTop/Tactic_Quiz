@@ -1,6 +1,5 @@
 import { useEffect, useReducer, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import heroArena from './assets/hero.png'
 import { ArenaGrid } from './components/ArenaGrid'
 import { PlayerDock } from './components/PlayerDock'
 import { TimerRing } from './components/TimerRing'
@@ -427,10 +426,10 @@ export default function App() {
   const finalHumanLocked = match?.finalAnswers.you !== null
 
   return <div className="arena">
-    <header className="topbar">
+    {phase !== 'home' ? <header className="topbar">
       <div><p className="kicker">Арена</p><h1>Ближе всех</h1></div>
-      {match && phase !== 'home' ? <div className="topbar-tools"><TurnIndicator activePlayer={activeTurn} /><PhaseBadge phase={phase} match={match} /><PlayerDock scores={match.scores} badges={{ [match.attacker]: phase.startsWith('battle') ? 'атакует' : undefined }} /><div className={`settings-menu${settingsOpen ? ' is-open' : ''}`}><button type="button" className="settings-button" aria-label="Настройки" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((open) => !open)}><span aria-hidden="true">⚙</span></button>{settingsOpen ? <div className="settings-popover"><button type="button" className="pause-button" onClick={togglePause}>{paused ? 'Продолжить' : 'Приостановить игру'}</button><button type="button" className="exit-button" onClick={exitGame}>Выйти из игры</button></div> : null}</div></div> : null}
-    </header>
+      {match ? <div className="topbar-tools"><TurnIndicator activePlayer={activeTurn} /><PhaseBadge phase={phase} match={match} /><PlayerDock scores={match.scores} badges={{ [match.attacker]: phase.startsWith('battle') ? 'атакует' : undefined }} /><div className={`settings-menu${settingsOpen ? ' is-open' : ''}`}><button type="button" className="settings-button" aria-label="Настройки" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((open) => !open)}><span aria-hidden="true">⚙</span></button>{settingsOpen ? <div className="settings-popover"><button type="button" className="pause-button" onClick={togglePause}>{paused ? 'Продолжить' : 'Приостановить игру'}</button><button type="button" className="exit-button" onClick={exitGame}>Выйти из игры</button></div> : null}</div></div> : null}
+    </header> : null}
     <main className="stage">
       {phase === 'home' ? <MenuScreen notice={menuNotice} onStart={startMatch} onStub={(label) => setMenuNotice(`${label} появится в следующем этапе.`)} /> : null}
       <AnimatePresence mode="wait">
@@ -514,5 +513,41 @@ function ResultsScreen({ scores, arena, onAgain }: { scores: Record<PlayerId, nu
 }
 
 function MenuScreen({ notice, onStart, onStub }: { notice: string; onStart: () => void; onStub: (label: string) => void }) {
-  return <section className="panel hero menu-panel"><div className="hero-copy"><p className="kicker">Главное меню</p><h2>Завоевание и битва</h2><p className="lede">Сначала расширь территорию правильными ответами, затем сражайся за границы.</p><div className="menu-actions"><button type="button" className="mode-button is-locked" onClick={() => onStub('Рейтинговая игра')}><span>Рейтинговая игра</span><small>Скоро</small></button><button type="button" className="mode-button is-primary" onClick={onStart}><span>Игра с ботами</span><small>Играть</small></button><button type="button" className="mode-button is-locked" onClick={() => onStub('Игра с друзьями')}><span>Игра с друзьями</span><small>Скоро</small></button></div>{notice ? <p className="menu-notice">{notice}</p> : null}</div><img className="hero-art" src={heroArena} alt="" aria-hidden="true" /></section>
+  return <section className="menu-map-screen">
+    <div className="map-ornament map-ornament-top" aria-hidden="true" />
+    <button type="button" className="menu-settings" aria-label="Настройки" title="Настройки" onClick={() => onStub('Настройки')}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2Zm8.2 3.6c0-.5-.1-1-.2-1.5l2-1.5-2-3.4-2.4 1a9 9 0 0 0-2.6-1.5L14.7 2H9.3L9 5.1a9 9 0 0 0-2.6 1.5L4 5.6 2 9l2 1.5a8 8 0 0 0 0 3L2 15l2 3.4 2.4-1A9 9 0 0 0 9 18.9l.3 3.1h5.4l.3-3.1a9 9 0 0 0 2.6-1.5l2.4 1 2-3.4-2-1.5c.1-.5.2-1 .2-1.5Z" /></svg>
+    </button>
+    <header className="menu-title">
+      <p className="menu-eyebrow">Средневековая карта знаний</p>
+      <h2>STRATEGI <span>QUIZ</span></h2>
+      <div className="title-rule" aria-hidden="true"><i /><b /><i /></div>
+    </header>
+    <div className="map-scene" aria-label="Карта стратегической викторины">
+      <div className="mountain mountain-left" aria-hidden="true"><i /><i /><i /></div>
+      <div className="mountain mountain-right" aria-hidden="true"><i /><i /><i /></div>
+      <div className="hex-field" aria-hidden="true" />
+      <div className="route route-one" aria-hidden="true" />
+      <div className="route route-two" aria-hidden="true" />
+      <HexToken className="token-top" color="terracotta" label="Игрок 1" />
+      <HexToken className="token-left" color="olive" label="Игрок 2" />
+      <HexToken className="token-right" color="blue" label="Игрок 3" />
+    </div>
+    <div className="menu-actions menu-plaques" aria-label="Режимы игры">
+      <button type="button" className="wood-plaque plaque-red" onClick={() => onStub('Рейтинговая игра')}><span>РЕЙТИНГОВАЯ ИГРА</span><small>СКОРО</small></button>
+      <button type="button" className="wood-plaque plaque-light" onClick={onStart}><span>ИГРА С БОТАМИ</span><small>НАЧАТЬ</small></button>
+      <button type="button" className="wood-plaque plaque-light" onClick={() => onStub('Игра с друзьями')}><span>ИГРА С ДРУЗЬЯМИ</span><small>СКОРО</small></button>
+    </div>
+    {notice ? <p className="menu-notice">{notice}</p> : null}
+    <p className="menu-version">v1.0</p>
+  </section>
+}
+
+function HexToken({ className, color, label }: { className: string; color: 'terracotta' | 'olive' | 'blue'; label: string }) {
+  return <div className={`hex-token ${className} token-${color}`} title={label} aria-label={label}>
+    <svg viewBox="0 0 100 112" aria-hidden="true">
+      <polygon points="50,3 96,28 96,84 50,109 4,84 4,28" />
+      <path className="castle-mark" d="M32 76V48h7V39h7v9h8V39h7v9h7v28H32Zm-5 5h46M42 76V64h7v12m9 0V64h7v12M25 81h50" />
+    </svg>
+  </div>
 }
