@@ -70,7 +70,9 @@ export function getAttackTargets(cells: ArenaCell[], playerId: PlayerId): ArenaC
       if (target?.owner && target.owner !== playerId) targets.add(cellKey(row, col))
     }
   }
-  return cells.filter((cell) => targets.has(cellKey(cell.row, cell.col)))
+  const bordering = cells.filter((cell) => targets.has(cellKey(cell.row, cell.col)))
+  if (bordering.length > 0) return bordering
+  return cells.filter((cell) => cell.owner !== null && cell.owner !== playerId)
 }
 
 export function captureOpponentCell(

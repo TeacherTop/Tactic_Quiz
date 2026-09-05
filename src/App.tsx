@@ -241,7 +241,7 @@ export default function App() {
       }
     }
     if (phase === 'battle-select' && PLAYER_BY_ID[match.attacker].kind === 'bot') {
-      const target = getAttackTargets(match.arena, match.attacker)[0]
+      const target = pickRandom(getAttackTargets(match.arena, match.attacker), 1)[0]
       if (target) {
         const id = window.setTimeout(() => dispatch({ type: 'select-attack', row: target.row, col: target.col }), 650)
         return () => window.clearTimeout(id)
