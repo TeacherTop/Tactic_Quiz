@@ -126,6 +126,18 @@ function beginBattle(match: Match): State {
   return { phase: 'battle-select', match: { ...match, attacker, battleRound: 0 } }
 }
 
+function beginFinalExpansion(match: Match): State {
+  return {
+    phase: 'expansion-final',
+    match: {
+      ...match,
+      finalQuestion: pickRandom(NUMERIC_QUESTIONS, 1)[0],
+      finalAnswers: blankAnswers(),
+      finalAnsweredAt: blankAnswerTimes(),
+    },
+  }
+}
+
 function advanceCaptureQueue(match: Match): State {
   let arena = match.arena
   let captureIndex = match.captureIndex
@@ -145,18 +157,13 @@ function advanceCaptureQueue(match: Match): State {
       lastCapturedKey = key
     }
     captureIndex += 1
+    if (freeCellCount(arena) === 1) {
+      return beginFinalExpansion({ ...match, arena, captureIndex, pendingCapture: null, lastCapturedKey })
+    }
   }
   const progressed = { ...match, arena, captureIndex, pendingCapture: null, lastCapturedKey }
   if (freeCellCount(arena) === 1) {
-    return {
-      phase: 'expansion-final',
-      match: {
-        ...progressed,
-        finalQuestion: pickRandom(NUMERIC_QUESTIONS, 1)[0],
-        finalAnswers: blankAnswers(),
-        finalAnsweredAt: blankAnswerTimes(),
-      },
-    }
+    return beginFinalExpansion(progressed)
   }
   if (arena.every((cell) => cell.owner)) return beginBattle(progressed)
   return {
@@ -332,9 +339,9 @@ export default function App() {
   useEffect(() => {
     const previous = previousRef.current
     if (previous.match && previous.phase !== phase) {
-      if (previous.phase === 'expansion' && previous.match.expansionAnswers.you !== null) {
+      if (previous.phase === 'expansion') {
         setRoundResult({ kind: 'quiz', question: previous.match.expansionQuestion, answers: previous.match.expansionAnswers })
-      } else if (previous.phase === 'battle-warmup' && previous.match.warmupAnswers.you !== null) {
+      } else if (previous.phase === 'battle-warmup') {
         setRoundResult({ kind: 'quiz', question: previous.match.warmupQuestion, answers: previous.match.warmupAnswers })
       } else if (previous.phase === 'battle-number') {
         setRoundResult({ kind: 'numeric', question: previous.match.numericQuestion, answers: previous.match.numericAnswers })
@@ -370,7 +377,7 @@ export default function App() {
       }
     }
     if (phase === 'expansion-final') {
-      const player = PLAYERS.find((candidate) => match.finalAnswers[candidate.id] === null)
+      const player = PLAYERS.find((candidate) => candidate.kind === 'bot' && match.finalAnswers[candidate.id] === null)
       if (player) {
         const id = window.setTimeout(() => dispatch({
           type: 'answer-final',
@@ -433,7 +440,7 @@ export default function App() {
     <main className="stage">
       {phase === 'home' ? <MenuScreen notice={menuNotice} onStart={startMatch} onStub={(label) => setMenuNotice(`${label} появится в следующем этапе.`)} /> : null}
       <AnimatePresence mode="wait">
-        {match && phase !== 'home' && !questionPhase && !roundResult ? <motion.div key="map" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}><ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /></motion.div> : null}
+        {match && phase !== 'home' && !questionPhase ? <motion.div key="map" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}><ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /></motion.div> : null}
         {questionPhase && !announcement ? <motion.div key="question" className="question-stage" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.3 }}>
           {phase === 'expansion' && match ? <>{expansionQueuePosition >= 0 ? <p className="queue-status">Ты в очереди захвата: {expansionQueuePosition + 1}-й</p> : null}{humanQuestion(match.expansionQuestion, match.expansionAnswers, 'expansion')}</> : null}
           {phase === 'expansion-final' && match ? <FinalRoundPanel match={match} remainingMs={remainingMs} locked={finalHumanLocked || paused} onAnswer={(value) => dispatch({ type: 'answer-final', id: 'you', value, answeredAt: performance.now() })} /> : null}

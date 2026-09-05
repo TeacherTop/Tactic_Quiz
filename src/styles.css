@@ -237,7 +237,7 @@ h2 {
   place-items: center;
   padding: 20px;
   background: rgba(62, 39, 35, 0.22);
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .round-result-card {
