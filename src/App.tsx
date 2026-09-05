@@ -422,47 +422,46 @@ export default function App() {
 
   useEffect(() => {
     if (!match || paused || announcement) return
+    const timers: number[] = []
+    const schedule = (callback: () => void, delay: number) => {
+      timers.push(window.setTimeout(callback, delay))
+    }
     if (phase === 'expansion') {
-      const player = PLAYERS.find((candidate) => candidate.kind === 'bot' && match.expansionAnswers[candidate.id] === null)
-      if (player) {
-        const id = window.setTimeout(() => dispatch({ type: 'answer-expansion', id: player.id, pick: botQuizChoice(match.expansionQuestion.correctIndex, player.skill), answeredAt: performance.now() }), botAnswerDelayMs(player.skill, QUIZ_TIME_MS))
-        return () => window.clearTimeout(id)
-      }
+      PLAYERS.filter((player) => player.kind === 'bot' && match.expansionAnswers[player.id] === null)
+        .forEach((player) => schedule(
+          () => dispatch({ type: 'answer-expansion', id: player.id, pick: botQuizChoice(match.expansionQuestion.correctIndex, player.skill), answeredAt: performance.now() }),
+          botAnswerDelayMs(player.skill, QUIZ_TIME_MS),
+        ))
     }
     if (phase === 'expansion-final') {
-      const player = PLAYERS.find((candidate) => candidate.kind === 'bot' && match.finalAnswers[candidate.id] === null)
-      if (player) {
-        const id = window.setTimeout(() => dispatch({
-          type: 'answer-final',
-          id: player.id,
-          value: botNumericGuess(match.finalQuestion.answer, player.skill),
-          answeredAt: performance.now(),
-        }), botAnswerDelayMs(player.skill, QUIZ_TIME_MS))
-        return () => window.clearTimeout(id)
-      }
+      PLAYERS.filter((player) => player.kind === 'bot' && match.finalAnswers[player.id] === null)
+        .forEach((player) => schedule(
+          () => dispatch({ type: 'answer-final', id: player.id, value: botNumericGuess(match.finalQuestion.answer, player.skill), answeredAt: performance.now() }),
+          botAnswerDelayMs(player.skill, QUIZ_TIME_MS),
+        ))
     }
     if (phase === 'battle-select' && PLAYER_BY_ID[match.attacker].kind === 'bot') {
       const target = pickRandom(getAttackTargets(match.arena, match.attacker), 1)[0]
-      if (target) {
-        const id = window.setTimeout(() => dispatch({ type: 'select-attack', row: target.row, col: target.col }), 650)
-        return () => window.clearTimeout(id)
-      }
+      if (target) schedule(() => dispatch({ type: 'select-attack', row: target.row, col: target.col }), 650)
     }
     if (phase === 'battle-warmup' && match.defender) {
-      const waiting = [match.attacker, match.defender].find((id) => match.warmupAnswers[id] === null && PLAYER_BY_ID[id].kind === 'bot')
-      if (waiting) {
-        const id = window.setTimeout(() => dispatch({ type: 'answer-warmup', id: waiting, pick: botQuizChoice(match.warmupQuestion.correctIndex, PLAYER_BY_ID[waiting].skill) }), botAnswerDelayMs(PLAYER_BY_ID[waiting].skill, QUIZ_TIME_MS))
-        return () => window.clearTimeout(id)
-      }
+      [match.attacker, match.defender]
+        .filter((id) => match.warmupAnswers[id] === null && PLAYER_BY_ID[id].kind === 'bot')
+        .forEach((id) => schedule(
+          () => dispatch({ type: 'answer-warmup', id, pick: botQuizChoice(match.warmupQuestion.correctIndex, PLAYER_BY_ID[id].skill) }),
+          botAnswerDelayMs(PLAYER_BY_ID[id].skill, QUIZ_TIME_MS),
+        ))
     }
     if (phase === 'battle-number' && match.defender) {
-      const waiting = [match.attacker, match.defender].find((id) => match.numericAnswers[id] === null && PLAYER_BY_ID[id].kind === 'bot')
-      if (waiting) {
-        const id = window.setTimeout(() => dispatch({ type: 'answer-number', id: waiting, value: botNumericGuess(match.numericQuestion.answer, PLAYER_BY_ID[waiting].skill) }), botAnswerDelayMs(PLAYER_BY_ID[waiting].skill, QUIZ_TIME_MS))
-        return () => window.clearTimeout(id)
-      }
+      [match.attacker, match.defender]
+        .filter((id) => match.numericAnswers[id] === null && PLAYER_BY_ID[id].kind === 'bot')
+        .forEach((id) => schedule(
+          () => dispatch({ type: 'answer-number', id, value: botNumericGuess(match.numericQuestion.answer, PLAYER_BY_ID[id].skill) }),
+          botAnswerDelayMs(PLAYER_BY_ID[id].skill, QUIZ_TIME_MS),
+        ))
     }
-  }, [phase, match, paused, announcement])
+    return () => timers.forEach((id) => window.clearTimeout(id))
+  }, [phase, paused, announcement, match?.expansionRound, match?.battleRound, match?.target?.row, match?.target?.col])
 
   const togglePause = () => {
     setSettingsOpen(false)
