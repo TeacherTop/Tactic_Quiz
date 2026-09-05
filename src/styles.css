@@ -1,12 +1,14 @@
 :root {
-  color-scheme: dark;
-  --bg: #0c1016;
-  --bg-2: #141b26;
-  --ink: #eef4ff;
-  --muted: #8b98ad;
-  --line: rgba(255, 255, 255, 0.08);
-  --gold: #f3c16f;
-  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+  --bg: #e8dcc4;
+  --paper: #f5e6c8;
+  --paper-deep: #ead7b5;
+  --ink: #3e2723;
+  --muted: #765f4e;
+  --line: #8b7355;
+  --gold: #a0522d;
+  --wood: #7b4f2c;
+  font-family: "Nunito", "Trebuchet MS", sans-serif;
 }
 
 * {
@@ -18,10 +20,8 @@ body,
 #root {
   margin: 0;
   min-height: 100%;
-  background:
-    radial-gradient(1200px 600px at 80% -10%, rgba(243, 193, 111, 0.12), transparent 50%),
-    radial-gradient(900px 500px at -10% 110%, rgba(62, 224, 195, 0.08), transparent 45%),
-    var(--bg);
+  background-color: var(--bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
   color: var(--ink);
 }
 
@@ -57,12 +57,15 @@ h1 {
   margin: 0;
   font-size: 2.2rem;
   font-weight: 700;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.01em;
 }
 
 h2 {
   margin: 0 0 18px;
   font-size: clamp(1.5rem, 3vw, 2.1rem);
   line-height: 1.25;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
 .dock {
@@ -74,12 +77,12 @@ h2 {
   min-width: 110px;
   padding: 10px 12px;
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--accent) 12%, var(--bg-2));
+  background: color-mix(in srgb, var(--accent) 13%, var(--paper));
   border-radius: 8px;
 }
 
 .dock-card.is-turn {
-  outline: 2px solid var(--accent);
+  border-color: var(--accent);
 }
 
 .dock-name {
@@ -106,7 +109,7 @@ h2 {
 }
 
 .panel {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 40%), var(--bg-2);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 28px 28px 32px;
@@ -133,8 +136,7 @@ h2 {
 .hero-art {
   width: min(100%, 320px);
   justify-self: end;
-  filter: drop-shadow(0 18px 44px rgba(126, 74, 255, 0.28));
-  opacity: 0.9;
+  opacity: 0.88;
 }
 
 .hero .lede {
@@ -160,7 +162,7 @@ h2 {
   place-items: center;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--paper-deep);
   color: var(--ink);
   cursor: pointer;
 }
@@ -192,7 +194,7 @@ h2 {
   padding: 14px 18px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #0b0f15;
+  background: var(--paper);
   color: var(--ink);
   cursor: pointer;
   text-align: left;
@@ -214,12 +216,12 @@ h2 {
 }
 
 .mode-button.is-primary {
-  background: color-mix(in srgb, #3ee0c3 16%, #0b0f15);
-  border-color: rgba(62, 224, 195, 0.46);
+  background: color-mix(in srgb, var(--gold) 13%, var(--paper));
+  border-color: var(--gold);
 }
 
 .mode-button.is-primary small {
-  color: #3ee0c3;
+  color: var(--gold);
 }
 
 .menu-notice {
@@ -237,8 +239,8 @@ h2 {
 
 .primary {
   margin-top: 22px;
-  background: var(--gold);
-  color: #1a1308;
+  background: var(--wood);
+  color: var(--paper);
   padding: 12px 22px;
   border-radius: 999px;
   font-weight: 700;
@@ -257,65 +259,74 @@ h2 {
 .arena-board-wrap {
   display: grid;
   gap: 12px;
-  width: min(100%, 520px);
+  width: min(100%, 560px);
 }
 
 .arena-board {
-  display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  gap: 5px;
   width: 100%;
-  aspect-ratio: 1;
-  padding: 10px;
+  height: auto;
+  padding: 12px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 42%),
-    #090d13;
+  background: var(--paper-deep);
 }
 
 .arena-cell {
-  position: relative;
-  display: grid;
-  place-items: center;
-  min-width: 0;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.035);
-  overflow: hidden;
   cursor: default;
+  outline: none;
 }
 
 .arena-cell-fill {
-  position: absolute;
-  inset: 0;
-  background: transparent;
+  fill: color-mix(in srgb, var(--paper) 78%, var(--owner-color));
+  stroke: #b79b74;
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+  transition: fill 260ms ease, stroke 260ms ease;
 }
 
 .arena-cell.is-owned .arena-cell-fill {
-  background:
-    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.34), transparent 22%),
-    var(--owner-color);
-  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.24);
+  fill: color-mix(in srgb, var(--owner-color) 72%, var(--paper));
+}
+
+.arena-cell.has-boundary .arena-cell-fill {
+  stroke: #704c35;
+  stroke-width: 3;
 }
 
 .arena-cell.is-available {
   cursor: pointer;
-  background: color-mix(in srgb, var(--active-color) 28%, rgba(255, 255, 255, 0.035));
-  border-color: color-mix(in srgb, var(--active-color) 64%, rgba(255, 255, 255, 0.12));
 }
 
-.arena-cell.is-available:hover {
-  background: color-mix(in srgb, var(--active-color) 42%, rgba(255, 255, 255, 0.035));
+.arena-cell.is-available .arena-cell-fill {
+  fill: color-mix(in srgb, var(--active-color) 26%, var(--paper));
+  stroke: var(--active-color);
+  stroke-width: 2;
 }
 
-.arena-cell.is-captured .arena-cell-fill::after {
-  content: "";
-  position: absolute;
-  inset: 50%;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
-  animation: territory-ripple 520ms ease-out;
+.arena-cell.is-available:hover .arena-cell-fill,
+.arena-cell:focus-visible .arena-cell-fill {
+  fill: color-mix(in srgb, var(--active-color) 42%, var(--paper));
+  stroke: var(--wood);
+}
+
+.arena-ripple {
+  fill: color-mix(in srgb, var(--owner-color) 42%, white);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: territory-ripple 720ms ease-out;
+  pointer-events: none;
+}
+
+@keyframes territory-ripple {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.15);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(4.8);
+  }
 }
 
 .arena-legend {
@@ -338,18 +349,13 @@ h2 {
   display: inline-block;
   border-radius: 3px;
   background: var(--legend-color);
+  border: 1px solid var(--line);
 }
 
-@keyframes territory-ripple {
-  from {
-    inset: 50%;
-    opacity: 0.85;
-  }
-
-  to {
-    inset: -42%;
-    opacity: 0;
-  }
+/* The SVG owns the cell shape; buttons elsewhere keep the shared cursor rule. */
+.arena-board button,
+.arena-board [role="gridcell"]:not(.is-available) {
+  cursor: default;
 }
 
 .guess-form {
@@ -360,7 +366,7 @@ h2 {
 
 .guess-form input {
   flex: 1;
-  background: #0b0f15;
+  background: var(--paper);
   border: 1px solid var(--line);
   color: var(--ink);
   padding: 14px 16px;
@@ -370,8 +376,8 @@ h2 {
 }
 
 .guess-form button {
-  background: #3ee0c3;
-  color: #06221c;
+  background: var(--wood);
+  color: var(--paper);
   padding: 0 22px;
   border-radius: 8px;
   font-weight: 700;
@@ -398,20 +404,20 @@ h2 {
 
 .timer-track {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.08);
+  stroke: #c3aa86;
   stroke-width: 6;
 }
 
 .timer-value {
   fill: none;
-  stroke: var(--gold);
+  stroke: var(--wood);
   stroke-width: 6;
   stroke-linecap: round;
   transition: stroke-dashoffset 80ms linear;
 }
 
 .timer.is-urgent .timer-value {
-  stroke: #ff6b6b;
+  stroke: #9b3f32;
 }
 
 .timer-num {
@@ -439,7 +445,8 @@ h2 {
   gap: 12px;
   align-items: center;
   padding: 12px 14px;
-  background: color-mix(in srgb, var(--accent) 10%, #0d131c);
+  background: color-mix(in srgb, var(--accent) 12%, var(--paper));
+  border: 1px solid #c1a47c;
   border-radius: 8px;
 }
 
@@ -454,7 +461,7 @@ h2 {
   place-items: center;
   border-radius: 50%;
   background: var(--accent);
-  color: #111;
+  color: var(--paper);
   font-weight: 700;
 }
 
@@ -475,11 +482,11 @@ h2 {
 }
 
 .ok {
-  color: #3ee0c3;
+  color: #5f7624;
 }
 
 .miss {
-  color: #ff8a8a;
+  color: #9b3f32;
 }
 
 .options {
@@ -489,7 +496,7 @@ h2 {
 
 .option {
   text-align: left;
-  background: #0b0f15;
+  background: var(--paper);
   color: var(--ink);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -509,7 +516,7 @@ h2 {
   border-radius: 8px;
   display: grid;
   place-items: center;
-  background: rgba(243, 193, 111, 0.16);
+  background: color-mix(in srgb, var(--gold) 16%, var(--paper));
   color: var(--gold);
   font-size: 0.85rem;
 }

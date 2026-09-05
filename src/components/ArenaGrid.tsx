@@ -1,6 +1,26 @@
-import { ARENA_SIZE, cellKey, getAvailableCells } from '../game/arena'
+import { ARENA_RADIUS, cellKey, getAvailableCells, getNeighbors } from '../game/arena'
 import { PLAYER_BY_ID } from '../game/players'
 import type { ArenaCell, PlayerId } from '../game/types'
+
+const HEX_SIZE = 34
+const HEX_HEIGHT = Math.sqrt(3) * HEX_SIZE
+const VIEWBOX_WIDTH = 480
+const VIEWBOX_HEIGHT = 530
+
+function centerFor(cell: ArenaCell): [number, number] {
+  return [
+    VIEWBOX_WIDTH / 2 + cell.row * HEX_SIZE * 1.5,
+    VIEWBOX_HEIGHT / 2 + (cell.col + cell.row / 2) * HEX_HEIGHT,
+  ]
+}
+
+function pointsFor(cell: ArenaCell): string {
+  const [centerX, centerY] = centerFor(cell)
+  return Array.from({ length: 6 }, (_, index) => {
+    const angle = (Math.PI / 3) * index
+    return `${centerX + HEX_SIZE * Math.cos(angle)},${centerY + HEX_SIZE * Math.sin(angle)}`
+  }).join(' ')
+}
 
 type Props = {
   cells: ArenaCell[]
@@ -14,33 +34,56 @@ export function ArenaGrid({ cells, activePlayer, lastCapturedKey, onCapture }: P
   const activeColor = activePlayer ? PLAYER_BY_ID[activePlayer].accent : '#ffffff'
 
   return (
-    <section className="arena-board-wrap" aria-label="Арена 8 на 8">
-      <div className="arena-board" style={{ ['--active-color' as string]: activeColor }}>
+    <section className="arena-board-wrap" aria-label={`Гексагональная арена, радиус ${ARENA_RADIUS}`}>
+      <svg
+        className="arena-board"
+        viewBox={`0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`}
+        role="grid"
+        aria-label="Гексагональная арена"
+        style={{ ['--active-color' as string]: activeColor }}
+      >
         {cells.map((cell) => {
           const key = cellKey(cell.row, cell.col)
           const owner = cell.owner ? PLAYER_BY_ID[cell.owner] : null
           const isAvailable = available.has(key)
           const isCaptured = lastCapturedKey === key
+          const hasBoundary = owner
+            ? getNeighbors(cell.row, cell.col).some(([row, col]) => {
+              const neighbor = cells.find((candidate) => candidate.row === row && candidate.col === col)
+              return neighbor?.owner && neighbor.owner !== cell.owner
+            })
+            : false
           return (
-            <button
+            <g
               key={key}
-              type="button"
               className={[
                 'arena-cell',
                 owner ? 'is-owned' : '',
                 isAvailable ? 'is-available' : '',
                 isCaptured ? 'is-captured' : '',
+                hasBoundary ? 'has-boundary' : '',
               ].join(' ')}
               style={{ ['--owner-color' as string]: owner?.accent ?? activeColor }}
-              disabled={!isAvailable}
-              onClick={() => onCapture(cell.row, cell.col)}
-              aria-label={`Клетка ${cell.row + 1}-${cell.col + 1}${owner ? `, ${owner.name}` : ''}`}
+              role="gridcell"
+              tabIndex={isAvailable ? 0 : -1}
+              aria-disabled={!isAvailable}
+              aria-label={`Сота ${cell.row}, ${cell.col}${owner ? `, ${owner.name}` : ''}`}
+              onClick={() => {
+                if (isAvailable) onCapture(cell.row, cell.col)
+              }}
+              onKeyDown={(event) => {
+                if (isAvailable && (event.key === 'Enter' || event.key === ' ')) {
+                  event.preventDefault()
+                  onCapture(cell.row, cell.col)
+                }
+              }}
             >
-              <span className="arena-cell-fill" />
-            </button>
+              <polygon points={pointsFor(cell)} className="arena-cell-fill" />
+              {isCaptured ? <circle cx={centerFor(cell)[0]} cy={centerFor(cell)[1]} r={HEX_SIZE * 0.2} className="arena-ripple" /> : null}
+            </g>
           )
         })}
-      </div>
+      </svg>
       <div className="arena-legend">
         <span>
           <b style={{ ['--legend-color' as string]: PLAYER_BY_ID.you.accent }} /> Игрок 1
@@ -48,7 +91,7 @@ export function ArenaGrid({ cells, activePlayer, lastCapturedKey, onCapture }: P
         <span>
           <b style={{ ['--legend-color' as string]: PLAYER_BY_ID.alex.accent }} /> Игрок 2
         </span>
-        <span>{ARENA_SIZE}x{ARENA_SIZE}</span>
+        <span>61 сот · радиус {ARENA_RADIUS}</span>
       </div>
     </section>
   )

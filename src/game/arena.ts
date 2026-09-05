@@ -1,14 +1,26 @@
 import type { ArenaCell, PlayerId } from './types'
 
-export const ARENA_SIZE = 8
+export const ARENA_RADIUS = 4
+
+const DIRECTIONS: [number, number][] = [
+  [1, 0],
+  [1, -1],
+  [0, -1],
+  [-1, 0],
+  [-1, 1],
+  [0, 1],
+]
 
 export function createArena(): ArenaCell[] {
   const cells: ArenaCell[] = []
-  for (let row = 0; row < ARENA_SIZE; row += 1) {
-    for (let col = 0; col < ARENA_SIZE; col += 1) {
+  for (let row = -ARENA_RADIUS; row <= ARENA_RADIUS; row += 1) {
+    for (let col = -ARENA_RADIUS; col <= ARENA_RADIUS; col += 1) {
+      if (Math.abs(row + col) > ARENA_RADIUS) continue
+
       let owner: PlayerId | null = null
-      if (row === ARENA_SIZE - 1 && col === 0) owner = 'you'
-      if (row === 0 && col === ARENA_SIZE - 1) owner = 'alex'
+      if (row === 0 && col === -ARENA_RADIUS) owner = 'you'
+      if (row === -ARENA_RADIUS && col === ARENA_RADIUS) owner = 'alex'
+      if (row === ARENA_RADIUS && col === 0) owner = 'marina'
       cells.push({ row, col, owner })
     }
   }
@@ -25,7 +37,7 @@ export function getAvailableCells(cells: ArenaCell[], playerId: PlayerId): Set<s
   const available = new Set<string>()
 
   for (const cell of playerCells) {
-    for (const [row, col] of neighbors(cell.row, cell.col)) {
+    for (const [row, col] of getNeighbors(cell.row, cell.col)) {
       const key = cellKey(row, col)
       if (!occupied.has(key)) available.add(key)
     }
@@ -50,12 +62,10 @@ export function captureCell(
   })
 }
 
-function neighbors(row: number, col: number): [number, number][] {
-  const offsets: [number, number][] = [
-    [row - 1, col],
-    [row + 1, col],
-    [row, col - 1],
-    [row, col + 1],
-  ]
-  return offsets.filter(([r, c]) => r >= 0 && r < ARENA_SIZE && c >= 0 && c < ARENA_SIZE)
+export function getNeighbors(row: number, col: number): [number, number][] {
+  return DIRECTIONS
+    .map(([rowOffset, colOffset]) => [row + rowOffset, col + colOffset] as [number, number])
+    .filter(([neighborRow, neighborCol]) => Math.abs(neighborRow) <= ARENA_RADIUS
+      && Math.abs(neighborCol) <= ARENA_RADIUS
+      && Math.abs(neighborRow + neighborCol) <= ARENA_RADIUS)
 }
