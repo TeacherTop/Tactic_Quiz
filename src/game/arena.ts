@@ -1,6 +1,6 @@
 import type { ArenaCell, PlayerId } from './types'
 
-export const ARENA_RADIUS = 4
+export const ARENA_RADIUS = 3
 
 const DIRECTIONS: [number, number][] = [
   [1, 0],
@@ -60,6 +60,33 @@ export function captureCell(
     if (cell.row !== row || cell.col !== col) return cell
     return { ...cell, owner: playerId }
   })
+}
+
+export function getAttackTargets(cells: ArenaCell[], playerId: PlayerId): ArenaCell[] {
+  const targets = new Set<string>()
+  for (const cell of cells.filter((candidate) => candidate.owner === playerId)) {
+    for (const [row, col] of getNeighbors(cell.row, cell.col)) {
+      const target = cells.find((candidate) => candidate.row === row && candidate.col === col)
+      if (target?.owner && target.owner !== playerId) targets.add(cellKey(row, col))
+    }
+  }
+  return cells.filter((cell) => targets.has(cellKey(cell.row, cell.col)))
+}
+
+export function captureOpponentCell(
+  cells: ArenaCell[],
+  attacker: PlayerId,
+  targetRow: number,
+  targetCol: number,
+): ArenaCell[] {
+  const target = getAttackTargets(cells, attacker)
+    .find((cell) => cell.row === targetRow && cell.col === targetCol)
+  if (!target) return cells
+  return cells.map((cell) => (
+    cell.row === targetRow && cell.col === targetCol
+      ? { ...cell, owner: attacker }
+      : cell
+  ))
 }
 
 export function getNeighbors(row: number, col: number): [number, number][] {

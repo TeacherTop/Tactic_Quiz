@@ -1,244 +1,220 @@
-import { useEffect, useMemo, useReducer, useRef, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import heroArena from './assets/hero.png'
 import { ArenaGrid } from './components/ArenaGrid'
 import { PlayerDock } from './components/PlayerDock'
 import { TimerRing } from './components/TimerRing'
 import { NUMERIC_QUESTIONS, QUIZ_QUESTIONS } from './data/questions'
-import { captureCell, cellKey, createArena, getAvailableCells } from './game/arena'
-import { botAnswerDelayMs, botNumericGuess, botQuizChoice } from './game/bots'
 import {
-  addScores,
-  emptyGuesses,
-  emptyScores,
-  formatNumber,
-  NUMERIC_TIME_MS,
-  numericAward,
-  pickRandom,
-  QUIZ_PER_MATCH,
-  QUIZ_TIME_MS,
-  quizAward,
-  rankNumericGuesses,
-} from './game/engine'
+  captureCell,
+  captureOpponentCell,
+  cellKey,
+  createArena,
+  getAttackTargets,
+  getAvailableCells,
+} from './game/arena'
+import { botAnswerDelayMs, botNumericGuess, botQuizChoice } from './game/bots'
+import { emptyScores, pickRandom, QUIZ_TIME_MS } from './game/engine'
 import { PLAYER_BY_ID, PLAYERS } from './game/players'
-import type { ArenaCell, Guess, NumericQuestion, PlayerId, QuizQuestion } from './game/types'
+import type { ArenaCell, NumericQuestion, PlayerId, QuizQuestion } from './game/types'
 import { useCountdown } from './hooks/useCountdown'
 import './styles.css'
 
-type Phase = 'home' | 'numeric' | 'numeric-reveal' | 'quiz' | 'quiz-reveal' | 'results'
+type Phase = 'home' | 'expansion' | 'expansion-capture' | 'battle-select' | 'battle-warmup' | 'battle-number' | 'results'
+const MAX_BATTLE_ROUNDS = 12
+const PLAYER_IDS: PlayerId[] = ['you', 'alex', 'marina']
+type Answers = Record<PlayerId, number | null>
 
 type Match = {
   scores: Record<PlayerId, number>
   arena: ArenaCell[]
-  pendingCapture: PlayerId | null
   lastCapturedKey: string | null
-  numericStartedAt: number
-  numeric: NumericQuestion
-  guesses: Record<PlayerId, Guess>
-  ranking: PlayerId[]
-  quiz: QuizQuestion[]
-  quizIndex: number
-  turnOrder: PlayerId[]
-  turnIndex: number
-  quizPicks: Record<PlayerId, number | null>
-  quizRemain: Record<PlayerId, number>
-  answered: Record<PlayerId, boolean>
+  expansionQuestion: QuizQuestion
+  expansionAnswers: Answers
+  expansionRound: number
+  pendingCapture: PlayerId | null
+  battleRound: number
+  attacker: PlayerId
+  defender: PlayerId | null
+  target: ArenaCell | null
+  warmupQuestion: QuizQuestion
+  warmupAnswers: Answers
+  numericQuestion: NumericQuestion
+  numericAnswers: Record<PlayerId, number | null>
 }
 
-type State = {
-  phase: Phase
-  match: Match | null
-}
+type State = { phase: Phase; match: Match | null }
 
 type Action =
-  | { type: 'start'; startedAt: number }
+  | { type: 'start' }
   | { type: 'exit' }
-  | { type: 'lock-numeric'; value: number; timeMs: number }
-  | { type: 'finish-numeric' }
-  | { type: 'capture-cell'; row: number; col: number }
-  | { type: 'begin-quiz' }
-  | { type: 'lock-quiz'; id: PlayerId; pick: number | null; remain: number }
-  | { type: 'timeout-quiz' }
-  | { type: 'next-after-quiz' }
+  | { type: 'answer-expansion'; id: PlayerId; pick: number | null }
+  | { type: 'finish-expansion' }
+  | { type: 'capture-expansion'; row: number; col: number }
+  | { type: 'select-attack'; row: number; col: number }
+  | { type: 'answer-warmup'; id: PlayerId; pick: number | null }
+  | { type: 'finish-warmup' }
+  | { type: 'answer-number'; id: PlayerId; value: number | null }
+  | { type: 'finish-number' }
 
-function blankAnswers(): Record<PlayerId, boolean> {
-  return { you: false, alex: false, marina: false }
+function blankAnswers(): Answers {
+  return { you: null, alex: null, marina: null }
 }
 
-function createMatch(startedAt: number): Match {
-  const numeric = pickRandom(NUMERIC_QUESTIONS, 1)[0]
-  const guesses = emptyGuesses()
-  for (const p of PLAYERS) {
-    if (p.kind !== 'bot') continue
-    guesses[p.id] = {
-      value: botNumericGuess(numeric.answer, p.skill),
-      timeMs: botAnswerDelayMs(p.skill, NUMERIC_TIME_MS),
-    }
+function allAnswered(answers: Answers): boolean {
+  return PLAYER_IDS.every((id) => answers[id] !== null)
+}
+
+function nextAttacker(arena: ArenaCell[], startIndex = 0): PlayerId | null {
+  for (let offset = 0; offset < PLAYER_IDS.length; offset += 1) {
+    const id = PLAYER_IDS[(startIndex + offset) % PLAYER_IDS.length]
+    if (getAttackTargets(arena, id).length > 0) return id
   }
+  return null
+}
+
+function makeMatch(): Match {
   return {
     scores: emptyScores(),
     arena: createArena(),
-    pendingCapture: null,
     lastCapturedKey: null,
-    numericStartedAt: startedAt,
-    numeric,
-    guesses,
-    ranking: [],
-    quiz: pickRandom(QUIZ_QUESTIONS, QUIZ_PER_MATCH),
-    quizIndex: 0,
-    turnOrder: ['you', 'alex', 'marina'],
-    turnIndex: 0,
-    quizPicks: { you: null, alex: null, marina: null },
-    quizRemain: { you: 0, alex: 0, marina: 0 },
-    answered: blankAnswers(),
+    expansionQuestion: pickRandom(QUIZ_QUESTIONS, 1)[0],
+    expansionAnswers: blankAnswers(),
+    expansionRound: 1,
+    pendingCapture: null,
+    battleRound: 0,
+    attacker: 'you',
+    defender: null,
+    target: null,
+    warmupQuestion: pickRandom(QUIZ_QUESTIONS, 1)[0],
+    warmupAnswers: blankAnswers(),
+    numericQuestion: pickRandom(NUMERIC_QUESTIONS, 1)[0],
+    numericAnswers: blankAnswers(),
   }
 }
 
-function applyQuizLock(match: Match, id: PlayerId, pick: number | null, remain: number): Match {
-  if (match.answered[id]) return match
-  const next: Match = {
-    ...match,
-    answered: { ...match.answered, [id]: true },
-    quizPicks: { ...match.quizPicks, [id]: pick },
-    quizRemain: { ...match.quizRemain, [id]: remain },
-    turnIndex: match.turnIndex + 1,
-  }
-  return next
+function beginBattle(match: Match): State {
+  const attacker = nextAttacker(match.arena)
+  if (!attacker) return { phase: 'results', match }
+  return { phase: 'battle-select', match: { ...match, attacker, battleRound: 0 } }
 }
 
-function scoreQuizIfComplete(match: Match): { match: Match; phase: Phase } {
-  if (match.turnIndex < match.turnOrder.length) return { match, phase: 'quiz' }
-  const q = match.quiz[match.quizIndex]
-  const delta: Partial<Record<PlayerId, number>> = {}
-  for (const p of PLAYERS) {
-    delta[p.id] = quizAward(match.quizPicks[p.id] === q.correctIndex, match.quizRemain[p.id])
+function resolveExpansion(match: Match): State {
+  let arena = match.arena
+  const scores = { ...match.scores }
+  let pendingCapture: PlayerId | null = null
+  for (const id of PLAYER_IDS) {
+    if (match.expansionAnswers[id] !== match.expansionQuestion.correctIndex) continue
+    scores[id] += 100
+    if (id === 'you') {
+      pendingCapture = id
+      continue
+    }
+    const key = [...getAvailableCells(arena, id)][0]
+    if (key) {
+      const [row, col] = key.split(':').map(Number)
+      arena = captureCell(arena, id, row, col)
+    }
   }
-  return { match: { ...match, scores: addScores(match.scores, delta) }, phase: 'quiz-reveal' }
+  const nextMatch = { ...match, arena, scores, pendingCapture, lastCapturedKey: null }
+  if (pendingCapture) return { phase: 'expansion-capture', match: nextMatch }
+  if (arena.every((cell) => cell.owner)) return beginBattle(nextMatch)
+  return {
+    phase: 'expansion',
+    match: {
+      ...nextMatch,
+      expansionQuestion: pickRandom(QUIZ_QUESTIONS, 1)[0],
+      expansionAnswers: blankAnswers(),
+      expansionRound: match.expansionRound + 1,
+    },
+  }
+}
+
+function startNextBattle(match: Match): State {
+  const nextRound = match.battleRound + 1
+  if (nextRound >= MAX_BATTLE_ROUNDS) return { phase: 'results', match: { ...match, battleRound: nextRound } }
+  const attacker = nextAttacker(match.arena, (PLAYER_IDS.indexOf(match.attacker) + 1) % PLAYER_IDS.length)
+  if (!attacker) return { phase: 'results', match: { ...match, battleRound: nextRound } }
+  return {
+    phase: 'battle-select',
+    match: { ...match, battleRound: nextRound, attacker, defender: null, target: null },
+  }
+}
+
+function resolveWarmup(match: Match): State {
+  const attackerCorrect = match.warmupAnswers[match.attacker] === match.warmupQuestion.correctIndex
+  const defenderCorrect = match.defender !== null
+    && match.warmupAnswers[match.defender] === match.warmupQuestion.correctIndex
+  if (!attackerCorrect || !match.defender || !match.target) return startNextBattle(match)
+  if (!defenderCorrect) {
+    const arena = captureOpponentCell(match.arena, match.attacker, match.target.row, match.target.col)
+    return startNextBattle({ ...match, arena, lastCapturedKey: cellKey(match.target.row, match.target.col) })
+  }
+  return {
+    phase: 'battle-number',
+    match: { ...match, numericQuestion: pickRandom(NUMERIC_QUESTIONS, 1)[0], numericAnswers: blankAnswers() },
+  }
+}
+
+function resolveNumber(match: Match): State {
+  if (!match.defender || !match.target) return startNextBattle(match)
+  const attackerAnswer = match.numericAnswers[match.attacker]
+  const defenderAnswer = match.numericAnswers[match.defender]
+  const attackerDistance = attackerAnswer === null ? null : Math.abs(attackerAnswer - match.numericQuestion.answer)
+  const defenderDistance = defenderAnswer === null ? null : Math.abs(defenderAnswer - match.numericQuestion.answer)
+  let arena = match.arena
+  if (attackerDistance !== null && (defenderDistance === null || attackerDistance < defenderDistance)) {
+    arena = captureOpponentCell(arena, match.attacker, match.target.row, match.target.col)
+  } else if (defenderDistance !== null && (attackerDistance === null || defenderDistance < attackerDistance)) {
+    arena = captureOpponentCell(arena, match.defender, match.target.row, match.target.col)
+  }
+  return startNextBattle({ ...match, arena, lastCapturedKey: arena === match.arena ? null : cellKey(match.target.row, match.target.col) })
 }
 
 function reducer(state: State, action: Action): State {
+  const match = state.match
   switch (action.type) {
-    case 'start':
-      return { phase: 'numeric', match: createMatch(action.startedAt) }
-    case 'exit':
-      return { phase: 'home', match: null }
-    case 'lock-numeric': {
-      if (!state.match || state.phase !== 'numeric') return state
-      if (state.match.guesses.you.timeMs !== null) return state
-      return {
-        ...state,
-        match: {
-          ...state.match,
-          guesses: {
-            ...state.match.guesses,
-            you: { value: action.value, timeMs: action.timeMs },
-          },
-        },
+    case 'start': return { phase: 'expansion', match: makeMatch() }
+    case 'exit': return { phase: 'home', match: null }
+    case 'answer-expansion': {
+      if (!match || state.phase !== 'expansion' || match.expansionAnswers[action.id] !== null) return state
+      const next = { ...match, expansionAnswers: { ...match.expansionAnswers, [action.id]: action.pick } }
+      return allAnswered(next.expansionAnswers) ? resolveExpansion(next) : { ...state, match: next }
+    }
+    case 'finish-expansion':
+      return match && state.phase === 'expansion' ? resolveExpansion(match) : state
+    case 'capture-expansion': {
+      if (!match || state.phase !== 'expansion-capture' || match.pendingCapture !== 'you') return state
+      const arena = captureCell(match.arena, 'you', action.row, action.col)
+      if (arena === match.arena) return state
+      const next = { ...match, arena, pendingCapture: null, lastCapturedKey: cellKey(action.row, action.col) }
+      return arena.every((cell) => cell.owner) ? beginBattle(next) : {
+        phase: 'expansion',
+        match: { ...next, expansionQuestion: pickRandom(QUIZ_QUESTIONS, 1)[0], expansionAnswers: blankAnswers(), expansionRound: match.expansionRound + 1 },
       }
     }
-    case 'finish-numeric': {
-      if (!state.match || state.phase !== 'numeric') return state
-      const ranking = rankNumericGuesses(state.match.numeric.answer, state.match.guesses)
-      const captureOwner = ranking[0]?.id
-      const delta: Partial<Record<PlayerId, number>> = {}
-      ranking.forEach((row, index) => {
-        delta[row.id] = numericAward(index, row.distance === null)
-      })
-
-      let arena = state.match.arena
-      let pendingCapture: PlayerId | null = null
-      let lastCapturedKey: string | null = null
-      if (captureOwner === 'you') {
-        pendingCapture = captureOwner
-      } else if (captureOwner) {
-        const botTarget = [...getAvailableCells(arena, captureOwner)][0]
-        if (botTarget) {
-          const [row, col] = botTarget.split(':').map(Number)
-          arena = captureCell(arena, captureOwner, row, col)
-          lastCapturedKey = botTarget
-        }
-      }
-
-      return {
-        phase: 'numeric-reveal',
-        match: {
-          ...state.match,
-          arena,
-          ranking: ranking.map((r) => r.id),
-          scores: addScores(state.match.scores, delta),
-          turnOrder: ranking.map((r) => r.id),
-          pendingCapture,
-          lastCapturedKey,
-        },
-      }
+    case 'select-attack': {
+      if (!match || state.phase !== 'battle-select') return state
+      const target = getAttackTargets(match.arena, match.attacker).find((cell) => cell.row === action.row && cell.col === action.col)
+      if (!target || !target.owner) return state
+      return { phase: 'battle-warmup', match: { ...match, target, defender: target.owner, warmupQuestion: pickRandom(QUIZ_QUESTIONS, 1)[0], warmupAnswers: blankAnswers() } }
     }
-    case 'capture-cell': {
-      if (!state.match || state.phase !== 'numeric-reveal' || !state.match.pendingCapture) return state
-      const arena = captureCell(
-        state.match.arena,
-        state.match.pendingCapture,
-        action.row,
-        action.col,
-      )
-      if (arena === state.match.arena) return state
-      return {
-        ...state,
-        match: {
-          ...state.match,
-          arena,
-          pendingCapture: null,
-          lastCapturedKey: cellKey(action.row, action.col),
-        },
-      }
+    case 'answer-warmup': {
+      if (!match || state.phase !== 'battle-warmup' || match.warmupAnswers[action.id] !== null) return state
+      const next = { ...match, warmupAnswers: { ...match.warmupAnswers, [action.id]: action.pick } }
+      return match.defender && next.warmupAnswers[match.attacker] !== null && next.warmupAnswers[match.defender] !== null
+        ? resolveWarmup(next)
+        : { ...state, match: next }
     }
-    case 'begin-quiz': {
-      if (!state.match || state.match.pendingCapture) return state
-      return {
-        phase: 'quiz',
-        match: {
-          ...state.match,
-          quizIndex: 0,
-          turnIndex: 0,
-          quizPicks: { you: null, alex: null, marina: null },
-          quizRemain: { you: 0, alex: 0, marina: 0 },
-          answered: blankAnswers(),
-        },
-      }
+    case 'finish-warmup': return match && state.phase === 'battle-warmup' ? resolveWarmup(match) : state
+    case 'answer-number': {
+      if (!match || state.phase !== 'battle-number' || match.numericAnswers[action.id] !== null) return state
+      const next = { ...match, numericAnswers: { ...match.numericAnswers, [action.id]: action.value } }
+      return match.defender && next.numericAnswers[match.attacker] !== null && next.numericAnswers[match.defender] !== null
+        ? resolveNumber(next)
+        : { ...state, match: next }
     }
-    case 'lock-quiz': {
-      if (!state.match || state.phase !== 'quiz') return state
-      const actor = state.match.turnOrder[state.match.turnIndex]
-      if (action.id !== actor) return state
-      const locked = applyQuizLock(state.match, action.id, action.pick, action.remain)
-      const next = scoreQuizIfComplete(locked)
-      return { phase: next.phase, match: next.match }
-    }
-    case 'timeout-quiz': {
-      if (!state.match || state.phase !== 'quiz') return state
-      const id = state.match.turnOrder[state.match.turnIndex]
-      const locked = applyQuizLock(state.match, id, null, 0)
-      const next = scoreQuizIfComplete(locked)
-      return { phase: next.phase, match: next.match }
-    }
-    case 'next-after-quiz': {
-      if (!state.match) return state
-      const nextIndex = state.match.quizIndex + 1
-      if (nextIndex >= state.match.quiz.length) {
-        return { phase: 'results', match: state.match }
-      }
-      return {
-        phase: 'quiz',
-        match: {
-          ...state.match,
-          quizIndex: nextIndex,
-          turnIndex: 0,
-          quizPicks: { you: null, alex: null, marina: null },
-          quizRemain: { you: 0, alex: 0, marina: 0 },
-          answered: blankAnswers(),
-        },
-      }
-    }
-    default:
-      return state
+    case 'finish-number': return match && state.phase === 'battle-number' ? resolveNumber(match) : state
+    default: return state
   }
 }
 
@@ -247,437 +223,95 @@ export default function App() {
   const [menuNotice, setMenuNotice] = useState('')
   const [settingsOpen, setSettingsOpen] = useState(false)
   const { phase, match } = state
-  const startMatch = () => {
-    setSettingsOpen(false)
-    dispatch({ type: 'start', startedAt: performance.now() })
-  }
-  const exitGame = () => {
-    setSettingsOpen(false)
-    dispatch({ type: 'exit' })
-  }
-  const nowMs = useElapsedMs(phase === 'numeric', match?.numericStartedAt ?? 0)
-
-  const numericLeft = useCountdown(
-    phase === 'numeric',
-    NUMERIC_TIME_MS,
-    () => dispatch({ type: 'finish-numeric' }),
-  )
-
-  const quizTurnKey = match ? `${match.quizIndex}-${match.turnIndex}` : 'none'
-  const quizLeft = useCountdown(
-    phase === 'quiz',
-    QUIZ_TIME_MS,
-    () => dispatch({ type: 'timeout-quiz' }),
-    quizTurnKey,
-  )
-
-  const currentTurn = match?.turnOrder[match.turnIndex] ?? null
-  const humanTurn = phase === 'quiz' && currentTurn === 'you'
+  const startMatch = () => { setSettingsOpen(false); dispatch({ type: 'start' }) }
+  const exitGame = () => { setSettingsOpen(false); dispatch({ type: 'exit' }) }
+  const timedPhase = phase === 'expansion' || phase === 'battle-warmup' || phase === 'battle-number'
+  const timerKey = match ? `${phase}-${match.expansionRound}-${match.battleRound}-${match.target?.row ?? ''}-${match.target?.col ?? ''}` : 'none'
+  const remainingMs = useCountdown(timedPhase, QUIZ_TIME_MS, () => {
+    dispatch({ type: phase === 'expansion' ? 'finish-expansion' : phase === 'battle-warmup' ? 'finish-warmup' : 'finish-number' })
+  }, timerKey)
 
   useEffect(() => {
-    if (phase !== 'quiz' || !match) return
-    const actor = match.turnOrder[match.turnIndex]
-    const player = PLAYER_BY_ID[actor]
-    if (player.kind !== 'bot') return
-    const q = match.quiz[match.quizIndex]
-    const delay = botAnswerDelayMs(player.skill, QUIZ_TIME_MS)
-    const id = window.setTimeout(() => {
-      dispatch({
-        type: 'lock-quiz',
-        id: actor,
-        pick: botQuizChoice(q.correctIndex, player.skill),
-        remain: Math.max(0, QUIZ_TIME_MS - delay),
-      })
-    }, delay)
-    return () => window.clearTimeout(id)
-  }, [phase, match?.quizIndex, match?.turnIndex, match])
-
-  const rankingRows = useMemo(() => {
-    if (!match || phase === 'home') return []
-    return rankNumericGuesses(match.numeric.answer, match.guesses)
-  }, [match, phase])
-
-  const lockedNumeric = match?.guesses.you.timeMs !== null
-
-  const badges = useMemo(() => {
-    const map: Partial<Record<PlayerId, string>> = {}
-    if (!match) return map
-    if (phase === 'numeric') {
-      map.you = lockedNumeric ? 'ставка' : 'думает'
-      for (const p of PLAYERS.filter((x) => x.kind === 'bot')) {
-        map[p.id] = (match.guesses[p.id].timeMs ?? 9e9) <= nowMs ? 'ставка' : 'думает'
+    if (!match) return
+    if (phase === 'expansion') {
+      const player = PLAYERS.find((candidate) => candidate.kind === 'bot' && match.expansionAnswers[candidate.id] === null)
+      if (player) {
+        const id = window.setTimeout(() => dispatch({ type: 'answer-expansion', id: player.id, pick: botQuizChoice(match.expansionQuestion.correctIndex, player.skill) }), botAnswerDelayMs(player.skill, QUIZ_TIME_MS))
+        return () => window.clearTimeout(id)
       }
     }
-    if (phase === 'quiz' && currentTurn) map[currentTurn] = 'ходит'
-    if (phase === 'numeric-reveal' && match.ranking[0]) map[match.ranking[0]] = 'ближе всех'
-    return map
-  }, [match, phase, lockedNumeric, nowMs, currentTurn])
-
-  return (
-    <div className="arena">
-      <header className="topbar">
-        <div>
-          <p className="kicker">Арена</p>
-          <h1>Ближе всех</h1>
-        </div>
-        {match && phase !== 'home' ? (
-          <div className="topbar-tools">
-            <PlayerDock
-              scores={match.scores}
-              highlight={phase === 'quiz' ? currentTurn : null}
-              badges={badges}
-            />
-            <div className={`settings-menu${settingsOpen ? ' is-open' : ''}`}>
-              <button
-                type="button"
-                className="settings-button"
-                aria-label="Настройки"
-                aria-expanded={settingsOpen}
-                title="Настройки"
-                onClick={() => setSettingsOpen((open) => !open)}
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2Zm8.2 3.6c0-.5-.1-1-.2-1.5l2-1.5-2-3.4-2.4 1a9 9 0 0 0-2.6-1.5L14.7 2h-5.4L9 5.1a9 9 0 0 0-2.6 1.5l-2.4-1-2 3.4 2 1.5a8 8 0 0 0 0 3l-2 1.5 2 3.4 2.4-1A9 9 0 0 0 9 18.9l.3 3.1h5.4l.3-3.1a9 9 0 0 0 2.6-1.5l2.4 1 2-3.4-2-1.5c.1-.5.2-1 .2-1.5Z" />
-                </svg>
-              </button>
-              {settingsOpen ? (
-                <div className="settings-popover">
-                  <button type="button" className="exit-button" onClick={exitGame}>
-                    Выйти из игры
-                  </button>
-                </div>
-              ) : null}
-            </div>
-          </div>
-        ) : null}
-      </header>
-
-      <main className="stage">
-        {phase === 'home' ? (
-          <MenuScreen
-            notice={menuNotice}
-            onStartBots={startMatch}
-            onStub={(label) => setMenuNotice(`${label} появится в следующем этапе.`)}
-          />
-        ) : null}
-
-        {phase === 'numeric' && match ? (
-          <NumericScreen
-            prompt={match.numeric.prompt}
-            remainingMs={numericLeft}
-            locked={lockedNumeric}
-            onSubmit={(value) =>
-              dispatch({
-                type: 'lock-numeric',
-                value,
-                timeMs: performance.now() - match.numericStartedAt,
-              })
-            }
-          />
-        ) : null}
-
-        {phase !== 'home' && match ? (
-          <ArenaGrid
-            cells={match.arena}
-            activePlayer={phase === 'numeric-reveal' ? match.pendingCapture : null}
-            lastCapturedKey={match.lastCapturedKey}
-            onCapture={(row, col) => dispatch({ type: 'capture-cell', row, col })}
-          />
-        ) : null}
-
-        {phase === 'numeric-reveal' && match ? (
-          <section className="panel">
-            <p className="kicker">Раскрытие</p>
-            <h2>Правильный ответ: {formatNumber(match.numeric.answer)}</h2>
-            {match.numeric.unit ? <p className="hint">Единица ответа: {match.numeric.unit}</p> : null}
-            <ol className="rank-list">
-              {rankingRows.map((row, i) => {
-                const player = PLAYER_BY_ID[row.id]
-                return (
-                  <li key={row.id} style={{ ['--accent' as string]: player.accent }}>
-                    <span className="rank-place">{i + 1}</span>
-                    <span>{player.name}</span>
-                    <span className="rank-guess">
-                      {row.distance === null
-                        ? 'нет ставки'
-                        : formatNumber(match.guesses[row.id].value ?? 0)}
-                    </span>
-                    <span className="rank-delta">
-                      {row.distance === null ? '—' : `Δ ${formatNumber(row.distance)}`}
-                    </span>
-                    <span className="rank-pts">+{numericAward(i, row.distance === null)}</span>
-                  </li>
-                )
-              })}
-            </ol>
-            <p className="hint">
-              {match.pendingCapture
-                ? `${PLAYER_BY_ID[match.pendingCapture].name} захватывает соседнюю клетку на арене.`
-                : 'Клетка захвачена. Можно переходить к вопросам.'}
-            </p>
-            <button
-              type="button"
-              className="primary"
-              disabled={Boolean(match.pendingCapture)}
-              onClick={() => dispatch({ type: 'begin-quiz' })}
-            >
-              К вопросам · первым ходит {PLAYER_BY_ID[match.ranking[0]]?.name}
-            </button>
-          </section>
-        ) : null}
-
-        {phase === 'quiz' && match ? (
-          <QuizBoard
-            match={match}
-            remainingMs={quizLeft}
-            currentTurn={currentTurn}
-            humanTurn={humanTurn}
-            onChoose={(index) =>
-              dispatch({ type: 'lock-quiz', id: 'you', pick: index, remain: quizLeft })
-            }
-          />
-        ) : null}
-
-        {phase === 'quiz-reveal' && match ? (
-          <QuizReveal match={match} onNext={() => dispatch({ type: 'next-after-quiz' })} />
-        ) : null}
-
-        {phase === 'results' && match ? (
-          <ResultsScreen scores={match.scores} onAgain={startMatch} />
-        ) : null}
-      </main>
-    </div>
-  )
-}
-
-function useElapsedMs(active: boolean, startedAt: number) {
-  const [elapsedMs, setElapsedMs] = useState(0)
-  useEffect(() => {
-    if (!active) return
-    let frame = 0
-    const tick = () => {
-      setElapsedMs(Math.max(0, performance.now() - startedAt))
-      frame = window.requestAnimationFrame(tick)
+    if (phase === 'battle-select' && PLAYER_BY_ID[match.attacker].kind === 'bot') {
+      const target = getAttackTargets(match.arena, match.attacker)[0]
+      if (target) {
+        const id = window.setTimeout(() => dispatch({ type: 'select-attack', row: target.row, col: target.col }), 650)
+        return () => window.clearTimeout(id)
+      }
     }
-    frame = window.requestAnimationFrame(tick)
-    return () => window.cancelAnimationFrame(frame)
-  }, [active, startedAt])
-  if (!active) return 0
-  return elapsedMs
-}
+    if (phase === 'battle-warmup' && match.defender) {
+      const waiting = [match.attacker, match.defender].find((id) => match.warmupAnswers[id] === null && PLAYER_BY_ID[id].kind === 'bot')
+      if (waiting) {
+        const id = window.setTimeout(() => dispatch({ type: 'answer-warmup', id: waiting, pick: botQuizChoice(match.warmupQuestion.correctIndex, PLAYER_BY_ID[waiting].skill) }), botAnswerDelayMs(PLAYER_BY_ID[waiting].skill, QUIZ_TIME_MS))
+        return () => window.clearTimeout(id)
+      }
+    }
+    if (phase === 'battle-number' && match.defender) {
+      const waiting = [match.attacker, match.defender].find((id) => match.numericAnswers[id] === null && PLAYER_BY_ID[id].kind === 'bot')
+      if (waiting) {
+        const id = window.setTimeout(() => dispatch({ type: 'answer-number', id: waiting, value: botNumericGuess(match.numericQuestion.answer, PLAYER_BY_ID[waiting].skill) }), botAnswerDelayMs(PLAYER_BY_ID[waiting].skill, QUIZ_TIME_MS))
+        return () => window.clearTimeout(id)
+      }
+    }
+  }, [phase, match])
 
-function parseGuess(raw: string): number | null {
-  const normalized = raw.replace(/\s/g, '').replace(',', '.')
-  if (!normalized) return null
-  const n = Number(normalized)
-  if (!Number.isFinite(n)) return null
-  return n
-}
-
-function MenuScreen({
-  notice,
-  onStartBots,
-  onStub,
-}: {
-  notice: string
-  onStartBots: () => void
-  onStub: (label: string) => void
-}) {
-  return (
-    <section className="panel hero menu-panel">
-      <button
-        type="button"
-        className="settings-button"
-        aria-label="Настройки"
-        title="Настройки"
-        onClick={() => onStub('Настройки')}
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2Zm8.2 3.6c0-.5-.1-1-.2-1.5l2-1.5-2-3.4-2.4 1a9 9 0 0 0-2.6-1.5L14.7 2h-5.4L9 5.1a9 9 0 0 0-2.6 1.5l-2.4-1-2 3.4 2 1.5a8 8 0 0 0 0 3l-2 1.5 2 3.4 2.4-1A9 9 0 0 0 9 18.9l.3 3.1h5.4l.3-3.1a9 9 0 0 0 2.6-1.5l2.4 1 2-3.4-2-1.5c.1-.5.2-1 .2-1.5Z" />
-        </svg>
-      </button>
-      <div className="hero-copy">
-        <p className="kicker">Главное меню</p>
-        <h2>Выбери режим викторины</h2>
-        <p className="lede">
-          Числовой раунд решает, кто ближе к правде, а затем открывает очередь в квизе.
-        </p>
-        <div className="menu-actions" aria-label="Режимы игры">
-          <button type="button" className="mode-button is-locked" onClick={() => onStub('Рейтинговая игра')}>
-            <span>Рейтинговая игра</span>
-            <small>Скоро</small>
-          </button>
-          <button type="button" className="mode-button is-primary" onClick={onStartBots}>
-            <span>Игра с ботами</span>
-            <small>Играть</small>
-          </button>
-          <button type="button" className="mode-button is-locked" onClick={() => onStub('Игра с друзьями')}>
-            <span>Игра с друзьями</span>
-            <small>Скоро</small>
-          </button>
-        </div>
-        {notice ? <p className="menu-notice">{notice}</p> : null}
-      </div>
-      <img className="hero-art" src={heroArena} alt="" aria-hidden="true" />
-    </section>
+  const humanQuestion = (question: QuizQuestion, answers: Answers, type: 'expansion' | 'warmup') => (
+    <QuestionPanel question={question} remainingMs={remainingMs} locked={answers.you !== null} onChoose={(pick) => dispatch({ type: type === 'expansion' ? 'answer-expansion' : 'answer-warmup', id: 'you', pick })} />
   )
+
+  return <div className="arena">
+    <header className="topbar">
+      <div><p className="kicker">Арена</p><h1>Ближе всех</h1></div>
+      {match && phase !== 'home' ? <div className="topbar-tools"><PhaseBadge phase={phase} match={match} /><PlayerDock scores={match.scores} badges={{ [match.attacker]: phase.startsWith('battle') ? 'атакует' : undefined }} /><div className={`settings-menu${settingsOpen ? ' is-open' : ''}`}><button type="button" className="settings-button" aria-label="Настройки" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((open) => !open)}><span aria-hidden="true">⚙</span></button>{settingsOpen ? <div className="settings-popover"><button type="button" className="exit-button" onClick={exitGame}>Выйти из игры</button></div> : null}</div></div> : null}
+    </header>
+    <main className="stage">
+      {phase === 'home' ? <MenuScreen notice={menuNotice} onStart={startMatch} onStub={(label) => setMenuNotice(`${label} появится в следующем этапе.`)} /> : null}
+      {match && phase !== 'home' ? <ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' ? 'you' : null} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => dispatch({ type: 'capture-expansion', row, col })} /> : null}
+      {phase === 'expansion' && match ? humanQuestion(match.expansionQuestion, match.expansionAnswers, 'expansion') : null}
+      {phase === 'expansion-capture' ? <section className="panel"><p className="kicker">Завоевание · правильный ответ</p><h2>Выбери свободную соседнюю соту</h2><p className="hint">Только правильный ответ даёт право расширить территорию.</p></section> : null}
+      {phase === 'battle-select' && match ? <BattleSelect match={match} onSelect={(row, col) => dispatch({ type: 'select-attack', row, col })} /> : null}
+      {phase === 'battle-warmup' && match && match.defender ? <><section className="panel battle-step"><p className="kicker">Битва · шаг 1 из 2 · Разминка</p><p className="hint">{PLAYER_BY_ID[match.attacker].name} атакует {PLAYER_BY_ID[match.defender].name}.</p></section>{match.attacker === 'you' || match.defender === 'you' ? humanQuestion(match.warmupQuestion, match.warmupAnswers, 'warmup') : <BotWaiting remainingMs={remainingMs} />}</> : null}
+      {phase === 'battle-number' && match && match.defender ? <><section className="panel battle-step"><p className="kicker">Битва · шаг 2 из 2 · Числовая дуэль</p><h2>Ближе к правильному числу побеждает</h2><p className="hint">Скорость не влияет на результат.</p></section>{match.attacker === 'you' || match.defender === 'you' ? <NumberDuel match={match} remainingMs={remainingMs} onAnswer={(value) => dispatch({ type: 'answer-number', id: 'you', value })} /> : <BotWaiting remainingMs={remainingMs} />}</> : null}
+      {phase === 'results' && match ? <ResultsScreen scores={match.scores} arena={match.arena} onAgain={startMatch} /> : null}
+    </main>
+  </div>
 }
 
-function NumericScreen({
-  prompt,
-  remainingMs,
-  locked,
-  onSubmit,
-}: {
-  prompt: string
-  remainingMs: number
-  locked: boolean
-  onSubmit: (value: number) => void
-}) {
-  const draft = useRef<HTMLInputElement>(null)
-  const [error, setError] = useState('')
-  return (
-    <section className="panel">
-      <p className="kicker">Числовой раунд · кто ближе, тот лучше</p>
-      <h2>{prompt}</h2>
-      <TimerRing remainingMs={remainingMs} totalMs={NUMERIC_TIME_MS} />
-      <form
-        className="guess-form"
-        onSubmit={(e) => {
-          e.preventDefault()
-          const parsed = parseGuess(draft.current?.value ?? '')
-          if (parsed === null) {
-            setError('Введи числовую ставку. Пустой ответ не засчитывается.')
-            return
-          }
-          setError('')
-          onSubmit(parsed)
-        }}
-      >
-        <input
-          ref={draft}
-          inputMode="decimal"
-          autoFocus
-          disabled={locked}
-          placeholder="Твоё число"
-          aria-label="Числовой ответ"
-          aria-invalid={error ? 'true' : 'false'}
-          onChange={() => setError('')}
-        />
-        <button type="submit" disabled={locked}>
-          {locked ? 'Принято' : 'Поставить'}
-        </button>
-      </form>
-      <p className="hint">
-        {error ||
-          (locked
-          ? 'Ждём остальных. Победит тот, чья ставка ближе к правде.'
-          : 'Боты уже думают. Чем меньше ошибка — тем выше место.')}
-      </p>
-    </section>
-  )
+function PhaseBadge({ phase, match }: { phase: Phase; match: Match }) {
+  const battle = phase.startsWith('battle') || phase === 'results'
+  return <div className="phase-badge"><strong>{battle ? 'Битва' : 'Завоевание'}</strong><small>{battle ? `Раунд ${Math.min(match.battleRound + 1, MAX_BATTLE_ROUNDS)} / ${MAX_BATTLE_ROUNDS}` : `Раунд ${match.expansionRound}`}</small></div>
 }
 
-function QuizBoard({
-  match,
-  remainingMs,
-  currentTurn,
-  humanTurn,
-  onChoose,
-}: {
-  match: Match
-  remainingMs: number
-  currentTurn: PlayerId | null
-  humanTurn: boolean
-  onChoose: (index: number) => void
-}) {
-  const q = match.quiz[match.quizIndex]
-  const actor = currentTurn ? PLAYER_BY_ID[currentTurn] : null
-  return (
-    <section className="panel">
-      <p className="kicker">
-        Вопрос {match.quizIndex + 1} из {match.quiz.length}
-        {actor ? ` · ход: ${actor.name}` : ''}
-      </p>
-      <h2>{q.prompt}</h2>
-      <TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} />
-      <div className="options">
-        {q.options.map((opt, i) => (
-          <button
-            key={opt}
-            type="button"
-            className="option"
-            disabled={!humanTurn}
-            onClick={() => onChoose(i)}
-          >
-            <span className="opt-key">{['А', 'Б', 'В', 'Г'][i]}</span>
-            {opt}
-          </button>
-        ))}
-      </div>
-      {!humanTurn ? (
-        <p className="hint">{actor?.name} выбирает вариант…</p>
-      ) : (
-        <p className="hint">Выбери ответ. Быстрее — больше очков.</p>
-      )}
-    </section>
-  )
+function QuestionPanel({ question, remainingMs, locked, onChoose }: { question: QuizQuestion; remainingMs: number; locked: boolean; onChoose: (pick: number) => void }) {
+  return <section className="panel"><p className="kicker">Общий вопрос · отвечают все одновременно</p><h2>{question.prompt}</h2><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><div className="options">{question.options.map((option, index) => <button key={option} type="button" className="option" disabled={locked} onClick={() => onChoose(index)}><span className="opt-key">{['А', 'Б', 'В', 'Г'][index]}</span>{option}</button>)}</div><p className="hint">{locked ? 'Ответ принят. Ждём остальных игроков.' : 'На ответ есть 15 секунд.'}</p></section>
 }
 
-function QuizReveal({ match, onNext }: { match: Match; onNext: () => void }) {
-  const q = match.quiz[match.quizIndex]
-  const last = match.quizIndex + 1 >= match.quiz.length
-  return (
-    <section className="panel">
-      <p className="kicker">Ответ</p>
-      <h2>{q.options[q.correctIndex]}</h2>
-      <ul className="reveal-list">
-        {PLAYERS.map((p) => {
-          const pick = match.quizPicks[p.id]
-          const ok = pick === q.correctIndex
-          const points = quizAward(ok, match.quizRemain[p.id])
-          return (
-            <li key={p.id} style={{ ['--accent' as string]: p.accent }}>
-              <span>{p.name}</span>
-              <span>{pick === null ? 'время вышло' : q.options[pick]}</span>
-              <span className={ok ? 'ok' : 'miss'}>{ok ? 'верно' : 'мимо'}</span>
-              <span className="reveal-points">+{points}</span>
-            </li>
-          )
-        })}
-      </ul>
-      <button type="button" className="primary" onClick={onNext}>
-        {last ? 'Итоги' : 'Дальше'}
-      </button>
-    </section>
-  )
+function BattleSelect({ match, onSelect }: { match: Match; onSelect: (row: number, col: number) => void }) {
+  const targets = getAttackTargets(match.arena, match.attacker)
+  return <section className="panel"><p className="kicker">Битва · выбор цели</p><h2>{PLAYER_BY_ID[match.attacker].name}, выбери соседнюю вражескую соту</h2><div className="target-list">{targets.map((target) => <button key={cellKey(target.row, target.col)} type="button" className="target-button" onClick={() => onSelect(target.row, target.col)}>Сота {target.row}:{target.col} · {PLAYER_BY_ID[target.owner as PlayerId].name}</button>)}</div></section>
 }
 
-function ResultsScreen({
-  scores,
-  onAgain,
-}: {
-  scores: Record<PlayerId, number>
-  onAgain: () => void
-}) {
-  const order = [...PLAYERS].sort((a, b) => scores[b.id] - scores[a.id])
-  const winner = order[0]
-  return (
-    <section className="panel">
-      <p className="kicker">Финиш</p>
-      <h2>{winner.id === 'you' ? 'Ты выиграл арену' : `${winner.name} сильнее в этот раз`}</h2>
-      <ol className="rank-list">
-        {order.map((p, i) => (
-          <li key={p.id} style={{ ['--accent' as string]: p.accent }}>
-            <span className="rank-place">{i + 1}</span>
-            <span>{p.name}</span>
-            <span className="rank-pts">{scores[p.id]}</span>
-          </li>
-        ))}
-      </ol>
-      <button type="button" className="primary" onClick={onAgain}>
-        Ещё партия
-      </button>
-    </section>
-  )
+function NumberDuel({ match, remainingMs, onAnswer }: { match: Match; remainingMs: number; onAnswer: (value: number | null) => void }) {
+  const [value, setValue] = useState('')
+  const [locked, setLocked] = useState(false)
+  return <section className="panel"><p className="kicker">Одновременный ответ</p><p className="hint">{match.numericQuestion.prompt}</p><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><form className="guess-form" onSubmit={(event) => { event.preventDefault(); const parsed = Number(value.replace(',', '.')); if (!Number.isFinite(parsed)) return; setLocked(true); onAnswer(parsed) }}><input value={value} onChange={(event) => setValue(event.target.value)} disabled={locked} inputMode="decimal" placeholder="Твоё число" aria-label="Числовой ответ" /><button type="submit" disabled={locked}>{locked ? 'Принято' : 'Ответить'}</button></form><p className="hint">Сравнивается только абсолютное отклонение, без бонуса за скорость.</p></section>
+}
+
+function BotWaiting({ remainingMs }: { remainingMs: number }) { return <section className="panel"><p className="kicker">Одновременный ответ</p><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><p className="hint">Боты отвечают…</p></section> }
+
+function ResultsScreen({ scores, arena, onAgain }: { scores: Record<PlayerId, number>; arena: ArenaCell[]; onAgain: () => void }) {
+  const territory = PLAYER_IDS.map((id) => ({ id, count: arena.filter((cell) => cell.owner === id).length })).sort((a, b) => b.count - a.count)
+  return <section className="panel"><p className="kicker">Матч завершён</p><h2>Победитель: {PLAYER_BY_ID[territory[0].id].name}</h2><ol className="rank-list">{territory.map((row) => <li key={row.id} style={{ ['--accent' as string]: PLAYER_BY_ID[row.id].accent }}><span className="rank-place">{row.count}</span><span>{PLAYER_BY_ID[row.id].name}</span><span>{scores[row.id]} очков</span></li>)}</ol><button type="button" className="primary" onClick={onAgain}>Новая игра</button></section>
+}
+
+function MenuScreen({ notice, onStart, onStub }: { notice: string; onStart: () => void; onStub: (label: string) => void }) {
+  return <section className="panel hero menu-panel"><div className="hero-copy"><p className="kicker">Главное меню</p><h2>Завоевание и битва</h2><p className="lede">Сначала расширь территорию правильными ответами, затем сражайся за границы.</p><div className="menu-actions"><button type="button" className="mode-button is-locked" onClick={() => onStub('Рейтинговая игра')}><span>Рейтинговая игра</span><small>Скоро</small></button><button type="button" className="mode-button is-primary" onClick={onStart}><span>Игра с ботами</span><small>Играть</small></button><button type="button" className="mode-button is-locked" onClick={() => onStub('Игра с друзьями')}><span>Игра с друзьями</span><small>Скоро</small></button></div>{notice ? <p className="menu-notice">{notice}</p> : null}</div><img className="hero-art" src={heroArena} alt="" aria-hidden="true" /></section>
 }

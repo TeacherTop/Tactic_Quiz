@@ -51,6 +51,26 @@ input {
   gap: 12px;
 }
 
+.phase-badge {
+  display: grid;
+  gap: 2px;
+  min-width: 112px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--paper);
+  text-align: center;
+}
+
+.phase-badge strong {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.phase-badge small {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
 .kicker {
   margin: 0 0 6px;
   letter-spacing: 0.16em;
@@ -270,6 +290,31 @@ h2 {
   min-height: 1.4em;
   margin: 16px 0 0;
   color: var(--gold);
+}
+
+.target-list {
+  display: grid;
+  gap: 8px;
+  max-width: 520px;
+}
+
+.target-button {
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--paper-deep);
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.target-button:hover {
+  border-color: var(--gold);
+  background: var(--paper);
+}
+
+.battle-step {
+  border-color: var(--gold);
 }
 
 .primary,

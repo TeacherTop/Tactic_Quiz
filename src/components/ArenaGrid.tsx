@@ -91,7 +91,7 @@ export function ArenaGrid({ cells, activePlayer, lastCapturedKey, onCapture }: P
         <span>
           <b style={{ ['--legend-color' as string]: PLAYER_BY_ID.alex.accent }} /> Игрок 2
         </span>
-        <span>61 сот · радиус {ARENA_RADIUS}</span>
+        <span>{cells.length} сот · радиус {ARENA_RADIUS}</span>
       </div>
     </section>
   )
