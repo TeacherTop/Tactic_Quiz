@@ -11,6 +11,7 @@ import {
   createArena,
   getAttackTargets,
   getAvailableCells,
+  isExpansionBreakthrough,
 } from './game/arena'
 import { botAnswerDelayMs, botNumericGuess, botQuizChoice } from './game/bots'
 import { emptyScores, pickRandom, QUIZ_TIME_MS } from './game/engine'
@@ -276,7 +277,7 @@ export default function App() {
       {phase === 'home' ? <MenuScreen notice={menuNotice} onStart={startMatch} onStub={(label) => setMenuNotice(`${label} появится в следующем этапе.`)} /> : null}
       {match && phase !== 'home' ? <ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' ? 'you' : null} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => dispatch({ type: 'capture-expansion', row, col })} /> : null}
       {phase === 'expansion' && match ? humanQuestion(match.expansionQuestion, match.expansionAnswers, 'expansion') : null}
-      {phase === 'expansion-capture' ? <section className="panel"><p className="kicker">Завоевание · правильный ответ</p><h2>Выбери свободную соседнюю соту</h2><p className="hint">Только правильный ответ даёт право расширить территорию.</p></section> : null}
+      {phase === 'expansion-capture' && match ? <section className="panel"><p className="kicker">Завоевание · правильный ответ</p><h2>{isExpansionBreakthrough(match.arena, 'you') ? 'Прорыв блокады: выбери любую свободную соту' : 'Выбери свободную соседнюю соту'}</h2><p className="hint">{isExpansionBreakthrough(match.arena, 'you') ? 'Твоя территория окружена. Десант можно высадить в любой свободной точке карты.' : 'Только соседняя свободная сота доступна для расширения.'}</p></section> : null}
       {phase === 'battle-select' && match ? <BattleSelect match={match} onSelect={(row, col) => dispatch({ type: 'select-attack', row, col })} /> : null}
       {phase === 'battle-warmup' && match && match.defender ? <><section className="panel battle-step"><p className="kicker">Битва · шаг 1 из 2 · Разминка</p><p className="hint">{PLAYER_BY_ID[match.attacker].name} атакует {PLAYER_BY_ID[match.defender].name}.</p></section>{match.attacker === 'you' || match.defender === 'you' ? humanQuestion(match.warmupQuestion, match.warmupAnswers, 'warmup') : <BotWaiting remainingMs={remainingMs} />}</> : null}
       {phase === 'battle-number' && match && match.defender ? <><section className="panel battle-step"><p className="kicker">Битва · шаг 2 из 2 · Числовая дуэль</p><h2>Ближе к правильному числу побеждает</h2><p className="hint">Скорость не влияет на результат.</p></section>{match.attacker === 'you' || match.defender === 'you' ? <NumberDuel match={match} remainingMs={remainingMs} onAnswer={(value) => dispatch({ type: 'answer-number', id: 'you', value })} /> : <BotWaiting remainingMs={remainingMs} />}</> : null}

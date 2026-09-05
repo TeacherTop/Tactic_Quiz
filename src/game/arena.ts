@@ -43,7 +43,19 @@ export function getAvailableCells(cells: ArenaCell[], playerId: PlayerId): Set<s
     }
   }
 
-  return available
+  if (available.size > 0) return available
+  return new Set(cells.filter((cell) => !cell.owner).map((cell) => cellKey(cell.row, cell.col)))
+}
+
+export function isExpansionBreakthrough(cells: ArenaCell[], playerId: PlayerId): boolean {
+  const adjacentFree = new Set<string>()
+  for (const cell of cells.filter((candidate) => candidate.owner === playerId)) {
+    for (const [row, col] of getNeighbors(cell.row, cell.col)) {
+      const neighbor = cells.find((candidate) => candidate.row === row && candidate.col === col)
+      if (neighbor && !neighbor.owner) adjacentFree.add(cellKey(row, col))
+    }
+  }
+  return adjacentFree.size === 0 && cells.some((cell) => !cell.owner)
 }
 
 export function captureCell(
