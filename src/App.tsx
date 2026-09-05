@@ -25,6 +25,7 @@ type Phase = 'home' | 'expansion' | 'expansion-capture' | 'expansion-final' | 'b
 const MAX_BATTLE_ROUNDS = 10
 const ANNOUNCEMENT_MS = 3500
 const ROUND_RESULT_MS = 4500
+const BOT_FALLBACK_BUFFER_MS = 500
 const PLAYER_IDS: PlayerId[] = ['you', 'alex', 'marina']
 type Answers = Record<PlayerId, number | null>
 type RoundResult =
@@ -426,19 +427,38 @@ export default function App() {
     const schedule = (callback: () => void, delay: number) => {
       timers.push(window.setTimeout(callback, delay))
     }
+    const scheduleBotAnswer = (
+      playerId: PlayerId,
+      delay: number,
+      value: number,
+      send: () => void,
+    ) => {
+      const player = PLAYER_BY_ID[playerId]
+      const fallbackDelay = QUIZ_TIME_MS - BOT_FALLBACK_BUFFER_MS
+      const safeDelay = Math.min(delay, fallbackDelay - 100)
+      console.info(`[bot] ${player.name} начал думать`)
+      schedule(() => {
+        console.info(`[bot] ${player.name} отправил ответ ${value}`)
+        send()
+      }, safeDelay)
+      schedule(() => {
+        console.info(`[bot] ${player.name} отправил fallback-ответ ${value}`)
+        send()
+      }, fallbackDelay)
+    }
     if (phase === 'expansion') {
       PLAYERS.filter((player) => player.kind === 'bot' && match.expansionAnswers[player.id] === null)
-        .forEach((player) => schedule(
-          () => dispatch({ type: 'answer-expansion', id: player.id, pick: botQuizChoice(match.expansionQuestion.correctIndex, player.skill), answeredAt: performance.now() }),
-          botAnswerDelayMs(player.skill, QUIZ_TIME_MS),
-        ))
+        .forEach((player) => {
+          const value = botQuizChoice(match.expansionQuestion.correctIndex, player.skill)
+          scheduleBotAnswer(player.id, botAnswerDelayMs(player.skill, QUIZ_TIME_MS), value, () => dispatch({ type: 'answer-expansion', id: player.id, pick: value, answeredAt: performance.now() }))
+        })
     }
     if (phase === 'expansion-final') {
       PLAYERS.filter((player) => player.kind === 'bot' && match.finalAnswers[player.id] === null)
-        .forEach((player) => schedule(
-          () => dispatch({ type: 'answer-final', id: player.id, value: botNumericGuess(match.finalQuestion.answer, player.skill), answeredAt: performance.now() }),
-          botAnswerDelayMs(player.skill, QUIZ_TIME_MS),
-        ))
+        .forEach((player) => {
+          const value = botNumericGuess(match.finalQuestion.answer, player.skill)
+          scheduleBotAnswer(player.id, botAnswerDelayMs(player.skill, QUIZ_TIME_MS), value, () => dispatch({ type: 'answer-final', id: player.id, value, answeredAt: performance.now() }))
+        })
     }
     if (phase === 'battle-select' && PLAYER_BY_ID[match.attacker].kind === 'bot') {
       const target = pickRandom(getAttackTargets(match.arena, match.attacker), 1)[0]
@@ -447,18 +467,18 @@ export default function App() {
     if (phase === 'battle-warmup' && match.defender) {
       [match.attacker, match.defender]
         .filter((id) => match.warmupAnswers[id] === null && PLAYER_BY_ID[id].kind === 'bot')
-        .forEach((id) => schedule(
-          () => dispatch({ type: 'answer-warmup', id, pick: botQuizChoice(match.warmupQuestion.correctIndex, PLAYER_BY_ID[id].skill) }),
-          botAnswerDelayMs(PLAYER_BY_ID[id].skill, QUIZ_TIME_MS),
-        ))
+        .forEach((id) => {
+          const value = botQuizChoice(match.warmupQuestion.correctIndex, PLAYER_BY_ID[id].skill)
+          scheduleBotAnswer(id, botAnswerDelayMs(PLAYER_BY_ID[id].skill, QUIZ_TIME_MS), value, () => dispatch({ type: 'answer-warmup', id, pick: value }))
+        })
     }
     if (phase === 'battle-number' && match.defender) {
       [match.attacker, match.defender]
         .filter((id) => match.numericAnswers[id] === null && PLAYER_BY_ID[id].kind === 'bot')
-        .forEach((id) => schedule(
-          () => dispatch({ type: 'answer-number', id, value: botNumericGuess(match.numericQuestion.answer, PLAYER_BY_ID[id].skill) }),
-          botAnswerDelayMs(PLAYER_BY_ID[id].skill, QUIZ_TIME_MS),
-        ))
+        .forEach((id) => {
+          const value = botNumericGuess(match.numericQuestion.answer, PLAYER_BY_ID[id].skill)
+          scheduleBotAnswer(id, botAnswerDelayMs(PLAYER_BY_ID[id].skill, QUIZ_TIME_MS), value, () => dispatch({ type: 'answer-number', id, value }))
+        })
     }
     return () => timers.forEach((id) => window.clearTimeout(id))
   }, [phase, paused, announcement, match?.expansionRound, match?.battleRound, match?.target?.row, match?.target?.col])
@@ -558,9 +578,17 @@ function answerBackground(playerIds: PlayerId[]): string {
   return `linear-gradient(90deg, ${stops.join(', ')})`
 }
 
+function playersForOption(answers: Answers, optionIndex: number): PlayerId[] {
+  return PLAYER_IDS.filter((id) => {
+    const answer = answers[id]
+    return Number.isInteger(answer) && answer === optionIndex && Boolean(PLAYER_BY_ID[id]?.accent)
+  })
+}
+
 function RoundResultOverlay({ result }: { result: RoundResult }) {
   if (result.kind === 'quiz') {
-    return <motion.div className="round-result-overlay" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}><section className="round-result-card"><p className="kicker">Результаты викторины</p><h2>Правильный ответ: {['А', 'Б', 'В', 'Г'][result.question.correctIndex]}</h2><div className="result-options">{result.question.options.map((option, index) => { const players = PLAYER_IDS.filter((id) => result.answers[id] === index); return <div key={option} className={`result-option ${index === result.question.correctIndex ? 'is-correct' : ''}`} style={{ background: answerBackground(players) }}><strong>{['А', 'Б', 'В', 'Г'][index]}</strong><span>{option}</span><div className="answer-players">{players.map((id) => <i key={id} style={{ background: PLAYER_BY_ID[id].accent }} title={PLAYER_BY_ID[id].name}>{PLAYER_BY_ID[id].name.slice(0, 1)}</i>)}</div></div> })}</div></section></motion.div>
+    const correctIndex = result.question.correctIndex
+    return <motion.div className="round-result-overlay" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}><section className="round-result-card"><p className="kicker">Результаты викторины</p><h2>Правильный ответ: {['А', 'Б', 'В', 'Г'][correctIndex]}</h2><div className="result-options">{result.question.options.map((option, index) => { const players = playersForOption(result.answers, index); return <div key={option} className={`result-option ${index === correctIndex ? 'is-correct' : ''}`} style={{ background: answerBackground(players) }}><strong>{['А', 'Б', 'В', 'Г'][index]}</strong><span>{option}</span><div className="answer-players">{players.map((id) => <i key={id} style={{ background: PLAYER_BY_ID[id].accent }} title={PLAYER_BY_ID[id].name}>{PLAYER_BY_ID[id].name.slice(0, 1)}</i>)}</div></div> })}</div></section></motion.div>
   }
   const rows = PLAYER_IDS.map((id) => ({ id, value: result.answers[id], distance: result.answers[id] === null ? null : Math.abs(result.answers[id] - result.question.answer) })).sort((a, b) => (a.distance ?? Infinity) - (b.distance ?? Infinity))
   return <motion.div className="round-result-overlay" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}><section className="round-result-card"><p className="kicker">Результаты числовой дуэли</p><h2>Правильный ответ: {result.question.answer}</h2><div className="numeric-result-cards">{rows.map((row, index) => <article key={row.id} className={`numeric-result-card ${index === 0 ? 'is-winner' : ''}`} style={{ ['--accent' as string]: PLAYER_BY_ID[row.id].accent }}><strong>{PLAYER_BY_ID[row.id].name}</strong><span>{row.value === null ? 'нет ответа' : row.value}</span><small>{row.distance === null ? '—' : `Отклонение: ${row.value! - result.question.answer > 0 ? '+' : ''}${row.value! - result.question.answer}`}</small></article>)}</div></section></motion.div>
