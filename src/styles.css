@@ -1130,3 +1130,164 @@ h2 {
   .wood-plaque small { margin-top: 2px; font-size: 0.48rem; }
   .menu-version { margin-top: 8px; }
 }
+
+/* The active match uses the same cartographic language as the main menu. */
+.game-shell {
+  max-width: 1180px;
+  padding-top: 22px;
+}
+
+.game-shell .topbar {
+  align-items: center;
+  margin: 0 0 18px;
+  padding: 12px 14px 12px 20px;
+  border: 1px solid #9c7b45;
+  border-radius: 7px;
+  background:
+    linear-gradient(90deg, rgba(255, 241, 199, 0.8), rgba(224, 193, 133, 0.48)),
+    var(--paper);
+  box-shadow: inset 0 0 0 3px rgba(255, 239, 191, 0.36), 0 2px 0 rgba(112, 74, 35, 0.22);
+}
+
+.game-shell .topbar h1 {
+  color: #815c2c;
+  font-size: 1.8rem;
+  text-shadow: 1px 1px 0 #fff0c8;
+}
+
+.game-shell .kicker {
+  color: #96702f;
+}
+
+.game-shell .stage {
+  position: relative;
+  min-height: 620px;
+  padding: 22px;
+  border: 1px solid rgba(139, 115, 85, 0.72);
+  border-radius: 8px;
+  background:
+    linear-gradient(rgba(139, 115, 85, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 115, 85, 0.05) 1px, transparent 1px),
+    var(--paper-deep);
+  background-size: 36px 36px;
+  box-shadow: inset 0 0 0 5px rgba(255, 239, 191, 0.26), inset 0 0 38px rgba(91, 56, 28, 0.12);
+}
+
+.game-shell .stage::before {
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(139, 105, 50, 0.28);
+  border-radius: 4px;
+  content: "";
+  pointer-events: none;
+}
+
+.game-shell .arena-board-wrap,
+.game-shell .question-stage,
+.game-shell .panel,
+.game-shell .queue-status,
+.game-shell .map-instruction {
+  position: relative;
+  z-index: 1;
+}
+
+.game-shell .arena-board-wrap {
+  width: min(100%, 610px);
+  margin: 0 auto;
+}
+
+.game-shell .arena-board {
+  border-color: #9c7b45;
+  background-color: #ead7b5;
+  box-shadow: inset 0 0 24px rgba(89, 57, 28, 0.12), 0 3px 0 rgba(112, 74, 35, 0.2);
+}
+
+.game-shell .dock {
+  gap: 7px;
+}
+
+.game-shell .dock-card {
+  min-width: 86px;
+  padding: 7px 9px;
+  border-color: #9c7b45;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--accent) 16%, var(--paper));
+}
+
+.game-shell .dock-card.is-turn {
+  border-width: 2px;
+  box-shadow: inset 0 0 0 1px #f4d68d;
+}
+
+.game-shell .phase-badge {
+  border-color: #9c7b45;
+  background: #e2c58d;
+  box-shadow: inset 0 0 0 2px rgba(255, 239, 191, 0.38);
+}
+
+.game-shell .question-stage {
+  width: min(100%, 760px);
+}
+
+.game-shell .panel,
+.game-shell .round-announcement,
+.game-shell .round-result-card,
+.game-shell .pause-card {
+  border-color: #9c7b45;
+  border-radius: 6px;
+  background:
+    linear-gradient(rgba(255, 246, 216, 0.34), transparent 42%),
+    var(--paper);
+  box-shadow: inset 0 0 0 3px rgba(255, 239, 191, 0.28), 0 3px 0 rgba(112, 74, 35, 0.18);
+}
+
+.game-shell .option {
+  border-color: #a78352;
+  border-radius: 5px;
+  background: #e7cca0;
+  color: var(--ink);
+}
+
+.game-shell .option:not(:disabled):hover {
+  border-color: #8e5f28;
+  background: #edd7af;
+}
+
+.game-shell .opt-key {
+  border-radius: 4px;
+  background: #b5843e;
+  color: #fff3d1;
+}
+
+.game-shell .guess-form input {
+  border-color: #a78352;
+  background: #f8eacb;
+}
+
+.game-shell .guess-form button,
+.game-shell .primary {
+  border: 1px solid #6e431f;
+  border-radius: 5px;
+  background: #8d4c31;
+  color: #fff3d1;
+  box-shadow: 0 2px 0 #62351e;
+}
+
+.game-shell .round-announcement {
+  margin: 18px auto;
+}
+
+.game-shell .round-result-overlay {
+  background: rgba(76, 48, 26, 0.3);
+}
+
+.game-shell .pause-overlay {
+  background: rgba(76, 48, 26, 0.42);
+}
+
+@media (max-width: 800px) {
+  .game-shell { padding: 12px 10px 26px; }
+  .game-shell .topbar { align-items: flex-start; flex-direction: column; }
+  .game-shell .topbar-tools { width: 100%; flex-wrap: wrap; }
+  .game-shell .stage { padding: 14px 10px; }
+}
