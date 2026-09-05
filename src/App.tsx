@@ -372,11 +372,11 @@ export default function App() {
   const [paused, setPaused] = useState(false)
   const [announcement, setAnnouncement] = useState(true)
   const [roundResult, setRoundResult] = useState<RoundResult | null>(null)
-  const [showStats, setShowStats] = useState(false)
+  const [homeScreen, setHomeScreen] = useState<'menu' | 'stats' | 'ranked' | 'history'>('menu')
   const recordedMatch = useRef(false)
   const previousRef = useRef<{ phase: Phase; match: Match | null }>({ phase: 'home', match: null })
   const { phase, match } = state
-  const startMatch = () => { setSettingsOpen(false); setShowStats(false); setPaused(false); setAnnouncement(true); recordedMatch.current = false; dispatch({ type: 'start' }) }
+  const startMatch = () => { setSettingsOpen(false); setHomeScreen('menu'); setPaused(false); setAnnouncement(true); recordedMatch.current = false; dispatch({ type: 'start' }) }
   const exitGame = () => { setSettingsOpen(false); setPaused(false); dispatch({ type: 'exit' }) }
   const questionPhase = phase === 'expansion' || phase === 'expansion-final' || phase === 'battle-warmup' || phase === 'battle-number'
   const shouldAnnounce = questionPhase && Boolean(match)
@@ -506,8 +506,10 @@ export default function App() {
       {match ? <div className="topbar-tools"><TurnIndicator activePlayer={activeTurn} /><PhaseBadge phase={phase} match={match} /><PlayerDock scores={match.scores} badges={{ [match.attacker]: phase.startsWith('battle') ? 'атакует' : undefined }} /><div className={`settings-menu${settingsOpen ? ' is-open' : ''}`}><button type="button" className="settings-button" aria-label="Настройки" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((open) => !open)}><span aria-hidden="true">⚙</span></button>{settingsOpen ? <div className="settings-popover"><button type="button" className="pause-button" onClick={togglePause}>{paused ? 'Продолжить' : 'Приостановить игру'}</button><button type="button" className="exit-button" onClick={exitGame}>Выйти из игры</button></div> : null}</div></div> : null}
     </header> : null}
     <main className="stage">
-      {phase === 'home' && showStats ? <StatsScreen stats={readPveStats()} onBack={() => setShowStats(false)} /> : null}
-      {phase === 'home' && !showStats ? <MenuScreen notice={menuNotice} onStart={startMatch} onStats={() => setShowStats(true)} onStub={(label) => setMenuNotice(`${label} появится в следующем этапе.`)} /> : null}
+      {phase === 'home' && homeScreen === 'stats' ? <StatsScreen stats={readPveStats()} onBack={() => setHomeScreen('menu')} onHistory={() => setHomeScreen('history')} /> : null}
+      {phase === 'home' && homeScreen === 'ranked' ? <RankedScreen onBack={() => setHomeScreen('menu')} /> : null}
+      {phase === 'home' && homeScreen === 'history' ? <HistoryScreen onBack={() => setHomeScreen('stats')} /> : null}
+      {phase === 'home' && homeScreen === 'menu' ? <MenuScreen notice={menuNotice} onStart={startMatch} onStats={() => setHomeScreen('stats')} onRanked={() => setHomeScreen('ranked')} onStub={(label) => setMenuNotice(`${label} появится в следующем этапе.`)} /> : null}
       <AnimatePresence mode="wait">
         {match && phase !== 'home' && !questionPhase ? <motion.div key="map" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}><ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /></motion.div> : null}
         {questionPhase && !announcement ? <motion.div key="question" className="question-stage" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.3 }}>
@@ -588,17 +590,39 @@ function ResultsScreen({ scores, arena, onAgain }: { scores: Record<PlayerId, nu
   return <section className="panel"><p className="kicker">Матч завершён</p><h2>Победитель: {PLAYER_BY_ID[territory[0].id].name}</h2><ol className="rank-list">{territory.map((row) => <li key={row.id} style={{ ['--accent' as string]: PLAYER_BY_ID[row.id].accent }}><span className="rank-place">{row.count}</span><span>{PLAYER_BY_ID[row.id].name}</span><span>{scores[row.id]} очков</span></li>)}</ol><button type="button" className="primary" onClick={onAgain}>Новая игра</button></section>
 }
 
-function StatsScreen({ stats, onBack }: { stats: PveStats; onBack: () => void }) {
+function StatsScreen({ stats, onBack, onHistory }: { stats: PveStats; onBack: () => void; onHistory: () => void }) {
   const mcAccuracy = stats.mcAnswered ? Math.round((stats.mcCorrect / stats.mcAnswered) * 100) : null
   const numericAccuracy = stats.numericAnswered ? Math.max(0, Math.round(100 - (stats.numericDeviationTotal / stats.numericAnswered))) : null
   return <section className="stats-screen">
     <button type="button" className="stats-back" onClick={onBack}>← Главное меню</button>
-    <header className="stats-title"><p className="menu-eyebrow">Летопись сражений</p><h2>СТАТИСТИКА</h2><div className="title-rule" aria-hidden="true"><i /><b /><i /></div></header>
+    <header className="stats-title"><p className="menu-eyebrow">Летопись сражений</p><h2>СТАТИСТИКА</h2><div className="title-rule" aria-hidden="true"><i /><b /><i /></div><button type="button" className="wood-plaque stats-history-button plaque-light" onClick={onHistory}>ИСТОРИЯ ИГР</button></header>
     <div className="stats-dashboard">
       <section className="stats-block stats-pvp"><p className="stats-block-kicker">Блок A · Рейтинговые игры (PvP)</p><div className="stats-columns"><StatsColumn title="Дуэль · 1v1" rows={[['Побед', '0'], ['Поражений', '0'], ['% правильных MC', '0%']]} /><StatsColumn title="Троица · 1v1v1" rows={[['1-е места', '0 🥇'], ['2-е места', '0 🥈'], ['3-е места', '0 🥉'], ['% правильных MC', '0%']]} /></div><p className="stats-empty-note">Рейтинговый режим пока не подключён</p></section>
       <section className="stats-block stats-pve"><p className="stats-block-kicker">Блок B · Игра с ботами (PvE)</p><div className="pve-grid"><StatMetric label="Всего игр" value={stats.games} /><StatMetric label="Побед над ботами" value={stats.wins} /><StatMetric label="% правильных MC" value={mcAccuracy === null ? '0%' : `${mcAccuracy}%`} progress={mcAccuracy ?? 0} /><StatMetric label="Точность числовых ответов" value={numericAccuracy === null ? '—' : `${numericAccuracy}%`} progress={numericAccuracy ?? 0} /></div></section>
     </div>
     <p className="menu-version">Данные хранятся на этом устройстве · v1.0</p>
+  </section>
+}
+
+function RankedScreen({ onBack }: { onBack: () => void }) {
+  const [notice, setNotice] = useState('')
+  const showNotice = (label: string) => setNotice(`${label}: скоро будет доступно`)
+  return <section className="ranked-screen">
+    <button type="button" className="stats-back" onClick={onBack}>← Главное меню</button>
+    <header className="stats-title"><p className="menu-eyebrow">Летопись соперников</p><h2>РЕЙТИНГОВАЯ ИГРА</h2><div className="title-rule" aria-hidden="true"><i /><b /><i /></div></header>
+    <div className="ranked-actions">
+      <button type="button" className="wood-plaque plaque-red" onClick={() => showNotice('Игра втроём')}><span>ИГРАТЬ ВТРОЕМ</span><small>1V1V1 · СКОРО</small></button>
+      <button type="button" className="wood-plaque plaque-light" onClick={() => showNotice('Дуэль')}><span>ДУЭЛЬ</span><small>1V1 · СКОРО</small></button>
+    </div>
+    {notice ? <p className="ranked-notice">{notice}</p> : null}
+  </section>
+}
+
+function HistoryScreen({ onBack }: { onBack: () => void }) {
+  return <section className="history-screen">
+    <button type="button" className="stats-back" onClick={onBack}>← Статистика</button>
+    <header className="stats-title"><p className="menu-eyebrow">Летопись матчей</p><h2>ИСТОРИЯ ИГР</h2><div className="title-rule" aria-hidden="true"><i /><b /><i /></div></header>
+    <div className="history-empty"><span aria-hidden="true">✦</span><h3>История пуста</h3><p>Завершённые матчи появятся здесь.</p></div>
   </section>
 }
 
@@ -610,7 +634,7 @@ function StatMetric({ label, value, progress }: { label: string; value: number |
   return <div className="stat-metric"><span>{label}</span><strong>{value}</strong>{progress !== undefined ? <i><b style={{ width: `${progress}%` }} /></i> : null}</div>
 }
 
-function MenuScreen({ notice, onStart, onStats, onStub }: { notice: string; onStart: () => void; onStats: () => void; onStub: (label: string) => void }) {
+function MenuScreen({ notice, onStart, onStats, onRanked, onStub }: { notice: string; onStart: () => void; onStats: () => void; onRanked: () => void; onStub: (label: string) => void }) {
   return <section className="menu-map-screen">
     <div className="map-ornament map-ornament-top" aria-hidden="true" />
     <button type="button" className="menu-settings" aria-label="Настройки" title="Настройки" onClick={() => onStub('Настройки')}>
@@ -632,7 +656,7 @@ function MenuScreen({ notice, onStart, onStats, onStub }: { notice: string; onSt
       <HexToken className="token-right" color="blue" label="Игрок 3" />
     </div>
     <div className="menu-actions menu-plaques" aria-label="Режимы игры">
-      <button type="button" className="wood-plaque plaque-red" onClick={() => onStub('Рейтинговая игра')}><span>РЕЙТИНГОВАЯ ИГРА</span><small>СКОРО</small></button>
+      <button type="button" className="wood-plaque plaque-red" onClick={onRanked}><span>РЕЙТИНГОВАЯ ИГРА</span><small>ОТКРЫТЬ</small></button>
       <button type="button" className="wood-plaque plaque-light" onClick={onStart}><span>ИГРА С БОТАМИ</span><small>НАЧАТЬ</small></button>
       <button type="button" className="wood-plaque plaque-light" onClick={() => onStub('Игра с друзьями')}><span>ИГРА С ДРУЗЬЯМИ</span><small>СКОРО</small></button>
     </div>

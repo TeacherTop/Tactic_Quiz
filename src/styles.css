@@ -1168,6 +1168,15 @@ h2 {
   text-shadow: 1px 1px 0 #f9edcf, 2px 2px 0 #8d6323;
 }
 
+.stats-history-button {
+  display: block;
+  min-width: 190px;
+  min-height: 48px;
+  margin: 16px auto 0;
+  padding: 10px 18px;
+  font-size: 0.78rem;
+}
+
 .stats-dashboard {
   position: relative;
   z-index: 2;
@@ -1280,6 +1289,82 @@ h2 {
   background: #a0522d;
 }
 
+.ranked-screen,
+.history-screen {
+  position: relative;
+  min-height: min(680px, calc(100dvh - 56px));
+  padding: 28px clamp(18px, 4vw, 52px) 24px;
+  border: 1px solid #9c7b45;
+  border-radius: 10px;
+  background:
+    linear-gradient(rgba(139, 115, 85, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 115, 85, 0.06) 1px, transparent 1px),
+    var(--paper);
+  background-size: 44px 44px;
+  box-shadow: inset 0 0 0 6px rgba(156, 123, 69, 0.1), inset 0 0 60px rgba(91, 56, 28, 0.12);
+}
+
+.ranked-screen::before,
+.history-screen::before {
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(139, 105, 50, 0.36);
+  border-radius: 5px;
+  content: "";
+  pointer-events: none;
+}
+
+.ranked-actions {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 16px;
+  width: min(100%, 430px);
+  margin: 64px auto 0;
+}
+
+.ranked-actions .wood-plaque {
+  min-height: 84px;
+  font-size: 1.05rem;
+}
+
+.ranked-notice {
+  position: relative;
+  z-index: 2;
+  margin: 22px auto 0;
+  color: #8d4c31;
+  text-align: center;
+}
+
+.history-empty {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 440px);
+  margin: 72px auto 0;
+  padding: 42px 24px;
+  border: 1px solid #b08a55;
+  border-radius: 5px;
+  background: rgba(234, 215, 181, 0.78);
+  text-align: center;
+}
+
+.history-empty span {
+  color: #a5792f;
+  font-size: 2rem;
+}
+
+.history-empty h3 {
+  margin: 12px 0 6px;
+  color: #3e2723;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.45rem;
+}
+
+.history-empty p {
+  margin: 0;
+  color: #5d4037;
+}
+
 @media (max-width: 700px) {
   .menu-map-screen { min-height: calc(100dvh - 28px); padding: 30px 14px 18px; }
   .menu-settings { top: 23px; right: 22px; }
@@ -1290,8 +1375,11 @@ h2 {
   .menu-plaques { grid-template-columns: 1fr; width: min(100%, 380px); gap: 10px; }
   .wood-plaque { min-height: 58px; padding: 11px 14px; }
   .stats-screen { min-height: calc(100dvh - 28px); padding: 22px 14px 18px; }
+  .ranked-screen, .history-screen { min-height: calc(100dvh - 28px); padding: 22px 14px 18px; }
   .stats-columns, .pve-grid { grid-template-columns: 1fr; }
   .stats-title { margin-top: 16px; }
+  .ranked-actions { margin-top: 44px; }
+  .history-empty { margin-top: 44px; }
 }
 
 @media (max-width: 700px) and (max-height: 650px) {
