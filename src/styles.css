@@ -255,6 +255,8 @@ h2 {
 }
 
 .result-option {
+  position: relative;
+  overflow: visible;
   display: grid;
   grid-template-columns: 30px 1fr auto;
   gap: 10px;
@@ -263,11 +265,31 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 5px;
   background: var(--paper-deep);
+  color: #3e2723;
+  text-shadow: 0 1px 0 rgba(255, 246, 216, 0.75);
 }
 
 .result-option.is-correct {
-  border: 3px solid #b07b18;
-  padding: 8px 10px;
+  border: 1px solid transparent;
+  padding: 10px 12px;
+  outline: 4px solid #ffd700;
+  outline-offset: -4px;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.72), inset 0 0 0 1px rgba(255, 247, 190, 0.9);
+  animation: correct-answer-pulse 1.25s ease-in-out infinite alternate;
+}
+
+.result-option.is-correct::after {
+  position: absolute;
+  inset: 0;
+  border: 3px solid #f59e0b;
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+}
+
+@keyframes correct-answer-pulse {
+  from { box-shadow: 0 0 5px rgba(255, 215, 0, 0.52), inset 0 0 0 1px rgba(255, 247, 190, 0.9); }
+  to { box-shadow: 0 0 14px rgba(255, 215, 0, 0.86), inset 0 0 0 1px rgba(255, 247, 190, 0.9); }
 }
 
 .answer-players {

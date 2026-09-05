@@ -549,9 +549,18 @@ function PauseOverlay({ onResume }: { onResume: () => void }) {
   return <motion.div className="pause-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}><section className="pause-card"><p className="kicker">Игра приостановлена</p><h2>Пауза</h2><p>Таймер и ответы остановлены.</p><button type="button" className="primary" onClick={onResume}>Продолжить</button></section></motion.div>
 }
 
+function answerBackground(playerIds: PlayerId[]): string {
+  if (playerIds.length === 0) return 'var(--paper-deep)'
+  const colors = playerIds.map((id) => PLAYER_BY_ID[id].accent)
+  if (colors.length === 1) return colors[0]
+  const step = 100 / colors.length
+  const stops = colors.flatMap((color, index) => [`${color} ${index * step}%`, `${color} ${(index + 1) * step}%`])
+  return `linear-gradient(90deg, ${stops.join(', ')})`
+}
+
 function RoundResultOverlay({ result }: { result: RoundResult }) {
   if (result.kind === 'quiz') {
-    return <motion.div className="round-result-overlay" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}><section className="round-result-card"><p className="kicker">Результаты викторины</p><h2>Правильный ответ: {['А', 'Б', 'В', 'Г'][result.question.correctIndex]}</h2><div className="result-options">{result.question.options.map((option, index) => <div key={option} className={`result-option ${index === result.question.correctIndex ? 'is-correct' : ''}`}><strong>{['А', 'Б', 'В', 'Г'][index]}</strong><span>{option}</span><div className="answer-players">{PLAYER_IDS.filter((id) => result.answers[id] === index).map((id) => <i key={id} style={{ background: PLAYER_BY_ID[id].accent }} title={PLAYER_BY_ID[id].name}>{PLAYER_BY_ID[id].name.slice(0, 1)}</i>)}</div></div>)}</div></section></motion.div>
+    return <motion.div className="round-result-overlay" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}><section className="round-result-card"><p className="kicker">Результаты викторины</p><h2>Правильный ответ: {['А', 'Б', 'В', 'Г'][result.question.correctIndex]}</h2><div className="result-options">{result.question.options.map((option, index) => { const players = PLAYER_IDS.filter((id) => result.answers[id] === index); return <div key={option} className={`result-option ${index === result.question.correctIndex ? 'is-correct' : ''}`} style={{ background: answerBackground(players) }}><strong>{['А', 'Б', 'В', 'Г'][index]}</strong><span>{option}</span><div className="answer-players">{players.map((id) => <i key={id} style={{ background: PLAYER_BY_ID[id].accent }} title={PLAYER_BY_ID[id].name}>{PLAYER_BY_ID[id].name.slice(0, 1)}</i>)}</div></div> })}</div></section></motion.div>
   }
   const rows = PLAYER_IDS.map((id) => ({ id, value: result.answers[id], distance: result.answers[id] === null ? null : Math.abs(result.answers[id] - result.question.answer) })).sort((a, b) => (a.distance ?? Infinity) - (b.distance ?? Infinity))
   return <motion.div className="round-result-overlay" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}><section className="round-result-card"><p className="kicker">Результаты числовой дуэли</p><h2>Правильный ответ: {result.question.answer}</h2><div className="numeric-result-cards">{rows.map((row, index) => <article key={row.id} className={`numeric-result-card ${index === 0 ? 'is-winner' : ''}`} style={{ ['--accent' as string]: PLAYER_BY_ID[row.id].accent }}><strong>{PLAYER_BY_ID[row.id].name}</strong><span>{row.value === null ? 'нет ответа' : row.value}</span><small>{row.distance === null ? '—' : `Отклонение: ${row.value! - result.question.answer > 0 ? '+' : ''}${row.value! - result.question.answer}`}</small></article>)}</div></section></motion.div>
