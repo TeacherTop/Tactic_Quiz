@@ -4,7 +4,7 @@ import { ArenaGrid } from './components/ArenaGrid'
 import { PlayerDock } from './components/PlayerDock'
 import { TimerRing } from './components/TimerRing'
 import { NUMERIC_QUESTIONS, QUIZ_QUESTIONS } from './data/questions'
-import { captureCell, cellKey, createArena } from './game/arena'
+import { captureCell, cellKey, createArena, getAvailableCells } from './game/arena'
 import { botAnswerDelayMs, botNumericGuess, botQuizChoice } from './game/bots'
 import {
   addScores,
@@ -135,20 +135,36 @@ function reducer(state: State, action: Action): State {
     case 'finish-numeric': {
       if (!state.match || state.phase !== 'numeric') return state
       const ranking = rankNumericGuesses(state.match.numeric.answer, state.match.guesses)
-      const captureOwner = ranking[0]?.id === 'you' ? 'you' : 'alex'
+      const captureOwner = ranking[0]?.id
       const delta: Partial<Record<PlayerId, number>> = {}
       ranking.forEach((row, index) => {
         delta[row.id] = numericAward(index, row.distance === null)
       })
+
+      let arena = state.match.arena
+      let pendingCapture: PlayerId | null = null
+      let lastCapturedKey: string | null = null
+      if (captureOwner === 'you') {
+        pendingCapture = captureOwner
+      } else if (captureOwner) {
+        const botTarget = [...getAvailableCells(arena, captureOwner)][0]
+        if (botTarget) {
+          const [row, col] = botTarget.split(':').map(Number)
+          arena = captureCell(arena, captureOwner, row, col)
+          lastCapturedKey = botTarget
+        }
+      }
+
       return {
         phase: 'numeric-reveal',
         match: {
           ...state.match,
+          arena,
           ranking: ranking.map((r) => r.id),
           scores: addScores(state.match.scores, delta),
           turnOrder: ranking.map((r) => r.id),
-          pendingCapture: captureOwner,
-          lastCapturedKey: null,
+          pendingCapture,
+          lastCapturedKey,
         },
       }
     }
