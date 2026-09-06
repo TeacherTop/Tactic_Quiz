@@ -4056,6 +4056,8 @@ h2 {
 
 @media (max-width: 640px) {
   .game-shell .topbar {
+    position: relative;
+    z-index: 40;
     grid-template-columns: 1fr;
     min-height: 0;
   }
@@ -4078,6 +4080,33 @@ h2 {
     flex: 1 1 auto;
     width: auto;
     max-width: 232px;
+  }
+
+  .game-shell .phase-badge,
+  .game-shell .settings-menu {
+    position: relative;
+    z-index: 45;
+  }
+
+  .game-shell .settings-button {
+    position: relative;
+    z-index: 46;
+    pointer-events: auto;
+  }
+
+  .game-shell .settings-popover {
+    z-index: 60;
+  }
+
+  .game-shell .stage {
+    position: relative;
+    z-index: 1;
+  }
+
+  .game-shell .map-stage,
+  .game-shell .arena-board-wrap,
+  .game-shell .question-stage {
+    z-index: 1;
   }
 
   .game-shell .phase-badge,
