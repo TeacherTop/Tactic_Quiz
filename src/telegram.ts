@@ -4,8 +4,17 @@ export function initializeTelegramWebApp(): void {
   try {
     WebApp.ready()
     WebApp.expand()
-    const theme = WebApp.themeParams
     const root = document.documentElement
+    root.classList.add('is-telegram-webapp')
+
+    const syncViewport = () => {
+      const viewportHeight = WebApp.viewportStableHeight || WebApp.viewportHeight || window.innerHeight
+      root.style.setProperty('--tg-viewport-height', `${Math.max(1, viewportHeight)}px`)
+    }
+
+    syncViewport()
+    WebApp.onEvent('viewportChanged', syncViewport)
+    const theme = WebApp.themeParams
     if (theme.bg_color && theme.bg_color.toLowerCase() !== '#ffffff') {
       root.style.setProperty('--bg', theme.bg_color)
       root.style.setProperty('--paper', theme.secondary_bg_color ?? '#2b251f')
