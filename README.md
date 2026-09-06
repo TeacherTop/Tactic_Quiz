@@ -38,7 +38,7 @@ npm run dev
 
 Для реального Telegram нужны публичные HTTPS URL для frontend и backend. Локальный `127.0.0.1` виден только на твоем компьютере.
 
-Backend можно развернуть на Render через `render.yaml`.
+Backend можно развернуть на Render через `deploy/render.yaml`.
 
 Нужные переменные backend:
 
