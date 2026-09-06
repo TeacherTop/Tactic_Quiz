@@ -3639,3 +3639,449 @@ h2 {
     font-size: 0.72rem;
   }
 }
+
+/* Mobile redesign: keep every bot-game screen dense, modern, and intentional. */
+@media (max-width: 640px) {
+  .game-shell {
+    padding: calc(7px + env(safe-area-inset-top, 0px)) 7px calc(7px + env(safe-area-inset-bottom, 0px));
+    background:
+      radial-gradient(circle at 18% 8%, rgba(255, 250, 226, 0.72), transparent 28%),
+      radial-gradient(circle at 82% 88%, rgba(160, 82, 45, 0.18), transparent 32%),
+      linear-gradient(160deg, #ead7b5 0%, #d6bb8e 48%, #f4e4c4 100%);
+  }
+
+  .game-shell .topbar {
+    margin-bottom: 7px;
+    padding: 8px;
+    border-radius: 24px;
+    background: rgba(255, 248, 227, 0.55);
+    box-shadow:
+      0 14px 30px rgba(63, 39, 24, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.68);
+  }
+
+  .game-shell .topbar h1 {
+    color: rgba(62, 39, 35, 0.76);
+    font-family: "Nunito", "Trebuchet MS", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 950;
+    letter-spacing: -0.04em;
+    text-shadow: none;
+  }
+
+  .game-shell .dock {
+    width: min(57vw, 236px);
+    gap: 5px;
+  }
+
+  .game-shell .dock-card {
+    padding: 6px 4px;
+    border-radius: 15px;
+    background: rgba(255, 250, 234, 0.42);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.62),
+      0 8px 16px rgba(62, 39, 35, 0.06);
+  }
+
+  .game-shell .dock-card.is-turn {
+    transform: translateY(-1px) scale(1.04);
+    background: rgba(255, 244, 205, 0.72);
+    box-shadow:
+      0 0 0 1px rgba(236, 188, 75, 0.52),
+      0 0 18px rgba(218, 158, 50, 0.26),
+      inset 0 1px 0 rgba(255, 255, 255, 0.74);
+  }
+
+  .game-shell .dock-name {
+    color: rgba(62, 39, 35, 0.52);
+    font-size: 0.49rem;
+    text-transform: uppercase;
+  }
+
+  .game-shell .dock-score {
+    color: #2d1b17;
+    font-size: 0.98rem;
+    font-weight: 1000;
+  }
+
+  .game-shell .phase-badge {
+    min-width: 86px;
+    padding: 7px 10px;
+    background: linear-gradient(135deg, #ecc05a, #b76f2f);
+    box-shadow:
+      0 10px 20px rgba(141, 82, 32, 0.2),
+      inset 0 1px 0 rgba(255, 245, 206, 0.72);
+  }
+
+  .game-shell .settings-button {
+    width: 34px;
+    height: 34px;
+    border-radius: 14px;
+    background: rgba(255, 250, 234, 0.58);
+  }
+
+  .game-shell .stage {
+    align-content: stretch;
+    align-items: stretch;
+    min-height: 0;
+    padding: 0;
+    border-radius: 28px;
+    background:
+      linear-gradient(180deg, rgba(255, 249, 230, 0.38), rgba(169, 110, 55, 0.18)),
+      rgba(231, 204, 160, 0.52);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.48),
+      inset 0 -42px 80px rgba(98, 58, 27, 0.08),
+      0 18px 36px rgba(62, 39, 35, 0.1);
+  }
+
+  .game-shell .stage::before {
+    display: none;
+  }
+
+  .game-shell.game-phase-expansion .stage,
+  .game-shell.game-phase-battle-warmup .stage,
+  .game-shell.game-phase-battle-number .stage,
+  .game-shell.game-phase-expansion-final .stage {
+    background:
+      radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.52), transparent 34%),
+      linear-gradient(155deg, rgba(255, 247, 220, 0.72), rgba(212, 176, 122, 0.72));
+  }
+
+  .game-shell.game-phase-expansion .question-stage,
+  .game-shell.game-phase-battle-warmup .question-stage,
+  .game-shell.game-phase-battle-number .question-stage,
+  .game-shell.game-phase-expansion-final .question-stage {
+    align-self: stretch;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    align-content: stretch;
+    align-items: stretch;
+    height: 100%;
+    gap: 6px;
+    padding: 7px;
+  }
+
+  .game-shell.game-phase-expansion .question-stage:not(:has(.queue-status)):not(:has(.timeline-status)),
+  .game-shell.game-phase-battle-warmup .question-stage,
+  .game-shell.game-phase-battle-number .question-stage,
+  .game-shell.game-phase-expansion-final .question-stage {
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .game-shell.game-phase-expansion .question-stage:not(:has(.queue-status)):not(:has(.timeline-status)) .question-card,
+  .game-shell.game-phase-battle-warmup .question-stage .question-card,
+  .game-shell.game-phase-battle-number .question-stage .question-card,
+  .game-shell.game-phase-expansion-final .question-stage .question-card {
+    grid-row: 1;
+  }
+
+  .game-shell.game-phase-expansion .question-stage:has(.queue-status) .question-card {
+    grid-row: 2;
+  }
+
+  .game-shell.game-phase-expansion .question-stage:has(.timeline-status) .question-card {
+    grid-row: 1 / 3;
+  }
+
+  .game-shell.game-phase-expansion .question-stage .question-card,
+  .game-shell.game-phase-battle-warmup .question-stage .question-card,
+  .game-shell.game-phase-battle-number .question-stage .question-card,
+  .game-shell.game-phase-expansion-final .question-stage .question-card {
+    align-self: stretch;
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+    min-height: 0;
+    max-height: none;
+    height: 100%;
+    padding: 18px 16px 14px;
+    border-radius: 26px;
+    background:
+      radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.5), transparent 32%),
+      linear-gradient(180deg, rgba(255, 251, 236, 0.94), rgba(236, 214, 178, 0.92));
+    box-shadow:
+      0 24px 44px rgba(62, 39, 35, 0.18),
+      0 8px 18px rgba(62, 39, 35, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.82),
+      inset 0 -20px 36px rgba(123, 79, 44, 0.06);
+  }
+
+  .game-shell.game-phase-expansion .question-stage .question-card::before,
+  .game-shell.game-phase-battle-warmup .question-stage .question-card::before,
+  .game-shell.game-phase-battle-number .question-stage .question-card::before,
+  .game-shell.game-phase-expansion-final .question-stage .question-card::before {
+    height: 4px;
+    background: linear-gradient(90deg, #a0522d, #e2ba55, #8f5b2d);
+    opacity: 0.9;
+  }
+
+  .game-shell.game-phase-expansion .question-stage .question-card:has(.timer),
+  .game-shell.game-phase-battle-warmup .question-stage .question-card:has(.timer),
+  .game-shell.game-phase-battle-number .question-stage .question-card:has(.timer),
+  .game-shell.game-phase-expansion-final .question-stage .question-card:has(.timer) {
+    padding-right: 16px;
+  }
+
+  .game-shell.game-phase-expansion .question-stage .question-card:has(.timer) .kicker,
+  .game-shell.game-phase-expansion .question-stage .question-card:has(.timer) .question-text,
+  .game-shell.game-phase-battle-warmup .question-stage .question-card:has(.timer) .kicker,
+  .game-shell.game-phase-battle-warmup .question-stage .question-card:has(.timer) .question-text,
+  .game-shell.game-phase-battle-number .question-stage .question-card:has(.timer) .kicker,
+  .game-shell.game-phase-battle-number .question-stage .question-card:has(.timer) .question-text,
+  .game-shell.game-phase-expansion-final .question-stage .question-card:has(.timer) .kicker,
+  .game-shell.game-phase-expansion-final .question-stage .question-card:has(.timer) .question-text {
+    margin-right: 0;
+  }
+
+  .game-shell.game-phase-expansion .question-stage .timer,
+  .game-shell.game-phase-battle-warmup .question-stage .timer,
+  .game-shell.game-phase-battle-number .question-stage .timer,
+  .game-shell.game-phase-expansion-final .question-stage .timer {
+    top: 14px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(180deg, rgba(255, 251, 235, 0.86), rgba(224, 192, 137, 0.58));
+    box-shadow:
+      0 10px 18px rgba(62, 39, 35, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  }
+
+  .game-shell.game-phase-expansion .question-stage .timer-svg,
+  .game-shell.game-phase-battle-warmup .question-stage .timer-svg,
+  .game-shell.game-phase-battle-number .question-stage .timer-svg,
+  .game-shell.game-phase-expansion-final .question-stage .timer-svg {
+    width: 44px;
+    height: 44px;
+  }
+
+  .game-shell.game-phase-expansion .question-card .kicker,
+  .game-shell.game-phase-battle-warmup .question-card .kicker,
+  .game-shell.game-phase-battle-number .question-card .kicker,
+  .game-shell.game-phase-expansion-final .question-card .kicker {
+    width: calc(100% - 56px);
+    margin-bottom: 8px;
+    color: #9d7138;
+    font-size: 0.59rem;
+    font-weight: 950;
+    letter-spacing: 0.11em;
+  }
+
+  .game-shell.game-phase-expansion .question-card h2.question-text,
+  .game-shell.game-phase-expansion-final .question-card h2.question-text {
+    align-self: start;
+    max-height: min(34vh, 245px);
+    margin: 0 0 12px;
+    color: #38211d;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.18rem, 5.7vw, 1.62rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  .game-shell.game-phase-battle-number .question-card p.question-text {
+    align-self: start;
+    max-height: min(34vh, 245px);
+    margin: 0 0 12px;
+    color: #38211d;
+    font-size: clamp(1.08rem, 5vw, 1.36rem);
+    font-weight: 900;
+    line-height: 1.14;
+  }
+
+  .game-shell.game-phase-expansion .question-card .question-text,
+  .game-shell.game-phase-battle-number .question-card .question-text,
+  .game-shell.game-phase-expansion-final .question-card .question-text {
+    overflow: auto;
+    scrollbar-width: thin;
+  }
+
+  .game-shell.game-phase-expansion .question-card .question-text::after,
+  .game-shell.game-phase-battle-number .question-card .question-text::after,
+  .game-shell.game-phase-expansion-final .question-card .question-text::after {
+    background: linear-gradient(180deg, rgba(246, 232, 205, 0), rgba(246, 232, 205, 0.96));
+  }
+
+  .game-shell.game-phase-expansion .question-card .options,
+  .game-shell.game-phase-battle-warmup .question-card .options {
+    align-self: stretch;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    min-height: 0;
+    gap: 10px;
+  }
+
+  .game-shell.game-phase-expansion .question-card .option,
+  .game-shell.game-phase-battle-warmup .question-card .option {
+    position: relative;
+    min-height: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 12px;
+    border-radius: 22px;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.62), transparent 34%),
+      linear-gradient(160deg, rgba(255, 250, 235, 0.84), rgba(225, 196, 151, 0.58));
+    box-shadow:
+      0 14px 28px rgba(62, 39, 35, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.76),
+      inset 0 -18px 32px rgba(123, 79, 44, 0.05);
+    color: #38231f;
+    font-size: clamp(0.78rem, 3.7vw, 0.96rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  .game-shell.game-phase-expansion .question-card .option::after,
+  .game-shell.game-phase-battle-warmup .question-card .option::after {
+    position: absolute;
+    inset: auto -18px -28px auto;
+    width: 74px;
+    height: 74px;
+    border-radius: 999px;
+    background: rgba(160, 82, 45, 0.08);
+    content: "";
+    pointer-events: none;
+  }
+
+  .game-shell.game-phase-expansion-final .question-card .guess-form,
+  .game-shell.game-phase-battle-number .question-card .guess-form {
+    align-self: start;
+  }
+
+  .game-shell.game-phase-expansion .question-card .option.is-selected,
+  .game-shell.game-phase-battle-warmup .question-card .option.is-selected {
+    background: linear-gradient(135deg, #a0522d, #c98b38);
+    color: #fff7e2;
+  }
+
+  .game-shell.game-phase-expansion .question-card .opt-key,
+  .game-shell.game-phase-battle-warmup .question-card .opt-key {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #d6a23a, #a7662e);
+    font-size: 0.78rem;
+  }
+
+  .game-shell.game-phase-expansion .question-card .hint,
+  .game-shell.game-phase-battle-warmup .question-card .hint,
+  .game-shell.game-phase-expansion-final .question-card .hint,
+  .game-shell.game-phase-battle-number .question-card .hint {
+    display: block;
+    min-height: 16px;
+    margin-top: 8px;
+    color: rgba(62, 39, 35, 0.52);
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .game-shell.game-phase-expansion .queue-status,
+  .game-shell.game-phase-expansion .timeline-status {
+    width: auto;
+    margin: 0 5px;
+    background: rgba(255, 250, 234, 0.58);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.54);
+  }
+
+  .game-shell.game-phase-expansion .timeline-status {
+    align-self: end;
+  }
+}
+
+@media (max-width: 640px) and (max-height: 700px) {
+  .game-shell .topbar {
+    padding: 6px;
+    border-radius: 20px;
+  }
+
+  .game-shell .dock {
+    width: min(55vw, 210px);
+  }
+
+  .game-shell .dock-card {
+    padding: 4px 3px;
+  }
+
+  .game-shell .phase-badge {
+    min-width: 78px;
+    padding: 5px 8px;
+  }
+
+  .game-shell.game-phase-expansion .question-stage,
+  .game-shell.game-phase-battle-warmup .question-stage,
+  .game-shell.game-phase-battle-number .question-stage,
+  .game-shell.game-phase-expansion-final .question-stage {
+    padding: 5px;
+  }
+
+  .game-shell.game-phase-expansion .question-stage .question-card,
+  .game-shell.game-phase-battle-warmup .question-stage .question-card,
+  .game-shell.game-phase-battle-number .question-stage .question-card,
+  .game-shell.game-phase-expansion-final .question-stage .question-card {
+    grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+    padding: 14px 12px 10px;
+    border-radius: 22px;
+  }
+
+  .game-shell.game-phase-expansion .question-card h2.question-text,
+  .game-shell.game-phase-expansion-final .question-card h2.question-text {
+    font-size: clamp(1rem, 5vw, 1.32rem);
+    line-height: 1.08;
+  }
+
+  .game-shell.game-phase-expansion .question-card .option,
+  .game-shell.game-phase-battle-warmup .question-card .option {
+    min-height: 0;
+    padding: 7px 9px;
+    border-radius: 17px;
+    font-size: 0.8rem;
+  }
+
+  .game-shell.game-phase-expansion .question-card .opt-key,
+  .game-shell.game-phase-battle-warmup .question-card .opt-key {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+  }
+}
+
+@media (max-width: 640px) {
+  .game-shell .topbar {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .game-shell .topbar > div:first-child {
+    display: none;
+  }
+
+  .game-shell .topbar-tools {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .game-shell .dock {
+    flex: 1 1 auto;
+    width: auto;
+    max-width: 232px;
+  }
+
+  .game-shell .phase-badge,
+  .game-shell .settings-menu {
+    flex: 0 0 auto;
+  }
+}
