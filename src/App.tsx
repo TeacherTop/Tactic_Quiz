@@ -887,7 +887,7 @@ export default function App() {
     recordedMatch.current = true
   }, [phase, match])
 
-  return <div className={`arena ${phase === 'home' ? '' : 'game-shell'}`}>
+  return <div className={`arena ${phase === 'home' ? '' : `game-shell game-phase-${phase}`}`}>
     {phase !== 'home' ? <header className="topbar">
       <div><p className="kicker">Арена</p><h1>Ближе всех</h1></div>
       {match ? <div className="topbar-tools"><TurnIndicator activePlayer={activeTurn} /><PhaseBadge phase={phase} match={match} /><PlayerDock scores={match.scores} highlight={activeTurn} badges={{ [match.attacker]: phase.startsWith('battle') ? 'атакует' : undefined }} /><div className={`settings-menu${settingsOpen ? ' is-open' : ''}`}><button type="button" className="settings-button" aria-label="Настройки" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((open) => !open)}><span aria-hidden="true">⚙</span></button>{settingsOpen ? <div className="settings-popover"><button type="button" className="pause-button" onClick={togglePause}>{paused ? 'Продолжить' : 'Приостановить игру'}</button><button type="button" className="exit-button" onClick={exitGame}>Выйти из игры</button></div> : null}</div></div> : null}
