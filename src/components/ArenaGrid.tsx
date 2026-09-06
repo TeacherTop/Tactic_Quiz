@@ -50,6 +50,9 @@ export function ArenaGrid({ cells, activePlayer, selectableKeys, lastCapturedKey
           const isAttackTarget = Boolean(selectableKeys?.has(key))
           const isSelectable = isAvailable || isAttackTarget
           const isCaptured = lastCapturedKey === key
+          const isCaptureNeighbor = lastCapturedKey
+            ? getNeighbors(cell.row, cell.col).some(([row, col]) => cellKey(row, col) === lastCapturedKey)
+            : false
           const hasBoundary = owner
             ? getNeighbors(cell.row, cell.col).some(([row, col]) => {
               const neighbor = cells.find((candidate) => candidate.row === row && candidate.col === col)
@@ -65,6 +68,7 @@ export function ArenaGrid({ cells, activePlayer, selectableKeys, lastCapturedKey
                 isAvailable && !isAttackTarget ? 'is-available' : '',
                 isAttackTarget ? 'is-attack-target' : '',
                 isCaptured ? 'is-captured' : '',
+                isCaptureNeighbor ? 'is-capture-neighbor' : '',
                 hasBoundary ? 'has-boundary' : '',
               ].join(' ')}
               style={{ ['--owner-color' as string]: owner?.accent ?? activeColor }}
@@ -88,15 +92,6 @@ export function ArenaGrid({ cells, activePlayer, selectableKeys, lastCapturedKey
           )
         })}
       </svg>
-      <div className="arena-legend">
-        <span>
-          <b style={{ ['--legend-color' as string]: PLAYER_BY_ID.you.accent }} /> Игрок 1
-        </span>
-        <span>
-          <b style={{ ['--legend-color' as string]: PLAYER_BY_ID.alex.accent }} /> Игрок 2
-        </span>
-        <span>{cells.length} сот · радиус {ARENA_RADIUS}</span>
-      </div>
     </section>
   )
 }

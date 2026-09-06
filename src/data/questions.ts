@@ -45,6 +45,27 @@ export const NUMERIC_QUESTIONS: NumericQuestion[] = [
     prompt: 'Сколько футболистов одной команды одновременно на поле?',
     answer: 11,
   },
+  {
+    id: 'periodic-table',
+    prompt: 'Сколько химических элементов официально входит в современную периодическую таблицу?',
+    answer: 118,
+  },
+  {
+    id: 'chess-board',
+    prompt: 'Сколько клеток на стандартной шахматной доске?',
+    answer: 64,
+  },
+  {
+    id: 'earth-radius',
+    prompt: 'Каков средний радиус Земли в километрах?',
+    answer: 6371,
+    unit: 'км',
+  },
+  {
+    id: 'olympic-rings',
+    prompt: 'Сколько колец изображено на олимпийском символе?',
+    answer: 5,
+  },
 ]
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [

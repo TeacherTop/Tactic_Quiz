@@ -1,11 +1,18 @@
 import type { Guess, NumericRanking, PlayerId } from './types'
 import { PLAYERS } from './players'
 
-export const NUMERIC_TIME_MS = 20_000
-export const QUIZ_TIME_MS = 10_000
+export const NUMERIC_TIME_MS = 25_000
+export const QUIZ_TIME_MS = 25_000
 export const QUIZ_PER_MATCH = 5
 
-export const NUMERIC_POINTS = [300, 150, 50] as const
+export const SCORE_VALUES = {
+  mcCorrect: 10,
+  numericWin: 15,
+  numericExactBonus: 5,
+  capture: 20,
+  lostTerritory: -20,
+  hold: 5,
+} as const
 
 export function emptyGuesses(): Record<PlayerId, Guess> {
   return {
@@ -43,14 +50,13 @@ export function rankNumericGuesses(
 }
 
 export function numericAward(rankIndex: number, missed: boolean): number {
-  if (missed) return 0
-  return NUMERIC_POINTS[rankIndex] ?? 0
+  if (missed || rankIndex !== 0) return 0
+  return SCORE_VALUES.numericWin
 }
 
-export function quizAward(correct: boolean, remainingMs: number): number {
+export function quizAward(correct: boolean): number {
   if (!correct) return 0
-  const timeBonus = Math.max(0, Math.ceil(remainingMs / 100))
-  return 200 + timeBonus
+  return SCORE_VALUES.mcCorrect
 }
 
 export function addScores(

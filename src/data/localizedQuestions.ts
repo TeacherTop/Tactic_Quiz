@@ -1,7 +1,7 @@
-import localizedQuestions from '../../opentdb_questions_ru.json'
 import type { QuizQuestion } from '../game/types'
 
 type LocalizedQuestion = {
+  category?: string
   type: 'multiple' | 'boolean'
   question: string
   correct_answer: string
@@ -9,7 +9,18 @@ type LocalizedQuestion = {
   answers: string[]
 }
 
-const source = localizedQuestions as LocalizedQuestion[]
+const questionBankFiles = import.meta.glob('../../question_bank/my_game_question*.json', {
+  eager: true,
+  import: 'default',
+}) as Record<string, LocalizedQuestion[]>
+
+const source = Object.entries(questionBankFiles)
+  .sort(([left], [right]) => questionBankFileNumber(left) - questionBankFileNumber(right))
+  .flatMap(([, questions]) => questions)
+
+function questionBankFileNumber(path: string): number {
+  return Number(path.match(/my_game_question(\d+)\.json$/)?.[1] ?? Number.MAX_SAFE_INTEGER)
+}
 
 function toQuizQuestion(question: LocalizedQuestion, index: number): QuizQuestion {
   if (question.type === 'boolean') {
@@ -20,7 +31,7 @@ function toQuizQuestion(question: LocalizedQuestion, index: number): QuizQuestio
       'Нельзя определить',
       'Нет верного варианта',
     ]
-    return { id: `opentdb-${index}`, prompt: question.question, options, correctIndex }
+    return { id: `opentdb-${index}`, category: question.category, prompt: question.question, options, correctIndex }
   }
 
   const options = question.answers as [string, string, string, string]
@@ -30,6 +41,7 @@ function toQuizQuestion(question: LocalizedQuestion, index: number): QuizQuestio
   }
   return {
     id: `opentdb-${index}`,
+    category: question.category,
     prompt: question.question,
     options,
     correctIndex: correctIndex as 0 | 1 | 2 | 3,
