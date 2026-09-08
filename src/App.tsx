@@ -1,3 +1,4 @@
+import { JeopardySolo } from './components/JeopardySolo'
 import { useEffect, useReducer, useRef, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArenaGrid } from './components/ArenaGrid'
@@ -19,6 +20,7 @@ import { botAnswerDelayMs, botNumericGuess, botQuizChoice } from './game/bots'
 import { emptyScores, pickRandom, QUIZ_TIME_MS, SCORE_VALUES } from './game/engine'
 import { PLAYER_BY_ID, PLAYERS } from './game/players'
 import type { ArenaCell, NumericQuestion, PlayerId, QuizQuestion } from './game/types'
+import { useQuestionLayout } from './hooks/useQuestionLayout'
 import { useCountdown } from './hooks/useCountdown'
 import { useTelegramControls } from './hooks/useTelegramControls'
 import { ANIMATION_TIMINGS, useGameTimeline } from './hooks/useGameTimeline'
@@ -33,11 +35,9 @@ const ANNOUNCEMENT_MS = 4500
 const ROUND_RESULT_MS = 6000
 const BOT_FALLBACK_BUFFER_MS = 500
 const PLAYER_IDS: PlayerId[] = ['you', 'alex', 'marina']
-const SOLO_STORAGE_KEY = 'solo_quiz_progress'
 const QUESTION_BANK_SELECTION_KEY = 'question_bank_selection'
 const QUESTION_BANK_CHUNK_SIZE = 100
 const QUESTION_BANK_FILE_COUNT = Math.ceil(LOCALIZED_QUIZ_QUESTIONS.length / QUESTION_BANK_CHUNK_SIZE)
-const API_URL = import.meta.env.VITE_MULTIPLAYER_API_URL ?? 'http://127.0.0.1:4000'
 type Answers = Record<PlayerId, number | null>
 type RoundResult =
   | { kind: 'quiz'; question: QuizQuestion; answers: Answers }
@@ -50,26 +50,6 @@ type PveStats = {
   mcAnswered: number
   numericDeviationTotal: number
   numericAnswered: number
-}
-
-type SoloProgress = {
-  seenQuestionIds: string[]
-  questionOrder: string[]
-  currentStreak: number
-  bestStreak: number
-  totalAnswered: number
-  correctAnswers: number
-  lastMilestone: number
-}
-
-type SoloFlaggedQuestion = {
-  id: string
-  category?: string
-  type: 'multiple'
-  question: string
-  correct_answer: string
-  incorrect_answers: string[]
-  answers: string[]
 }
 
 const STATS_STORAGE_KEY = 'strategi-quiz-pve-stats'
@@ -205,42 +185,6 @@ function questionsForBankFiles(files: number[]): QuizQuestion[] {
   })
 }
 
-function emptySoloProgress(): SoloProgress {
-  return {
-    seenQuestionIds: [],
-    questionOrder: [],
-    currentStreak: 0,
-    bestStreak: 0,
-    totalAnswered: 0,
-    correctAnswers: 0,
-    lastMilestone: 0,
-  }
-}
-
-function readSoloProgress(): SoloProgress {
-  try {
-    const raw = localStorage.getItem(SOLO_STORAGE_KEY)
-    if (!raw) return emptySoloProgress()
-    const parsed = JSON.parse(raw) as Partial<SoloProgress>
-    return {
-      ...emptySoloProgress(),
-      ...parsed,
-      seenQuestionIds: Array.isArray(parsed.seenQuestionIds) ? parsed.seenQuestionIds : [],
-      questionOrder: Array.isArray(parsed.questionOrder) ? parsed.questionOrder : [],
-    }
-  } catch {
-    return emptySoloProgress()
-  }
-}
-
-function saveSoloProgress(progress: SoloProgress): void {
-  try {
-    localStorage.setItem(SOLO_STORAGE_KEY, JSON.stringify(progress))
-  } catch {
-    // Progress persistence is best-effort when browser storage is blocked.
-  }
-}
-
 function randomIndex(length: number): number {
   if (length <= 0) return 0
   const cryptoApi = globalThis.crypto
@@ -253,41 +197,6 @@ function randomIndex(length: number): number {
     return value[0] % length
   }
   return Math.floor(Math.random() * length)
-}
-
-function cryptoShuffle<T>(items: T[]): T[] {
-  const copy = [...items]
-  for (let i = copy.length - 1; i > 0; i -= 1) {
-    const j = randomIndex(i + 1)
-    ;[copy[i], copy[j]] = [copy[j], copy[i]]
-  }
-  return copy
-}
-
-function nextSoloQuestion(progress: SoloProgress, questions = activeQuizQuestionBank): QuizQuestion | null {
-  const seen = new Set(progress.seenQuestionIds)
-  const orderedIds = progress.questionOrder.length > 0
-    ? progress.questionOrder
-    : questions.map((question) => question.id)
-  const pool = orderedIds
-    .filter((id) => !seen.has(id))
-    .map((id) => questions.find((question) => question.id === id))
-    .filter((question): question is QuizQuestion => Boolean(question))
-  if (pool.length === 0) return null
-  return shuffleQuizOptions(pool[randomIndex(pool.length)])
-}
-
-function toSoloFlaggedQuestion(question: QuizQuestion): SoloFlaggedQuestion {
-  const correctAnswer = question.options[question.correctIndex]
-  return {
-    id: question.id,
-    category: question.category,
-    type: 'multiple',
-    question: question.prompt,
-    correct_answer: correctAnswer,
-    incorrect_answers: question.options.filter((_, index) => index !== question.correctIndex),
-    answers: [...question.options],
-  }
 }
 
 function freeCellCount(arena: ArenaCell[]): number {
@@ -698,8 +607,9 @@ function reducer(state: State, action: Action): State {
 }
 
 export default function App() {
+  useQuestionLayout()
   const [state, dispatch] = useReducer(reducer, { phase: 'home', match: null, completedRoundResult: null })
-  const [menuNotice] = useState('')
+  const [menuNotice, setMenuNotice] = useState('')
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [paused, setPaused] = useState(false)
   const [announcement, setAnnouncement] = useState(true)
@@ -710,7 +620,7 @@ export default function App() {
   const { phase, match, completedRoundResult } = state
   const quizQuestions = questionsForBankFiles(selectedQuestionBankFiles)
   activeQuizQuestionBank = quizQuestions
-  const startMatch = () => { setSettingsOpen(false); setHomeScreen('menu'); setPaused(false); setAnnouncement(false); recordedMatch.current = false; dispatch({ type: 'start' }) }
+  const startMatch = () => { if (!quizQuestions.length) { setMenuNotice('Банк вопросов с вариантами ответов пока не подключён. Попробуй «Свою игру».'); return } setSettingsOpen(false); setHomeScreen('menu'); setPaused(false); setAnnouncement(false); recordedMatch.current = false; dispatch({ type: 'start' }) }
   const startSolo = () => { setSettingsOpen(false); setPaused(false); setAnnouncement(false); setHomeScreen('solo') }
   const updateQuestionBankFiles = (files: number[]) => {
     const next = normalizeQuestionBankSelection(files)
@@ -897,10 +807,10 @@ export default function App() {
       {phase === 'home' && homeScreen === 'ranked' ? <RankedScreen onBack={() => setHomeScreen('menu')} /> : null}
       {phase === 'home' && homeScreen === 'friends' ? <FriendsScreen onBack={() => setHomeScreen('menu')} /> : null}
       {phase === 'home' && homeScreen === 'history' ? <HistoryScreen onBack={() => setHomeScreen('stats')} /> : null}
-      {phase === 'home' && homeScreen === 'solo' ? <SoloQuizScreen questions={quizQuestions} onExit={() => setHomeScreen('menu')} /> : null}
+      {phase === 'home' && homeScreen === 'solo' ? <JeopardySolo onExit={() => setHomeScreen('menu')} /> : null}
       {phase === 'home' && homeScreen === 'menu' ? <MenuScreen notice={menuNotice} selectedQuestionBankFiles={selectedQuestionBankFiles} connectedQuestionCount={quizQuestions.length} onQuestionBankFilesChange={updateQuestionBankFiles} onSolo={startSolo} onStart={startMatch} onStats={() => setHomeScreen('stats')} onRanked={() => setHomeScreen('ranked')} onFriends={() => setHomeScreen('friends')} /> : null}
       <AnimatePresence mode="wait">
-        {match && (timeline.mapVisible || (phase !== 'home' && phase !== 'expansion' && !questionPhase)) ? <motion.div key="map" className={`map-stage ${timeline.mapReturning ? 'is-returning' : ''}`} initial={{ opacity: 0.5, y: 10, filter: 'blur(10px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} exit={{ opacity: 0, y: -10, filter: 'blur(10px)' }} transition={{ duration: Math.max(ANIMATION_TIMINGS.minTransition, timeline.mapReturning ? ANIMATION_TIMINGS.mapReturn : ANIMATION_TIMINGS.minTransition) / 1000 }}><ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' && match.pendingCapture === 'you' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /></motion.div> : null}
+        {match && (timeline.mapVisible || (phase !== 'home' && phase !== 'results' && phase !== 'expansion' && !questionPhase)) ? <motion.div key="map" className={`map-stage ${timeline.mapReturning ? 'is-returning' : ''}`} initial={{ opacity: 0.5, y: 10, filter: 'blur(10px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} exit={{ opacity: 0, y: -10, filter: 'blur(10px)' }} transition={{ duration: Math.max(ANIMATION_TIMINGS.minTransition, timeline.mapReturning ? ANIMATION_TIMINGS.mapReturn : ANIMATION_TIMINGS.minTransition) / 1000 }}><ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' && match.pendingCapture === 'you' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /></motion.div> : null}
         {((phase === 'expansion' && timeline.questionVisible) || (questionPhase && phase !== 'expansion' && !announcement)) ? <motion.div key="question" className={`question-stage ${timeline.inputExiting ? 'is-exiting' : ''}`} initial={{ opacity: 0, y: 50 }} animate={{ opacity: timeline.inputExiting ? 0 : 1, y: timeline.inputExiting ? -12 : 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: (timeline.inputExiting ? ANIMATION_TIMINGS.inputExit : ANIMATION_TIMINGS.questionEnter) / 1000 }}>
           {phase === 'expansion' && match ? <>{expansionQueuePosition >= 0 ? <p className="queue-status">Ты в очереди захвата: {expansionQueuePosition + 1}-й</p> : null}{humanQuestion(match.expansionQuestion, match.expansionAnswers, 'expansion')}{match.expansionAnswers.you !== null && !expansionAllAnswered ? <p className="timeline-status">Ожидание соперников...</p> : null}</> : null}
           {phase === 'expansion-final' && match ? <FinalRoundPanel match={match} remainingMs={remainingMs} locked={finalHumanLocked || paused} onAnswer={(value) => dispatch({ type: 'answer-final', id: 'you', value, answeredAt: performance.now() })} /> : null}
@@ -1178,8 +1088,8 @@ function FriendsScreen({ onBack }: { onBack: () => void }) {
         <span>Код комнаты</span>
         <input value={roomCode} onChange={(event) => setRoomCode(event.target.value.replace(/\D/g, '').slice(0, 6))} inputMode="numeric" placeholder="000000" />
       </label>
-      <button type="button" className="wood-plaque plaque-light" disabled={roomCode.length !== 6} onClick={joinRoom}><span>ВОЙТИ ПО КОДУ</span><small>ONLINE · SOCKET.IO</small></button>
-      {currentRoomCode ? <button type="button" className="wood-plaque plaque-light" onClick={() => { shareTelegramInvite(currentRoomCode); setNotice(`Ссылка-приглашение готова: ${getTelegramInviteUrl(currentRoomCode)}`) }}><span>ПРИГЛАСИТЬ ДРУГА</span><small>TELEGRAM LINK</small></button> : null}
+      <button type="button" className="wood-plaque plaque-light" disabled={roomCode.length !== 6} onClick={joinRoom}><span>ВОЙТИ ПО КОДУ</span><small>ПО КОДУ ПРИГЛАШЕНИЯ</small></button>
+      {currentRoomCode ? <button type="button" className="wood-plaque plaque-light" onClick={() => { shareTelegramInvite(currentRoomCode); setNotice(`Ссылка-приглашение готова: ${getTelegramInviteUrl(currentRoomCode)}`) }}><span>ПРИГЛАСИТЬ ДРУГА</span><small>ЧЕРЕЗ TELEGRAM</small></button> : null}
     </div>
     {state ? <div className="online-room-panel">
       <p className="menu-eyebrow">Комната {state.roomCode}</p>
@@ -1239,7 +1149,7 @@ function OnlineGameView({ state, socket }: { state: MultiplayerGameState; socket
           <span className="opt-key">{['А', 'Б', 'В', 'Г'][index]}</span>{option}
         </motion.button>)}
       </div>
-      <p className="hint">Ответ проверит сервер; правильный вариант клиенту не отправляется.</p>
+      <p className="hint">Выбери один ответ. Каждый верный ответ приближает к победе.</p>
     </section> : null}
     {state.currentQuestion?.type === 'numeric' && state.phase === 'battle-number' ? <OnlineNumberPanel state={state} remainingMs={remainingMs} onAnswer={(answer) => sendAnswer(answer)} /> : null}
     {state.phase === 'expansion-review' && state.roundResult ? <OnlineRoundResults state={state} /> : null}
@@ -1275,7 +1185,7 @@ function OnlineNumberPanel({ state, remainingMs, onAnswer }: { state: Multiplaye
       <input value={value} onChange={(event) => setValue(event.target.value)} inputMode="decimal" placeholder="Твоё число" />
       <button type="submit">Ответить</button>
     </form>
-    <p className="hint">Сервер сравнит только участников дуэли.</p>
+    <p className="hint">Побеждает тот, чей ответ ближе к правильному числу.</p>
   </section>
 }
 
@@ -1289,149 +1199,6 @@ function OnlineFinalResults({ state }: { state: MultiplayerGameState }) {
     mcTotal: state.mcStats[player.id]?.total ?? 0,
     hexCount: state.arena.filter((cell) => cell.ownerId === player.id).length,
   }))} onMenu={() => window.location.reload()} />
-}
-
-function SoloQuizScreen({ questions, onExit }: { questions: QuizQuestion[]; onExit: () => void }) {
-  const [progress, setProgress] = useState<SoloProgress>(() => readSoloProgress())
-  const [question, setQuestion] = useState<QuizQuestion | null>(() => nextSoloQuestion(readSoloProgress(), questions))
-  const [selected, setSelected] = useState<number | null>(null)
-  const [result, setResult] = useState<'correct' | 'wrong' | null>(null)
-  const [toastPercent, setToastPercent] = useState<number | null>(null)
-  const [flagNotice, setFlagNotice] = useState('')
-  const totalQuestions = questions.length
-  const selectedQuestionIds = new Set(questions.map((item) => item.id))
-  const seenSelectedCount = progress.seenQuestionIds.filter((id) => selectedQuestionIds.has(id)).length
-  const progressPercent = Math.floor((seenSelectedCount / totalQuestions) * 100)
-  const accuracy = progress.totalAnswered === 0 ? 0 : Math.round((progress.correctAnswers / progress.totalAnswered) * 100)
-  const roundDone = result !== null || !question
-
-  const commitProgress = (next: SoloProgress) => {
-    setProgress(next)
-    saveSoloProgress(next)
-  }
-
-  const showMilestone = (percent: number, next: SoloProgress) => {
-    setToastPercent(percent)
-    window.setTimeout(() => {
-      setToastPercent(null)
-      const latest = readSoloProgress()
-      if (latest.lastMilestone >= percent) return
-      commitProgress({ ...latest, lastMilestone: percent })
-    }, 2000)
-    commitProgress(next)
-  }
-
-  function answerSolo(pick: number | null) {
-    if (!question || result !== null) return
-    const correct = pick === question.correctIndex
-    const seenQuestionIds = progress.seenQuestionIds.includes(question.id)
-      ? progress.seenQuestionIds
-      : [...progress.seenQuestionIds, question.id]
-    const currentStreak = correct ? progress.currentStreak + 1 : 0
-    const next: SoloProgress = {
-      ...progress,
-      seenQuestionIds,
-      currentStreak,
-      bestStreak: Math.max(progress.bestStreak, currentStreak),
-      totalAnswered: progress.totalAnswered + 1,
-      correctAnswers: progress.correctAnswers + (correct ? 1 : 0),
-    }
-    setSelected(pick)
-    setResult(correct ? 'correct' : 'wrong')
-    const percent = Math.floor((seenQuestionIds.filter((id) => selectedQuestionIds.has(id)).length / totalQuestions) * 100)
-    if (correct && percent > progress.lastMilestone && percent >= 1 && percent <= 100) {
-      showMilestone(percent, next)
-    } else {
-      commitProgress(next)
-    }
-  }
-
-  const nextRound = () => {
-    const latest = readSoloProgress()
-    const nextQuestion = nextSoloQuestion(latest, questions)
-    setProgress(latest)
-    setQuestion(nextQuestion)
-    setSelected(null)
-    setResult(null)
-  }
-
-  const restart = () => {
-    const fresh: SoloProgress = {
-      ...emptySoloProgress(),
-      questionOrder: cryptoShuffle(questions.map((item) => item.id)),
-    }
-    saveSoloProgress(fresh)
-    setProgress(fresh)
-    setQuestion(nextSoloQuestion(fresh, questions))
-    setSelected(null)
-    setResult(null)
-    setToastPercent(null)
-    setFlagNotice('')
-  }
-
-  const flagQuestion = async () => {
-    if (!question) return
-    const flaggedQuestion = toSoloFlaggedQuestion(question)
-    try {
-      const response = await fetch(`${API_URL}/api/solo-flag-question`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(flaggedQuestion),
-      })
-      if (!response.ok) throw new Error('server unavailable')
-      setFlagNotice('Вопрос добавлен в solo_flagged_questions.json')
-    } catch {
-      setFlagNotice('Backend не запущен, вопрос не сохранен')
-    }
-    window.setTimeout(() => setFlagNotice(''), 2200)
-  }
-
-  if (!question) {
-    return <section className="solo-screen">
-      <button type="button" className="solo-exit" onClick={onExit}>Выйти в меню</button>
-      <div className="solo-complete panel">
-        <p className="kicker">Соло</p>
-        <h2>Все вопросы пройдены!</h2>
-        <div className="solo-stats">
-          <StatMetric label="Всего отвечено" value={progress.totalAnswered} />
-          <StatMetric label="Лучший стрик" value={progress.bestStreak} />
-          <StatMetric label="Точность" value={`${accuracy}%`} progress={accuracy} />
-        </div>
-        <button type="button" className="wood-plaque plaque-red solo-next" onClick={restart}>НАЧАТЬ ЗАНОВО</button>
-      </div>
-    </section>
-  }
-
-  return <section className="solo-screen">
-    <button type="button" className="solo-exit" onClick={onExit}>Пауза / Выход в меню</button>
-    <header className="solo-hud">
-      <div className="solo-progress">
-        <span>% правильных ответов: {accuracy}%</span>
-        <i><b style={{ width: `${progressPercent}%` }} /></i>
-      </div>
-      <motion.div key={progress.currentStreak} className="solo-streak" initial={{ scale: 1 }} animate={{ scale: [1, 1.08, 1] }} transition={{ duration: 0.32 }}>
-        Серия: {progress.currentStreak}
-      </motion.div>
-    </header>
-    <section className="panel solo-question-panel">
-      <button type="button" className="solo-flag-button" onClick={flagQuestion} title="Отправить вопрос в solo_flagged_questions.json" aria-label="Отправить вопрос в JSON-файл">!</button>
-      <p className="kicker">Соло · вопрос {seenSelectedCount + (result ? 0 : 1)} из {totalQuestions}</p>
-      <p className="solo-category">{question.category ?? 'Общие знания'}</p>
-      <h2>{question.prompt}</h2>
-      <div className="options">
-        {question.options.map((option, index) => (
-          <motion.button key={`${question.id}-${option}`} type="button" className={`option ${selected === index ? 'is-selected' : ''} ${result && index === question.correctIndex ? 'is-correct' : ''}`} disabled={roundDone} whileTap={{ scale: 0.95 }} onClick={() => answerSolo(index)}>
-            <span className="opt-key">{['А', 'Б', 'В', 'Г'][index]}</span>{option}
-          </motion.button>
-        ))}
-      </div>
-      {result ? <button type="button" className="primary solo-next" onClick={nextRound}>Следующий вопрос</button> : null}
-      {flagNotice ? <p className="solo-flag-notice">{flagNotice}</p> : null}
-    </section>
-    <AnimatePresence>
-      {toastPercent !== null ? <motion.div className="solo-toast" initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.25 }}>🎉 Пройдено {toastPercent}% вопросов!</motion.div> : null}
-    </AnimatePresence>
-  </section>
 }
 
 function HistoryScreen({ onBack }: { onBack: () => void }) {
@@ -1473,6 +1240,7 @@ function MenuScreen({
 }) {
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [bankOpen, setBankOpen] = useState(false)
+  const [bankPage, setBankPage] = useState(0)
   const [bankInput, setBankInput] = useState(() => selectedQuestionBankFiles.join(', '))
   const selectedBankSet = new Set(selectedQuestionBankFiles)
 
@@ -1527,7 +1295,7 @@ function MenuScreen({
             />
           </label>
           <div className="menu-bank-files" aria-label="Файлы банка вопросов">
-            {allQuestionBankFiles().map((file) => <button
+            {allQuestionBankFiles().slice(bankPage * 30, (bankPage + 1) * 30).map((file) => <button
               type="button"
               key={file}
               className={`menu-bank-file${selectedBankSet.has(file) ? ' is-selected' : ''}`}
@@ -1537,31 +1305,30 @@ function MenuScreen({
               {file}
             </button>)}
           </div>
+          <div className="bank-pagination"><button disabled={bankPage === 0} onClick={() => setBankPage(bankPage - 1)}>←</button><span>{bankPage + 1} / {Math.ceil(QUESTION_BANK_FILE_COUNT / 30)}</span><button disabled={(bankPage + 1) * 30 >= QUESTION_BANK_FILE_COUNT} onClick={() => setBankPage(bankPage + 1)}>→</button></div>
         </div> : null}
       </div> : null}
     </div>
     <header className="menu-title">
-      <p className="menu-eyebrow">Средневековая карта знаний</p>
-      <h2>STRATEGI <span>QUIZ</span></h2>
+      <p className="menu-eyebrow">Знания решают всё</p>
+      <h2>Ближе <span>всех.</span></h2><p className="menu-subtitle">Твой ум. Твоя стратегия. Твоя победа.</p>
       <div className="title-rule" aria-hidden="true"><i /><b /><i /></div>
     </header>
-    <div className="map-scene" aria-label="Карта стратегической викторины">
-      <div className="mountain mountain-left" aria-hidden="true"><i /><i /><i /></div>
-      <div className="mountain mountain-right" aria-hidden="true"><i /><i /><i /></div>
-      <div className="hex-field" aria-hidden="true" />
-      <div className="route route-one" aria-hidden="true" />
-      <div className="route route-two" aria-hidden="true" />
-      <HexToken className="token-top" color="terracotta" label="Игрок 1" />
-      <HexToken className="token-left" color="olive" label="Игрок 2" />
-      <HexToken className="token-right" color="blue" label="Игрок 3" />
+    <div className="map-scene" aria-hidden="true">
+      <div className="orbit orbit-one" /><div className="orbit orbit-two" />
+      <div className="hero-monogram">?</div>
+      <HexToken className="token-top" color="terracotta" label="" />
+      <HexToken className="token-left" color="olive" label="" />
+      <HexToken className="token-right" color="blue" label="" />
+      <span className="scene-caption">Каждый ответ — новый ход</span>
     </div>
     <div className="menu-actions menu-plaques" aria-label="Режимы игры">
-      <button type="button" className="wood-plaque plaque-red" onClick={onSolo}><span>СОЛО</span><small>БЕСКОНЕЧНО</small></button>
-      <button type="button" className="wood-plaque plaque-red" onClick={onRanked}><span>РЕЙТИНГОВАЯ ИГРА</span><small>ОТКРЫТЬ</small></button>
-      <button type="button" className="wood-plaque plaque-light" onClick={onStart}><span>ИГРА С БОТАМИ</span><small>НАЧАТЬ</small></button>
-      <button type="button" className="wood-plaque plaque-light" onClick={onFriends}><span>ИГРА С ДРУЗЬЯМИ</span><small>ОТКРЫТЬ</small></button>
+      <button type="button" className="wood-plaque plaque-red" onClick={onSolo}><i className="mode-icon" aria-hidden="true">✦</i><span>Своя игра<small>Введи ответ · проверим по смыслу</small></span><b aria-hidden="true">↗</b></button>
+      <button type="button" className="wood-plaque plaque-red" onClick={onRanked}><i className="mode-icon" aria-hidden="true">♜</i><span>Рейтинговая игра<small>Брось вызов лучшим</small></span><b aria-hidden="true">↗</b></button>
+      <button type="button" className="wood-plaque plaque-light" onClick={onStart}><i className="mode-icon" aria-hidden="true">⬡</i><span>Битва умов<small>Захватывай территорию с ботами</small></span><b aria-hidden="true">↗</b></button>
+      <button type="button" className="wood-plaque plaque-light" onClick={onFriends}><i className="mode-icon" aria-hidden="true">⌘</i><span>С друзьями<small>Собери свою компанию</small></span><b aria-hidden="true">↗</b></button>
     </div>
-    <button type="button" className="stats-link" onClick={onStats}>ОТКРЫТЬ СТАТИСТИКУ</button>
+    <button type="button" className="stats-link" onClick={onStats}>Моя статистика →</button>
     {notice ? <p className="menu-notice">{notice}</p> : null}
     <p className="menu-version">v1.0</p>
   </section>

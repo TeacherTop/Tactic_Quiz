@@ -2,10 +2,9 @@ import 'dotenv/config'
 import http from 'node:http'
 import cors from 'cors'
 import express from 'express'
-import fs from 'node:fs'
-import path from 'node:path'
 import { Server } from 'socket.io'
 import { z } from 'zod'
+import { createJeopardyRouter } from './jeopardy'
 import { GameRoomStore } from './gameRoomStore'
 import { verifyTelegramInitData } from './telegramAuth'
 import type { ClientToServerEvents, MultiplayerGameState, ServerToClientEvents, TelegramUser } from '../shared/multiplayer'
@@ -17,16 +16,6 @@ const RATE_LIMIT_PER_SECOND = 10
 
 const initDataSchema = z.object({ initData: z.string().default('') })
 const joinRoomSchema = initDataSchema.extend({ roomCode: z.string().regex(/^\d{6}$/) })
-const flaggedQuestionSchema = z.object({
-  id: z.string(),
-  category: z.string().optional(),
-  type: z.string(),
-  question: z.string(),
-  correct_answer: z.string(),
-  incorrect_answers: z.array(z.string()),
-  answers: z.array(z.string()),
-})
-
 type SocketData = {
   roomId?: string
   playerId?: string
@@ -37,7 +26,6 @@ const server = http.createServer(app)
 const store = new GameRoomStore()
 const actionBuckets = new Map<string, { startedAt: number; count: number }>()
 const scheduledBotTurns = new Set<string>()
-const FLAGGED_QUESTIONS_PATH = path.resolve(process.cwd(), 'solo_flagged_questions.json')
 const corsOrigin: cors.CorsOptions['origin'] = (origin, callback) => {
   if (!origin || origin === CLIENT_ORIGIN || /^http:\/\/(127\.0\.0\.1|localhost):\d+$/.test(origin)) {
     callback(null, true)
@@ -51,7 +39,8 @@ export const io = new Server<ClientToServerEvents, ServerToClientEvents, Record<
 })
 
 app.use(cors({ origin: corsOrigin, credentials: true }))
-app.use(express.json())
+app.use(express.json({ limit: '512kb' }))
+app.use('/api/solo', createJeopardyRouter(authenticate))
 
 function log(roomId: string, message: string): void {
   const entry = { roomId, message, at: Date.now() }
@@ -173,6 +162,7 @@ app.get('/health', (_req, res) => {
 
 app.post('/api/create-room', (req, res) => {
   try {
+    if (!store.hasQuestions()) throw new Error('Банк вопросов для игры с друзьями ещё не подключён.')
     const { initData } = initDataSchema.parse(req.body)
     const state = store.createRoom(authenticate(initData, req.query.devUser))
     log(state.roomId, `Создана комната ${state.roomCode}`)
@@ -191,26 +181,6 @@ app.post('/api/join-room', (req, res) => {
     res.json({ state: publicState(state) })
   } catch (error) {
     res.status(400).json({ error: error instanceof Error ? error.message : 'Не удалось войти в комнату' })
-  }
-})
-
-app.post('/api/solo-flag-question', (req, res) => {
-  try {
-    const question = flaggedQuestionSchema.parse(req.body)
-    let flagged: z.infer<typeof flaggedQuestionSchema>[] = []
-    if (fs.existsSync(FLAGGED_QUESTIONS_PATH)) {
-      const raw = fs.readFileSync(FLAGGED_QUESTIONS_PATH, 'utf8')
-      const parsed = JSON.parse(raw)
-      if (Array.isArray(parsed)) flagged = parsed
-    }
-    const next = [
-      ...flagged.filter((item) => item.id !== question.id),
-      question,
-    ]
-    fs.writeFileSync(FLAGGED_QUESTIONS_PATH, `${JSON.stringify(next, null, 2)}\n`)
-    res.json({ ok: true, path: FLAGGED_QUESTIONS_PATH, count: next.length })
-  } catch (error) {
-    res.status(400).json({ error: error instanceof Error ? error.message : 'Не удалось сохранить вопрос' })
   }
 })
 

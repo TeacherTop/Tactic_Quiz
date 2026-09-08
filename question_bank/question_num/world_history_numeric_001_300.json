@@ -1,0 +1,2102 @@
+[
+  {
+    "id": "world_hist_num_001",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. традиционно датируются первые Олимпийские игры в Древней Греции?",
+    "correct_answer": 776
+  },
+  {
+    "id": "world_hist_num_002",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э., согласно римской традиции, был основан Рим?",
+    "correct_answer": 753
+  },
+  {
+    "id": "world_hist_num_003",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько чудес входило в классический список Семи чудес древнего мира?",
+    "correct_answer": 7
+  },
+  {
+    "id": "world_hist_num_004",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько таблиц включал древнеримский свод законов, известный как Законы XII таблиц?",
+    "correct_answer": 12
+  },
+  {
+    "id": "world_hist_num_005",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. афиняне победили персов в Марафонской битве?",
+    "correct_answer": 490
+  },
+  {
+    "id": "world_hist_num_006",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. произошла битва при Фермопилах?",
+    "correct_answer": 480
+  },
+  {
+    "id": "world_hist_num_007",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. произошла морская битва при Саламине?",
+    "correct_answer": 480
+  },
+  {
+    "id": "world_hist_num_008",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. началась Пелопоннесская война?",
+    "correct_answer": 431
+  },
+  {
+    "id": "world_hist_num_009",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. завершилась Пелопоннесская война?",
+    "correct_answer": 404
+  },
+  {
+    "id": "world_hist_num_010",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет продолжалась Пелопоннесская война по датировке 431–404 годы до н. э.?",
+    "correct_answer": 27
+  },
+  {
+    "id": "world_hist_num_011",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. Александр Македонский стал царём Македонии?",
+    "correct_answer": 336
+  },
+  {
+    "id": "world_hist_num_012",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. Александр Македонский победил персов при Гранике?",
+    "correct_answer": 334
+  },
+  {
+    "id": "world_hist_num_013",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. произошла битва при Иссе между Александром Македонским и Дарием III?",
+    "correct_answer": 333
+  },
+  {
+    "id": "world_hist_num_014",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. произошла битва при Гавгамелах?",
+    "correct_answer": 331
+  },
+  {
+    "id": "world_hist_num_015",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. умер Александр Македонский?",
+    "correct_answer": 323
+  },
+  {
+    "id": "world_hist_num_016",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет было Александру Македонскому на момент смерти?",
+    "correct_answer": 32
+  },
+  {
+    "id": "world_hist_num_017",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. началась Первая Пуническая война?",
+    "correct_answer": 264
+  },
+  {
+    "id": "world_hist_num_018",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. завершилась Первая Пуническая война?",
+    "correct_answer": 241
+  },
+  {
+    "id": "world_hist_num_019",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько Пунических войн произошло между Римом и Карфагеном?",
+    "correct_answer": 3
+  },
+  {
+    "id": "world_hist_num_020",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. Ганнибал одержал победу над римлянами при Каннах?",
+    "correct_answer": 216
+  },
+  {
+    "id": "world_hist_num_021",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. произошла битва при Заме, завершившая Вторую Пуническую войну?",
+    "correct_answer": 202
+  },
+  {
+    "id": "world_hist_num_022",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. Карфаген был разрушен римлянами в конце Третьей Пунической войны?",
+    "correct_answer": 146
+  },
+  {
+    "id": "world_hist_num_023",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. началось восстание Спартака?",
+    "correct_answer": 73
+  },
+  {
+    "id": "world_hist_num_024",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. был убит Юлий Цезарь?",
+    "correct_answer": 44
+  },
+  {
+    "id": "world_hist_num_025",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько участников было в Первом триумвирате Цезаря, Помпея и Красса?",
+    "correct_answer": 3
+  },
+  {
+    "id": "world_hist_num_026",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько участников было во Втором триумвирате Октавиана, Антония и Лепида?",
+    "correct_answer": 3
+  },
+  {
+    "id": "world_hist_num_027",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. произошла битва при Акции?",
+    "correct_answer": 31
+  },
+  {
+    "id": "world_hist_num_028",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. Октавиан получил титул Августа?",
+    "correct_answer": 27
+  },
+  {
+    "id": "world_hist_num_029",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько консулов одновременно избиралось в Римской республике в обычном порядке?",
+    "correct_answer": 2
+  },
+  {
+    "id": "world_hist_num_030",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько соправителей предполагала система тетрархии Диоклетиана?",
+    "correct_answer": 4
+  },
+  {
+    "id": "world_hist_num_031",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошло извержение Везувия, погубившее Помпеи?",
+    "correct_answer": 79
+  },
+  {
+    "id": "world_hist_num_032",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году император Траян начал войну с Дакией, завершившуюся созданием римской провинции?",
+    "correct_answer": 101
+  },
+  {
+    "id": "world_hist_num_033",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началось строительство вала Адриана в Британии?",
+    "correct_answer": 122
+  },
+  {
+    "id": "world_hist_num_034",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году император Константин победил в битве у Мульвийского моста?",
+    "correct_answer": 312
+  },
+  {
+    "id": "world_hist_num_035",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был издан Миланский эдикт о веротерпимости в Римской империи?",
+    "correct_answer": 313
+  },
+  {
+    "id": "world_hist_num_036",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году состоялся Первый Никейский собор?",
+    "correct_answer": 325
+  },
+  {
+    "id": "world_hist_num_037",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Римская империя окончательно разделилась на Восточную и Западную после смерти Феодосия I?",
+    "correct_answer": 395
+  },
+  {
+    "id": "world_hist_num_038",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году вестготы Алариха разграбили Рим?",
+    "correct_answer": 410
+  },
+  {
+    "id": "world_hist_num_039",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году традиционно датируют падение Западной Римской империи?",
+    "correct_answer": 476
+  },
+  {
+    "id": "world_hist_num_040",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. Цинь Шихуанди объединил Китай?",
+    "correct_answer": 221
+  },
+  {
+    "id": "world_hist_num_041",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. началась династия Хань?",
+    "correct_answer": 206
+  },
+  {
+    "id": "world_hist_num_042",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. умер Цинь Шихуанди?",
+    "correct_answer": 210
+  },
+  {
+    "id": "world_hist_num_043",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. Чжан Цянь впервые был отправлен ханьским двором на запад?",
+    "correct_answer": 138
+  },
+  {
+    "id": "world_hist_num_044",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году до н. э. Чандрагупта Маурья основал империю Маурьев по распространённой датировке?",
+    "correct_answer": 322
+  },
+  {
+    "id": "world_hist_num_045",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началось правление династии Гуптов в Северной Индии по традиционной датировке?",
+    "correct_answer": 320
+  },
+  {
+    "id": "world_hist_num_046",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась китайская династия Тан?",
+    "correct_answer": 618
+  },
+  {
+    "id": "world_hist_num_047",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилось правление китайской династии Тан?",
+    "correct_answer": 907
+  },
+  {
+    "id": "world_hist_num_048",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет продолжалась династия Тан по датировке 618–907?",
+    "correct_answer": 289
+  },
+  {
+    "id": "world_hist_num_049",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был разрушен Второй Иерусалимский храм римлянами?",
+    "correct_answer": 70
+  },
+  {
+    "id": "world_hist_num_050",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году император Каракалла распространил римское гражданство почти на всех свободных жителей империи?",
+    "correct_answer": 212
+  },
+  {
+    "id": "world_hist_num_051",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла хиджра Мухаммеда из Мекки в Медину?",
+    "correct_answer": 622
+  },
+  {
+    "id": "world_hist_num_052",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году умер пророк Мухаммед?",
+    "correct_answer": 632
+  },
+  {
+    "id": "world_hist_num_053",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началось мусульманское завоевание Пиренейского полуострова?",
+    "correct_answer": 711
+  },
+  {
+    "id": "world_hist_num_054",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла битва при Пуатье между франками и армией Омейядов?",
+    "correct_answer": 732
+  },
+  {
+    "id": "world_hist_num_055",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Карл Великий был коронован императором?",
+    "correct_answer": 800
+  },
+  {
+    "id": "world_hist_num_056",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был заключён Верденский договор о разделе империи Карла Великого?",
+    "correct_answer": 843
+  },
+  {
+    "id": "world_hist_num_057",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Оттон I был коронован императором, что традиционно связывают с возникновением Священной Римской империи?",
+    "correct_answer": 962
+  },
+  {
+    "id": "world_hist_num_058",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошёл Великий раскол между западной и восточной христианскими церквями?",
+    "correct_answer": 1054
+  },
+  {
+    "id": "world_hist_num_059",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошло нормандское завоевание Англии и битва при Гастингсе?",
+    "correct_answer": 1066
+  },
+  {
+    "id": "world_hist_num_060",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году папа Урбан II призвал к Первому крестовому походу?",
+    "correct_answer": 1095
+  },
+  {
+    "id": "world_hist_num_061",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году крестоносцы взяли Иерусалим в ходе Первого крестового похода?",
+    "correct_answer": 1099
+  },
+  {
+    "id": "world_hist_num_062",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Саладин победил крестоносцев при Хаттине?",
+    "correct_answer": 1187
+  },
+  {
+    "id": "world_hist_num_063",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Саладин вернул Иерусалим под мусульманский контроль?",
+    "correct_answer": 1187
+  },
+  {
+    "id": "world_hist_num_064",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году участники Четвёртого крестового похода захватили Константинополь?",
+    "correct_answer": 1204
+  },
+  {
+    "id": "world_hist_num_065",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Темучин был провозглашён Чингисханом?",
+    "correct_answer": 1206
+  },
+  {
+    "id": "world_hist_num_066",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была подписана Великая хартия вольностей?",
+    "correct_answer": 1215
+  },
+  {
+    "id": "world_hist_num_067",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько статей насчитывала Великая хартия вольностей в версии 1215 года?",
+    "correct_answer": 63
+  },
+  {
+    "id": "world_hist_num_068",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началось монгольское завоевание государства Цзинь?",
+    "correct_answer": 1211
+  },
+  {
+    "id": "world_hist_num_069",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году монголы захватили Багдад и прекратили существование Аббасидского халифата в городе?",
+    "correct_answer": 1258
+  },
+  {
+    "id": "world_hist_num_070",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году мамлюки победили монголов в битве при Айн-Джалуте?",
+    "correct_answer": 1260
+  },
+  {
+    "id": "world_hist_num_071",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году пал последний крупный оплот крестоносцев в Акре?",
+    "correct_answer": 1291
+  },
+  {
+    "id": "world_hist_num_072",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Столетняя война?",
+    "correct_answer": 1337
+  },
+  {
+    "id": "world_hist_num_073",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась Столетняя война?",
+    "correct_answer": 1453
+  },
+  {
+    "id": "world_hist_num_074",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет длилась Столетняя война по датировке 1337–1453?",
+    "correct_answer": 116
+  },
+  {
+    "id": "world_hist_num_075",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Чёрная смерть достигла Средиземноморской Европы?",
+    "correct_answer": 1347
+  },
+  {
+    "id": "world_hist_num_076",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошёл Жакерия — крупное крестьянское восстание во Франции?",
+    "correct_answer": 1358
+  },
+  {
+    "id": "world_hist_num_077",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошёл английский крестьянский мятеж Уота Тайлера?",
+    "correct_answer": 1381
+  },
+  {
+    "id": "world_hist_num_078",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла битва при Азенкуре?",
+    "correct_answer": 1415
+  },
+  {
+    "id": "world_hist_num_079",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Жанна д’Арк была казнена в Руане?",
+    "correct_answer": 1431
+  },
+  {
+    "id": "world_hist_num_080",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году османы захватили Константинополь?",
+    "correct_answer": 1453
+  },
+  {
+    "id": "world_hist_num_081",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году пало Гранадское эмиратство, завершив Реконкисту?",
+    "correct_answer": 1492
+  },
+  {
+    "id": "world_hist_num_082",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько королевств-крестоносных государств традиционно выделяют после Первого крестового похода на Востоке?",
+    "correct_answer": 4
+  },
+  {
+    "id": "world_hist_num_083",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был основан университет в Болонье по традиционной датировке?",
+    "correct_answer": 1088
+  },
+  {
+    "id": "world_hist_num_084",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был основан Оксфордский университет по традиционно указываемой дате начала преподавания?",
+    "correct_answer": 1096
+  },
+  {
+    "id": "world_hist_num_085",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был основан Парижский университет как корпорация магистров и студентов по традиционной датировке?",
+    "correct_answer": 1150
+  },
+  {
+    "id": "world_hist_num_086",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был основан Кембриджский университет?",
+    "correct_answer": 1209
+  },
+  {
+    "id": "world_hist_num_087",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был издан Золотой буллой Карла IV акт, закрепивший порядок избрания императора Священной Римской империи?",
+    "correct_answer": 1356
+  },
+  {
+    "id": "world_hist_num_088",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько курфюрстов закрепила Золотая булла 1356 года?",
+    "correct_answer": 7
+  },
+  {
+    "id": "world_hist_num_089",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Великая западная схизма в Католической церкви?",
+    "correct_answer": 1378
+  },
+  {
+    "id": "world_hist_num_090",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась Великая западная схизма?",
+    "correct_answer": 1417
+  },
+  {
+    "id": "world_hist_num_091",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет продолжалась Великая западная схизма по датировке 1378–1417?",
+    "correct_answer": 39
+  },
+  {
+    "id": "world_hist_num_092",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году состоялась битва на Косовом поле между сербскими силами и османской армией?",
+    "correct_answer": 1389
+  },
+  {
+    "id": "world_hist_num_093",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году османы разгромили крестоносцев при Никополе?",
+    "correct_answer": 1396
+  },
+  {
+    "id": "world_hist_num_094",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году начались морские экспедиции китайского адмирала Чжэн Хэ?",
+    "correct_answer": 1405
+  },
+  {
+    "id": "world_hist_num_095",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько крупных морских экспедиций Чжэн Хэ традиционно насчитывают?",
+    "correct_answer": 7
+  },
+  {
+    "id": "world_hist_num_096",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась последняя экспедиция Чжэн Хэ?",
+    "correct_answer": 1433
+  },
+  {
+    "id": "world_hist_num_097",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была основана династия Мин в Китае?",
+    "correct_answer": 1368
+  },
+  {
+    "id": "world_hist_num_098",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году династия Мин прекратила правление в Китае?",
+    "correct_answer": 1644
+  },
+  {
+    "id": "world_hist_num_099",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году начался сёгунат Камакура в Японии по традиционной датировке?",
+    "correct_answer": 1192
+  },
+  {
+    "id": "world_hist_num_100",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершился сёгунат Камакура?",
+    "correct_answer": 1333
+  },
+  {
+    "id": "world_hist_num_101",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Христофор Колумб впервые достиг Америки?",
+    "correct_answer": 1492
+  },
+  {
+    "id": "world_hist_num_102",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был подписан Тордесильясский договор между Испанией и Португалией?",
+    "correct_answer": 1494
+  },
+  {
+    "id": "world_hist_num_103",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Васко да Гама достиг Индии морским путём вокруг Африки?",
+    "correct_answer": 1498
+  },
+  {
+    "id": "world_hist_num_104",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Педру Кабрал достиг берегов Бразилии?",
+    "correct_answer": 1500
+  },
+  {
+    "id": "world_hist_num_105",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началось кругосветное путешествие экспедиции Магеллана?",
+    "correct_answer": 1519
+  },
+  {
+    "id": "world_hist_num_106",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году экспедиция Магеллана—Элькано завершила первое кругосветное плавание?",
+    "correct_answer": 1522
+  },
+  {
+    "id": "world_hist_num_107",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько кораблей вышло из Испании в составе экспедиции Магеллана в 1519 году?",
+    "correct_answer": 5
+  },
+  {
+    "id": "world_hist_num_108",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько кораблей из первоначальной экспедиции Магеллана вернулось в Испанию после первого кругосветного плавания?",
+    "correct_answer": 1
+  },
+  {
+    "id": "world_hist_num_109",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Мартин Лютер обнародовал свои 95 тезисов?",
+    "correct_answer": 1517
+  },
+  {
+    "id": "world_hist_num_110",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько тезисов традиционно связывают с выступлением Мартина Лютера в Виттенберге?",
+    "correct_answer": 95
+  },
+  {
+    "id": "world_hist_num_111",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году состоялся Вормсский рейхстаг, на котором выступал Мартин Лютер?",
+    "correct_answer": 1521
+  },
+  {
+    "id": "world_hist_num_112",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году испанцы под командованием Кортеса захватили Теночтитлан?",
+    "correct_answer": 1521
+  },
+  {
+    "id": "world_hist_num_113",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Франсиско Писарро захватил инкского правителя Атауальпу в Кахамарке?",
+    "correct_answer": 1532
+  },
+  {
+    "id": "world_hist_num_114",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году английский Акт о супрематии провозгласил Генриха VIII главой Церкви Англии?",
+    "correct_answer": 1534
+  },
+  {
+    "id": "world_hist_num_115",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был опубликован труд Коперника «О вращении небесных сфер»?",
+    "correct_answer": 1543
+  },
+  {
+    "id": "world_hist_num_116",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году начался Тридентский собор?",
+    "correct_answer": 1545
+  },
+  {
+    "id": "world_hist_num_117",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершился Тридентский собор?",
+    "correct_answer": 1563
+  },
+  {
+    "id": "world_hist_num_118",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет продолжался Тридентский собор по датировке 1545–1563?",
+    "correct_answer": 18
+  },
+  {
+    "id": "world_hist_num_119",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был заключён Аугсбургский религиозный мир?",
+    "correct_answer": 1555
+  },
+  {
+    "id": "world_hist_num_120",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была разгромлена Испанская армада у берегов Англии?",
+    "correct_answer": 1588
+  },
+  {
+    "id": "world_hist_num_121",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была основана Английская Ост-Индская компания?",
+    "correct_answer": 1600
+  },
+  {
+    "id": "world_hist_num_122",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Токугава Иэясу получил титул сёгуна и начался сёгунат Токугава?",
+    "correct_answer": 1603
+  },
+  {
+    "id": "world_hist_num_123",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году было основано английское поселение Джеймстаун в Виргинии?",
+    "correct_answer": 1607
+  },
+  {
+    "id": "world_hist_num_124",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Тридцатилетняя война?",
+    "correct_answer": 1618
+  },
+  {
+    "id": "world_hist_num_125",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась Тридцатилетняя война?",
+    "correct_answer": 1648
+  },
+  {
+    "id": "world_hist_num_126",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет продолжалась Тридцатилетняя война?",
+    "correct_answer": 30
+  },
+  {
+    "id": "world_hist_num_127",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году корабль Mayflower доставил английских переселенцев в Новую Англию?",
+    "correct_answer": 1620
+  },
+  {
+    "id": "world_hist_num_128",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Английская гражданская война?",
+    "correct_answer": 1642
+  },
+  {
+    "id": "world_hist_num_129",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был казнён английский король Карл I?",
+    "correct_answer": 1649
+  },
+  {
+    "id": "world_hist_num_130",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла Славная революция в Англии?",
+    "correct_answer": 1688
+  },
+  {
+    "id": "world_hist_num_131",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году английский Билль о правах получил королевскую санкцию?",
+    "correct_answer": 1689
+  },
+  {
+    "id": "world_hist_num_132",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была основана Английская банковская система через создание Банка Англии?",
+    "correct_answer": 1694
+  },
+  {
+    "id": "world_hist_num_133",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Война за испанское наследство?",
+    "correct_answer": 1701
+  },
+  {
+    "id": "world_hist_num_134",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был подписан Утрехтский мир, ставший главным итогом Войны за испанское наследство?",
+    "correct_answer": 1713
+  },
+  {
+    "id": "world_hist_num_135",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Семилетняя война?",
+    "correct_answer": 1756
+  },
+  {
+    "id": "world_hist_num_136",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась Семилетняя война?",
+    "correct_answer": 1763
+  },
+  {
+    "id": "world_hist_num_137",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет продолжалась Семилетняя война по датировке 1756–1763?",
+    "correct_answer": 7
+  },
+  {
+    "id": "world_hist_num_138",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошло Бостонское чаепитие?",
+    "correct_answer": 1773
+  },
+  {
+    "id": "world_hist_num_139",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была принята Декларация независимости США?",
+    "correct_answer": 1776
+  },
+  {
+    "id": "world_hist_num_140",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько британских колоний объявили независимость и образовали Соединённые Штаты?",
+    "correct_answer": 13
+  },
+  {
+    "id": "world_hist_num_141",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась Война за независимость США Парижским миром?",
+    "correct_answer": 1783
+  },
+  {
+    "id": "world_hist_num_142",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была подписана Конституция США?",
+    "correct_answer": 1787
+  },
+  {
+    "id": "world_hist_num_143",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько статей содержит первоначальный текст Конституции США?",
+    "correct_answer": 7
+  },
+  {
+    "id": "world_hist_num_144",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько поправок Конгресс США первоначально предложил штатам в 1789 году как Билль о правах?",
+    "correct_answer": 12
+  },
+  {
+    "id": "world_hist_num_145",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько из этих первоначально предложенных поправок были ратифицированы к 1791 году и составили Билль о правах?",
+    "correct_answer": 10
+  },
+  {
+    "id": "world_hist_num_146",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Французская революция?",
+    "correct_answer": 1789
+  },
+  {
+    "id": "world_hist_num_147",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был казнён Людовик XVI?",
+    "correct_answer": 1793
+  },
+  {
+    "id": "world_hist_num_148",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошёл переворот 18 брюмера, приведший Наполеона к власти?",
+    "correct_answer": 1799
+  },
+  {
+    "id": "world_hist_num_149",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Наполеон Бонапарт был провозглашён императором французов?",
+    "correct_answer": 1804
+  },
+  {
+    "id": "world_hist_num_150",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Гаити провозгласило независимость от Франции?",
+    "correct_answer": 1804
+  },
+  {
+    "id": "world_hist_num_151",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла битва при Аустерлице?",
+    "correct_answer": 1805
+  },
+  {
+    "id": "world_hist_num_152",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошло Трафальгарское сражение?",
+    "correct_answer": 1805
+  },
+  {
+    "id": "world_hist_num_153",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Наполеон вторгся в Россию?",
+    "correct_answer": 1812
+  },
+  {
+    "id": "world_hist_num_154",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла битва при Ватерлоо?",
+    "correct_answer": 1815
+  },
+  {
+    "id": "world_hist_num_155",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершился Венский конгресс?",
+    "correct_answer": 1815
+  },
+  {
+    "id": "world_hist_num_156",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была провозглашена доктрина Монро?",
+    "correct_answer": 1823
+  },
+  {
+    "id": "world_hist_num_157",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году начала работу первая общественная железная дорога Стоктон — Дарлингтон?",
+    "correct_answer": 1825
+  },
+  {
+    "id": "world_hist_num_158",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году открылась железная дорога Ливерпуль — Манчестер?",
+    "correct_answer": 1830
+  },
+  {
+    "id": "world_hist_num_159",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году королева Виктория вступила на британский престол?",
+    "correct_answer": 1837
+  },
+  {
+    "id": "world_hist_num_160",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году начались революции, известные как «Весна народов»?",
+    "correct_answer": 1848
+  },
+  {
+    "id": "world_hist_num_161",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был опубликован «Манифест Коммунистической партии» Маркса и Энгельса?",
+    "correct_answer": 1848
+  },
+  {
+    "id": "world_hist_num_162",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году коммодор Мэтью Перри прибыл в Японию с «чёрными кораблями»?",
+    "correct_answer": 1853
+  },
+  {
+    "id": "world_hist_num_163",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началось восстание сипаев в Индии?",
+    "correct_answer": 1857
+  },
+  {
+    "id": "world_hist_num_164",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Чарльз Дарвин опубликовал «Происхождение видов»?",
+    "correct_answer": 1859
+  },
+  {
+    "id": "world_hist_num_165",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году было провозглашено Королевство Италия?",
+    "correct_answer": 1861
+  },
+  {
+    "id": "world_hist_num_166",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Гражданская война в США?",
+    "correct_answer": 1861
+  },
+  {
+    "id": "world_hist_num_167",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась Гражданская война в США?",
+    "correct_answer": 1865
+  },
+  {
+    "id": "world_hist_num_168",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет продолжалась Гражданская война в США по датировке 1861–1865?",
+    "correct_answer": 4
+  },
+  {
+    "id": "world_hist_num_169",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году вступила в силу Прокламация об освобождении рабов в США?",
+    "correct_answer": 1863
+  },
+  {
+    "id": "world_hist_num_170",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была принята Тринадцатая поправка к Конституции США, отменившая рабство?",
+    "correct_answer": 1865
+  },
+  {
+    "id": "world_hist_num_171",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Реставрация Мэйдзи в Японии?",
+    "correct_answer": 1868
+  },
+  {
+    "id": "world_hist_num_172",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была открыта периодическая система элементов Менделеева?",
+    "correct_answer": 1869
+  },
+  {
+    "id": "world_hist_num_173",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Франко-прусская война?",
+    "correct_answer": 1870
+  },
+  {
+    "id": "world_hist_num_174",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была провозглашена Германская империя?",
+    "correct_answer": 1871
+  },
+  {
+    "id": "world_hist_num_175",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Александр Грэм Белл получил американский патент на телефон?",
+    "correct_answer": 1876
+  },
+  {
+    "id": "world_hist_num_176",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Томас Эдисон продемонстрировал практичную лампу накаливания с длительным сроком работы?",
+    "correct_answer": 1879
+  },
+  {
+    "id": "world_hist_num_177",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Берлинская конференция по вопросам колониального раздела Африки?",
+    "correct_answer": 1884
+  },
+  {
+    "id": "world_hist_num_178",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась Берлинская конференция?",
+    "correct_answer": 1885
+  },
+  {
+    "id": "world_hist_num_179",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Луи Пастер успешно применил вакцину против бешенства к человеку?",
+    "correct_answer": 1885
+  },
+  {
+    "id": "world_hist_num_180",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году было создано Свободное государство Конго под личной властью Леопольда II?",
+    "correct_answer": 1885
+  },
+  {
+    "id": "world_hist_num_181",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году состоялась битва при Адуа, где Эфиопия победила Италию?",
+    "correct_answer": 1896
+  },
+  {
+    "id": "world_hist_num_182",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Вильгельм Рентген открыл рентгеновские лучи?",
+    "correct_answer": 1895
+  },
+  {
+    "id": "world_hist_num_183",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году состоялись первые Олимпийские игры современности в Афинах?",
+    "correct_answer": 1896
+  },
+  {
+    "id": "world_hist_num_184",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Испано-американская война?",
+    "correct_answer": 1898
+  },
+  {
+    "id": "world_hist_num_185",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году закончилась Испано-американская война?",
+    "correct_answer": 1898
+  },
+  {
+    "id": "world_hist_num_186",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась англо-бурская война в Южной Африке?",
+    "correct_answer": 1899
+  },
+  {
+    "id": "world_hist_num_187",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась англо-бурская война?",
+    "correct_answer": 1902
+  },
+  {
+    "id": "world_hist_num_188",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет продолжалась англо-бурская война по датировке 1899–1902?",
+    "correct_answer": 3
+  },
+  {
+    "id": "world_hist_num_189",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году братья Райт совершили первый управляемый полёт на самолёте с двигателем?",
+    "correct_answer": 1903
+  },
+  {
+    "id": "world_hist_num_190",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Русско-японская война?",
+    "correct_answer": 1904
+  },
+  {
+    "id": "world_hist_num_191",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась Русско-японская война?",
+    "correct_answer": 1905
+  },
+  {
+    "id": "world_hist_num_192",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Альберт Эйнштейн опубликовал работы своего «года чудес»?",
+    "correct_answer": 1905
+  },
+  {
+    "id": "world_hist_num_193",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошло землетрясение в Сан-Франциско, ставшее одним из крупнейших бедствий в истории США?",
+    "correct_answer": 1906
+  },
+  {
+    "id": "world_hist_num_194",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была основана компания Ford Motor Company?",
+    "correct_answer": 1903
+  },
+  {
+    "id": "world_hist_num_195",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Ford начал производство модели T?",
+    "correct_answer": 1908
+  },
+  {
+    "id": "world_hist_num_196",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Мексиканская революция?",
+    "correct_answer": 1910
+  },
+  {
+    "id": "world_hist_num_197",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Китайская революция свергла династию Цин?",
+    "correct_answer": 1911
+  },
+  {
+    "id": "world_hist_num_198",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году затонул пассажирский лайнер «Титаник»?",
+    "correct_answer": 1912
+  },
+  {
+    "id": "world_hist_num_199",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько олимпийских колец изображено на символе Олимпийского движения?",
+    "correct_answer": 5
+  },
+  {
+    "id": "world_hist_num_200",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был открыт Панамский канал для регулярного движения судов?",
+    "correct_answer": 1914
+  },
+  {
+    "id": "world_hist_num_201",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году убийство Франца Фердинанда в Сараево стало поводом к Первой мировой войне?",
+    "correct_answer": 1914
+  },
+  {
+    "id": "world_hist_num_202",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Первая мировая война?",
+    "correct_answer": 1914
+  },
+  {
+    "id": "world_hist_num_203",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Италия вступила в Первую мировую войну на стороне Антанты?",
+    "correct_answer": 1915
+  },
+  {
+    "id": "world_hist_num_204",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла битва при Вердене?",
+    "correct_answer": 1916
+  },
+  {
+    "id": "world_hist_num_205",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась битва на Сомме?",
+    "correct_answer": 1916
+  },
+  {
+    "id": "world_hist_num_206",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году США вступили в Первую мировую войну?",
+    "correct_answer": 1917
+  },
+  {
+    "id": "world_hist_num_207",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году было подписано Компьенское перемирие, завершившее боевые действия Первой мировой войны?",
+    "correct_answer": 1918
+  },
+  {
+    "id": "world_hist_num_208",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет продолжалась Первая мировая война по датировке 1914–1918?",
+    "correct_answer": 4
+  },
+  {
+    "id": "world_hist_num_209",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был подписан Версальский договор с Германией?",
+    "correct_answer": 1919
+  },
+  {
+    "id": "world_hist_num_210",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году начала работу Лига Наций?",
+    "correct_answer": 1920
+  },
+  {
+    "id": "world_hist_num_211",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошёл «Поход на Рим» Бенито Муссолини?",
+    "correct_answer": 1922
+  },
+  {
+    "id": "world_hist_num_212",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была провозглашена Турецкая Республика?",
+    "correct_answer": 1923
+  },
+  {
+    "id": "world_hist_num_213",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошёл биржевой крах на Уолл-стрит, ставший символическим началом Великой депрессии?",
+    "correct_answer": 1929
+  },
+  {
+    "id": "world_hist_num_214",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Адольф Гитлер стал рейхсканцлером Германии?",
+    "correct_answer": 1933
+  },
+  {
+    "id": "world_hist_num_215",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году в Германии были приняты Нюрнбергские расовые законы?",
+    "correct_answer": 1935
+  },
+  {
+    "id": "world_hist_num_216",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Гражданская война в Испании?",
+    "correct_answer": 1936
+  },
+  {
+    "id": "world_hist_num_217",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась Гражданская война в Испании?",
+    "correct_answer": 1939
+  },
+  {
+    "id": "world_hist_num_218",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет продолжалась Гражданская война в Испании по датировке 1936–1939?",
+    "correct_answer": 3
+  },
+  {
+    "id": "world_hist_num_219",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошёл аншлюс Австрии Германией?",
+    "correct_answer": 1938
+  },
+  {
+    "id": "world_hist_num_220",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году было заключено Мюнхенское соглашение?",
+    "correct_answer": 1938
+  },
+  {
+    "id": "world_hist_num_221",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Германия напала на Польшу, начав Вторую мировую войну в Европе?",
+    "correct_answer": 1939
+  },
+  {
+    "id": "world_hist_num_222",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Германия вторглась во Францию и страны Бенилюкса?",
+    "correct_answer": 1940
+  },
+  {
+    "id": "world_hist_num_223",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла эвакуация союзных войск из Дюнкерка?",
+    "correct_answer": 1940
+  },
+  {
+    "id": "world_hist_num_224",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла Битва за Британию?",
+    "correct_answer": 1940
+  },
+  {
+    "id": "world_hist_num_225",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Германия напала на СССР?",
+    "correct_answer": 1941
+  },
+  {
+    "id": "world_hist_num_226",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Япония атаковала Пёрл-Харбор?",
+    "correct_answer": 1941
+  },
+  {
+    "id": "world_hist_num_227",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году состоялась Ванзейская конференция?",
+    "correct_answer": 1942
+  },
+  {
+    "id": "world_hist_num_228",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла битва при Мидуэе?",
+    "correct_answer": 1942
+  },
+  {
+    "id": "world_hist_num_229",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году союзники высадились в Северной Африке в ходе операции «Торч»?",
+    "correct_answer": 1942
+  },
+  {
+    "id": "world_hist_num_230",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла вторая битва при Эль-Аламейне?",
+    "correct_answer": 1942
+  },
+  {
+    "id": "world_hist_num_231",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Италия подписала перемирие с союзниками?",
+    "correct_answer": 1943
+  },
+  {
+    "id": "world_hist_num_232",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году состоялась Тегеранская конференция?",
+    "correct_answer": 1943
+  },
+  {
+    "id": "world_hist_num_233",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году союзники высадились в Нормандии?",
+    "correct_answer": 1944
+  },
+  {
+    "id": "world_hist_num_234",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько основных участков высадки было у союзников в Нормандии в день D?",
+    "correct_answer": 5
+  },
+  {
+    "id": "world_hist_num_235",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году состоялась Ялтинская конференция?",
+    "correct_answer": 1945
+  },
+  {
+    "id": "world_hist_num_236",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Германия капитулировала перед союзниками?",
+    "correct_answer": 1945
+  },
+  {
+    "id": "world_hist_num_237",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году США сбросили атомную бомбу на Хиросиму?",
+    "correct_answer": 1945
+  },
+  {
+    "id": "world_hist_num_238",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году США сбросили атомную бомбу на Нагасаки?",
+    "correct_answer": 1945
+  },
+  {
+    "id": "world_hist_num_239",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Япония подписала акт о капитуляции?",
+    "correct_answer": 1945
+  },
+  {
+    "id": "world_hist_num_240",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась Вторая мировая война?",
+    "correct_answer": 1945
+  },
+  {
+    "id": "world_hist_num_241",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет продолжалась Вторая мировая война по датировке 1939–1945?",
+    "correct_answer": 6
+  },
+  {
+    "id": "world_hist_num_242",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была основана Организация Объединённых Наций?",
+    "correct_answer": 1945
+  },
+  {
+    "id": "world_hist_num_243",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько государств были первоначальными членами ООН в 1945 году?",
+    "correct_answer": 51
+  },
+  {
+    "id": "world_hist_num_244",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько стран подписали Устав ООН на конференции в Сан-Франциско 26 июня 1945 года?",
+    "correct_answer": 50
+  },
+  {
+    "id": "world_hist_num_245",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году начался Нюрнбергский процесс над главными нацистскими преступниками?",
+    "correct_answer": 1945
+  },
+  {
+    "id": "world_hist_num_246",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершился Нюрнбергский процесс над главными нацистскими преступниками?",
+    "correct_answer": 1946
+  },
+  {
+    "id": "world_hist_num_247",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году прошла Бреттон-Вудская конференция?",
+    "correct_answer": 1944
+  },
+  {
+    "id": "world_hist_num_248",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько стран были представлены на Бреттон-Вудской конференции 1944 года?",
+    "correct_answer": 44
+  },
+  {
+    "id": "world_hist_num_249",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году были учреждены Международный валютный фонд и Международный банк реконструкции и развития соглашениями Бреттон-Вудской конференции?",
+    "correct_answer": 1944
+  },
+  {
+    "id": "world_hist_num_250",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Международный валютный фонд начал финансовые операции?",
+    "correct_answer": 1947
+  },
+  {
+    "id": "world_hist_num_251",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Индия получила независимость от Великобритании?",
+    "correct_answer": 1947
+  },
+  {
+    "id": "world_hist_num_252",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был создан Пакистан как независимое государство?",
+    "correct_answer": 1947
+  },
+  {
+    "id": "world_hist_num_253",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько независимых доминионов возникло в результате раздела Британской Индии в 1947 году?",
+    "correct_answer": 2
+  },
+  {
+    "id": "world_hist_num_254",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году было провозглашено государство Израиль?",
+    "correct_answer": 1948
+  },
+  {
+    "id": "world_hist_num_255",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Берлинская блокада западных секторов города?",
+    "correct_answer": 1948
+  },
+  {
+    "id": "world_hist_num_256",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была создана НАТО?",
+    "correct_answer": 1949
+  },
+  {
+    "id": "world_hist_num_257",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько государств стали учредителями НАТО в 1949 году?",
+    "correct_answer": 12
+  },
+  {
+    "id": "world_hist_num_258",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько статей содержит Североатлантический договор 1949 года?",
+    "correct_answer": 14
+  },
+  {
+    "id": "world_hist_num_259",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была провозглашена Китайская Народная Республика?",
+    "correct_answer": 1949
+  },
+  {
+    "id": "world_hist_num_260",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась Корейская война?",
+    "correct_answer": 1950
+  },
+  {
+    "id": "world_hist_num_261",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась Корейская война перемирием?",
+    "correct_answer": 1953
+  },
+  {
+    "id": "world_hist_num_262",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет продолжалась Корейская война по датировке 1950–1953?",
+    "correct_answer": 3
+  },
+  {
+    "id": "world_hist_num_263",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был подписан Парижский договор о создании Европейского объединения угля и стали?",
+    "correct_answer": 1951
+  },
+  {
+    "id": "world_hist_num_264",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько стран основали Европейское объединение угля и стали?",
+    "correct_answer": 6
+  },
+  {
+    "id": "world_hist_num_265",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году умер Иосиф Сталин?",
+    "correct_answer": 1953
+  },
+  {
+    "id": "world_hist_num_266",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошло восстание в Венгрии против коммунистического режима?",
+    "correct_answer": 1956
+  },
+  {
+    "id": "world_hist_num_267",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошёл Суэцкий кризис?",
+    "correct_answer": 1956
+  },
+  {
+    "id": "world_hist_num_268",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году были подписаны Римские договоры о создании ЕЭС и Евратома?",
+    "correct_answer": 1957
+  },
+  {
+    "id": "world_hist_num_269",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько стран подписали Римские договоры 1957 года как государства-основатели?",
+    "correct_answer": 6
+  },
+  {
+    "id": "world_hist_num_270",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был запущен первый искусственный спутник Земли?",
+    "correct_answer": 1957
+  },
+  {
+    "id": "world_hist_num_271",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла Кубинская революция и к власти пришёл Фидель Кастро?",
+    "correct_answer": 1959
+  },
+  {
+    "id": "world_hist_num_272",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Юрий Гагарин стал первым человеком в космосе?",
+    "correct_answer": 1961
+  },
+  {
+    "id": "world_hist_num_273",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году была построена Берлинская стена?",
+    "correct_answer": 1961
+  },
+  {
+    "id": "world_hist_num_274",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошёл Карибский кризис?",
+    "correct_answer": 1962
+  },
+  {
+    "id": "world_hist_num_275",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько дней обычно называют продолжительностью наиболее острой фазы Карибского кризиса?",
+    "correct_answer": 13
+  },
+  {
+    "id": "world_hist_num_276",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был подписан Договор о запрещении ядерных испытаний в атмосфере, космосе и под водой?",
+    "correct_answer": 1963
+  },
+  {
+    "id": "world_hist_num_277",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Мартин Лютер Кинг произнёс речь «У меня есть мечта» в Вашингтоне?",
+    "correct_answer": 1963
+  },
+  {
+    "id": "world_hist_num_278",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году США приняли Закон о гражданских правах, запретивший расовую сегрегацию в общественных местах?",
+    "correct_answer": 1964
+  },
+  {
+    "id": "world_hist_num_279",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась американская крупномасштабная наземная интервенция во Вьетнаме?",
+    "correct_answer": 1965
+  },
+  {
+    "id": "world_hist_num_280",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла Шестидневная война на Ближнем Востоке?",
+    "correct_answer": 1967
+  },
+  {
+    "id": "world_hist_num_281",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году советские войска и силы Варшавского договора вошли в Чехословакию?",
+    "correct_answer": 1968
+  },
+  {
+    "id": "world_hist_num_282",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла первая высадка людей на Луну?",
+    "correct_answer": 1969
+  },
+  {
+    "id": "world_hist_num_283",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько астронавтов входило в основной экипаж Apollo 11?",
+    "correct_answer": 3
+  },
+  {
+    "id": "world_hist_num_284",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько человек ступили на поверхность Луны в рамках программы Apollo?",
+    "correct_answer": 12
+  },
+  {
+    "id": "world_hist_num_285",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась война Судного дня?",
+    "correct_answer": 1973
+  },
+  {
+    "id": "world_hist_num_286",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошёл первый нефтяной кризис, связанный с эмбарго арабских экспортёров?",
+    "correct_answer": 1973
+  },
+  {
+    "id": "world_hist_num_287",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась война во Вьетнаме падением Сайгона?",
+    "correct_answer": 1975
+  },
+  {
+    "id": "world_hist_num_288",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году умер Мао Цзэдун?",
+    "correct_answer": 1976
+  },
+  {
+    "id": "world_hist_num_289",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла Иранская революция?",
+    "correct_answer": 1979
+  },
+  {
+    "id": "world_hist_num_290",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году началась ирано-иракская война?",
+    "correct_answer": 1980
+  },
+  {
+    "id": "world_hist_num_291",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году завершилась ирано-иракская война?",
+    "correct_answer": 1988
+  },
+  {
+    "id": "world_hist_num_292",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "Сколько лет продолжалась ирано-иракская война по датировке 1980–1988?",
+    "correct_answer": 8
+  },
+  {
+    "id": "world_hist_num_293",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Михаил Горбачёв стал генеральным секретарём ЦК КПСС?",
+    "correct_answer": 1985
+  },
+  {
+    "id": "world_hist_num_294",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году произошла авария на Чернобыльской АЭС?",
+    "correct_answer": 1986
+  },
+  {
+    "id": "world_hist_num_295",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году пала Берлинская стена?",
+    "correct_answer": 1989
+  },
+  {
+    "id": "world_hist_num_296",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Германия была объединена после разделения на ФРГ и ГДР?",
+    "correct_answer": 1990
+  },
+  {
+    "id": "world_hist_num_297",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году прекратил существование Советский Союз?",
+    "correct_answer": 1991
+  },
+  {
+    "id": "world_hist_num_298",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году был подписан Маастрихтский договор?",
+    "correct_answer": 1992
+  },
+  {
+    "id": "world_hist_num_299",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Маастрихтский договор вступил в силу и Европейский союз официально начал существование?",
+    "correct_answer": 1993
+  },
+  {
+    "id": "world_hist_num_300",
+    "category": "Мировая история",
+    "type": "numeric",
+    "question": "В каком году Нельсон Мандела стал первым чернокожим президентом Южно-Африканской Республики?",
+    "correct_answer": 1994
+  }
+]

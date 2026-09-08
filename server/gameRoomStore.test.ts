@@ -2,6 +2,17 @@ import { describe, expect, it, vi } from 'vitest'
 import { GameRoomStore } from './gameRoomStore'
 import type { TelegramUser } from '../shared/multiplayer'
 
+// Game mechanics use a deterministic fixture, independent of the installed content bank.
+vi.mock('node:fs', async () => {
+  const actual = await vi.importActual<typeof import('node:fs')>('node:fs')
+  const fixture = JSON.stringify([{ category: 'Тест', type: 'multiple', question: 'Два плюс два?', correct_answer: '4', answers: ['4', '3', '5', '6'] }])
+  return { ...actual, default: { ...actual,
+    existsSync: (path: string) => String(path).endsWith('question_bank') || actual.existsSync(path),
+    readdirSync: (path: string) => String(path).endsWith('question_bank') ? ['my_game_question1.json'] : actual.readdirSync(path),
+    readFileSync: (path: string, encoding: BufferEncoding) => String(path).endsWith('my_game_question1.json') ? fixture : actual.readFileSync(path, encoding),
+  } }
+})
+
 function user(id: number): TelegramUser {
   return { id, first_name: `Player ${id}` }
 }

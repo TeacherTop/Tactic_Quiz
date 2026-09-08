@@ -1,0 +1,3602 @@
+[
+  {
+    "id": "tech_001",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как расшифровывается аббревиатура CPU?",
+    "correct_answer": "Central Processing Unit",
+    "incorrect_answers": [
+      "Central Program Utility",
+      "Computer Processing User",
+      "Core Performance Unit"
+    ],
+    "answers": [
+      "Central Processing Unit",
+      "Central Program Utility",
+      "Computer Processing User",
+      "Core Performance Unit"
+    ]
+  },
+  {
+    "id": "tech_002",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется основная оперативная память компьютера, данные в которой обычно теряются после выключения питания?",
+    "correct_answer": "RAM",
+    "incorrect_answers": [
+      "ROM",
+      "SSD",
+      "HDD"
+    ],
+    "answers": [
+      "RAM",
+      "ROM",
+      "SSD",
+      "HDD"
+    ]
+  },
+  {
+    "id": "tech_003",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется энергонезависимая память, в которой может храниться прошивка устройства?",
+    "correct_answer": "ROM",
+    "incorrect_answers": [
+      "RAM",
+      "Cache",
+      "VRAM"
+    ],
+    "answers": [
+      "ROM",
+      "RAM",
+      "Cache",
+      "VRAM"
+    ]
+  },
+  {
+    "id": "tech_004",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой компонент компьютера в первую очередь отвечает за обработку графики?",
+    "correct_answer": "GPU",
+    "incorrect_answers": [
+      "CPU",
+      "RAM",
+      "SSD"
+    ],
+    "answers": [
+      "GPU",
+      "CPU",
+      "RAM",
+      "SSD"
+    ]
+  },
+  {
+    "id": "tech_005",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется высокоскоростная память внутри или рядом с процессором, используемая для ускорения доступа к данным?",
+    "correct_answer": "Кэш",
+    "incorrect_answers": [
+      "ROM",
+      "Swap",
+      "Буфер обмена"
+    ],
+    "answers": [
+      "Кэш",
+      "ROM",
+      "Swap",
+      "Буфер обмена"
+    ]
+  },
+  {
+    "id": "tech_006",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется накопитель без движущихся механических частей, использующий флеш-память?",
+    "correct_answer": "SSD",
+    "incorrect_answers": [
+      "HDD",
+      "DVD",
+      "LTO"
+    ],
+    "answers": [
+      "SSD",
+      "HDD",
+      "DVD",
+      "LTO"
+    ]
+  },
+  {
+    "id": "tech_007",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется традиционный жёсткий диск с вращающимися магнитными пластинами?",
+    "correct_answer": "HDD",
+    "incorrect_answers": [
+      "SSD",
+      "NVMe",
+      "RAM"
+    ],
+    "answers": [
+      "HDD",
+      "SSD",
+      "NVMe",
+      "RAM"
+    ]
+  },
+  {
+    "id": "tech_008",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой интерфейс обычно используется современными NVMe-накопителями?",
+    "correct_answer": "PCI Express",
+    "incorrect_answers": [
+      "SATA",
+      "USB 2.0",
+      "VGA"
+    ],
+    "answers": [
+      "PCI Express",
+      "SATA",
+      "USB 2.0",
+      "VGA"
+    ]
+  },
+  {
+    "id": "tech_009",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется стандарт беспроводной локальной сети, обычно используемый для подключения к интернету дома?",
+    "correct_answer": "Wi‑Fi",
+    "incorrect_answers": [
+      "Bluetooth",
+      "NFC",
+      "GPS"
+    ],
+    "answers": [
+      "Wi‑Fi",
+      "Bluetooth",
+      "NFC",
+      "GPS"
+    ]
+  },
+  {
+    "id": "tech_010",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология беспроводной связи малого радиуса действия, широко используемая для наушников и периферии?",
+    "correct_answer": "Bluetooth",
+    "incorrect_answers": [
+      "Wi‑Fi",
+      "NFC",
+      "LTE"
+    ],
+    "answers": [
+      "Bluetooth",
+      "Wi‑Fi",
+      "NFC",
+      "LTE"
+    ]
+  },
+  {
+    "id": "tech_011",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология бесконтактной связи на очень коротком расстоянии, используемая в том числе для платежей?",
+    "correct_answer": "NFC",
+    "incorrect_answers": [
+      "Bluetooth",
+      "GPS",
+      "Infrared"
+    ],
+    "answers": [
+      "NFC",
+      "Bluetooth",
+      "GPS",
+      "Infrared"
+    ]
+  },
+  {
+    "id": "tech_012",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой порт чаще всего используется для современных универсальных проводных подключений и зарядки смартфонов?",
+    "correct_answer": "USB-C",
+    "incorrect_answers": [
+      "VGA",
+      "PS/2",
+      "RJ-11"
+    ],
+    "answers": [
+      "USB-C",
+      "VGA",
+      "PS/2",
+      "RJ-11"
+    ]
+  },
+  {
+    "id": "tech_013",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется стандарт цифрового интерфейса для передачи видео и звука на телевизоры и мониторы?",
+    "correct_answer": "HDMI",
+    "incorrect_answers": [
+      "VGA",
+      "PS/2",
+      "SATA"
+    ],
+    "answers": [
+      "HDMI",
+      "VGA",
+      "PS/2",
+      "SATA"
+    ]
+  },
+  {
+    "id": "tech_014",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется разъём, чаще всего используемый для проводного Ethernet-подключения?",
+    "correct_answer": "RJ-45",
+    "incorrect_answers": [
+      "USB-A",
+      "RJ-11",
+      "DisplayPort"
+    ],
+    "answers": [
+      "RJ-45",
+      "USB-A",
+      "RJ-11",
+      "DisplayPort"
+    ]
+  },
+  {
+    "id": "tech_015",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология мобильной связи пятого поколения?",
+    "correct_answer": "5G",
+    "incorrect_answers": [
+      "LTE",
+      "3G",
+      "EDGE"
+    ],
+    "answers": [
+      "5G",
+      "LTE",
+      "3G",
+      "EDGE"
+    ]
+  },
+  {
+    "id": "tech_016",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется система спутниковой навигации, разработанная США?",
+    "correct_answer": "GPS",
+    "incorrect_answers": [
+      "ГЛОНАСС",
+      "Galileo",
+      "BeiDou"
+    ],
+    "answers": [
+      "GPS",
+      "ГЛОНАСС",
+      "Galileo",
+      "BeiDou"
+    ]
+  },
+  {
+    "id": "tech_017",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется европейская глобальная спутниковая навигационная система?",
+    "correct_answer": "Galileo",
+    "incorrect_answers": [
+      "GPS",
+      "ГЛОНАСС",
+      "BeiDou"
+    ],
+    "answers": [
+      "Galileo",
+      "GPS",
+      "ГЛОНАСС",
+      "BeiDou"
+    ]
+  },
+  {
+    "id": "tech_018",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется российская глобальная спутниковая навигационная система?",
+    "correct_answer": "ГЛОНАСС",
+    "incorrect_answers": [
+      "GPS",
+      "Galileo",
+      "BeiDou"
+    ],
+    "answers": [
+      "ГЛОНАСС",
+      "GPS",
+      "Galileo",
+      "BeiDou"
+    ]
+  },
+  {
+    "id": "tech_019",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой протокол используется для передачи веб-страниц между браузером и сервером?",
+    "correct_answer": "HTTP",
+    "incorrect_answers": [
+      "FTP",
+      "SMTP",
+      "SSH"
+    ],
+    "answers": [
+      "HTTP",
+      "FTP",
+      "SMTP",
+      "SSH"
+    ]
+  },
+  {
+    "id": "tech_020",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется защищённая версия HTTP с шифрованием?",
+    "correct_answer": "HTTPS",
+    "incorrect_answers": [
+      "HTTPX",
+      "SFTP",
+      "HTTS"
+    ],
+    "answers": [
+      "HTTPS",
+      "HTTPX",
+      "SFTP",
+      "HTTS"
+    ]
+  },
+  {
+    "id": "tech_021",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой протокол обычно используется для отправки электронной почты между серверами?",
+    "correct_answer": "SMTP",
+    "incorrect_answers": [
+      "IMAP",
+      "POP3",
+      "FTP"
+    ],
+    "answers": [
+      "SMTP",
+      "IMAP",
+      "POP3",
+      "FTP"
+    ]
+  },
+  {
+    "id": "tech_022",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой протокол позволяет клиенту синхронизировать почту с сервером, сохраняя письма на сервере?",
+    "correct_answer": "IMAP",
+    "incorrect_answers": [
+      "SMTP",
+      "FTP",
+      "Telnet"
+    ],
+    "answers": [
+      "IMAP",
+      "SMTP",
+      "FTP",
+      "Telnet"
+    ]
+  },
+  {
+    "id": "tech_023",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой протокол традиционно использовался для загрузки файлов с удалённого сервера?",
+    "correct_answer": "FTP",
+    "incorrect_answers": [
+      "HTTP",
+      "SMTP",
+      "DNS"
+    ],
+    "answers": [
+      "FTP",
+      "HTTP",
+      "SMTP",
+      "DNS"
+    ]
+  },
+  {
+    "id": "tech_024",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой протокол обычно используется для безопасного удалённого доступа к командной строке сервера?",
+    "correct_answer": "SSH",
+    "incorrect_answers": [
+      "Telnet",
+      "FTP",
+      "SMTP"
+    ],
+    "answers": [
+      "SSH",
+      "Telnet",
+      "FTP",
+      "SMTP"
+    ]
+  },
+  {
+    "id": "tech_025",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какая система преобразует доменные имена вроде example.com в IP-адреса?",
+    "correct_answer": "DNS",
+    "incorrect_answers": [
+      "DHCP",
+      "HTTP",
+      "ARP"
+    ],
+    "answers": [
+      "DNS",
+      "DHCP",
+      "HTTP",
+      "ARP"
+    ]
+  },
+  {
+    "id": "tech_026",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется уникальный сетевой адрес устройства в IP-сети?",
+    "correct_answer": "IP-адрес",
+    "incorrect_answers": [
+      "MAC-адрес",
+      "URL",
+      "SSID"
+    ],
+    "answers": [
+      "IP-адрес",
+      "MAC-адрес",
+      "URL",
+      "SSID"
+    ]
+  },
+  {
+    "id": "tech_027",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется аппаратный адрес сетевого интерфейса?",
+    "correct_answer": "MAC-адрес",
+    "incorrect_answers": [
+      "IP-адрес",
+      "URL",
+      "DNS"
+    ],
+    "answers": [
+      "MAC-адрес",
+      "IP-адрес",
+      "URL",
+      "DNS"
+    ]
+  },
+  {
+    "id": "tech_028",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, соединяющее разные сети и направляющее пакеты между ними?",
+    "correct_answer": "Маршрутизатор",
+    "incorrect_answers": [
+      "Коммутатор",
+      "Модем",
+      "Репитер"
+    ],
+    "answers": [
+      "Маршрутизатор",
+      "Коммутатор",
+      "Модем",
+      "Репитер"
+    ]
+  },
+  {
+    "id": "tech_029",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, соединяющее устройства внутри одной локальной сети на канальном уровне?",
+    "correct_answer": "Коммутатор",
+    "incorrect_answers": [
+      "Маршрутизатор",
+      "Модем",
+      "Точка доступа"
+    ],
+    "answers": [
+      "Коммутатор",
+      "Маршрутизатор",
+      "Модем",
+      "Точка доступа"
+    ]
+  },
+  {
+    "id": "tech_030",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, преобразующее сигнал провайдера для подключения домашней сети к интернету?",
+    "correct_answer": "Модем",
+    "incorrect_answers": [
+      "Коммутатор",
+      "Репитер",
+      "NAS"
+    ],
+    "answers": [
+      "Модем",
+      "Коммутатор",
+      "Репитер",
+      "NAS"
+    ]
+  },
+  {
+    "id": "tech_031",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется беспроводная сеть, имя которой пользователь видит при подключении к Wi‑Fi?",
+    "correct_answer": "SSID",
+    "incorrect_answers": [
+      "BSSID",
+      "DNS",
+      "VLAN"
+    ],
+    "answers": [
+      "SSID",
+      "BSSID",
+      "DNS",
+      "VLAN"
+    ]
+  },
+  {
+    "id": "tech_032",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология, позволяющая логически разделять одну физическую сеть на несколько изолированных сетей?",
+    "correct_answer": "VLAN",
+    "incorrect_answers": [
+      "VPN",
+      "NAT",
+      "DNS"
+    ],
+    "answers": [
+      "VLAN",
+      "VPN",
+      "NAT",
+      "DNS"
+    ]
+  },
+  {
+    "id": "tech_033",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология, позволяющая создавать зашифрованное соединение поверх публичной сети?",
+    "correct_answer": "VPN",
+    "incorrect_answers": [
+      "VLAN",
+      "NAT",
+      "CDN"
+    ],
+    "answers": [
+      "VPN",
+      "VLAN",
+      "NAT",
+      "CDN"
+    ]
+  },
+  {
+    "id": "tech_034",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется механизм преобразования частных IP-адресов локальной сети в публичный адрес?",
+    "correct_answer": "NAT",
+    "incorrect_answers": [
+      "DNS",
+      "DHCP",
+      "ARP"
+    ],
+    "answers": [
+      "NAT",
+      "DNS",
+      "DHCP",
+      "ARP"
+    ]
+  },
+  {
+    "id": "tech_035",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой протокол автоматически выдаёт устройствам IP-адреса в локальной сети?",
+    "correct_answer": "DHCP",
+    "incorrect_answers": [
+      "DNS",
+      "ARP",
+      "ICMP"
+    ],
+    "answers": [
+      "DHCP",
+      "DNS",
+      "ARP",
+      "ICMP"
+    ]
+  },
+  {
+    "id": "tech_036",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется сеть доставки контента, распределяющая копии данных по серверам ближе к пользователям?",
+    "correct_answer": "CDN",
+    "incorrect_answers": [
+      "VPN",
+      "LAN",
+      "SAN"
+    ],
+    "answers": [
+      "CDN",
+      "VPN",
+      "LAN",
+      "SAN"
+    ]
+  },
+  {
+    "id": "tech_037",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется адрес веб-ресурса в интернете?",
+    "correct_answer": "URL",
+    "incorrect_answers": [
+      "IP",
+      "DNS",
+      "HTML"
+    ],
+    "answers": [
+      "URL",
+      "IP",
+      "DNS",
+      "HTML"
+    ]
+  },
+  {
+    "id": "tech_038",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется язык разметки, используемый для структуры веб-страниц?",
+    "correct_answer": "HTML",
+    "incorrect_answers": [
+      "CSS",
+      "JavaScript",
+      "SQL"
+    ],
+    "answers": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "SQL"
+    ]
+  },
+  {
+    "id": "tech_039",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется язык стилей, используемый для оформления веб-страниц?",
+    "correct_answer": "CSS",
+    "incorrect_answers": [
+      "HTML",
+      "Java",
+      "XML"
+    ],
+    "answers": [
+      "CSS",
+      "HTML",
+      "Java",
+      "XML"
+    ]
+  },
+  {
+    "id": "tech_040",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой язык программирования выполняется в браузере и широко используется для интерактивности веб-страниц?",
+    "correct_answer": "JavaScript",
+    "incorrect_answers": [
+      "Java",
+      "C",
+      "SQL"
+    ],
+    "answers": [
+      "JavaScript",
+      "Java",
+      "C",
+      "SQL"
+    ]
+  },
+  {
+    "id": "tech_041",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой язык программирования особенно популярен в анализе данных, машинном обучении и автоматизации?",
+    "correct_answer": "Python",
+    "incorrect_answers": [
+      "HTML",
+      "CSS",
+      "SQL"
+    ],
+    "answers": [
+      "Python",
+      "HTML",
+      "CSS",
+      "SQL"
+    ]
+  },
+  {
+    "id": "tech_042",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой язык программирования был создан Джеймсом Гослингом и стал основой платформы JVM?",
+    "correct_answer": "Java",
+    "incorrect_answers": [
+      "C#",
+      "Kotlin",
+      "Scala"
+    ],
+    "answers": [
+      "Java",
+      "C#",
+      "Kotlin",
+      "Scala"
+    ]
+  },
+  {
+    "id": "tech_043",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой язык программирования разработан Microsoft и тесно связан с платформой .NET?",
+    "correct_answer": "C#",
+    "incorrect_answers": [
+      "Java",
+      "Go",
+      "Swift"
+    ],
+    "answers": [
+      "C#",
+      "Java",
+      "Go",
+      "Swift"
+    ]
+  },
+  {
+    "id": "tech_044",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой язык программирования был создан в Google и известен простотой и удобством для сетевых сервисов?",
+    "correct_answer": "Go",
+    "incorrect_answers": [
+      "Rust",
+      "Ruby",
+      "Lua"
+    ],
+    "answers": [
+      "Go",
+      "Rust",
+      "Ruby",
+      "Lua"
+    ]
+  },
+  {
+    "id": "tech_045",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой язык программирования разработан Mozilla и делает акцент на безопасности памяти?",
+    "correct_answer": "Rust",
+    "incorrect_answers": [
+      "C",
+      "Go",
+      "Ruby"
+    ],
+    "answers": [
+      "Rust",
+      "C",
+      "Go",
+      "Ruby"
+    ]
+  },
+  {
+    "id": "tech_046",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой язык используется Apple как основной современный язык разработки под iOS и macOS?",
+    "correct_answer": "Swift",
+    "incorrect_answers": [
+      "Kotlin",
+      "Objective-C",
+      "Dart"
+    ],
+    "answers": [
+      "Swift",
+      "Kotlin",
+      "Objective-C",
+      "Dart"
+    ]
+  },
+  {
+    "id": "tech_047",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой язык является официально поддерживаемым языком разработки Android наряду с Java?",
+    "correct_answer": "Kotlin",
+    "incorrect_answers": [
+      "Swift",
+      "Ruby",
+      "PHP"
+    ],
+    "answers": [
+      "Kotlin",
+      "Swift",
+      "Ruby",
+      "PHP"
+    ]
+  },
+  {
+    "id": "tech_048",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой язык программирования лежит в основе многих операционных систем и системного программного обеспечения?",
+    "correct_answer": "C",
+    "incorrect_answers": [
+      "HTML",
+      "SQL",
+      "R"
+    ],
+    "answers": [
+      "C",
+      "HTML",
+      "SQL",
+      "R"
+    ]
+  },
+  {
+    "id": "tech_049",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой язык программирования является развитием C с поддержкой объектно-ориентированного программирования?",
+    "correct_answer": "C++",
+    "incorrect_answers": [
+      "C#",
+      "Pascal",
+      "Fortran"
+    ],
+    "answers": [
+      "C++",
+      "C#",
+      "Pascal",
+      "Fortran"
+    ]
+  },
+  {
+    "id": "tech_050",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой язык часто используется в статистике и анализе данных и называется одной буквой?",
+    "correct_answer": "R",
+    "incorrect_answers": [
+      "C",
+      "D",
+      "Q"
+    ],
+    "answers": [
+      "R",
+      "C",
+      "D",
+      "Q"
+    ]
+  },
+  {
+    "id": "tech_051",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется язык запросов к реляционным базам данных?",
+    "correct_answer": "SQL",
+    "incorrect_answers": [
+      "HTML",
+      "Bash",
+      "YAML"
+    ],
+    "answers": [
+      "SQL",
+      "HTML",
+      "Bash",
+      "YAML"
+    ]
+  },
+  {
+    "id": "tech_052",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется база данных, в которой данные организованы в таблицы со строками и столбцами?",
+    "correct_answer": "Реляционная база данных",
+    "incorrect_answers": [
+      "Графовая база данных",
+      "Документная база данных",
+      "Векторная база данных"
+    ],
+    "answers": [
+      "Реляционная база данных",
+      "Графовая база данных",
+      "Документная база данных",
+      "Векторная база данных"
+    ]
+  },
+  {
+    "id": "tech_053",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какая СУБД является одной из самых популярных реляционных систем с открытым исходным кодом?",
+    "correct_answer": "PostgreSQL",
+    "incorrect_answers": [
+      "MongoDB",
+      "Redis",
+      "Neo4j"
+    ],
+    "answers": [
+      "PostgreSQL",
+      "MongoDB",
+      "Redis",
+      "Neo4j"
+    ]
+  },
+  {
+    "id": "tech_054",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какая СУБД относится к документным NoSQL-базам данных?",
+    "correct_answer": "MongoDB",
+    "incorrect_answers": [
+      "PostgreSQL",
+      "MySQL",
+      "SQLite"
+    ],
+    "answers": [
+      "MongoDB",
+      "PostgreSQL",
+      "MySQL",
+      "SQLite"
+    ]
+  },
+  {
+    "id": "tech_055",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какая база данных часто используется как быстрое хранилище ключ-значение в памяти?",
+    "correct_answer": "Redis",
+    "incorrect_answers": [
+      "PostgreSQL",
+      "Neo4j",
+      "ClickHouse"
+    ],
+    "answers": [
+      "Redis",
+      "PostgreSQL",
+      "Neo4j",
+      "ClickHouse"
+    ]
+  },
+  {
+    "id": "tech_056",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какая база данных специализируется на графовых структурах и связях между сущностями?",
+    "correct_answer": "Neo4j",
+    "incorrect_answers": [
+      "MongoDB",
+      "Redis",
+      "SQLite"
+    ],
+    "answers": [
+      "Neo4j",
+      "MongoDB",
+      "Redis",
+      "SQLite"
+    ]
+  },
+  {
+    "id": "tech_057",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется операция объединения строк из нескольких таблиц по связанным полям в SQL?",
+    "correct_answer": "JOIN",
+    "incorrect_answers": [
+      "GROUP BY",
+      "ORDER BY",
+      "UNION ALL"
+    ],
+    "answers": [
+      "JOIN",
+      "GROUP BY",
+      "ORDER BY",
+      "UNION ALL"
+    ]
+  },
+  {
+    "id": "tech_058",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется SQL-операция фильтрации строк по условию?",
+    "correct_answer": "WHERE",
+    "incorrect_answers": [
+      "HAVING",
+      "ORDER BY",
+      "LIMIT"
+    ],
+    "answers": [
+      "WHERE",
+      "HAVING",
+      "ORDER BY",
+      "LIMIT"
+    ]
+  },
+  {
+    "id": "tech_059",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется SQL-конструкция для группировки строк перед применением агрегатных функций?",
+    "correct_answer": "GROUP BY",
+    "incorrect_answers": [
+      "ORDER BY",
+      "PARTITION BY",
+      "JOIN"
+    ],
+    "answers": [
+      "GROUP BY",
+      "ORDER BY",
+      "PARTITION BY",
+      "JOIN"
+    ]
+  },
+  {
+    "id": "tech_060",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какая SQL-функция обычно считает количество строк?",
+    "correct_answer": "COUNT",
+    "incorrect_answers": [
+      "SUM",
+      "AVG",
+      "MAX"
+    ],
+    "answers": [
+      "COUNT",
+      "SUM",
+      "AVG",
+      "MAX"
+    ]
+  },
+  {
+    "id": "tech_061",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется система контроля версий, созданная Линусом Торвальдсом?",
+    "correct_answer": "Git",
+    "incorrect_answers": [
+      "Docker",
+      "SVN",
+      "Mercurial"
+    ],
+    "answers": [
+      "Git",
+      "Docker",
+      "SVN",
+      "Mercurial"
+    ]
+  },
+  {
+    "id": "tech_062",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется популярная платформа для размещения Git-репозиториев, принадлежащая Microsoft?",
+    "correct_answer": "GitHub",
+    "incorrect_answers": [
+      "GitLab",
+      "Bitbucket",
+      "SourceForge"
+    ],
+    "answers": [
+      "GitHub",
+      "GitLab",
+      "Bitbucket",
+      "SourceForge"
+    ]
+  },
+  {
+    "id": "tech_063",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какая команда Git создаёт локальную копию удалённого репозитория?",
+    "correct_answer": "git clone",
+    "incorrect_answers": [
+      "git push",
+      "git merge",
+      "git status"
+    ],
+    "answers": [
+      "git clone",
+      "git push",
+      "git merge",
+      "git status"
+    ]
+  },
+  {
+    "id": "tech_064",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какая команда Git отправляет локальные коммиты в удалённый репозиторий?",
+    "correct_answer": "git push",
+    "incorrect_answers": [
+      "git pull",
+      "git init",
+      "git diff"
+    ],
+    "answers": [
+      "git push",
+      "git pull",
+      "git init",
+      "git diff"
+    ]
+  },
+  {
+    "id": "tech_065",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется процесс объединения изменений из разных веток в Git?",
+    "correct_answer": "Merge",
+    "incorrect_answers": [
+      "Clone",
+      "Commit",
+      "Fork"
+    ],
+    "answers": [
+      "Merge",
+      "Clone",
+      "Commit",
+      "Fork"
+    ]
+  },
+  {
+    "id": "tech_066",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется изолированная линия разработки в системе контроля версий?",
+    "correct_answer": "Ветка",
+    "incorrect_answers": [
+      "Коммит",
+      "Тег",
+      "Релиз"
+    ],
+    "answers": [
+      "Ветка",
+      "Коммит",
+      "Тег",
+      "Релиз"
+    ]
+  },
+  {
+    "id": "tech_067",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется сохранённое состояние изменений в Git?",
+    "correct_answer": "Коммит",
+    "incorrect_answers": [
+      "Ветка",
+      "Fork",
+      "Issue"
+    ],
+    "answers": [
+      "Коммит",
+      "Ветка",
+      "Fork",
+      "Issue"
+    ]
+  },
+  {
+    "id": "tech_068",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология контейнеризации, популярная в DevOps?",
+    "correct_answer": "Docker",
+    "incorrect_answers": [
+      "Git",
+      "Kubernetes",
+      "Jenkins"
+    ],
+    "answers": [
+      "Docker",
+      "Git",
+      "Kubernetes",
+      "Jenkins"
+    ]
+  },
+  {
+    "id": "tech_069",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется файл, описывающий сборку Docker-образа?",
+    "correct_answer": "Dockerfile",
+    "incorrect_answers": [
+      "docker.json",
+      "compose.ini",
+      "Containerfile.yml"
+    ],
+    "answers": [
+      "Dockerfile",
+      "docker.json",
+      "compose.ini",
+      "Containerfile.yml"
+    ]
+  },
+  {
+    "id": "tech_070",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется система оркестрации контейнеров, изначально разработанная Google?",
+    "correct_answer": "Kubernetes",
+    "incorrect_answers": [
+      "Docker",
+      "Jenkins",
+      "Ansible"
+    ],
+    "answers": [
+      "Kubernetes",
+      "Docker",
+      "Jenkins",
+      "Ansible"
+    ]
+  },
+  {
+    "id": "tech_071",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется практика автоматической сборки и тестирования изменений после каждого коммита?",
+    "correct_answer": "Continuous Integration",
+    "incorrect_answers": [
+      "Continuous Deployment",
+      "Version Control",
+      "Code Review"
+    ],
+    "answers": [
+      "Continuous Integration",
+      "Continuous Deployment",
+      "Version Control",
+      "Code Review"
+    ]
+  },
+  {
+    "id": "tech_072",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как расшифровывается CI/CD?",
+    "correct_answer": "Continuous Integration / Continuous Delivery",
+    "incorrect_answers": [
+      "Code Integration / Code Delivery",
+      "Continuous Internet / Continuous Data",
+      "Central Integration / Central Deployment"
+    ],
+    "answers": [
+      "Continuous Integration / Continuous Delivery",
+      "Code Integration / Code Delivery",
+      "Continuous Internet / Continuous Data",
+      "Central Integration / Central Deployment"
+    ]
+  },
+  {
+    "id": "tech_073",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется процесс поиска и исправления ошибок в программе?",
+    "correct_answer": "Отладка",
+    "incorrect_answers": [
+      "Компиляция",
+      "Рефакторинг",
+      "Деплой"
+    ],
+    "answers": [
+      "Отладка",
+      "Компиляция",
+      "Рефакторинг",
+      "Деплой"
+    ]
+  },
+  {
+    "id": "tech_074",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется программа, переводящая исходный код целиком в машинный код или промежуточное представление до запуска?",
+    "correct_answer": "Компилятор",
+    "incorrect_answers": [
+      "Интерпретатор",
+      "Отладчик",
+      "Линтер"
+    ],
+    "answers": [
+      "Компилятор",
+      "Интерпретатор",
+      "Отладчик",
+      "Линтер"
+    ]
+  },
+  {
+    "id": "tech_075",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется программа, выполняющая исходный код по мере чтения?",
+    "correct_answer": "Интерпретатор",
+    "incorrect_answers": [
+      "Компилятор",
+      "Ассемблер",
+      "Линтер"
+    ],
+    "answers": [
+      "Интерпретатор",
+      "Компилятор",
+      "Ассемблер",
+      "Линтер"
+    ]
+  },
+  {
+    "id": "tech_076",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется инструмент статического анализа, проверяющий стиль и потенциальные ошибки в коде?",
+    "correct_answer": "Линтер",
+    "incorrect_answers": [
+      "Отладчик",
+      "Профилировщик",
+      "Компоновщик"
+    ],
+    "answers": [
+      "Линтер",
+      "Отладчик",
+      "Профилировщик",
+      "Компоновщик"
+    ]
+  },
+  {
+    "id": "tech_077",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется процесс изменения структуры кода без изменения его внешнего поведения?",
+    "correct_answer": "Рефакторинг",
+    "incorrect_answers": [
+      "Деплой",
+      "Компиляция",
+      "Тестирование"
+    ],
+    "answers": [
+      "Рефакторинг",
+      "Деплой",
+      "Компиляция",
+      "Тестирование"
+    ]
+  },
+  {
+    "id": "tech_078",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется автоматическая проверка небольшой изолированной части программы?",
+    "correct_answer": "Юнит-тест",
+    "incorrect_answers": [
+      "Интеграционный тест",
+      "Нагрузочный тест",
+      "Smoke-тест"
+    ],
+    "answers": [
+      "Юнит-тест",
+      "Интеграционный тест",
+      "Нагрузочный тест",
+      "Smoke-тест"
+    ]
+  },
+  {
+    "id": "tech_079",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется тестирование взаимодействия нескольких компонентов системы?",
+    "correct_answer": "Интеграционное тестирование",
+    "incorrect_answers": [
+      "Юнит-тестирование",
+      "A/B-тестирование",
+      "Линтинг"
+    ],
+    "answers": [
+      "Интеграционное тестирование",
+      "Юнит-тестирование",
+      "A/B-тестирование",
+      "Линтинг"
+    ]
+  },
+  {
+    "id": "tech_080",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется искусственная нагрузка на систему для проверки её производительности?",
+    "correct_answer": "Нагрузочное тестирование",
+    "incorrect_answers": [
+      "Регрессионное тестирование",
+      "Юнит-тестирование",
+      "Фаззинг"
+    ],
+    "answers": [
+      "Нагрузочное тестирование",
+      "Регрессионное тестирование",
+      "Юнит-тестирование",
+      "Фаззинг"
+    ]
+  },
+  {
+    "id": "tech_081",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется модель разработки, в которой исходный код доступен для изучения и изменения?",
+    "correct_answer": "Open source",
+    "incorrect_answers": [
+      "Closed source",
+      "SaaS",
+      "Proprietary cloud"
+    ],
+    "answers": [
+      "Open source",
+      "Closed source",
+      "SaaS",
+      "Proprietary cloud"
+    ]
+  },
+  {
+    "id": "tech_082",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется программное обеспечение, исходный код которого закрыт и контролируется владельцем?",
+    "correct_answer": "Проприетарное ПО",
+    "incorrect_answers": [
+      "Open source",
+      "Freeware",
+      "Public domain"
+    ],
+    "answers": [
+      "Проприетарное ПО",
+      "Open source",
+      "Freeware",
+      "Public domain"
+    ]
+  },
+  {
+    "id": "tech_083",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется операционная система с открытым исходным кодом, ядро которой создал Линус Торвальдс?",
+    "correct_answer": "Linux",
+    "incorrect_answers": [
+      "Windows",
+      "macOS",
+      "iOS"
+    ],
+    "answers": [
+      "Linux",
+      "Windows",
+      "macOS",
+      "iOS"
+    ]
+  },
+  {
+    "id": "tech_084",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется семейство операционных систем Microsoft для персональных компьютеров?",
+    "correct_answer": "Windows",
+    "incorrect_answers": [
+      "Linux",
+      "Unix",
+      "Android"
+    ],
+    "answers": [
+      "Windows",
+      "Linux",
+      "Unix",
+      "Android"
+    ]
+  },
+  {
+    "id": "tech_085",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется настольная операционная система Apple?",
+    "correct_answer": "macOS",
+    "incorrect_answers": [
+      "iOS",
+      "watchOS",
+      "tvOS"
+    ],
+    "answers": [
+      "macOS",
+      "iOS",
+      "watchOS",
+      "tvOS"
+    ]
+  },
+  {
+    "id": "tech_086",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется мобильная операционная система Google?",
+    "correct_answer": "Android",
+    "incorrect_answers": [
+      "iOS",
+      "HarmonyOS",
+      "Windows Phone"
+    ],
+    "answers": [
+      "Android",
+      "iOS",
+      "HarmonyOS",
+      "Windows Phone"
+    ]
+  },
+  {
+    "id": "tech_087",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется мобильная операционная система Apple?",
+    "correct_answer": "iOS",
+    "incorrect_answers": [
+      "Android",
+      "macOS",
+      "watchOS"
+    ],
+    "answers": [
+      "iOS",
+      "Android",
+      "macOS",
+      "watchOS"
+    ]
+  },
+  {
+    "id": "tech_088",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется командная оболочка, распространённая в Linux и macOS?",
+    "correct_answer": "Bash",
+    "incorrect_answers": [
+      "SQL",
+      "HTML",
+      "Docker"
+    ],
+    "answers": [
+      "Bash",
+      "SQL",
+      "HTML",
+      "Docker"
+    ]
+  },
+  {
+    "id": "tech_089",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется семейство операционных систем, оказавшее большое влияние на Linux и macOS?",
+    "correct_answer": "Unix",
+    "incorrect_answers": [
+      "DOS",
+      "CP/M",
+      "AmigaOS"
+    ],
+    "answers": [
+      "Unix",
+      "DOS",
+      "CP/M",
+      "AmigaOS"
+    ]
+  },
+  {
+    "id": "tech_090",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется программный интерфейс, позволяющий приложениям взаимодействовать друг с другом?",
+    "correct_answer": "API",
+    "incorrect_answers": [
+      "IDE",
+      "SDK",
+      "GUI"
+    ],
+    "answers": [
+      "API",
+      "IDE",
+      "SDK",
+      "GUI"
+    ]
+  },
+  {
+    "id": "tech_091",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется набор инструментов и библиотек для разработки приложений под определённую платформу?",
+    "correct_answer": "SDK",
+    "incorrect_answers": [
+      "API",
+      "IDE",
+      "CLI"
+    ],
+    "answers": [
+      "SDK",
+      "API",
+      "IDE",
+      "CLI"
+    ]
+  },
+  {
+    "id": "tech_092",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется среда разработки, объединяющая редактор, запуск, отладку и другие инструменты?",
+    "correct_answer": "IDE",
+    "incorrect_answers": [
+      "API",
+      "SDK",
+      "CLI"
+    ],
+    "answers": [
+      "IDE",
+      "API",
+      "SDK",
+      "CLI"
+    ]
+  },
+  {
+    "id": "tech_093",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется интерфейс взаимодействия с программой через текстовые команды?",
+    "correct_answer": "CLI",
+    "incorrect_answers": [
+      "GUI",
+      "API",
+      "IDE"
+    ],
+    "answers": [
+      "CLI",
+      "GUI",
+      "API",
+      "IDE"
+    ]
+  },
+  {
+    "id": "tech_094",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется графический пользовательский интерфейс?",
+    "correct_answer": "GUI",
+    "incorrect_answers": [
+      "CLI",
+      "API",
+      "SDK"
+    ],
+    "answers": [
+      "GUI",
+      "CLI",
+      "API",
+      "SDK"
+    ]
+  },
+  {
+    "id": "tech_095",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется вычислительная модель, при которой ресурсы предоставляются через интернет по запросу?",
+    "correct_answer": "Облачные вычисления",
+    "incorrect_answers": [
+      "Пиринговая сеть",
+      "Локальная виртуализация",
+      "Edge printing"
+    ],
+    "answers": [
+      "Облачные вычисления",
+      "Пиринговая сеть",
+      "Локальная виртуализация",
+      "Edge printing"
+    ]
+  },
+  {
+    "id": "tech_096",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется модель облачного сервиса, где пользователь получает готовое приложение через интернет?",
+    "correct_answer": "SaaS",
+    "incorrect_answers": [
+      "IaaS",
+      "PaaS",
+      "LAN"
+    ],
+    "answers": [
+      "SaaS",
+      "IaaS",
+      "PaaS",
+      "LAN"
+    ]
+  },
+  {
+    "id": "tech_097",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется модель облачного сервиса, где предоставляются виртуальные серверы, сети и хранилища?",
+    "correct_answer": "IaaS",
+    "incorrect_answers": [
+      "SaaS",
+      "PaaS",
+      "CDN"
+    ],
+    "answers": [
+      "IaaS",
+      "SaaS",
+      "PaaS",
+      "CDN"
+    ]
+  },
+  {
+    "id": "tech_098",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется модель облачного сервиса, предоставляющая платформу для разработки и запуска приложений?",
+    "correct_answer": "PaaS",
+    "incorrect_answers": [
+      "SaaS",
+      "IaaS",
+      "VPN"
+    ],
+    "answers": [
+      "PaaS",
+      "SaaS",
+      "IaaS",
+      "VPN"
+    ]
+  },
+  {
+    "id": "tech_099",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология создания виртуальных компьютеров на одном физическом сервере?",
+    "correct_answer": "Виртуализация",
+    "incorrect_answers": [
+      "Контейнеризация",
+      "Компиляция",
+      "Шардирование"
+    ],
+    "answers": [
+      "Виртуализация",
+      "Контейнеризация",
+      "Компиляция",
+      "Шардирование"
+    ]
+  },
+  {
+    "id": "tech_100",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется система искусственного интеллекта, способная генерировать текст, изображения или другой контент?",
+    "correct_answer": "Генеративный ИИ",
+    "incorrect_answers": [
+      "Экспертная система",
+      "СУБД",
+      "Компилятор"
+    ],
+    "answers": [
+      "Генеративный ИИ",
+      "Экспертная система",
+      "СУБД",
+      "Компилятор"
+    ]
+  },
+  {
+    "id": "tech_101",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, преобразующее электрическую энергию в механическое вращение?",
+    "correct_answer": "Электродвигатель",
+    "incorrect_answers": [
+      "Генератор",
+      "Трансформатор",
+      "Инвертор"
+    ],
+    "answers": [
+      "Электродвигатель",
+      "Генератор",
+      "Трансформатор",
+      "Инвертор"
+    ]
+  },
+  {
+    "id": "tech_102",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, преобразующее механическую энергию в электрическую?",
+    "correct_answer": "Генератор",
+    "incorrect_answers": [
+      "Электродвигатель",
+      "Компрессор",
+      "Резистор"
+    ],
+    "answers": [
+      "Генератор",
+      "Электродвигатель",
+      "Компрессор",
+      "Резистор"
+    ]
+  },
+  {
+    "id": "tech_103",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, изменяющее напряжение переменного тока?",
+    "correct_answer": "Трансформатор",
+    "incorrect_answers": [
+      "Инвертор",
+      "Конденсатор",
+      "Диод"
+    ],
+    "answers": [
+      "Трансформатор",
+      "Инвертор",
+      "Конденсатор",
+      "Диод"
+    ]
+  },
+  {
+    "id": "tech_104",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется электронный компонент, пропускающий ток преимущественно в одном направлении?",
+    "correct_answer": "Диод",
+    "incorrect_answers": [
+      "Резистор",
+      "Транзистор",
+      "Катушка"
+    ],
+    "answers": [
+      "Диод",
+      "Резистор",
+      "Транзистор",
+      "Катушка"
+    ]
+  },
+  {
+    "id": "tech_105",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется компонент, способный накапливать электрический заряд?",
+    "correct_answer": "Конденсатор",
+    "incorrect_answers": [
+      "Диод",
+      "Резистор",
+      "Реле"
+    ],
+    "answers": [
+      "Конденсатор",
+      "Диод",
+      "Резистор",
+      "Реле"
+    ]
+  },
+  {
+    "id": "tech_106",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется компонент, ограничивающий ток в электрической цепи?",
+    "correct_answer": "Резистор",
+    "incorrect_answers": [
+      "Диод",
+      "Конденсатор",
+      "Трансформатор"
+    ],
+    "answers": [
+      "Резистор",
+      "Диод",
+      "Конденсатор",
+      "Трансформатор"
+    ]
+  },
+  {
+    "id": "tech_107",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется полупроводниковый элемент, ставший основой современной электроники и логических схем?",
+    "correct_answer": "Транзистор",
+    "incorrect_answers": [
+      "Резистор",
+      "Реле",
+      "Катушка"
+    ],
+    "answers": [
+      "Транзистор",
+      "Резистор",
+      "Реле",
+      "Катушка"
+    ]
+  },
+  {
+    "id": "tech_108",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой материал чаще всего используется как основа современных полупроводниковых микросхем?",
+    "correct_answer": "Кремний",
+    "incorrect_answers": [
+      "Медь",
+      "Алюминий",
+      "Графит"
+    ],
+    "answers": [
+      "Кремний",
+      "Медь",
+      "Алюминий",
+      "Графит"
+    ]
+  },
+  {
+    "id": "tech_109",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется тонкая пластина полупроводникового материала, на которой изготавливают множество микросхем?",
+    "correct_answer": "Кремниевая пластина",
+    "incorrect_answers": [
+      "Печатная плата",
+      "Матрица",
+      "Катушка"
+    ],
+    "answers": [
+      "Кремниевая пластина",
+      "Печатная плата",
+      "Матрица",
+      "Катушка"
+    ]
+  },
+  {
+    "id": "tech_110",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется плата, на которой электронные компоненты соединены проводящими дорожками?",
+    "correct_answer": "Печатная плата",
+    "incorrect_answers": [
+      "Материнская плата",
+      "Кремниевая пластина",
+      "Контактная группа"
+    ],
+    "answers": [
+      "Печатная плата",
+      "Материнская плата",
+      "Кремниевая пластина",
+      "Контактная группа"
+    ]
+  },
+  {
+    "id": "tech_111",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство для измерения электрического напряжения?",
+    "correct_answer": "Вольтметр",
+    "incorrect_answers": [
+      "Амперметр",
+      "Омметр",
+      "Ваттметр"
+    ],
+    "answers": [
+      "Вольтметр",
+      "Амперметр",
+      "Омметр",
+      "Ваттметр"
+    ]
+  },
+  {
+    "id": "tech_112",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство для измерения силы тока?",
+    "correct_answer": "Амперметр",
+    "incorrect_answers": [
+      "Вольтметр",
+      "Омметр",
+      "Гальванометр"
+    ],
+    "answers": [
+      "Амперметр",
+      "Вольтметр",
+      "Омметр",
+      "Гальванометр"
+    ]
+  },
+  {
+    "id": "tech_113",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется единица электрического сопротивления?",
+    "correct_answer": "Ом",
+    "incorrect_answers": [
+      "Вольт",
+      "Ампер",
+      "Ватт"
+    ],
+    "answers": [
+      "Ом",
+      "Вольт",
+      "Ампер",
+      "Ватт"
+    ]
+  },
+  {
+    "id": "tech_114",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется единица электрической мощности?",
+    "correct_answer": "Ватт",
+    "incorrect_answers": [
+      "Джоуль",
+      "Ампер",
+      "Ом"
+    ],
+    "answers": [
+      "Ватт",
+      "Джоуль",
+      "Ампер",
+      "Ом"
+    ]
+  },
+  {
+    "id": "tech_115",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется единица электрического напряжения?",
+    "correct_answer": "Вольт",
+    "incorrect_answers": [
+      "Ватт",
+      "Ампер",
+      "Ом"
+    ],
+    "answers": [
+      "Вольт",
+      "Ватт",
+      "Ампер",
+      "Ом"
+    ]
+  },
+  {
+    "id": "tech_116",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется единица силы электрического тока?",
+    "correct_answer": "Ампер",
+    "incorrect_answers": [
+      "Вольт",
+      "Кулон",
+      "Ватт"
+    ],
+    "answers": [
+      "Ампер",
+      "Вольт",
+      "Кулон",
+      "Ватт"
+    ]
+  },
+  {
+    "id": "tech_117",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология, преобразующая солнечный свет непосредственно в электричество?",
+    "correct_answer": "Фотоэлектрическая генерация",
+    "incorrect_answers": [
+      "Термоэлектрическая генерация",
+      "Индукционная генерация",
+      "Пьезоэлектрическая генерация"
+    ],
+    "answers": [
+      "Фотоэлектрическая генерация",
+      "Термоэлектрическая генерация",
+      "Индукционная генерация",
+      "Пьезоэлектрическая генерация"
+    ]
+  },
+  {
+    "id": "tech_118",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой материал чаще всего используется в современных солнечных панелях?",
+    "correct_answer": "Кремний",
+    "incorrect_answers": [
+      "Медь",
+      "Железо",
+      "Графит"
+    ],
+    "answers": [
+      "Кремний",
+      "Медь",
+      "Железо",
+      "Графит"
+    ]
+  },
+  {
+    "id": "tech_119",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется электростанция, использующая энергию падающей или текущей воды?",
+    "correct_answer": "Гидроэлектростанция",
+    "incorrect_answers": [
+      "Тепловая электростанция",
+      "Атомная электростанция",
+      "Геотермальная станция"
+    ],
+    "answers": [
+      "Гидроэлектростанция",
+      "Тепловая электростанция",
+      "Атомная электростанция",
+      "Геотермальная станция"
+    ]
+  },
+  {
+    "id": "tech_120",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется установка, преобразующая энергию ветра в электричество?",
+    "correct_answer": "Ветрогенератор",
+    "incorrect_answers": [
+      "Турбокомпрессор",
+      "Гидротурбина",
+      "Инвертор"
+    ],
+    "answers": [
+      "Ветрогенератор",
+      "Турбокомпрессор",
+      "Гидротурбина",
+      "Инвертор"
+    ]
+  },
+  {
+    "id": "tech_121",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой тип электростанций использует деление атомных ядер для получения энергии?",
+    "correct_answer": "Атомные электростанции",
+    "incorrect_answers": [
+      "Геотермальные",
+      "Солнечные",
+      "Приливные"
+    ],
+    "answers": [
+      "Атомные электростанции",
+      "Геотермальные",
+      "Солнечные",
+      "Приливные"
+    ]
+  },
+  {
+    "id": "tech_122",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется процесс получения энергии из тепла земных недр?",
+    "correct_answer": "Геотермальная энергетика",
+    "incorrect_answers": [
+      "Термоядерная энергетика",
+      "Приливная энергетика",
+      "Фотоэлектрика"
+    ],
+    "answers": [
+      "Геотермальная энергетика",
+      "Термоядерная энергетика",
+      "Приливная энергетика",
+      "Фотоэлектрика"
+    ]
+  },
+  {
+    "id": "tech_123",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, преобразующее постоянный ток в переменный?",
+    "correct_answer": "Инвертор",
+    "incorrect_answers": [
+      "Трансформатор",
+      "Выпрямитель",
+      "Генератор"
+    ],
+    "answers": [
+      "Инвертор",
+      "Трансформатор",
+      "Выпрямитель",
+      "Генератор"
+    ]
+  },
+  {
+    "id": "tech_124",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, преобразующее переменный ток в постоянный?",
+    "correct_answer": "Выпрямитель",
+    "incorrect_answers": [
+      "Инвертор",
+      "Трансформатор",
+      "Реле"
+    ],
+    "answers": [
+      "Выпрямитель",
+      "Инвертор",
+      "Трансформатор",
+      "Реле"
+    ]
+  },
+  {
+    "id": "tech_125",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология беспроводной зарядки, основанная на электромагнитной индукции?",
+    "correct_answer": "Индукционная зарядка",
+    "incorrect_answers": [
+      "Оптическая зарядка",
+      "Пьезозарядка",
+      "Радиолокационная зарядка"
+    ],
+    "answers": [
+      "Индукционная зарядка",
+      "Оптическая зарядка",
+      "Пьезозарядка",
+      "Радиолокационная зарядка"
+    ]
+  },
+  {
+    "id": "tech_126",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой химический тип аккумуляторов наиболее распространён в современных смартфонах и электромобилях?",
+    "correct_answer": "Литий-ионные",
+    "incorrect_answers": [
+      "Никель-железные",
+      "Свинцово-кислотные",
+      "Цинк-угольные"
+    ],
+    "answers": [
+      "Литий-ионные",
+      "Никель-железные",
+      "Свинцово-кислотные",
+      "Цинк-угольные"
+    ]
+  },
+  {
+    "id": "tech_127",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, которое временно хранит электрическую энергию и может многократно перезаряжаться?",
+    "correct_answer": "Аккумулятор",
+    "incorrect_answers": [
+      "Резистор",
+      "Диод",
+      "Предохранитель"
+    ],
+    "answers": [
+      "Аккумулятор",
+      "Резистор",
+      "Диод",
+      "Предохранитель"
+    ]
+  },
+  {
+    "id": "tech_128",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой металл дал название литий-ионным аккумуляторам?",
+    "correct_answer": "Литий",
+    "incorrect_answers": [
+      "Кобальт",
+      "Никель",
+      "Графит"
+    ],
+    "answers": [
+      "Литий",
+      "Кобальт",
+      "Никель",
+      "Графит"
+    ]
+  },
+  {
+    "id": "tech_129",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется система, которая восстанавливает часть энергии при торможении электромобиля?",
+    "correct_answer": "Рекуперативное торможение",
+    "incorrect_answers": [
+      "Индуктивное торможение",
+      "Гидравлическое торможение",
+      "Дифференциальное торможение"
+    ],
+    "answers": [
+      "Рекуперативное торможение",
+      "Индуктивное торможение",
+      "Гидравлическое торможение",
+      "Дифференциальное торможение"
+    ]
+  },
+  {
+    "id": "tech_130",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется автомобиль, использующий и двигатель внутреннего сгорания, и электромотор?",
+    "correct_answer": "Гибрид",
+    "incorrect_answers": [
+      "Электромобиль",
+      "Плагин",
+      "Турбодизель"
+    ],
+    "answers": [
+      "Гибрид",
+      "Электромобиль",
+      "Плагин",
+      "Турбодизель"
+    ]
+  },
+  {
+    "id": "tech_131",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется автомобиль, который движется только за счёт электродвигателя и аккумулятора?",
+    "correct_answer": "Электромобиль",
+    "incorrect_answers": [
+      "Гибрид",
+      "Водородный гибрид",
+      "Турбоэлектрический автомобиль"
+    ],
+    "answers": [
+      "Электромобиль",
+      "Гибрид",
+      "Водородный гибрид",
+      "Турбоэлектрический автомобиль"
+    ]
+  },
+  {
+    "id": "tech_132",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология помощи водителю, автоматически поддерживающая заданную скорость и дистанцию?",
+    "correct_answer": "Адаптивный круиз-контроль",
+    "incorrect_answers": [
+      "ABS",
+      "ESP",
+      "Парктроник"
+    ],
+    "answers": [
+      "Адаптивный круиз-контроль",
+      "ABS",
+      "ESP",
+      "Парктроник"
+    ]
+  },
+  {
+    "id": "tech_133",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется система, предотвращающая блокировку колёс при торможении?",
+    "correct_answer": "ABS",
+    "incorrect_answers": [
+      "ESP",
+      "TCS",
+      "ADAS"
+    ],
+    "answers": [
+      "ABS",
+      "ESP",
+      "TCS",
+      "ADAS"
+    ]
+  },
+  {
+    "id": "tech_134",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется система стабилизации автомобиля при заносе?",
+    "correct_answer": "ESP",
+    "incorrect_answers": [
+      "ABS",
+      "Cruise Control",
+      "TPMS"
+    ],
+    "answers": [
+      "ESP",
+      "ABS",
+      "Cruise Control",
+      "TPMS"
+    ]
+  },
+  {
+    "id": "tech_135",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется система контроля давления в шинах?",
+    "correct_answer": "TPMS",
+    "incorrect_answers": [
+      "ABS",
+      "ESP",
+      "TCS"
+    ],
+    "answers": [
+      "TPMS",
+      "ABS",
+      "ESP",
+      "TCS"
+    ]
+  },
+  {
+    "id": "tech_136",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется датчик, измеряющий расстояние с помощью лазерных импульсов?",
+    "correct_answer": "Лидар",
+    "incorrect_answers": [
+      "Радар",
+      "Сонар",
+      "Гироскоп"
+    ],
+    "answers": [
+      "Лидар",
+      "Радар",
+      "Сонар",
+      "Гироскоп"
+    ]
+  },
+  {
+    "id": "tech_137",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется система, определяющая расстояние до объектов с помощью радиоволн?",
+    "correct_answer": "Радар",
+    "incorrect_answers": [
+      "Лидар",
+      "Сонар",
+      "Барометр"
+    ],
+    "answers": [
+      "Радар",
+      "Лидар",
+      "Сонар",
+      "Барометр"
+    ]
+  },
+  {
+    "id": "tech_138",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется система обнаружения объектов под водой с помощью звуковых волн?",
+    "correct_answer": "Сонар",
+    "incorrect_answers": [
+      "Радар",
+      "Лидар",
+      "Радиометр"
+    ],
+    "answers": [
+      "Сонар",
+      "Радар",
+      "Лидар",
+      "Радиометр"
+    ]
+  },
+  {
+    "id": "tech_139",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется прибор для определения высоты по атмосферному давлению?",
+    "correct_answer": "Барометрический высотомер",
+    "incorrect_answers": [
+      "Гироскоп",
+      "Спидометр",
+      "Тахометр"
+    ],
+    "answers": [
+      "Барометрический высотомер",
+      "Гироскоп",
+      "Спидометр",
+      "Тахометр"
+    ]
+  },
+  {
+    "id": "tech_140",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется прибор для измерения скорости вращения двигателя?",
+    "correct_answer": "Тахометр",
+    "incorrect_answers": [
+      "Спидометр",
+      "Одометр",
+      "Альтиметр"
+    ],
+    "answers": [
+      "Тахометр",
+      "Спидометр",
+      "Одометр",
+      "Альтиметр"
+    ]
+  },
+  {
+    "id": "tech_141",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется прибор, показывающий скорость автомобиля?",
+    "correct_answer": "Спидометр",
+    "incorrect_answers": [
+      "Тахометр",
+      "Одометр",
+      "Вольтметр"
+    ],
+    "answers": [
+      "Спидометр",
+      "Тахометр",
+      "Одометр",
+      "Вольтметр"
+    ]
+  },
+  {
+    "id": "tech_142",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется прибор, измеряющий пройденное автомобилем расстояние?",
+    "correct_answer": "Одометр",
+    "incorrect_answers": [
+      "Спидометр",
+      "Тахометр",
+      "Гироскоп"
+    ],
+    "answers": [
+      "Одометр",
+      "Спидометр",
+      "Тахометр",
+      "Гироскоп"
+    ]
+  },
+  {
+    "id": "tech_143",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология, при которой автомобиль автоматически удерживается в полосе движения?",
+    "correct_answer": "Система удержания в полосе",
+    "incorrect_answers": [
+      "Парктроник",
+      "Круиз-контроль",
+      "Автозапуск"
+    ],
+    "answers": [
+      "Система удержания в полосе",
+      "Парктроник",
+      "Круиз-контроль",
+      "Автозапуск"
+    ]
+  },
+  {
+    "id": "tech_144",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется система помощи при парковке, использующая ультразвуковые датчики?",
+    "correct_answer": "Парктроник",
+    "incorrect_answers": [
+      "Лидар",
+      "ABS",
+      "TPMS"
+    ],
+    "answers": [
+      "Парктроник",
+      "Лидар",
+      "ABS",
+      "TPMS"
+    ]
+  },
+  {
+    "id": "tech_145",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология проекции информации на лобовое стекло автомобиля?",
+    "correct_answer": "Head-up display",
+    "incorrect_answers": [
+      "Night Vision",
+      "Park Assist",
+      "Lane Assist"
+    ],
+    "answers": [
+      "Head-up display",
+      "Night Vision",
+      "Park Assist",
+      "Lane Assist"
+    ]
+  },
+  {
+    "id": "tech_146",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется авиационный прибор, показывающий пространственное положение самолёта относительно горизонта?",
+    "correct_answer": "Авиагоризонт",
+    "incorrect_answers": [
+      "Высотомер",
+      "Вариометр",
+      "Компас"
+    ],
+    "answers": [
+      "Авиагоризонт",
+      "Высотомер",
+      "Вариометр",
+      "Компас"
+    ]
+  },
+  {
+    "id": "tech_147",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется система, автоматически управляющая самолётом по заданным параметрам полёта?",
+    "correct_answer": "Автопилот",
+    "incorrect_answers": [
+      "Радар",
+      "Транспондер",
+      "Флайт-рекордер"
+    ],
+    "answers": [
+      "Автопилот",
+      "Радар",
+      "Транспондер",
+      "Флайт-рекордер"
+    ]
+  },
+  {
+    "id": "tech_148",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, записывающее параметры полёта самолёта?",
+    "correct_answer": "Бортовой самописец",
+    "incorrect_answers": [
+      "Автопилот",
+      "Транспондер",
+      "Радиомаяк"
+    ],
+    "answers": [
+      "Бортовой самописец",
+      "Автопилот",
+      "Транспондер",
+      "Радиомаяк"
+    ]
+  },
+  {
+    "id": "tech_149",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Какой цвет обычно имеет корпус авиационного «чёрного ящика» для облегчения поиска?",
+    "correct_answer": "Оранжевый",
+    "incorrect_answers": [
+      "Чёрный",
+      "Красный",
+      "Синий"
+    ],
+    "answers": [
+      "Оранжевый",
+      "Чёрный",
+      "Красный",
+      "Синий"
+    ]
+  },
+  {
+    "id": "tech_150",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство на самолёте, передающее его идентификационные данные и высоту радару?",
+    "correct_answer": "Транспондер",
+    "incorrect_answers": [
+      "Автопилот",
+      "Радиомаяк",
+      "Вариометр"
+    ],
+    "answers": [
+      "Транспондер",
+      "Автопилот",
+      "Радиомаяк",
+      "Вариометр"
+    ]
+  },
+  {
+    "id": "tech_151",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется вертикальный взлёт и посадка летательного аппарата?",
+    "correct_answer": "VTOL",
+    "incorrect_answers": [
+      "STOL",
+      "VFR",
+      "ILS"
+    ],
+    "answers": [
+      "VTOL",
+      "STOL",
+      "VFR",
+      "ILS"
+    ]
+  },
+  {
+    "id": "tech_152",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется воздушное судно, поднимаемое за счёт подъёмной силы вращающихся винтов?",
+    "correct_answer": "Вертолёт",
+    "incorrect_answers": [
+      "Дирижабль",
+      "Планёр",
+      "Конвертоплан"
+    ],
+    "answers": [
+      "Вертолёт",
+      "Дирижабль",
+      "Планёр",
+      "Конвертоплан"
+    ]
+  },
+  {
+    "id": "tech_153",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется летательный аппарат, сочетающий вертикальный взлёт вертолёта и горизонтальный полёт самолёта?",
+    "correct_answer": "Конвертоплан",
+    "incorrect_answers": [
+      "Планёр",
+      "Дирижабль",
+      "Автожир"
+    ],
+    "answers": [
+      "Конвертоплан",
+      "Планёр",
+      "Дирижабль",
+      "Автожир"
+    ]
+  },
+  {
+    "id": "tech_154",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется беспилотный летательный аппарат?",
+    "correct_answer": "Дрон",
+    "incorrect_answers": [
+      "Дирижабль",
+      "Автожир",
+      "Ровер"
+    ],
+    "answers": [
+      "Дрон",
+      "Дирижабль",
+      "Автожир",
+      "Ровер"
+    ]
+  },
+  {
+    "id": "tech_155",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется космический аппарат, предназначенный для передвижения по поверхности другой планеты?",
+    "correct_answer": "Ровер",
+    "incorrect_answers": [
+      "Орбитер",
+      "Лендер",
+      "Телескоп"
+    ],
+    "answers": [
+      "Ровер",
+      "Орбитер",
+      "Лендер",
+      "Телескоп"
+    ]
+  },
+  {
+    "id": "tech_156",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется аппарат, предназначенный для посадки на поверхность небесного тела?",
+    "correct_answer": "Лендер",
+    "incorrect_answers": [
+      "Орбитер",
+      "Ровер",
+      "Зонд"
+    ],
+    "answers": [
+      "Лендер",
+      "Орбитер",
+      "Ровер",
+      "Зонд"
+    ]
+  },
+  {
+    "id": "tech_157",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется аппарат, работающий на орбите вокруг планеты или другого тела?",
+    "correct_answer": "Орбитер",
+    "incorrect_answers": [
+      "Лендер",
+      "Ровер",
+      "Буёк"
+    ],
+    "answers": [
+      "Орбитер",
+      "Лендер",
+      "Ровер",
+      "Буёк"
+    ]
+  },
+  {
+    "id": "tech_158",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется прибор, позволяющий наблюдать далёкие небесные объекты, собирая электромагнитное излучение?",
+    "correct_answer": "Телескоп",
+    "incorrect_answers": [
+      "Микроскоп",
+      "Радар",
+      "Спектрометр"
+    ],
+    "answers": [
+      "Телескоп",
+      "Микроскоп",
+      "Радар",
+      "Спектрометр"
+    ]
+  },
+  {
+    "id": "tech_159",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется телескоп, использующий зеркала вместо линз?",
+    "correct_answer": "Рефлектор",
+    "incorrect_answers": [
+      "Рефрактор",
+      "Интерферометр",
+      "Коллиматор"
+    ],
+    "answers": [
+      "Рефлектор",
+      "Рефрактор",
+      "Интерферометр",
+      "Коллиматор"
+    ]
+  },
+  {
+    "id": "tech_160",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется телескоп, использующий линзы?",
+    "correct_answer": "Рефрактор",
+    "incorrect_answers": [
+      "Рефлектор",
+      "Радиотелескоп",
+      "Спектрограф"
+    ],
+    "answers": [
+      "Рефрактор",
+      "Рефлектор",
+      "Радиотелескоп",
+      "Спектрограф"
+    ]
+  },
+  {
+    "id": "tech_161",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется метод исследования состава вещества по его спектру излучения или поглощения?",
+    "correct_answer": "Спектроскопия",
+    "incorrect_answers": [
+      "Томография",
+      "Интерферометрия",
+      "Голография"
+    ],
+    "answers": [
+      "Спектроскопия",
+      "Томография",
+      "Интерферометрия",
+      "Голография"
+    ]
+  },
+  {
+    "id": "tech_162",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология получения трёхмерного изображения объекта с помощью интерференции света?",
+    "correct_answer": "Голография",
+    "incorrect_answers": [
+      "Томография",
+      "Спектроскопия",
+      "Фотолитография"
+    ],
+    "answers": [
+      "Голография",
+      "Томография",
+      "Спектроскопия",
+      "Фотолитография"
+    ]
+  },
+  {
+    "id": "tech_163",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, увеличивающее изображение очень малых объектов с помощью оптики?",
+    "correct_answer": "Микроскоп",
+    "incorrect_answers": [
+      "Телескоп",
+      "Коллиматор",
+      "Спектрометр"
+    ],
+    "answers": [
+      "Микроскоп",
+      "Телескоп",
+      "Коллиматор",
+      "Спектрометр"
+    ]
+  },
+  {
+    "id": "tech_164",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется микроскоп, использующий пучок электронов вместо света?",
+    "correct_answer": "Электронный микроскоп",
+    "incorrect_answers": [
+      "Оптический микроскоп",
+      "Рентгеновский телескоп",
+      "Сканер"
+    ],
+    "answers": [
+      "Электронный микроскоп",
+      "Оптический микроскоп",
+      "Рентгеновский телескоп",
+      "Сканер"
+    ]
+  },
+  {
+    "id": "tech_165",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется медицинская технология получения послойных изображений тела с помощью рентгеновского излучения?",
+    "correct_answer": "Компьютерная томография",
+    "incorrect_answers": [
+      "МРТ",
+      "УЗИ",
+      "ЭКГ"
+    ],
+    "answers": [
+      "Компьютерная томография",
+      "МРТ",
+      "УЗИ",
+      "ЭКГ"
+    ]
+  },
+  {
+    "id": "tech_166",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология медицинской визуализации, использующая сильное магнитное поле и радиоволны?",
+    "correct_answer": "МРТ",
+    "incorrect_answers": [
+      "КТ",
+      "УЗИ",
+      "Рентгенография"
+    ],
+    "answers": [
+      "МРТ",
+      "КТ",
+      "УЗИ",
+      "Рентгенография"
+    ]
+  },
+  {
+    "id": "tech_167",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется метод медицинской визуализации с помощью ультразвуковых волн?",
+    "correct_answer": "УЗИ",
+    "incorrect_answers": [
+      "МРТ",
+      "КТ",
+      "ПЭТ"
+    ],
+    "answers": [
+      "УЗИ",
+      "МРТ",
+      "КТ",
+      "ПЭТ"
+    ]
+  },
+  {
+    "id": "tech_168",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется прибор, регистрирующий электрическую активность сердца?",
+    "correct_answer": "Электрокардиограф",
+    "incorrect_answers": [
+      "Электроэнцефалограф",
+      "Пульсоксиметр",
+      "Спирометр"
+    ],
+    "answers": [
+      "Электрокардиограф",
+      "Электроэнцефалограф",
+      "Пульсоксиметр",
+      "Спирометр"
+    ]
+  },
+  {
+    "id": "tech_169",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется прибор, измеряющий насыщение крови кислородом?",
+    "correct_answer": "Пульсоксиметр",
+    "incorrect_answers": [
+      "Тонометр",
+      "Глюкометр",
+      "Спирометр"
+    ],
+    "answers": [
+      "Пульсоксиметр",
+      "Тонометр",
+      "Глюкометр",
+      "Спирометр"
+    ]
+  },
+  {
+    "id": "tech_170",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется прибор для измерения артериального давления?",
+    "correct_answer": "Тонометр",
+    "incorrect_answers": [
+      "Пульсоксиметр",
+      "Глюкометр",
+      "Манометр"
+    ],
+    "answers": [
+      "Тонометр",
+      "Пульсоксиметр",
+      "Глюкометр",
+      "Манометр"
+    ]
+  },
+  {
+    "id": "tech_171",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется прибор для измерения уровня глюкозы в крови?",
+    "correct_answer": "Глюкометр",
+    "incorrect_answers": [
+      "Тонометр",
+      "Пульсоксиметр",
+      "Спирометр"
+    ],
+    "answers": [
+      "Глюкометр",
+      "Тонометр",
+      "Пульсоксиметр",
+      "Спирометр"
+    ]
+  },
+  {
+    "id": "tech_172",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология создания физических объектов послойным нанесением материала по цифровой модели?",
+    "correct_answer": "3D-печать",
+    "incorrect_answers": [
+      "Литьё",
+      "Фрезеровка",
+      "Фотолитография"
+    ],
+    "answers": [
+      "3D-печать",
+      "Литьё",
+      "Фрезеровка",
+      "Фотолитография"
+    ]
+  },
+  {
+    "id": "tech_173",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется промышленная обработка материала путём удаления его слоя режущим инструментом?",
+    "correct_answer": "Фрезерование",
+    "incorrect_answers": [
+      "Литьё",
+      "Пайка",
+      "Спекание"
+    ],
+    "answers": [
+      "Фрезерование",
+      "Литьё",
+      "Пайка",
+      "Спекание"
+    ]
+  },
+  {
+    "id": "tech_174",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется соединение металлических деталей расплавленным присадочным металлом с относительно низкой температурой плавления?",
+    "correct_answer": "Пайка",
+    "incorrect_answers": [
+      "Сварка",
+      "Клёпка",
+      "Фрезеровка"
+    ],
+    "answers": [
+      "Пайка",
+      "Сварка",
+      "Клёпка",
+      "Фрезеровка"
+    ]
+  },
+  {
+    "id": "tech_175",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется соединение деталей путём локального расплавления их материала?",
+    "correct_answer": "Сварка",
+    "incorrect_answers": [
+      "Пайка",
+      "Клёпка",
+      "Шлифовка"
+    ],
+    "answers": [
+      "Сварка",
+      "Пайка",
+      "Клёпка",
+      "Шлифовка"
+    ]
+  },
+  {
+    "id": "tech_176",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология массового изготовления микросхем с использованием света для формирования рисунка на пластине?",
+    "correct_answer": "Фотолитография",
+    "incorrect_answers": [
+      "Голография",
+      "Лазерная сварка",
+      "Термография"
+    ],
+    "answers": [
+      "Фотолитография",
+      "Голография",
+      "Лазерная сварка",
+      "Термография"
+    ]
+  },
+  {
+    "id": "tech_177",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется станок, управляемый программой и автоматически выполняющий обработку детали?",
+    "correct_answer": "Станок с ЧПУ",
+    "incorrect_answers": [
+      "Токарный верстак",
+      "Гидропресс",
+      "Штамповочный молот"
+    ],
+    "answers": [
+      "Станок с ЧПУ",
+      "Токарный верстак",
+      "Гидропресс",
+      "Штамповочный молот"
+    ]
+  },
+  {
+    "id": "tech_178",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется робот, выполняющий повторяющиеся операции на производственной линии?",
+    "correct_answer": "Промышленный робот",
+    "incorrect_answers": [
+      "Экзоскелет",
+      "Дрон",
+      "Манипулятор хирурга"
+    ],
+    "answers": [
+      "Промышленный робот",
+      "Экзоскелет",
+      "Дрон",
+      "Манипулятор хирурга"
+    ]
+  },
+  {
+    "id": "tech_179",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется носимое устройство, усиливающее движения человека с помощью механических приводов?",
+    "correct_answer": "Экзоскелет",
+    "incorrect_answers": [
+      "Протез",
+      "Манипулятор",
+      "Гироскоп"
+    ],
+    "answers": [
+      "Экзоскелет",
+      "Протез",
+      "Манипулятор",
+      "Гироскоп"
+    ]
+  },
+  {
+    "id": "tech_180",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология, при которой компьютер накладывает цифровые объекты на изображение реального мира?",
+    "correct_answer": "Дополненная реальность",
+    "incorrect_answers": [
+      "Виртуальная реальность",
+      "Голография",
+      "Стереоскопия"
+    ],
+    "answers": [
+      "Дополненная реальность",
+      "Виртуальная реальность",
+      "Голография",
+      "Стереоскопия"
+    ]
+  },
+  {
+    "id": "tech_181",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология полного погружения пользователя в компьютерно созданную среду?",
+    "correct_answer": "Виртуальная реальность",
+    "incorrect_answers": [
+      "Дополненная реальность",
+      "Голография",
+      "Панорамная съёмка"
+    ],
+    "answers": [
+      "Виртуальная реальность",
+      "Дополненная реальность",
+      "Голография",
+      "Панорамная съёмка"
+    ]
+  },
+  {
+    "id": "tech_182",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология съёмки, при которой изображение фиксируется на светочувствительной матрице, а не на плёнке?",
+    "correct_answer": "Цифровая фотография",
+    "incorrect_answers": [
+      "Аналоговая фотография",
+      "Голография",
+      "Рентгенография"
+    ],
+    "answers": [
+      "Цифровая фотография",
+      "Аналоговая фотография",
+      "Голография",
+      "Рентгенография"
+    ]
+  },
+  {
+    "id": "tech_183",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется светочувствительный элемент цифровой камеры, преобразующий свет в электрический сигнал?",
+    "correct_answer": "Матрица",
+    "incorrect_answers": [
+      "Объектив",
+      "Диафрагма",
+      "Затвор"
+    ],
+    "answers": [
+      "Матрица",
+      "Объектив",
+      "Диафрагма",
+      "Затвор"
+    ]
+  },
+  {
+    "id": "tech_184",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется механизм камеры, регулирующий количество света через объектив?",
+    "correct_answer": "Диафрагма",
+    "incorrect_answers": [
+      "Затвор",
+      "Матрица",
+      "Стабилизатор"
+    ],
+    "answers": [
+      "Диафрагма",
+      "Затвор",
+      "Матрица",
+      "Стабилизатор"
+    ]
+  },
+  {
+    "id": "tech_185",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется механизм камеры, определяющий время экспозиции?",
+    "correct_answer": "Затвор",
+    "incorrect_answers": [
+      "Диафрагма",
+      "Объектив",
+      "Матрица"
+    ],
+    "answers": [
+      "Затвор",
+      "Диафрагма",
+      "Объектив",
+      "Матрица"
+    ]
+  },
+  {
+    "id": "tech_186",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется параметр камеры, отражающий чувствительность сенсора к свету?",
+    "correct_answer": "ISO",
+    "incorrect_answers": [
+      "FPS",
+      "HDR",
+      "DPI"
+    ],
+    "answers": [
+      "ISO",
+      "FPS",
+      "HDR",
+      "DPI"
+    ]
+  },
+  {
+    "id": "tech_187",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется количество кадров видео, показываемых за одну секунду?",
+    "correct_answer": "FPS",
+    "incorrect_answers": [
+      "DPI",
+      "ISO",
+      "HDR"
+    ],
+    "answers": [
+      "FPS",
+      "DPI",
+      "ISO",
+      "HDR"
+    ]
+  },
+  {
+    "id": "tech_188",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология расширенного динамического диапазона изображения?",
+    "correct_answer": "HDR",
+    "incorrect_answers": [
+      "RAW",
+      "FPS",
+      "DPI"
+    ],
+    "answers": [
+      "HDR",
+      "RAW",
+      "FPS",
+      "DPI"
+    ]
+  },
+  {
+    "id": "tech_189",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется формат изображения, сохраняющий почти необработанные данные с матрицы камеры?",
+    "correct_answer": "RAW",
+    "incorrect_answers": [
+      "JPEG",
+      "GIF",
+      "PNG"
+    ],
+    "answers": [
+      "RAW",
+      "JPEG",
+      "GIF",
+      "PNG"
+    ]
+  },
+  {
+    "id": "tech_190",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология оптического или электронного уменьшения дрожания камеры?",
+    "correct_answer": "Стабилизация изображения",
+    "incorrect_answers": [
+      "Автофокус",
+      "Экспозамер",
+      "Баланс белого"
+    ],
+    "answers": [
+      "Стабилизация изображения",
+      "Автофокус",
+      "Экспозамер",
+      "Баланс белого"
+    ]
+  },
+  {
+    "id": "tech_191",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется система автоматического наведения объектива на резкость?",
+    "correct_answer": "Автофокус",
+    "incorrect_answers": [
+      "Стабилизация",
+      "Экспозамер",
+      "Зум"
+    ],
+    "answers": [
+      "Автофокус",
+      "Стабилизация",
+      "Экспозамер",
+      "Зум"
+    ]
+  },
+  {
+    "id": "tech_192",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется изменение фокусного расстояния объектива для приближения изображения?",
+    "correct_answer": "Зум",
+    "incorrect_answers": [
+      "Фокус-пикинг",
+      "Баланс белого",
+      "Экспозамер"
+    ],
+    "answers": [
+      "Зум",
+      "Фокус-пикинг",
+      "Баланс белого",
+      "Экспозамер"
+    ]
+  },
+  {
+    "id": "tech_193",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, преобразующее звуковые колебания в электрический сигнал?",
+    "correct_answer": "Микрофон",
+    "incorrect_answers": [
+      "Динамик",
+      "Усилитель",
+      "Эквалайзер"
+    ],
+    "answers": [
+      "Микрофон",
+      "Динамик",
+      "Усилитель",
+      "Эквалайзер"
+    ]
+  },
+  {
+    "id": "tech_194",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, преобразующее электрический сигнал в звук?",
+    "correct_answer": "Динамик",
+    "incorrect_answers": [
+      "Микрофон",
+      "Ресивер",
+      "Компрессор"
+    ],
+    "answers": [
+      "Динамик",
+      "Микрофон",
+      "Ресивер",
+      "Компрессор"
+    ]
+  },
+  {
+    "id": "tech_195",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, увеличивающее амплитуду электрического сигнала?",
+    "correct_answer": "Усилитель",
+    "incorrect_answers": [
+      "Эквалайзер",
+      "Компрессор",
+      "Микшер"
+    ],
+    "answers": [
+      "Усилитель",
+      "Эквалайзер",
+      "Компрессор",
+      "Микшер"
+    ]
+  },
+  {
+    "id": "tech_196",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется устройство, объединяющее несколько аудиосигналов в один выходной микс?",
+    "correct_answer": "Микшер",
+    "incorrect_answers": [
+      "Усилитель",
+      "Тюнер",
+      "Компрессор"
+    ],
+    "answers": [
+      "Микшер",
+      "Усилитель",
+      "Тюнер",
+      "Компрессор"
+    ]
+  },
+  {
+    "id": "tech_197",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология шумоподавления, при которой создаётся звуковая волна в противофазе внешнему шуму?",
+    "correct_answer": "Активное шумоподавление",
+    "incorrect_answers": [
+      "Пассивная изоляция",
+      "Эквализация",
+      "Реверберация"
+    ],
+    "answers": [
+      "Активное шумоподавление",
+      "Пассивная изоляция",
+      "Эквализация",
+      "Реверберация"
+    ]
+  },
+  {
+    "id": "tech_198",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется технология сжатия аудио с потерями, широко применяемая в музыкальных файлах?",
+    "correct_answer": "MP3",
+    "incorrect_answers": [
+      "WAV",
+      "FLAC",
+      "AIFF"
+    ],
+    "answers": [
+      "MP3",
+      "WAV",
+      "FLAC",
+      "AIFF"
+    ]
+  },
+  {
+    "id": "tech_199",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется формат аудио без потерь?",
+    "correct_answer": "FLAC",
+    "incorrect_answers": [
+      "MP3",
+      "AAC",
+      "OGG Vorbis"
+    ],
+    "answers": [
+      "FLAC",
+      "MP3",
+      "AAC",
+      "OGG Vorbis"
+    ]
+  },
+  {
+    "id": "tech_200",
+    "category": "Технологии",
+    "type": "multiple",
+    "question": "Как называется цифровой стандарт телевещания, используемый во многих странах Европы?",
+    "correct_answer": "DVB",
+    "incorrect_answers": [
+      "PAL",
+      "NTSC",
+      "VHS"
+    ],
+    "answers": [
+      "DVB",
+      "PAL",
+      "NTSC",
+      "VHS"
+    ]
+  }
+]

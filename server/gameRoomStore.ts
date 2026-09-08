@@ -27,7 +27,7 @@ const SCORE_VALUES = {
   hold: 5,
 } as const
 const QUESTION_BANK_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../question_bank')
-const QUESTIONS = fs.readdirSync(QUESTION_BANK_DIR)
+const QUESTIONS = (fs.existsSync(QUESTION_BANK_DIR) ? fs.readdirSync(QUESTION_BANK_DIR) : [])
   .filter((file) => /^my_game_question\d+\.json$/.test(file))
   .sort((left, right) => questionBankFileNumber(left) - questionBankFileNumber(right))
   .flatMap((file) => JSON.parse(fs.readFileSync(path.join(QUESTION_BANK_DIR, file), 'utf8')) as StoredQuestion[])
@@ -171,6 +171,7 @@ function publicQuestion(question: StoredQuestion, index: number): { publicQuesti
 }
 
 export class GameRoomStore {
+  hasQuestions(): boolean { return QUESTIONS.length > 0 }
   private rooms = new Map<string, MultiplayerGameState>()
   private questionAnswers = new Map<string, number>()
   private supabase: SupabaseClient | null
@@ -243,6 +244,7 @@ export class GameRoomStore {
   }
 
   startGame(roomId: string): MultiplayerGameState {
+    if (!QUESTIONS.length) throw new Error('Банк вопросов для игры с друзьями ещё не подключён.')
     const room = this.requireRoom(roomId)
     const questionIndex = pickQuestionIndex(room.usedQuestionIds ?? [])
     const question = QUESTIONS[questionIndex]

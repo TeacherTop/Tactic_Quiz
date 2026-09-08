@@ -1,6 +1,7 @@
 import type { QuizQuestion } from '../game/types'
 
 type LocalizedQuestion = {
+  id?: string
   category?: string
   type: 'multiple' | 'boolean'
   question: string
@@ -31,7 +32,7 @@ function toQuizQuestion(question: LocalizedQuestion, index: number): QuizQuestio
       'Нельзя определить',
       'Нет верного варианта',
     ]
-    return { id: `opentdb-${index}`, category: question.category, prompt: question.question, options, correctIndex }
+    return { id: question.id ?? `opentdb-${index}`, category: question.category, prompt: question.question, options, correctIndex }
   }
 
   const options = question.answers as [string, string, string, string]
@@ -40,7 +41,7 @@ function toQuizQuestion(question: LocalizedQuestion, index: number): QuizQuestio
     throw new Error(`Localized question has no correct answer: ${question.question}`)
   }
   return {
-    id: `opentdb-${index}`,
+    id: question.id ?? `opentdb-${index}`,
     category: question.category,
     prompt: question.question,
     options,

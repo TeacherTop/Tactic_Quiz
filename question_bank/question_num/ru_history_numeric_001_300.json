@@ -1,0 +1,2102 @@
+[
+  {
+    "id": "ru_hist_num_001",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году князь Олег, согласно летописной традиции, овладел Киевом?",
+    "correct_answer": 882
+  },
+  {
+    "id": "ru_hist_num_002",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году традиционно датируется Крещение Руси князем Владимиром?",
+    "correct_answer": 988
+  },
+  {
+    "id": "ru_hist_num_003",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году состоялся Любечский съезд князей?",
+    "correct_answer": 1097
+  },
+  {
+    "id": "ru_hist_num_004",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Москва впервые упоминается в летописи?",
+    "correct_answer": 1147
+  },
+  {
+    "id": "ru_hist_num_005",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошла битва русских князей с монголами на реке Калке?",
+    "correct_answer": 1223
+  },
+  {
+    "id": "ru_hist_num_006",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошла Невская битва?",
+    "correct_answer": 1240
+  },
+  {
+    "id": "ru_hist_num_007",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошло Ледовое побоище на Чудском озере?",
+    "correct_answer": 1242
+  },
+  {
+    "id": "ru_hist_num_008",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошла Куликовская битва?",
+    "correct_answer": 1380
+  },
+  {
+    "id": "ru_hist_num_009",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошло стояние на реке Угре?",
+    "correct_answer": 1480
+  },
+  {
+    "id": "ru_hist_num_010",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Новгород окончательно вошёл в состав Московского государства?",
+    "correct_answer": 1478
+  },
+  {
+    "id": "ru_hist_num_011",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был принят Судебник Ивана III?",
+    "correct_answer": 1497
+  },
+  {
+    "id": "ru_hist_num_012",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Иван IV был венчан на царство?",
+    "correct_answer": 1547
+  },
+  {
+    "id": "ru_hist_num_013",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был принят Судебник Ивана IV?",
+    "correct_answer": 1550
+  },
+  {
+    "id": "ru_hist_num_014",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Русское государство взяло Казань?",
+    "correct_answer": 1552
+  },
+  {
+    "id": "ru_hist_num_015",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Астраханское ханство было присоединено к Русскому государству?",
+    "correct_answer": 1556
+  },
+  {
+    "id": "ru_hist_num_016",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году в Москве Иван Фёдоров и Пётр Мстиславец издали «Апостол»?",
+    "correct_answer": 1564
+  },
+  {
+    "id": "ru_hist_num_017",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Иван IV ввёл опричнину?",
+    "correct_answer": 1565
+  },
+  {
+    "id": "ru_hist_num_018",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году в Русской церкви было учреждено патриаршество?",
+    "correct_answer": 1589
+  },
+  {
+    "id": "ru_hist_num_019",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году после смерти Фёдора Ивановича царём был избран Борис Годунов?",
+    "correct_answer": 1598
+  },
+  {
+    "id": "ru_hist_num_020",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Второе ополчение Минина и Пожарского освободило Москву?",
+    "correct_answer": 1612
+  },
+  {
+    "id": "ru_hist_num_021",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Земский собор избрал Михаила Фёдоровича Романова царём?",
+    "correct_answer": 1613
+  },
+  {
+    "id": "ru_hist_num_022",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько лет было Михаилу Фёдоровичу Романову при избрании на царство в 1613 году?",
+    "correct_answer": 16
+  },
+  {
+    "id": "ru_hist_num_023",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году было принято Соборное уложение?",
+    "correct_answer": 1649
+  },
+  {
+    "id": "ru_hist_num_024",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году было заключено Андрусовское перемирие между Россией и Речью Посполитой?",
+    "correct_answer": 1667
+  },
+  {
+    "id": "ru_hist_num_025",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году русские войска взяли Азов во время второго Азовского похода?",
+    "correct_answer": 1696
+  },
+  {
+    "id": "ru_hist_num_026",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началось Великое посольство Петра I в Европу?",
+    "correct_answer": 1697
+  },
+  {
+    "id": "ru_hist_num_027",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась Северная война?",
+    "correct_answer": 1700
+  },
+  {
+    "id": "ru_hist_num_028",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был основан Санкт-Петербург?",
+    "correct_answer": 1703
+  },
+  {
+    "id": "ru_hist_num_029",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошла Полтавская битва?",
+    "correct_answer": 1709
+  },
+  {
+    "id": "ru_hist_num_030",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Пётр I учредил Правительствующий сенат?",
+    "correct_answer": 1711
+  },
+  {
+    "id": "ru_hist_num_031",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошла первая крупная морская победа русского флота при Гангуте?",
+    "correct_answer": 1714
+  },
+  {
+    "id": "ru_hist_num_032",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Ништадтский мир завершил Северную войну?",
+    "correct_answer": 1721
+  },
+  {
+    "id": "ru_hist_num_033",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько лет продолжалась Северная война по датировке 1700–1721?",
+    "correct_answer": 21
+  },
+  {
+    "id": "ru_hist_num_034",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Россия была провозглашена империей?",
+    "correct_answer": 1721
+  },
+  {
+    "id": "ru_hist_num_035",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был учреждён Святейший правительствующий синод?",
+    "correct_answer": 1721
+  },
+  {
+    "id": "ru_hist_num_036",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была введена Табель о рангах?",
+    "correct_answer": 1722
+  },
+  {
+    "id": "ru_hist_num_037",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был основан Московский университет?",
+    "correct_answer": 1755
+  },
+  {
+    "id": "ru_hist_num_038",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Екатерина II пришла к власти в результате дворцового переворота?",
+    "correct_answer": 1762
+  },
+  {
+    "id": "ru_hist_num_039",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был заключён Кючук-Кайнарджийский мир?",
+    "correct_answer": 1774
+  },
+  {
+    "id": "ru_hist_num_040",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Крым был присоединён к Российской империи при Екатерине II?",
+    "correct_answer": 1783
+  },
+  {
+    "id": "ru_hist_num_041",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году русские войска под командованием Суворова взяли Измаил?",
+    "correct_answer": 1790
+  },
+  {
+    "id": "ru_hist_num_042",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась Отечественная война против Наполеона?",
+    "correct_answer": 1812
+  },
+  {
+    "id": "ru_hist_num_043",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошло Бородинское сражение?",
+    "correct_answer": 1812
+  },
+  {
+    "id": "ru_hist_num_044",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошло восстание декабристов на Сенатской площади?",
+    "correct_answer": 1825
+  },
+  {
+    "id": "ru_hist_num_045",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась Крымская война?",
+    "correct_answer": 1853
+  },
+  {
+    "id": "ru_hist_num_046",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Парижский мир завершил Крымскую войну?",
+    "correct_answer": 1856
+  },
+  {
+    "id": "ru_hist_num_047",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году в Российской империи было отменено крепостное право?",
+    "correct_answer": 1861
+  },
+  {
+    "id": "ru_hist_num_048",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была проведена судебная реформа Александра II?",
+    "correct_answer": 1864
+  },
+  {
+    "id": "ru_hist_num_049",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году в Российской империи была введена всеобщая воинская повинность?",
+    "correct_answer": 1874
+  },
+  {
+    "id": "ru_hist_num_050",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась русско-турецкая война, завершившаяся Сан-Стефанским миром?",
+    "correct_answer": 1877
+  },
+  {
+    "id": "ru_hist_num_051",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был убит император Александр II?",
+    "correct_answer": 1881
+  },
+  {
+    "id": "ru_hist_num_052",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началось строительство Транссибирской магистрали?",
+    "correct_answer": 1891
+  },
+  {
+    "id": "ru_hist_num_053",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году прошла первая всеобщая перепись населения Российской империи?",
+    "correct_answer": 1897
+  },
+  {
+    "id": "ru_hist_num_054",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась Русско-японская война?",
+    "correct_answer": 1904
+  },
+  {
+    "id": "ru_hist_num_055",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась Первая русская революция?",
+    "correct_answer": 1905
+  },
+  {
+    "id": "ru_hist_num_056",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году впервые собралась Государственная дума Российской империи?",
+    "correct_answer": 1906
+  },
+  {
+    "id": "ru_hist_num_057",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько созывов Государственной думы Российской империи существовало до 1917 года?",
+    "correct_answer": 4
+  },
+  {
+    "id": "ru_hist_num_058",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Россия вступила в Первую мировую войну?",
+    "correct_answer": 1914
+  },
+  {
+    "id": "ru_hist_num_059",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошла Февральская революция?",
+    "correct_answer": 1917
+  },
+  {
+    "id": "ru_hist_num_060",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошла Октябрьская революция?",
+    "correct_answer": 1917
+  },
+  {
+    "id": "ru_hist_num_061",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был подписан Брестский мир?",
+    "correct_answer": 1918
+  },
+  {
+    "id": "ru_hist_num_062",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была введена новая экономическая политика — НЭП?",
+    "correct_answer": 1921
+  },
+  {
+    "id": "ru_hist_num_063",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был образован СССР?",
+    "correct_answer": 1922
+  },
+  {
+    "id": "ru_hist_num_064",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько республик выступили учредителями СССР в 1922 году?",
+    "correct_answer": 4
+  },
+  {
+    "id": "ru_hist_num_065",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была принята первая Конституция СССР?",
+    "correct_answer": 1924
+  },
+  {
+    "id": "ru_hist_num_066",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась первая пятилетка?",
+    "correct_answer": 1928
+  },
+  {
+    "id": "ru_hist_num_067",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году открылась первая линия Московского метрополитена?",
+    "correct_answer": 1935
+  },
+  {
+    "id": "ru_hist_num_068",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась советско-финляндская война?",
+    "correct_answer": 1939
+  },
+  {
+    "id": "ru_hist_num_069",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Германия напала на СССР?",
+    "correct_answer": 1941
+  },
+  {
+    "id": "ru_hist_num_070",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась блокада Ленинграда?",
+    "correct_answer": 1941
+  },
+  {
+    "id": "ru_hist_num_071",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько дней продолжалась блокада Ленинграда по официальной памятной датировке?",
+    "correct_answer": 872
+  },
+  {
+    "id": "ru_hist_num_072",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась Сталинградская битва?",
+    "correct_answer": 1942
+  },
+  {
+    "id": "ru_hist_num_073",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько дней продолжалась Сталинградская битва?",
+    "correct_answer": 200
+  },
+  {
+    "id": "ru_hist_num_074",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году завершилась Сталинградская битва?",
+    "correct_answer": 1943
+  },
+  {
+    "id": "ru_hist_num_075",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была полностью снята блокада Ленинграда?",
+    "correct_answer": 1944
+  },
+  {
+    "id": "ru_hist_num_076",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году завершилась Великая Отечественная война?",
+    "correct_answer": 1945
+  },
+  {
+    "id": "ru_hist_num_077",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была запущена первая в мире атомная электростанция в Обнинске?",
+    "correct_answer": 1954
+  },
+  {
+    "id": "ru_hist_num_078",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Какова была электрическая мощность реактора первой Обнинской АЭС в мегаваттах?",
+    "correct_answer": 5
+  },
+  {
+    "id": "ru_hist_num_079",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году СССР запустил первый искусственный спутник Земли?",
+    "correct_answer": 1957
+  },
+  {
+    "id": "ru_hist_num_080",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Юрий Гагарин совершил первый полёт человека в космос?",
+    "correct_answer": 1961
+  },
+  {
+    "id": "ru_hist_num_081",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько минут продолжался полёт Юрия Гагарина на «Востоке-1»?",
+    "correct_answer": 108
+  },
+  {
+    "id": "ru_hist_num_082",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Валентина Терешкова стала первой женщиной-космонавтом?",
+    "correct_answer": 1963
+  },
+  {
+    "id": "ru_hist_num_083",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Алексей Леонов первым в мире вышел в открытый космос?",
+    "correct_answer": 1965
+  },
+  {
+    "id": "ru_hist_num_084",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была запущена первая советская орбитальная станция «Салют-1»?",
+    "correct_answer": 1971
+  },
+  {
+    "id": "ru_hist_num_085",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году советские войска вошли в Афганистан?",
+    "correct_answer": 1979
+  },
+  {
+    "id": "ru_hist_num_086",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Москва принимала XXII летние Олимпийские игры?",
+    "correct_answer": 1980
+  },
+  {
+    "id": "ru_hist_num_087",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Михаил Горбачёв стал генеральным секретарём ЦК КПСС?",
+    "correct_answer": 1985
+  },
+  {
+    "id": "ru_hist_num_088",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошла авария на Чернобыльской АЭС?",
+    "correct_answer": 1986
+  },
+  {
+    "id": "ru_hist_num_089",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году космический корабль «Буран» совершил свой единственный орбитальный полёт?",
+    "correct_answer": 1988
+  },
+  {
+    "id": "ru_hist_num_090",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была принята Декларация о государственном суверенитете РСФСР?",
+    "correct_answer": 1990
+  },
+  {
+    "id": "ru_hist_num_091",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Борис Ельцин был избран президентом РСФСР?",
+    "correct_answer": 1991
+  },
+  {
+    "id": "ru_hist_num_092",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году были подписаны Беловежские соглашения?",
+    "correct_answer": 1991
+  },
+  {
+    "id": "ru_hist_num_093",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько руководителей республик подписали Беловежское соглашение 8 декабря 1991 года?",
+    "correct_answer": 3
+  },
+  {
+    "id": "ru_hist_num_094",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была принята действующая Конституция Российской Федерации?",
+    "correct_answer": 1993
+  },
+  {
+    "id": "ru_hist_num_095",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько депутатов составляет Государственная дума Российской Федерации по Конституции?",
+    "correct_answer": 450
+  },
+  {
+    "id": "ru_hist_num_096",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошёл российский финансовый кризис и дефолт по ГКО?",
+    "correct_answer": 1998
+  },
+  {
+    "id": "ru_hist_num_097",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году срок полномочий президента России был увеличен с четырёх до шести лет конституционной поправкой?",
+    "correct_answer": 2008
+  },
+  {
+    "id": "ru_hist_num_098",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько лет составляет срок полномочий президента России после поправки 2008 года?",
+    "correct_answer": 6
+  },
+  {
+    "id": "ru_hist_num_099",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько лет составляет срок полномочий Государственной думы после поправки 2008 года?",
+    "correct_answer": 5
+  },
+  {
+    "id": "ru_hist_num_100",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году состоялось общероссийское голосование по поправкам к Конституции России?",
+    "correct_answer": 2020
+  },
+  {
+    "id": "ru_hist_num_101",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году умер князь Ярослав Мудрый?",
+    "correct_answer": 1054
+  },
+  {
+    "id": "ru_hist_num_102",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году князь Андрей Боголюбский захватил Киев?",
+    "correct_answer": 1169
+  },
+  {
+    "id": "ru_hist_num_103",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошла битва на реке Липице между русскими князьями?",
+    "correct_answer": 1216
+  },
+  {
+    "id": "ru_hist_num_104",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году войска Батыя разорили Рязань?",
+    "correct_answer": 1237
+  },
+  {
+    "id": "ru_hist_num_105",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошла битва на реке Сить?",
+    "correct_answer": 1238
+  },
+  {
+    "id": "ru_hist_num_106",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году монгольские войска взяли Киев?",
+    "correct_answer": 1240
+  },
+  {
+    "id": "ru_hist_num_107",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году умер Александр Невский?",
+    "correct_answer": 1263
+  },
+  {
+    "id": "ru_hist_num_108",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году митрополит Пётр перенёс свою резиденцию в Москву?",
+    "correct_answer": 1325
+  },
+  {
+    "id": "ru_hist_num_109",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Иван Калита получил ярлык на великое княжение Владимирское?",
+    "correct_answer": 1328
+  },
+  {
+    "id": "ru_hist_num_110",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошла битва на реке Воже?",
+    "correct_answer": 1378
+  },
+  {
+    "id": "ru_hist_num_111",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году хан Тохтамыш разорил Москву?",
+    "correct_answer": 1382
+  },
+  {
+    "id": "ru_hist_num_112",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году войска Едигея осадили Москву?",
+    "correct_answer": 1408
+  },
+  {
+    "id": "ru_hist_num_113",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Василий II был ослеплён и получил прозвище Тёмный?",
+    "correct_answer": 1446
+  },
+  {
+    "id": "ru_hist_num_114",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Иван III женился на Софье Палеолог?",
+    "correct_answer": 1472
+  },
+  {
+    "id": "ru_hist_num_115",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Тверь была присоединена к Московскому государству?",
+    "correct_answer": 1485
+  },
+  {
+    "id": "ru_hist_num_116",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началось строительство современных кирпичных стен Московского Кремля?",
+    "correct_answer": 1485
+  },
+  {
+    "id": "ru_hist_num_117",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году завершилось строительство основных кирпичных стен Московского Кремля?",
+    "correct_answer": 1495
+  },
+  {
+    "id": "ru_hist_num_118",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Василий III вступил на московский престол?",
+    "correct_answer": 1505
+  },
+  {
+    "id": "ru_hist_num_119",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Псков был присоединён к Московскому государству?",
+    "correct_answer": 1510
+  },
+  {
+    "id": "ru_hist_num_120",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Смоленск был присоединён к Московскому государству при Василии III?",
+    "correct_answer": 1514
+  },
+  {
+    "id": "ru_hist_num_121",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Рязанское княжество окончательно вошло в состав Московского государства?",
+    "correct_answer": 1521
+  },
+  {
+    "id": "ru_hist_num_122",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году родился Иван IV Грозный?",
+    "correct_answer": 1530
+  },
+  {
+    "id": "ru_hist_num_123",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году состоялся Стоглавый собор?",
+    "correct_answer": 1551
+  },
+  {
+    "id": "ru_hist_num_124",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась Ливонская война?",
+    "correct_answer": 1558
+  },
+  {
+    "id": "ru_hist_num_125",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году закончилась Ливонская война?",
+    "correct_answer": 1583
+  },
+  {
+    "id": "ru_hist_num_126",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько лет продолжалась Ливонская война по датировке 1558–1583?",
+    "correct_answer": 25
+  },
+  {
+    "id": "ru_hist_num_127",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году крымский хан Девлет I Гирей сжёг Москву?",
+    "correct_answer": 1571
+  },
+  {
+    "id": "ru_hist_num_128",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошла битва при Молодях?",
+    "correct_answer": 1572
+  },
+  {
+    "id": "ru_hist_num_129",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году начался поход Ермака в Сибирское ханство?",
+    "correct_answer": 1581
+  },
+  {
+    "id": "ru_hist_num_130",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году умер Иван IV Грозный?",
+    "correct_answer": 1584
+  },
+  {
+    "id": "ru_hist_num_131",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году начался голод, охвативший Русское государство в начале XVII века?",
+    "correct_answer": 1601
+  },
+  {
+    "id": "ru_hist_num_132",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Лжедмитрий I вступил в Москву и занял престол?",
+    "correct_answer": 1605
+  },
+  {
+    "id": "ru_hist_num_133",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началось восстание Ивана Болотникова?",
+    "correct_answer": 1606
+  },
+  {
+    "id": "ru_hist_num_134",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был свергнут Василий Шуйский?",
+    "correct_answer": 1610
+  },
+  {
+    "id": "ru_hist_num_135",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был заключён Столбовский мир со Швецией?",
+    "correct_answer": 1617
+  },
+  {
+    "id": "ru_hist_num_136",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году было заключено Деулинское перемирие с Речью Посполитой?",
+    "correct_answer": 1618
+  },
+  {
+    "id": "ru_hist_num_137",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году патриарх Филарет вернулся из польского плена в Москву?",
+    "correct_answer": 1619
+  },
+  {
+    "id": "ru_hist_num_138",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась Смоленская война России с Речью Посполитой?",
+    "correct_answer": 1632
+  },
+  {
+    "id": "ru_hist_num_139",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошёл Соляной бунт в Москве?",
+    "correct_answer": 1648
+  },
+  {
+    "id": "ru_hist_num_140",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Семён Дежнёв прошёл пролив между Азией и Северной Америкой?",
+    "correct_answer": 1648
+  },
+  {
+    "id": "ru_hist_num_141",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году патриарх Никон начал церковную реформу?",
+    "correct_answer": 1653
+  },
+  {
+    "id": "ru_hist_num_142",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошёл Медный бунт в Москве?",
+    "correct_answer": 1662
+  },
+  {
+    "id": "ru_hist_num_143",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году церковный собор лишил Никона патриаршего сана?",
+    "correct_answer": 1666
+  },
+  {
+    "id": "ru_hist_num_144",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началось восстание Степана Разина?",
+    "correct_answer": 1670
+  },
+  {
+    "id": "ru_hist_num_145",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошло Стрелецкое восстание, после которого Софья стала регентом?",
+    "correct_answer": 1682
+  },
+  {
+    "id": "ru_hist_num_146",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Пётр I и Иван V были совместно венчаны на царство?",
+    "correct_answer": 1682
+  },
+  {
+    "id": "ru_hist_num_147",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был заключён Нерчинский договор России с Китаем?",
+    "correct_answer": 1689
+  },
+  {
+    "id": "ru_hist_num_148",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году состоялся первый Азовский поход Петра I?",
+    "correct_answer": 1695
+  },
+  {
+    "id": "ru_hist_num_149",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году в России началось летоисчисление от Рождества Христова по указу Петра I?",
+    "correct_answer": 1700
+  },
+  {
+    "id": "ru_hist_num_150",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году начала выходить первая русская печатная газета «Ведомости»?",
+    "correct_answer": 1703
+  },
+  {
+    "id": "ru_hist_num_151",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошла битва при Лесной?",
+    "correct_answer": 1708
+  },
+  {
+    "id": "ru_hist_num_152",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году состоялся Прутский поход Петра I?",
+    "correct_answer": 1711
+  },
+  {
+    "id": "ru_hist_num_153",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Санкт-Петербург фактически стал столицей Российской империи?",
+    "correct_answer": 1712
+  },
+  {
+    "id": "ru_hist_num_154",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько классов включала Табель о рангах?",
+    "correct_answer": 14
+  },
+  {
+    "id": "ru_hist_num_155",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была основана Петербургская академия наук?",
+    "correct_answer": 1724
+  },
+  {
+    "id": "ru_hist_num_156",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Екатерина I вступила на престол?",
+    "correct_answer": 1725
+  },
+  {
+    "id": "ru_hist_num_157",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Пётр II вступил на престол?",
+    "correct_answer": 1727
+  },
+  {
+    "id": "ru_hist_num_158",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Анна Иоанновна вступила на престол?",
+    "correct_answer": 1730
+  },
+  {
+    "id": "ru_hist_num_159",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Елизавета Петровна вступила на престол?",
+    "correct_answer": 1741
+  },
+  {
+    "id": "ru_hist_num_160",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была основана Императорская Академия художеств?",
+    "correct_answer": 1757
+  },
+  {
+    "id": "ru_hist_num_161",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году русская армия одержала победу при Кунерсдорфе?",
+    "correct_answer": 1759
+  },
+  {
+    "id": "ru_hist_num_162",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Пётр III вступил на престол?",
+    "correct_answer": 1761
+  },
+  {
+    "id": "ru_hist_num_163",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был издан Манифест о вольности дворянства?",
+    "correct_answer": 1762
+  },
+  {
+    "id": "ru_hist_num_164",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Екатерина II провела секуляризацию монастырских земель?",
+    "correct_answer": 1764
+  },
+  {
+    "id": "ru_hist_num_165",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году начала работу Уложенная комиссия Екатерины II?",
+    "correct_answer": 1767
+  },
+  {
+    "id": "ru_hist_num_166",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началось восстание Емельяна Пугачёва?",
+    "correct_answer": 1773
+  },
+  {
+    "id": "ru_hist_num_167",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году завершилось восстание Емельяна Пугачёва?",
+    "correct_answer": 1775
+  },
+  {
+    "id": "ru_hist_num_168",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был заключён Георгиевский трактат между Россией и Картли-Кахетинским царством?",
+    "correct_answer": 1783
+  },
+  {
+    "id": "ru_hist_num_169",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Екатерина II издала Жалованную грамоту городам?",
+    "correct_answer": 1785
+  },
+  {
+    "id": "ru_hist_num_170",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году умерла Екатерина II?",
+    "correct_answer": 1796
+  },
+  {
+    "id": "ru_hist_num_171",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Павел I издал новый акт о престолонаследии?",
+    "correct_answer": 1797
+  },
+  {
+    "id": "ru_hist_num_172",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году состоялся Швейцарский поход Суворова?",
+    "correct_answer": 1799
+  },
+  {
+    "id": "ru_hist_num_173",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был убит император Павел I?",
+    "correct_answer": 1801
+  },
+  {
+    "id": "ru_hist_num_174",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году в Российской империи были учреждены министерства?",
+    "correct_answer": 1802
+  },
+  {
+    "id": "ru_hist_num_175",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько министерств было учреждено манифестом Александра I в 1802 году?",
+    "correct_answer": 8
+  },
+  {
+    "id": "ru_hist_num_176",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началось первое русское кругосветное плавание Крузенштерна и Лисянского?",
+    "correct_answer": 1803
+  },
+  {
+    "id": "ru_hist_num_177",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась русско-шведская война, по итогам которой Финляндия вошла в состав России?",
+    "correct_answer": 1808
+  },
+  {
+    "id": "ru_hist_num_178",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Финляндия вошла в состав Российской империи как Великое княжество?",
+    "correct_answer": 1809
+  },
+  {
+    "id": "ru_hist_num_179",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был учреждён Государственный совет Российской империи?",
+    "correct_answer": 1810
+  },
+  {
+    "id": "ru_hist_num_180",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был заключён Бухарестский мир между Россией и Османской империей?",
+    "correct_answer": 1812
+  },
+  {
+    "id": "ru_hist_num_181",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году русские войска вошли в Париж после войны с Наполеоном?",
+    "correct_answer": 1814
+  },
+  {
+    "id": "ru_hist_num_182",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Николай I был коронован российским императором?",
+    "correct_answer": 1826
+  },
+  {
+    "id": "ru_hist_num_183",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году было создано Третье отделение Собственной Его Императорского Величества канцелярии?",
+    "correct_answer": 1826
+  },
+  {
+    "id": "ru_hist_num_184",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был опубликован Свод законов Российской империи?",
+    "correct_answer": 1832
+  },
+  {
+    "id": "ru_hist_num_185",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась реформа государственных крестьян Павла Киселёва?",
+    "correct_answer": 1837
+  },
+  {
+    "id": "ru_hist_num_186",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году открылась первая в России железная дорога общего пользования между Петербургом и Царским Селом?",
+    "correct_answer": 1837
+  },
+  {
+    "id": "ru_hist_num_187",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась денежная реформа Егора Канкрина?",
+    "correct_answer": 1839
+  },
+  {
+    "id": "ru_hist_num_188",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась оборона Севастополя в Крымскую войну?",
+    "correct_answer": 1854
+  },
+  {
+    "id": "ru_hist_num_189",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был принят новый Университетский устав Александра II?",
+    "correct_answer": 1863
+  },
+  {
+    "id": "ru_hist_num_190",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была проведена городская реформа Александра II?",
+    "correct_answer": 1870
+  },
+  {
+    "id": "ru_hist_num_191",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был подписан Сан-Стефанский мир?",
+    "correct_answer": 1878
+  },
+  {
+    "id": "ru_hist_num_192",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году состоялся Берлинский конгресс, пересмотревший условия Сан-Стефанского мира?",
+    "correct_answer": 1878
+  },
+  {
+    "id": "ru_hist_num_193",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был опубликован Манифест о незыблемости самодержавия Александра III?",
+    "correct_answer": 1881
+  },
+  {
+    "id": "ru_hist_num_194",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был основан Крестьянский поземельный банк?",
+    "correct_answer": 1882
+  },
+  {
+    "id": "ru_hist_num_195",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был принят новый Университетский устав Александра III?",
+    "correct_answer": 1884
+  },
+  {
+    "id": "ru_hist_num_196",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был издан циркуляр о «кухаркиных детях»?",
+    "correct_answer": 1887
+  },
+  {
+    "id": "ru_hist_num_197",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году начался голод в Российской империи, известный как голод 1891–1892 годов?",
+    "correct_answer": 1891
+  },
+  {
+    "id": "ru_hist_num_198",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Сергей Витте стал министром финансов Российской империи?",
+    "correct_answer": 1892
+  },
+  {
+    "id": "ru_hist_num_199",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошла Ходынская катастрофа?",
+    "correct_answer": 1896
+  },
+  {
+    "id": "ru_hist_num_200",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была проведена денежная реформа Витте, закрепившая золотой стандарт рубля?",
+    "correct_answer": 1897
+  },
+  {
+    "id": "ru_hist_num_201",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была основана Российская социал-демократическая рабочая партия?",
+    "correct_answer": 1898
+  },
+  {
+    "id": "ru_hist_num_202",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошло Кровавое воскресенье?",
+    "correct_answer": 1905
+  },
+  {
+    "id": "ru_hist_num_203",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошло восстание на броненосце «Князь Потёмкин-Таврический»?",
+    "correct_answer": 1905
+  },
+  {
+    "id": "ru_hist_num_204",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Николай II подписал Манифест 17 октября?",
+    "correct_answer": 1905
+  },
+  {
+    "id": "ru_hist_num_205",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году были опубликованы Основные государственные законы Российской империи в новой редакции?",
+    "correct_answer": 1906
+  },
+  {
+    "id": "ru_hist_num_206",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была распущена Первая Государственная дума?",
+    "correct_answer": 1906
+  },
+  {
+    "id": "ru_hist_num_207",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошёл Третьеиюньский переворот?",
+    "correct_answer": 1907
+  },
+  {
+    "id": "ru_hist_num_208",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был убит Пётр Столыпин?",
+    "correct_answer": 1911
+  },
+  {
+    "id": "ru_hist_num_209",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошёл Ленский расстрел рабочих?",
+    "correct_answer": 1912
+  },
+  {
+    "id": "ru_hist_num_210",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошёл Брусиловский прорыв?",
+    "correct_answer": 1916
+  },
+  {
+    "id": "ru_hist_num_211",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Николай II отрёкся от престола?",
+    "correct_answer": 1917
+  },
+  {
+    "id": "ru_hist_num_212",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году было создано Временное правительство?",
+    "correct_answer": 1917
+  },
+  {
+    "id": "ru_hist_num_213",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году состоялись выборы во Всероссийское учредительное собрание?",
+    "correct_answer": 1917
+  },
+  {
+    "id": "ru_hist_num_214",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была создана ВЧК?",
+    "correct_answer": 1917
+  },
+  {
+    "id": "ru_hist_num_215",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году в Советской России был введён григорианский календарь?",
+    "correct_answer": 1918
+  },
+  {
+    "id": "ru_hist_num_216",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году столица Советской России была перенесена из Петрограда в Москву?",
+    "correct_answer": 1918
+  },
+  {
+    "id": "ru_hist_num_217",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была расстреляна семья Николая II в Екатеринбурге?",
+    "correct_answer": 1918
+  },
+  {
+    "id": "ru_hist_num_218",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была создана Рабоче-крестьянская Красная армия?",
+    "correct_answer": 1918
+  },
+  {
+    "id": "ru_hist_num_219",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был основан Коммунистический интернационал?",
+    "correct_answer": 1919
+  },
+  {
+    "id": "ru_hist_num_220",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был утверждён план ГОЭЛРО?",
+    "correct_answer": 1920
+  },
+  {
+    "id": "ru_hist_num_221",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошло Кронштадтское восстание?",
+    "correct_answer": 1921
+  },
+  {
+    "id": "ru_hist_num_222",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась денежная реформа с введением советского червонца?",
+    "correct_answer": 1922
+  },
+  {
+    "id": "ru_hist_num_223",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году умер Владимир Ленин?",
+    "correct_answer": 1924
+  },
+  {
+    "id": "ru_hist_num_224",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Петроград был переименован в Ленинград?",
+    "correct_answer": 1924
+  },
+  {
+    "id": "ru_hist_num_225",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась массовая коллективизация сельского хозяйства в СССР?",
+    "correct_answer": 1929
+  },
+  {
+    "id": "ru_hist_num_226",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась массовая кампания раскулачивания?",
+    "correct_answer": 1930
+  },
+  {
+    "id": "ru_hist_num_227",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была введена в строй Днепровская ГЭС?",
+    "correct_answer": 1932
+  },
+  {
+    "id": "ru_hist_num_228",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был открыт Беломорско-Балтийский канал?",
+    "correct_answer": 1933
+  },
+  {
+    "id": "ru_hist_num_229",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько станций насчитывала первая очередь Московского метрополитена при открытии в 1935 году?",
+    "correct_answer": 13
+  },
+  {
+    "id": "ru_hist_num_230",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началось стахановское движение?",
+    "correct_answer": 1935
+  },
+  {
+    "id": "ru_hist_num_231",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была принята Конституция СССР, известная как Сталинская?",
+    "correct_answer": 1936
+  },
+  {
+    "id": "ru_hist_num_232",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году начался период массовых репрессий, известный как Большой террор?",
+    "correct_answer": 1937
+  },
+  {
+    "id": "ru_hist_num_233",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году прошла Всесоюзная перепись населения, результаты которой были официально опубликованы и использованы властями перед войной?",
+    "correct_answer": 1939
+  },
+  {
+    "id": "ru_hist_num_234",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был подписан пакт Молотова — Риббентропа?",
+    "correct_answer": 1939
+  },
+  {
+    "id": "ru_hist_num_235",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году СССР вошёл в состав Лиги Наций?",
+    "correct_answer": 1934
+  },
+  {
+    "id": "ru_hist_num_236",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году СССР был исключён из Лиги Наций?",
+    "correct_answer": 1939
+  },
+  {
+    "id": "ru_hist_num_237",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Красная армия заняла Западную Украину и Западную Белоруссию после начала Второй мировой войны?",
+    "correct_answer": 1939
+  },
+  {
+    "id": "ru_hist_num_238",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году СССР включил Литву, Латвию и Эстонию в свой состав?",
+    "correct_answer": 1940
+  },
+  {
+    "id": "ru_hist_num_239",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году состоялся военный парад на Красной площади 7 ноября во время битвы за Москву?",
+    "correct_answer": 1941
+  },
+  {
+    "id": "ru_hist_num_240",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась оборона Севастополя в Великой Отечественной войне?",
+    "correct_answer": 1941
+  },
+  {
+    "id": "ru_hist_num_241",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько дней продолжалась оборона Севастополя 1941–1942 годов по советской официальной формуле?",
+    "correct_answer": 250
+  },
+  {
+    "id": "ru_hist_num_242",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году завершилась оборона Севастополя 1941–1942 годов?",
+    "correct_answer": 1942
+  },
+  {
+    "id": "ru_hist_num_243",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году состоялась Тегеранская конференция лидеров СССР, США и Великобритании?",
+    "correct_answer": 1943
+  },
+  {
+    "id": "ru_hist_num_244",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась операция «Багратион»?",
+    "correct_answer": 1944
+  },
+  {
+    "id": "ru_hist_num_245",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году состоялась Ялтинская конференция?",
+    "correct_answer": 1945
+  },
+  {
+    "id": "ru_hist_num_246",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась советско-японская война?",
+    "correct_answer": 1945
+  },
+  {
+    "id": "ru_hist_num_247",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году начался Нюрнбергский процесс над главными нацистскими преступниками?",
+    "correct_answer": 1945
+  },
+  {
+    "id": "ru_hist_num_248",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько дней продолжалась Великая Отечественная война по официальной советской и российской памятной датировке?",
+    "correct_answer": 1418
+  },
+  {
+    "id": "ru_hist_num_249",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году СССР испытал первую атомную бомбу?",
+    "correct_answer": 1949
+  },
+  {
+    "id": "ru_hist_num_250",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году умер Иосиф Сталин?",
+    "correct_answer": 1953
+  },
+  {
+    "id": "ru_hist_num_251",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Никита Хрущёв выступил с докладом «О культе личности и его последствиях»?",
+    "correct_answer": 1956
+  },
+  {
+    "id": "ru_hist_num_252",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году СССР запустил аппарат «Луна-2», впервые достигший поверхности Луны?",
+    "correct_answer": 1959
+  },
+  {
+    "id": "ru_hist_num_253",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошёл Новочеркасский расстрел?",
+    "correct_answer": 1962
+  },
+  {
+    "id": "ru_hist_num_254",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Никита Хрущёв был освобождён от должности первого секретаря ЦК КПСС?",
+    "correct_answer": 1964
+  },
+  {
+    "id": "ru_hist_num_255",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была начата экономическая реформа, известная как косыгинская?",
+    "correct_answer": 1965
+  },
+  {
+    "id": "ru_hist_num_256",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году была принята Конституция СССР, известная как Брежневская?",
+    "correct_answer": 1977
+  },
+  {
+    "id": "ru_hist_num_257",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Юрий Андропов стал генеральным секретарём ЦК КПСС?",
+    "correct_answer": 1982
+  },
+  {
+    "id": "ru_hist_num_258",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Константин Черненко стал генеральным секретарём ЦК КПСС?",
+    "correct_answer": 1984
+  },
+  {
+    "id": "ru_hist_num_259",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был принят Закон СССР о кооперации?",
+    "correct_answer": 1988
+  },
+  {
+    "id": "ru_hist_num_260",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году состоялись первые выборы народных депутатов СССР?",
+    "correct_answer": 1989
+  },
+  {
+    "id": "ru_hist_num_261",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был учреждён пост президента СССР?",
+    "correct_answer": 1990
+  },
+  {
+    "id": "ru_hist_num_262",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошёл августовский путч ГКЧП?",
+    "correct_answer": 1991
+  },
+  {
+    "id": "ru_hist_num_263",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году СССР прекратил существование?",
+    "correct_answer": 1991
+  },
+  {
+    "id": "ru_hist_num_264",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году в России началась либерализация цен?",
+    "correct_answer": 1992
+  },
+  {
+    "id": "ru_hist_num_265",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году был подписан Федеративный договор?",
+    "correct_answer": 1992
+  },
+  {
+    "id": "ru_hist_num_266",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году произошёл конституционный кризис с вооружённым противостоянием в Москве?",
+    "correct_answer": 1993
+  },
+  {
+    "id": "ru_hist_num_267",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году состоялись первые выборы Государственной думы Российской Федерации?",
+    "correct_answer": 1993
+  },
+  {
+    "id": "ru_hist_num_268",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году началась Первая чеченская война?",
+    "correct_answer": 1994
+  },
+  {
+    "id": "ru_hist_num_269",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году состоялись президентские выборы, на которых Борис Ельцин был переизбран на второй срок?",
+    "correct_answer": 1996
+  },
+  {
+    "id": "ru_hist_num_270",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько старых рублей обменивалось на один новый рубль при деноминации 1998 года?",
+    "correct_answer": 1000
+  },
+  {
+    "id": "ru_hist_num_271",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Владимир Путин стал исполняющим обязанности президента России?",
+    "correct_answer": 1999
+  },
+  {
+    "id": "ru_hist_num_272",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Владимир Путин впервые был избран президентом России?",
+    "correct_answer": 2000
+  },
+  {
+    "id": "ru_hist_num_273",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году в России были образованы федеральные округа?",
+    "correct_answer": 2000
+  },
+  {
+    "id": "ru_hist_num_274",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году прошла первая Всероссийская перепись населения после распада СССР?",
+    "correct_answer": 2002
+  },
+  {
+    "id": "ru_hist_num_275",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Россия принимала зимние Олимпийские игры в Сочи?",
+    "correct_answer": 2014
+  },
+  {
+    "id": "ru_hist_num_276",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Россия принимала чемпионат мира по футболу?",
+    "correct_answer": 2018
+  },
+  {
+    "id": "ru_hist_num_277",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько лет прошло между основанием Санкт-Петербурга в 1703 году и его переименованием в Петроград в 1914 году?",
+    "correct_answer": 211
+  },
+  {
+    "id": "ru_hist_num_278",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Санкт-Петербург был переименован в Петроград?",
+    "correct_answer": 1914
+  },
+  {
+    "id": "ru_hist_num_279",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Ленинград был переименован обратно в Санкт-Петербург?",
+    "correct_answer": 1991
+  },
+  {
+    "id": "ru_hist_num_280",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько лет город носил название Ленинград по интервалу 1924–1991?",
+    "correct_answer": 67
+  },
+  {
+    "id": "ru_hist_num_281",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Нижний Новгород был переименован в Горький?",
+    "correct_answer": 1932
+  },
+  {
+    "id": "ru_hist_num_282",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году город Горький получил обратно название Нижний Новгород?",
+    "correct_answer": 1990
+  },
+  {
+    "id": "ru_hist_num_283",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько лет Нижний Новгород официально носил название Горький по интервалу 1932–1990?",
+    "correct_answer": 58
+  },
+  {
+    "id": "ru_hist_num_284",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Екатеринбург был переименован в Свердловск?",
+    "correct_answer": 1924
+  },
+  {
+    "id": "ru_hist_num_285",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Свердловску вернули название Екатеринбург?",
+    "correct_answer": 1991
+  },
+  {
+    "id": "ru_hist_num_286",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько лет Екатеринбург носил название Свердловск по интервалу 1924–1991?",
+    "correct_answer": 67
+  },
+  {
+    "id": "ru_hist_num_287",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Царицын был переименован в Сталинград?",
+    "correct_answer": 1925
+  },
+  {
+    "id": "ru_hist_num_288",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Сталинград был переименован в Волгоград?",
+    "correct_answer": 1961
+  },
+  {
+    "id": "ru_hist_num_289",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько лет город носил название Сталинград по интервалу 1925–1961?",
+    "correct_answer": 36
+  },
+  {
+    "id": "ru_hist_num_290",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Самара была переименована в Куйбышев?",
+    "correct_answer": 1935
+  },
+  {
+    "id": "ru_hist_num_291",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Куйбышеву вернули название Самара?",
+    "correct_answer": 1991
+  },
+  {
+    "id": "ru_hist_num_292",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько лет Самара носила название Куйбышев по интервалу 1935–1991?",
+    "correct_answer": 56
+  },
+  {
+    "id": "ru_hist_num_293",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Тверь была переименована в Калинин?",
+    "correct_answer": 1931
+  },
+  {
+    "id": "ru_hist_num_294",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Калинину вернули название Тверь?",
+    "correct_answer": 1990
+  },
+  {
+    "id": "ru_hist_num_295",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько лет Тверь носила название Калинин по интервалу 1931–1990?",
+    "correct_answer": 59
+  },
+  {
+    "id": "ru_hist_num_296",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Оренбург был переименован в Чкалов?",
+    "correct_answer": 1938
+  },
+  {
+    "id": "ru_hist_num_297",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Чкалову вернули название Оренбург?",
+    "correct_answer": 1957
+  },
+  {
+    "id": "ru_hist_num_298",
+    "category": "История России",
+    "type": "numeric",
+    "question": "Сколько лет Оренбург носил название Чкалов по интервалу 1938–1957?",
+    "correct_answer": 19
+  },
+  {
+    "id": "ru_hist_num_299",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Пермь была переименована в Молотов?",
+    "correct_answer": 1940
+  },
+  {
+    "id": "ru_hist_num_300",
+    "category": "История России",
+    "type": "numeric",
+    "question": "В каком году Молотову вернули название Пермь?",
+    "correct_answer": 1957
+  }
+]

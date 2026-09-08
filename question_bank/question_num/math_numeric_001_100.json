@@ -1,0 +1,702 @@
+[
+  {
+    "id": "math_num_001",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна сумма первых 100 натуральных чисел?",
+    "correct_answer": 5050
+  },
+  {
+    "id": "math_num_002",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равно произведение 7 × 8?",
+    "correct_answer": 56
+  },
+  {
+    "id": "math_num_003",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равен остаток от деления 100 на 9?",
+    "correct_answer": 1
+  },
+  {
+    "id": "math_num_004",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равен наибольший общий делитель чисел 84 и 126?",
+    "correct_answer": 42
+  },
+  {
+    "id": "math_num_005",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равно наименьшее общее кратное чисел 12 и 18?",
+    "correct_answer": 36
+  },
+  {
+    "id": "math_num_006",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько простых чисел меньше 20?",
+    "correct_answer": 8
+  },
+  {
+    "id": "math_num_007",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько положительных делителей имеет число 36?",
+    "correct_answer": 9
+  },
+  {
+    "id": "math_num_008",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько положительных делителей имеет число 100?",
+    "correct_answer": 9
+  },
+  {
+    "id": "math_num_009",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна сумма цифр числа 987654321?",
+    "correct_answer": 45
+  },
+  {
+    "id": "math_num_010",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Какое наименьшее простое число больше 100?",
+    "correct_answer": 101
+  },
+  {
+    "id": "math_num_011",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько нулей в конце числа 10!?",
+    "correct_answer": 2
+  },
+  {
+    "id": "math_num_012",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько нулей в конце числа 100!?",
+    "correct_answer": 24
+  },
+  {
+    "id": "math_num_013",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна функция Эйлера φ(10)?",
+    "correct_answer": 4
+  },
+  {
+    "id": "math_num_014",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна функция Эйлера φ(12)?",
+    "correct_answer": 4
+  },
+  {
+    "id": "math_num_015",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько взаимно простых с 15 натуральных чисел от 1 до 15?",
+    "correct_answer": 8
+  },
+  {
+    "id": "math_num_016",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равен остаток от деления 2^10 на 7?",
+    "correct_answer": 2
+  },
+  {
+    "id": "math_num_017",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равен остаток от деления 3^5 на 11?",
+    "correct_answer": 1
+  },
+  {
+    "id": "math_num_018",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько простых множителей с учётом кратности в разложении числа 72?",
+    "correct_answer": 5
+  },
+  {
+    "id": "math_num_019",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Какова сумма всех положительных делителей числа 12?",
+    "correct_answer": 28
+  },
+  {
+    "id": "math_num_020",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Какое наибольшее целое число делит одновременно 144 и 216?",
+    "correct_answer": 72
+  },
+  {
+    "id": "math_num_021",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Если 3x + 5 = 20, чему равен x?",
+    "correct_answer": 5
+  },
+  {
+    "id": "math_num_022",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Если x² = 144 и x положительно, чему равен x?",
+    "correct_answer": 12
+  },
+  {
+    "id": "math_num_023",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна сумма корней уравнения x² - 10x + 21 = 0?",
+    "correct_answer": 10
+  },
+  {
+    "id": "math_num_024",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равно произведение корней уравнения x² - 7x + 12 = 0?",
+    "correct_answer": 12
+  },
+  {
+    "id": "math_num_025",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равен дискриминант уравнения x² - 6x + 5 = 0?",
+    "correct_answer": 16
+  },
+  {
+    "id": "math_num_026",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько целых корней имеет уравнение x² = 49?",
+    "correct_answer": 2
+  },
+  {
+    "id": "math_num_027",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равно значение выражения 2x² - 3x + 1 при x = 4?",
+    "correct_answer": 21
+  },
+  {
+    "id": "math_num_028",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равен 10-й член арифметической прогрессии 3, 7, 11, ...?",
+    "correct_answer": 39
+  },
+  {
+    "id": "math_num_029",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна сумма первых 10 членов арифметической прогрессии 1, 4, 7, ...?",
+    "correct_answer": 145
+  },
+  {
+    "id": "math_num_030",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равен 8-й член геометрической прогрессии 1, 2, 4, 8, ...?",
+    "correct_answer": 128
+  },
+  {
+    "id": "math_num_031",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна сумма первых 8 членов геометрической прогрессии 1, 2, 4, ...?",
+    "correct_answer": 255
+  },
+  {
+    "id": "math_num_032",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Какое число идёт следующим в последовательности 1, 1, 2, 3, 5, 8, 13?",
+    "correct_answer": 21
+  },
+  {
+    "id": "math_num_033",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равен 10-й член последовательности Фибоначчи, если считать 1, 1 первым и вторым членами?",
+    "correct_answer": 55
+  },
+  {
+    "id": "math_num_034",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна сумма первых 10 нечётных натуральных чисел?",
+    "correct_answer": 100
+  },
+  {
+    "id": "math_num_035",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна сумма первых 10 чётных натуральных чисел?",
+    "correct_answer": 110
+  },
+  {
+    "id": "math_num_036",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Если 2^x = 32, чему равен x?",
+    "correct_answer": 5
+  },
+  {
+    "id": "math_num_037",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Если 5^x = 125, чему равен x?",
+    "correct_answer": 3
+  },
+  {
+    "id": "math_num_038",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равен log₂(64)?",
+    "correct_answer": 6
+  },
+  {
+    "id": "math_num_039",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равен log₁₀(100000)?",
+    "correct_answer": 5
+  },
+  {
+    "id": "math_num_040",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько решений имеет система x + y = 10, x - y = 2 над действительными числами?",
+    "correct_answer": 1
+  },
+  {
+    "id": "math_num_041",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколькими способами можно переставить 5 различных книг на полке?",
+    "correct_answer": 120
+  },
+  {
+    "id": "math_num_042",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколькими способами можно выбрать 2 человека из 6?",
+    "correct_answer": 15
+  },
+  {
+    "id": "math_num_043",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколькими способами можно выбрать 3 человека из 8?",
+    "correct_answer": 56
+  },
+  {
+    "id": "math_num_044",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько двузначных чисел можно составить из цифр 1, 2, 3 без повторений?",
+    "correct_answer": 6
+  },
+  {
+    "id": "math_num_045",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько трёхзначных чисел можно составить из цифр 1, 2, 3 без повторений?",
+    "correct_answer": 6
+  },
+  {
+    "id": "math_num_046",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько различных перестановок имеет слово «МАТЕМАТИКА»?",
+    "correct_answer": 151200
+  },
+  {
+    "id": "math_num_047",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько подмножеств имеет множество из 5 элементов?",
+    "correct_answer": 32
+  },
+  {
+    "id": "math_num_048",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько непустых подмножеств имеет множество из 6 элементов?",
+    "correct_answer": 63
+  },
+  {
+    "id": "math_num_049",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько диагоналей у правильного десятиугольника?",
+    "correct_answer": 35
+  },
+  {
+    "id": "math_num_050",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько рукопожатий произойдёт, если 10 человек пожмут руку каждому другому ровно один раз?",
+    "correct_answer": 45
+  },
+  {
+    "id": "math_num_051",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколькими способами можно рассадить 4 человек на 4 различных стула?",
+    "correct_answer": 24
+  },
+  {
+    "id": "math_num_052",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько способов выбрать президента и вице-президента из 7 человек?",
+    "correct_answer": 42
+  },
+  {
+    "id": "math_num_053",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько бинарных строк длины 5 существует?",
+    "correct_answer": 32
+  },
+  {
+    "id": "math_num_054",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько бинарных строк длины 8 содержат ровно две единицы?",
+    "correct_answer": 28
+  },
+  {
+    "id": "math_num_055",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько способов пройти из левого нижнего угла сетки 3×3 в правый верхний, двигаясь только вправо и вверх по рёбрам?",
+    "correct_answer": 20
+  },
+  {
+    "id": "math_num_056",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько равновероятных исходов имеет бросок стандартного шестигранного кубика?",
+    "correct_answer": 6
+  },
+  {
+    "id": "math_num_057",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько равновероятных исходов имеет одновременный бросок двух стандартных кубиков?",
+    "correct_answer": 36
+  },
+  {
+    "id": "math_num_058",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколькими способами на двух кубиках можно получить сумму 7?",
+    "correct_answer": 6
+  },
+  {
+    "id": "math_num_059",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколькими способами на двух кубиках можно получить сумму 8?",
+    "correct_answer": 5
+  },
+  {
+    "id": "math_num_060",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько орлов в среднем ожидается при 100 бросках честной монеты?",
+    "correct_answer": 50
+  },
+  {
+    "id": "math_num_061",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Какова медиана набора 1, 3, 5, 7, 9?",
+    "correct_answer": 5
+  },
+  {
+    "id": "math_num_062",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Какова мода набора 2, 2, 3, 4, 4, 4, 5?",
+    "correct_answer": 4
+  },
+  {
+    "id": "math_num_063",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равно среднее арифметическое чисел 10, 20, 30, 40, 50?",
+    "correct_answer": 30
+  },
+  {
+    "id": "math_num_064",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Каков размах набора 4, 8, 15, 16, 23, 42?",
+    "correct_answer": 38
+  },
+  {
+    "id": "math_num_065",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько элементов в наборе 2, 4, 6, 8, 10 имеют значение выше среднего этого набора?",
+    "correct_answer": 2
+  },
+  {
+    "id": "math_num_066",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько градусов составляет сумма углов треугольника в евклидовой геометрии?",
+    "correct_answer": 180
+  },
+  {
+    "id": "math_num_067",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько градусов составляет сумма внутренних углов четырёхугольника?",
+    "correct_answer": 360
+  },
+  {
+    "id": "math_num_068",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько градусов составляет каждый внутренний угол правильного шестиугольника?",
+    "correct_answer": 120
+  },
+  {
+    "id": "math_num_069",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько градусов составляет сумма внутренних углов правильного восьмиугольника?",
+    "correct_answer": 1080
+  },
+  {
+    "id": "math_num_070",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько диагоналей имеет выпуклый шестиугольник?",
+    "correct_answer": 9
+  },
+  {
+    "id": "math_num_071",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько сторон имеет многоугольник, сумма внутренних углов которого равна 1260 градусов?",
+    "correct_answer": 9
+  },
+  {
+    "id": "math_num_072",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна площадь квадрата со стороной 12?",
+    "correct_answer": 144
+  },
+  {
+    "id": "math_num_073",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равен периметр квадрата со стороной 9?",
+    "correct_answer": 36
+  },
+  {
+    "id": "math_num_074",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна площадь прямоугольника со сторонами 8 и 15?",
+    "correct_answer": 120
+  },
+  {
+    "id": "math_num_075",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равен периметр прямоугольника со сторонами 7 и 11?",
+    "correct_answer": 36
+  },
+  {
+    "id": "math_num_076",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна площадь прямоугольного треугольника с катетами 6 и 8?",
+    "correct_answer": 24
+  },
+  {
+    "id": "math_num_077",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна гипотенуза прямоугольного треугольника с катетами 5 и 12?",
+    "correct_answer": 13
+  },
+  {
+    "id": "math_num_078",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна гипотенуза прямоугольного треугольника с катетами 9 и 12?",
+    "correct_answer": 15
+  },
+  {
+    "id": "math_num_079",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна площадь круга радиуса 5, если считать π = 3?",
+    "correct_answer": 75
+  },
+  {
+    "id": "math_num_080",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна длина окружности радиуса 7, если считать π = 22/7?",
+    "correct_answer": 44
+  },
+  {
+    "id": "math_num_081",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равен объём куба с ребром 4?",
+    "correct_answer": 64
+  },
+  {
+    "id": "math_num_082",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна площадь поверхности куба с ребром 5?",
+    "correct_answer": 150
+  },
+  {
+    "id": "math_num_083",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько рёбер у куба?",
+    "correct_answer": 12
+  },
+  {
+    "id": "math_num_084",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько вершин у октаэдра?",
+    "correct_answer": 6
+  },
+  {
+    "id": "math_num_085",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько граней у икосаэдра?",
+    "correct_answer": 20
+  },
+  {
+    "id": "math_num_086",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько рёбер у полного графа на 5 вершинах?",
+    "correct_answer": 10
+  },
+  {
+    "id": "math_num_087",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько рёбер у полного графа на 8 вершинах?",
+    "correct_answer": 28
+  },
+  {
+    "id": "math_num_088",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько рёбер имеет дерево с 20 вершинами?",
+    "correct_answer": 19
+  },
+  {
+    "id": "math_num_089",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько вершин нечётной степени может быть в любом конечном графе по модулю 2?",
+    "correct_answer": 0
+  },
+  {
+    "id": "math_num_090",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько булевых значений может принимать одна логическая переменная?",
+    "correct_answer": 2
+  },
+  {
+    "id": "math_num_091",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько строк содержит таблица истинности для 4 логических переменных?",
+    "correct_answer": 16
+  },
+  {
+    "id": "math_num_092",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько строк содержит таблица истинности для 6 логических переменных?",
+    "correct_answer": 64
+  },
+  {
+    "id": "math_num_093",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько возможных отображений существует из множества из 3 элементов в множество из 2 элементов?",
+    "correct_answer": 8
+  },
+  {
+    "id": "math_num_094",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько возможных отношений на множестве из 2 элементов существует?",
+    "correct_answer": 16
+  },
+  {
+    "id": "math_num_095",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько различных неориентированных простых графов можно построить на 4 помеченных вершинах?",
+    "correct_answer": 64
+  },
+  {
+    "id": "math_num_096",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько знаков после запятой имеет число π в приближении 3.14159?",
+    "correct_answer": 5
+  },
+  {
+    "id": "math_num_097",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Чему равна сумма первых шести совершенных чисел, если взять 6, 28, 496, 8128, 33550336 и 8589869056?",
+    "correct_answer": 8623424050
+  },
+  {
+    "id": "math_num_098",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько правильных многогранников существует в трёхмерном евклидовом пространстве?",
+    "correct_answer": 5
+  },
+  {
+    "id": "math_num_099",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько цветов достаточно для раскраски любой плоской карты так, чтобы соседние области имели разные цвета?",
+    "correct_answer": 4
+  },
+  {
+    "id": "math_num_100",
+    "category": "Математика",
+    "type": "numeric",
+    "question": "Сколько ходов нужно минимум, чтобы решить классическую Ханойскую башню с 5 дисками?",
+    "correct_answer": 31
+  }
+]
