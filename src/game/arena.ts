@@ -75,8 +75,11 @@ export function captureCell(
 }
 
 export function getAttackTargets(cells: ArenaCell[], playerId: PlayerId): ArenaCell[] {
+  const ownedCells = cells.filter((candidate) => candidate.owner === playerId)
+  if (ownedCells.length === 0) return cells.filter((cell) => cell.owner && cell.owner !== playerId)
+
   const targets = new Set<string>()
-  for (const cell of cells.filter((candidate) => candidate.owner === playerId)) {
+  for (const cell of ownedCells) {
     for (const [row, col] of getNeighbors(cell.row, cell.col)) {
       const target = cells.find((candidate) => candidate.row === row && candidate.col === col)
       if (target?.owner && target.owner !== playerId) targets.add(cellKey(row, col))

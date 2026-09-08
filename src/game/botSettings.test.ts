@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { arenaRadius, botPlayerIds, defaultBotSettings, numericQuestionsForTopics, parseBotSettings, questionsForTopics, BOT_SKILL } from './botSettings'
 import { createArena, getAvailableCells, captureCell, getAttackTargets } from './arena'
-import type { QuizQuestion } from './types'
+import type { PlayerId, QuizQuestion } from './types'
 
 describe('Bot settings and arena rules', () => {
   it('defaults to medium, two opponents, 19 cells and every topic', () => {
@@ -46,7 +46,17 @@ describe('Bot settings and arena rules', () => {
     ]
     const selected = questionsForTopics(questions, ['История'])
     expect(selected.map(q => q.id)).toEqual(['history'])
-    expect(numericQuestionsForTopics(selected)).toEqual([{ id: 'number-history', prompt: 'В каком году?', answer: 882 }])
+    expect(numericQuestionsForTopics(selected)).toEqual([{ id: 'number-history', category: 'История', prompt: 'В каком году?', answer: 882 }])
     expect(questionsForTopics(questions, [])).toEqual([])
+  })
+  it('lets an eliminated player attack any opponent territory', () => {
+    const cells = createArena(1, ['you', 'alex']).map(cell => ({
+      ...cell,
+      owner: cell.owner === 'you' ? 'alex' : cell.owner,
+    }))
+    expect(cells.filter(cell => (cell.owner as PlayerId | null) === 'you')).toHaveLength(0)
+    const targets = getAttackTargets(cells, 'you')
+    expect(targets.length).toBeGreaterThan(0)
+    expect(targets.every(cell => (cell.owner as PlayerId | null) !== null && (cell.owner as PlayerId | null) !== 'you')).toBe(true)
   })
 })

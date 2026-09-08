@@ -27,6 +27,6 @@ export function numericQuestionsForTopics(questions: QuizQuestion[]): NumericQue
   return questions.flatMap(q => {
     const answer = q.options[q.correctIndex].trim()
     if (!/^-?\d+(?:[.,]\d+)?$/.test(answer)) return []
-    return [{ id: `number-${q.id}`, prompt: q.prompt, answer: Number(answer.replace(',', '.')) }]
+    return [{ id: `number-${q.id}`, category: q.category, prompt: q.prompt, answer: Number(answer.replace(',', '.')) }]
   })
 }

@@ -4,7 +4,6 @@ import cors from 'cors'
 import express from 'express'
 import { Server } from 'socket.io'
 import { z } from 'zod'
-import { createJeopardyRouter } from './jeopardy'
 import { GameRoomStore } from './gameRoomStore'
 import { verifyTelegramInitData } from './telegramAuth'
 import type { ClientToServerEvents, MultiplayerGameState, ServerToClientEvents, TelegramUser } from '../shared/multiplayer'
@@ -40,7 +39,6 @@ export const io = new Server<ClientToServerEvents, ServerToClientEvents, Record<
 
 app.use(cors({ origin: corsOrigin, credentials: true }))
 app.use(express.json({ limit: '512kb' }))
-app.use('/api/solo', createJeopardyRouter(authenticate))
 
 function log(roomId: string, message: string): void {
   const entry = { roomId, message, at: Date.now() }

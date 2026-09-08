@@ -1,6 +1,5 @@
 import { BotGameSettings } from './components/BotGameSettings'
 import { BOT_SETTINGS_KEY, BOT_SKILL, parseBotSettings, botPlayerIds, arenaRadius, questionsForTopics, numericQuestionsForTopics, type BotSettings } from './game/botSettings'
-import { JeopardySolo } from './components/JeopardySolo'
 import { useEffect, useReducer, useRef, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArenaGrid } from './components/ArenaGrid'
@@ -630,7 +629,7 @@ export default function App() {
   const [paused, setPaused] = useState(false)
   const [announcement, setAnnouncement] = useState(true)
   const [roundResult, setRoundResult] = useState<RoundResult | null>(null)
-  const [homeScreen, setHomeScreen] = useState<'menu' | 'stats' | 'ranked' | 'friends' | 'history' | 'solo' | 'bot-settings'>('menu')
+  const [homeScreen, setHomeScreen] = useState<'menu' | 'stats' | 'ranked' | 'friends' | 'history' | 'bot-settings'>('menu')
   const [selectedQuestionBankFiles, setSelectedQuestionBankFiles] = useState(() => readQuestionBankSelection())
   const recordedMatch = useRef(false)
   const { phase, match, completedRoundResult } = state
@@ -650,7 +649,6 @@ export default function App() {
   }
   const openBotSettings = () => { setBotSettings(readBotSettings()); setHomeScreen('bot-settings') }
 
-  const startSolo = () => { setSettingsOpen(false); setPaused(false); setAnnouncement(false); setHomeScreen('solo') }
   const updateQuestionBankFiles = (files: number[]) => {
     const next = normalizeQuestionBankSelection(files)
     if (next.length === 0) return
@@ -837,8 +835,7 @@ export default function App() {
       {phase === 'home' && homeScreen === 'friends' ? <FriendsScreen onBack={() => setHomeScreen('menu')} /> : null}
       {phase === 'home' && homeScreen === 'history' ? <HistoryScreen onBack={() => setHomeScreen('stats')} /> : null}
       {phase === 'home' && homeScreen === 'bot-settings' ? <BotGameSettings settings={botSettings} topics={BOT_TOPICS.map(name => ({ name, count: [...LOCALIZED_QUIZ_QUESTIONS, ...LOCALIZED_NUMERIC_QUESTIONS].filter(q => (q.category ?? 'Общие знания') === name).length }))} onChange={updateBotSettings} onStart={startMatch} onBack={() => setHomeScreen('menu')} /> : null}
-      {phase === 'home' && homeScreen === 'solo' ? <JeopardySolo onExit={() => setHomeScreen('menu')} /> : null}
-      {phase === 'home' && homeScreen === 'menu' ? <MenuScreen notice={menuNotice} selectedQuestionBankFiles={selectedQuestionBankFiles} connectedQuestionCount={quizQuestions.length} onQuestionBankFilesChange={updateQuestionBankFiles} onSolo={startSolo} onStart={openBotSettings} onStats={() => setHomeScreen('stats')} onRanked={() => setHomeScreen('ranked')} onFriends={() => setHomeScreen('friends')} /> : null}
+      {phase === 'home' && homeScreen === 'menu' ? <MenuScreen notice={menuNotice} selectedQuestionBankFiles={selectedQuestionBankFiles} connectedQuestionCount={quizQuestions.length} onQuestionBankFilesChange={updateQuestionBankFiles} onStart={openBotSettings} onStats={() => setHomeScreen('stats')} onRanked={() => setHomeScreen('ranked')} onFriends={() => setHomeScreen('friends')} /> : null}
       <AnimatePresence mode="wait">
         {match && (timeline.mapVisible || (phase !== 'home' && phase !== 'results' && phase !== 'expansion' && !questionPhase)) ? <motion.div key="map" className={`map-stage ${timeline.mapReturning ? 'is-returning' : ''}`} initial={{ opacity: 0.5, y: 10, filter: 'blur(10px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} exit={{ opacity: 0, y: -10, filter: 'blur(10px)' }} transition={{ duration: Math.max(ANIMATION_TIMINGS.minTransition, timeline.mapReturning ? ANIMATION_TIMINGS.mapReturn : ANIMATION_TIMINGS.minTransition) / 1000 }}><ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' && match.pendingCapture === 'you' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /></motion.div> : null}
         {((phase === 'expansion' && timeline.questionVisible) || (questionPhase && phase !== 'expansion' && !announcement)) ? <motion.div key="question" className={`question-stage ${timeline.inputExiting ? 'is-exiting' : ''}`} initial={{ opacity: 0, y: 50 }} animate={{ opacity: timeline.inputExiting ? 0 : 1, y: timeline.inputExiting ? -12 : 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: (timeline.inputExiting ? ANIMATION_TIMINGS.inputExit : ANIMATION_TIMINGS.questionEnter) / 1000 }}>
@@ -909,8 +906,8 @@ function answerBackground(playerIds: PlayerId[]): string {
   return `linear-gradient(to right, ${stops.join(', ')})`
 }
 
-function playersForOption(answers: Answers, optionIndex: number): PlayerId[] {
-  return PLAYER_IDS.filter((id) => {
+function playersForOption(answers: Answers, optionIndex: number, participants = PLAYER_IDS): PlayerId[] {
+  return participants.filter((id) => {
     const answer = answers[id]
     return Number.isInteger(answer) && answer === optionIndex && Boolean(PLAYER_BY_ID[id]?.accent)
   })
@@ -919,7 +916,7 @@ function playersForOption(answers: Answers, optionIndex: number): PlayerId[] {
 function RoundResultOverlay({ result, humanCorrect = null }: { result: RoundResult; humanCorrect?: boolean | null }) {
   if (result.kind === 'quiz') {
     const correctIndex = result.question.correctIndex
-    return <motion.div className="round-result-overlay" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: ANIMATION_TIMINGS.resultReveal / 1000 }}><section className="round-result-card"><p className="kicker">Результаты викторины</p><h2 className="question-text">{result.question.prompt}</h2><div className="result-options">{result.question.options.map((option, index) => { const players = playersForOption(result.answers, index); return <motion.div key={option} className={`result-option ${index === correctIndex ? 'is-correct' : ''}`} style={{ background: answerBackground(players) }} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: ANIMATION_TIMINGS.minTransition / 1000, delay: index * 0.04 }}><strong>{['А', 'Б', 'В', 'Г'][index]}</strong><span>{option}</span></motion.div> })}</div>{humanCorrect !== null ? <motion.p className={`answer-verdict ${humanCorrect ? 'is-correct' : 'is-wrong'}`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: ANIMATION_TIMINGS.minTransition / 1000 }}> {humanCorrect ? 'Правильно!' : 'Неправильно'} </motion.p> : null}</section></motion.div>
+    return <motion.div className="round-result-overlay" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: ANIMATION_TIMINGS.resultReveal / 1000 }}><section className="round-result-card"><p className="kicker">Результаты викторины · {result.question.category ?? 'Общие знания'}</p><h2 className="question-text">{result.question.prompt}</h2><div className="result-options">{result.question.options.map((option, index) => { const players = playersForOption(result.answers, index, result.participants); return <motion.div key={option} className={`result-option ${index === correctIndex ? 'is-correct is-gold-correct' : ''}`} style={{ background: answerBackground(players) }} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: ANIMATION_TIMINGS.minTransition / 1000, delay: index * 0.04 }}><strong>{['А', 'Б', 'В', 'Г'][index]}</strong><span>{option}</span></motion.div> })}</div>{humanCorrect !== null ? <motion.p className={`answer-verdict ${humanCorrect ? 'is-correct' : 'is-wrong'}`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: ANIMATION_TIMINGS.minTransition / 1000 }}> {humanCorrect ? 'Правильно!' : 'Неправильно'} </motion.p> : null}</section></motion.div>
   }
   const participants = result.participants ?? PLAYER_IDS
   const rows = participants
@@ -942,18 +939,18 @@ function TurnIndicator({ activePlayer, playerIds }: { activePlayer: PlayerId | n
 }
 
 function QuestionPanel({ question, remainingMs, locked, selected, result, onChoose }: { question: QuizQuestion; remainingMs: number; locked: boolean; selected: number | null; result: boolean | null; onChoose: (pick: number) => void }) {
-  return <section className="panel question-card"><p className="kicker">Общий вопрос · отвечают все одновременно</p><h2 className="question-text">{question.prompt}</h2><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><div className="options">{question.options.map((option, index) => <motion.button key={option} type="button" className={`option ${selected === index ? 'is-selected' : ''}`} style={{ ['--answer-color' as string]: PLAYER_BY_ID.you.accent }} disabled={locked} whileTap={{ scale: 0.95 }} transition={{ duration: ANIMATION_TIMINGS.answerPress / 1000 }} onClick={() => onChoose(index)}><span className="opt-key">{['А', 'Б', 'В', 'Г'][index]}</span>{option}</motion.button>)}</div>{result !== null ? <p className={`answer-verdict ${result ? 'is-correct' : 'is-wrong'}`}>{result ? 'Правильно!' : 'Неправильно'}</p> : null}<p className="hint">{locked ? 'Ответ принят. Ждём остальных игроков.' : `На ответ есть ${Math.round(QUIZ_TIME_MS / 1000)} секунд.`}</p></section>
+  return <section className="panel question-card"><p className="kicker">Общий вопрос · {question.category ?? 'Общие знания'}</p><h2 className="question-text">{question.prompt}</h2><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><div className="options">{question.options.map((option, index) => <motion.button key={option} type="button" className={`option ${selected === index ? 'is-selected' : ''}`} style={{ ['--answer-color' as string]: PLAYER_BY_ID.you.accent }} disabled={locked} whileTap={{ scale: 0.95 }} transition={{ duration: ANIMATION_TIMINGS.answerPress / 1000 }} onClick={() => onChoose(index)}><span className="opt-key">{['А', 'Б', 'В', 'Г'][index]}</span>{option}</motion.button>)}</div>{result !== null ? <p className={`answer-verdict ${result ? 'is-correct' : 'is-wrong'}`}>{result ? 'Правильно!' : 'Неправильно'}</p> : null}<p className="hint">{locked ? 'Ответ принят. Ждём остальных игроков.' : `На ответ есть ${Math.round(QUIZ_TIME_MS / 1000)} секунд.`}</p></section>
 }
 
 function NumberDuel({ match, remainingMs, paused, onAnswer }: { match: Match; remainingMs: number; paused: boolean; onAnswer: (value: number | null) => void }) {
   const [value, setValue] = useState('')
   const [locked, setLocked] = useState(false)
-  return <section className="panel question-card"><p className="kicker">Одновременный ответ</p><p className="hint question-text">{match.numericQuestion.prompt}</p><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><form className="guess-form" onSubmit={(event) => { event.preventDefault(); const parsed = Number(value.replace(',', '.')); if (!Number.isFinite(parsed)) return; setLocked(true); onAnswer(parsed) }}><input value={value} onChange={(event) => setValue(event.target.value)} disabled={locked || paused} inputMode="decimal" placeholder="Твоё число" aria-label="Числовой ответ" /><button type="submit" disabled={locked || paused}>{locked ? 'Принято' : 'Ответить'}</button></form><p className="hint">Сравнивается только абсолютное отклонение, без бонуса за скорость.</p></section>
+  return <section className="panel question-card"><p className="kicker">Числовая дуэль · {match.numericQuestion.category ?? 'Общие знания'}</p><h2 className="question-text">{match.numericQuestion.prompt}</h2><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><form className="guess-form" onSubmit={(event) => { event.preventDefault(); const parsed = Number(value.replace(',', '.')); if (!Number.isFinite(parsed)) return; setLocked(true); onAnswer(parsed) }}><input value={value} onChange={(event) => setValue(event.target.value)} disabled={locked || paused} inputMode="decimal" placeholder="Твоё число" aria-label="Числовой ответ" /><button type="submit" disabled={locked || paused}>{locked ? 'Принято' : 'Ответить'}</button></form><p className="hint">Сравнивается только абсолютное отклонение, без бонуса за скорость.</p></section>
 }
 
 function FinalRoundPanel({ match, remainingMs, locked, onAnswer }: { match: Match; remainingMs: number; locked: boolean; onAnswer: (value: number | null) => void }) {
   const [value, setValue] = useState('')
-  return <section className="panel question-card final-round-panel"><p className="kicker">РЕШАЮЩИЙ РАУНД · ФИНАЛЬНАЯ СОТА</p><h2 className="question-text">{match.finalQuestion.prompt}</h2><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><form className="guess-form" onSubmit={(event) => { event.preventDefault(); const parsed = Number(value.replace(',', '.')); if (!Number.isFinite(parsed)) return; onAnswer(parsed) }}><input value={value} onChange={(event) => setValue(event.target.value)} disabled={locked} inputMode="decimal" placeholder="Твоё число" aria-label="Ответ финального раунда" /><button type="submit" disabled={locked}>{locked ? 'Принято' : 'Ответить'}</button></form><p className="hint">Осталась одна сота. Побеждает ближайший ответ; при равенстве решает время отправки.</p></section>
+  return <section className="panel question-card final-round-panel"><p className="kicker">Финальная сота · {match.finalQuestion.category ?? 'Общие знания'}</p><h2 className="question-text">{match.finalQuestion.prompt}</h2><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><form className="guess-form" onSubmit={(event) => { event.preventDefault(); const parsed = Number(value.replace(',', '.')); if (!Number.isFinite(parsed)) return; onAnswer(parsed) }}><input value={value} onChange={(event) => setValue(event.target.value)} disabled={locked} inputMode="decimal" placeholder="Твоё число" aria-label="Ответ финального раунда" /><button type="submit" disabled={locked}>{locked ? 'Принято' : 'Ответить'}</button></form><p className="hint">Осталась одна сота. Побеждает ближайший ответ; при равенстве решает время отправки.</p></section>
 }
 
 function BotWaiting({ remainingMs }: { remainingMs: number }) { return <section className="panel"><p className="kicker">Одновременный ответ</p><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><p className="hint">Боты отвечают…</p></section> }
@@ -1169,7 +1166,7 @@ function OnlineGameView({ state, socket }: { state: MultiplayerGameState; socket
     </div>
     <OnlineArenaGrid state={state} onChoose={chooseHex} />
     {state.currentQuestion && state.currentQuestion.type !== 'numeric' && state.phase === 'expansion' ? <section className="panel online-question-panel">
-      <p className="kicker">Онлайн · общий вопрос</p>
+      <p className="kicker">Онлайн · общий вопрос · {state.currentQuestion.category}</p>
       <h2>{state.currentQuestion.prompt}</h2>
       <TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} />
       <div className="options">
@@ -1191,10 +1188,10 @@ function OnlineGameView({ state, socket }: { state: MultiplayerGameState; socket
 function OnlineRoundResults({ state }: { state: MultiplayerGameState }) {
   const correctOption = state.roundResult?.correctOption
   return <motion.section className="panel online-question-panel" initial={{ opacity: 0, y: 30, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.5 }}>
-    <p className="kicker">Результаты раунда</p>
+    <p className="kicker">Результаты раунда · {state.currentQuestion?.category ?? 'Общие знания'}</p>
     <h2>{state.currentQuestion?.prompt ?? 'Результаты вопроса'}</h2>
     {state.currentQuestion ? <div className="result-options">
-      {state.currentQuestion.options.map((option, index) => <motion.div key={`${option}-${index}`} className={`result-option ${index === correctOption ? 'is-correct' : ''}`} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: index * 0.06 }}>
+      {state.currentQuestion.options.map((option, index) => <motion.div key={`${option}-${index}`} className={`result-option ${index === correctOption ? 'is-correct is-gold-correct' : ''}`} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: index * 0.06 }}>
         <strong>{['А', 'Б', 'В', 'Г'][index]}</strong>
         <span>{option}</span>
       </motion.div>)}
@@ -1206,7 +1203,7 @@ function OnlineRoundResults({ state }: { state: MultiplayerGameState }) {
 function OnlineNumberPanel({ state, remainingMs, onAnswer }: { state: MultiplayerGameState; remainingMs: number; onAnswer: (answer: number) => void }) {
   const [value, setValue] = useState('')
   return <section className="panel online-question-panel">
-    <p className="kicker">Онлайн · числовая дуэль</p>
+    <p className="kicker">Онлайн · числовая дуэль · {state.currentQuestion?.category ?? 'Общие знания'}</p>
     <h2>{state.currentQuestion?.prompt}</h2>
       <TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} />
     <form className="guess-form" onSubmit={(event) => { event.preventDefault(); const parsed = Number(value.replace(',', '.')); if (Number.isFinite(parsed)) onAnswer(parsed) }}>
@@ -1250,7 +1247,6 @@ function MenuScreen({
   selectedQuestionBankFiles,
   connectedQuestionCount,
   onQuestionBankFilesChange,
-  onSolo,
   onStart,
   onStats,
   onRanked,
@@ -1260,7 +1256,6 @@ function MenuScreen({
   selectedQuestionBankFiles: number[]
   connectedQuestionCount: number
   onQuestionBankFilesChange: (files: number[]) => void
-  onSolo: () => void
   onStart: () => void
   onStats: () => void
   onRanked: () => void
@@ -1351,7 +1346,6 @@ function MenuScreen({
       <span className="scene-caption">Каждый ответ — новый ход</span>
     </div>
     <div className="menu-actions menu-plaques" aria-label="Режимы игры">
-      <button type="button" className="wood-plaque plaque-red" onClick={onSolo}><i className="mode-icon" aria-hidden="true">✦</i><span>Своя игра<small>Введи ответ · проверим по смыслу</small></span><b aria-hidden="true">↗</b></button>
       <button type="button" className="wood-plaque plaque-red" onClick={onRanked}><i className="mode-icon" aria-hidden="true">♜</i><span>Рейтинговая игра<small>Брось вызов лучшим</small></span><b aria-hidden="true">↗</b></button>
       <button type="button" className="wood-plaque plaque-light" onClick={onStart}><i className="mode-icon" aria-hidden="true">⬡</i><span>Битва умов<small>Захватывай территорию с ботами</small></span><b aria-hidden="true">↗</b></button>
       <button type="button" className="wood-plaque plaque-light" onClick={onFriends}><i className="mode-icon" aria-hidden="true">⌘</i><span>С друзьями<small>Собери свою компанию</small></span><b aria-hidden="true">↗</b></button>

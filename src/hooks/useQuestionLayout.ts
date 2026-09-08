@@ -7,7 +7,7 @@ export function useQuestionLayout() {
     const fit = () => {
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(() => {
-        document.querySelectorAll<HTMLElement>('.question-card, .solo-question-panel, .online-question-panel, .round-result-card').forEach((card) => {
+        document.querySelectorAll<HTMLElement>('.question-card, .online-question-panel, .round-result-card').forEach((card) => {
           const text = Array.from(card.querySelectorAll<HTMLElement>('h2, .question-text, .option, .result-option'))
           text.forEach((element) => element.style.removeProperty('font-size'))
           const sizes = text.map((element) => parseFloat(getComputedStyle(element).fontSize))

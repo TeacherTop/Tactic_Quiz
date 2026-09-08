@@ -553,6 +553,15 @@ button {
   opacity:1;
   color:#35442b;
 }
+.result-option.is-gold-correct {
+  border-color:#f2c553;
+  box-shadow:0 0 0 3px #f2c55355,0 0 28px #e4a72f75;
+  animation:gold-answer-pulse .8s ease-in-out infinite alternate;
+}
+@keyframes gold-answer-pulse {
+  from { box-shadow:0 0 0 2px #f2c55355,0 0 14px #e4a72f55; }
+  to { box-shadow:0 0 0 6px #f7d87f95,0 0 36px #e4a72fa0; }
+}
 .timer {
   position:relative;
   width:54px;
@@ -657,6 +666,9 @@ button {
 }
 .arena-cell.is-available,.arena-cell.is-attack-target {
   cursor:pointer;
+}
+.arena-cell:focus {
+  outline:none;
 }
 .arena-cell.is-available .arena-cell-fill {
   fill:color-mix(in srgb,var(--active-color) 35%,var(--paper));

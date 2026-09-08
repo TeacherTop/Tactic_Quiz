@@ -12,6 +12,7 @@ export type Player = {
 
 export type NumericQuestion = {
   id: string
+  category?: string
   prompt: string
   answer: number
   unit?: string
