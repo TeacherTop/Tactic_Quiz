@@ -27,10 +27,12 @@ const SCORE_VALUES = {
   hold: 5,
 } as const
 const QUESTION_BANK_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../question_bank')
-const QUESTIONS = (fs.existsSync(QUESTION_BANK_DIR) ? fs.readdirSync(QUESTION_BANK_DIR) : [])
-  .filter((file) => /^my_game_question\d+\.json$/.test(file))
-  .sort((left, right) => questionBankFileNumber(left) - questionBankFileNumber(right))
-  .flatMap((file) => JSON.parse(fs.readFileSync(path.join(QUESTION_BANK_DIR, file), 'utf8')) as StoredQuestion[])
+const QUESTIONS = [QUESTION_BANK_DIR, path.join(QUESTION_BANK_DIR, 'question_text')]
+  .flatMap(directory => (fs.existsSync(directory) ? fs.readdirSync(directory) : [])
+    .filter(file => file.endsWith('.json'))
+    .sort((left, right) => questionBankFileNumber(left) - questionBankFileNumber(right) || left.localeCompare(right))
+    .flatMap(file => JSON.parse(fs.readFileSync(path.join(directory, file), 'utf8')) as StoredQuestion[]))
+  .filter(question => question.type === 'multiple' || question.type === 'boolean')
 const NUMERIC_QUESTIONS = [
   { id: 'numeric-cube', prompt: 'Сколько граней у куба?', answer: 6, unit: '' },
   { id: 'numeric-piano', prompt: 'Сколько клавиш у стандартного фортепиано?', answer: 88, unit: '' },

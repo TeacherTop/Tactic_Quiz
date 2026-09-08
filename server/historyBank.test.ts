@@ -3,7 +3,8 @@ import { describe, expect, it } from 'vitest'
 import { GameRoomStore } from './gameRoomStore'
 
 type Entry = { id: string; category: string; type: string; question: string; correct_answer: string; incorrect_answers: string[]; answers: string[] }
-const bank = JSON.parse(fs.readFileSync(new URL('../question_bank/my_game_question1.json', import.meta.url), 'utf8')) as Entry[]
+const fullBank = JSON.parse(fs.readFileSync(new URL('../question_bank/question_text/ru_history_questions_001_500.json', import.meta.url), 'utf8')) as Entry[]
+const bank = fullBank.slice(0, 100)
 describe('Russian history batch 001–100', () => {
   it('contains exactly 100 unique questions with sequential stable IDs', () => {
     expect(bank).toHaveLength(100)
@@ -29,7 +30,9 @@ describe('Russian history batch 001–100', () => {
     store.joinRoom(room.roomCode, { id: 502, first_name: 'Второй' }, 'test-2')
     store.joinRoom(room.roomCode, { id: 503, first_name: 'Третий' }, 'test-3')
     const state = store.startGame(room.roomId)
-    const q = bank.find(q => q.question === state.currentQuestion?.prompt)
+    const directory = new URL('../question_bank/question_text/', import.meta.url)
+    const allQuestions = fs.readdirSync(directory).filter(file => file.endsWith('.json')).flatMap(file => JSON.parse(fs.readFileSync(new URL(file, directory), 'utf8')) as Entry[])
+    const q = allQuestions.find(q => q.question === state.currentQuestion?.prompt)
     expect(q).toBeDefined()
     expect([...state.currentQuestion!.options].sort()).toEqual([...q!.answers].sort())
     const correct = (store as unknown as { questionAnswers: Map<string, number> }).questionAnswers.get(room.roomId)!

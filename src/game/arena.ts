@@ -11,17 +11,17 @@ const DIRECTIONS: [number, number][] = [
   [0, 1],
 ]
 
-export function createArena(): ArenaCell[] {
+export function createArena(radius = ARENA_RADIUS, players: PlayerId[] = ['you', 'alex', 'marina']): ArenaCell[] {
   const cells: ArenaCell[] = []
-  for (let row = -ARENA_RADIUS; row <= ARENA_RADIUS; row += 1) {
-    for (let col = -ARENA_RADIUS; col <= ARENA_RADIUS; col += 1) {
-      if (Math.abs(row + col) > ARENA_RADIUS) continue
+  for (let row = -radius; row <= radius; row += 1) {
+    for (let col = -radius; col <= radius; col += 1) {
+      if (Math.abs(row + col) > radius) continue
 
       let owner: PlayerId | null = null
-      if (row === 0 && col === -ARENA_RADIUS) owner = 'you'
-      if (row === -ARENA_RADIUS && col === ARENA_RADIUS) owner = 'alex'
-      if (row === ARENA_RADIUS && col === 0) owner = 'marina'
-      cells.push({ row, col, owner })
+      if (row === 0 && col === -radius) owner = 'you'
+      if (row === -radius && col === radius) owner = 'alex'
+      if (row === radius && col === 0) owner = 'marina'
+      cells.push({ row, col, owner: owner && players.includes(owner) ? owner : null })
     }
   }
   return cells
@@ -39,7 +39,7 @@ export function getAvailableCells(cells: ArenaCell[], playerId: PlayerId): Set<s
   for (const cell of playerCells) {
     for (const [row, col] of getNeighbors(cell.row, cell.col)) {
       const key = cellKey(row, col)
-      if (!occupied.has(key)) available.add(key)
+      if (!occupied.has(key) && cells.some(cell => cell.row === row && cell.col === col)) available.add(key)
     }
   }
 
@@ -102,9 +102,5 @@ export function captureOpponentCell(
 }
 
 export function getNeighbors(row: number, col: number): [number, number][] {
-  return DIRECTIONS
-    .map(([rowOffset, colOffset]) => [row + rowOffset, col + colOffset] as [number, number])
-    .filter(([neighborRow, neighborCol]) => Math.abs(neighborRow) <= ARENA_RADIUS
-      && Math.abs(neighborCol) <= ARENA_RADIUS
-      && Math.abs(neighborRow + neighborCol) <= ARENA_RADIUS)
+  return DIRECTIONS.map(([dr, dc]) => [row + dr, col + dc] as [number, number])
 }

@@ -1,4 +1,4 @@
-import { ARENA_RADIUS, cellKey, getAvailableCells, getNeighbors } from '../game/arena'
+import { cellKey, getAvailableCells, getNeighbors } from '../game/arena'
 import { PLAYER_BY_ID } from '../game/players'
 import type { ArenaCell, PlayerId } from '../game/types'
 
@@ -34,11 +34,16 @@ export function ArenaGrid({ cells, activePlayer, selectableKeys, lastCapturedKey
   const available = selectableKeys ?? (activePlayer ? getAvailableCells(cells, activePlayer) : new Set<string>())
   const activeColor = activePlayer ? PLAYER_BY_ID[activePlayer].accent : '#ffffff'
 
+  const radius = Math.max(...cells.map(cell => Math.max(Math.abs(cell.row), Math.abs(cell.col), Math.abs(cell.row + cell.col))))
+  const scale = (radius + 0.7) / 2.7
+  const width = VIEWBOX_WIDTH * scale
+  const height = VIEWBOX_HEIGHT * scale
+
   return (
-    <section className="arena-board-wrap" aria-label={`Гексагональная арена, радиус ${ARENA_RADIUS}`}>
+    <section className="arena-board-wrap" aria-label={`Гексагональная арена, радиус ${radius}`}>
       <svg
         className="arena-board"
-        viewBox={`0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`}
+        viewBox={`${(VIEWBOX_WIDTH - width) / 2} ${(VIEWBOX_HEIGHT - height) / 2} ${width} ${height}`}
         role="grid"
         aria-label="Гексагональная арена"
         style={{ ['--active-color' as string]: activeColor }}

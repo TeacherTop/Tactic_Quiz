@@ -1845,3 +1845,115 @@ button {
 .jeopardy-empty { margin:auto; display:grid; gap:20px; text-align:center; }
 @media(max-width:700px) { .jeopardy-card { padding:16px; gap:10px; } .jeopardy-question .jeopardy-text-pages>p { font-size:18px; } .jeopardy-meta { flex-direction:column; gap:5px; } .jeopardy-meta .solo-category { max-width:100%; text-align:left; } .jeopardy-verdict { padding:10px; font-size:12px; } .jeopardy-screen .solo-hud { position:static; width:auto; } }
 @media(max-height:500px) { .jeopardy-screen { gap:5px; } .jeopardy-screen .solo-hud { display:none; } .jeopardy-card { padding:10px 14px; gap:6px; } .jeopardy-top .solo-exit { min-height:24px; } .jeopardy-question .jeopardy-text-pages>p { font-size:14px; line-height:1.25; } .jeopardy-meta { flex-direction:row; } .jeopardy-meta .kicker,.jeopardy-meta .solo-category { font-size:9px; } .jeopardy-actions button { min-height:36px; padding:6px; } .jeopardy-form { gap:5px; } .jeopardy-form label { display:none; } .jeopardy-verdict { padding:8px; font-size:11px; } .jeopardy-card>.hint { display:none; } }
+/* Bot setup uses native controls and restrained wooden section headers. */
+.bot-settings-screen { flex:1; min-height:0; display:flex; flex-direction:column; gap:20px; padding:28px; border:1px solid var(--line); border-radius:26px; background:var(--paper); }
+.bot-settings-header .stats-back { margin-bottom:8px; }
+.bot-settings-header h2 { font-size:30px; margin-top:8px; }
+.bot-settings-groups { flex:1; min-height:0; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto 1fr; gap:18px; }
+.bot-settings-group { min-height:0; padding:16px; background:#f0e9dc; border:1px solid var(--line); border-radius:16px; }
+.bot-topics-group { grid-column:2; grid-row:1/3; display:flex; flex-direction:column; }
+.wood-heading { margin:-16px -16px 14px; padding:12px 16px; border-radius:15px 15px 0 0; background:repeating-linear-gradient(2deg,transparent 0 8px,#ffffff04 9px 10px),linear-gradient(110deg,#76563a,#533c2a); color:#fff3dc; font-size:12px; font-weight:650; letter-spacing:.12em; box-shadow:inset 0 1px #ffffff25,inset 0 -2px #34241440; }
+.wood-heading>span { margin-right:12px; color:#d5b991; font-size:10px; }
+.bot-settings-group fieldset { padding:0; margin:12px 0 0; border:0; }
+.bot-settings-group legend { margin-bottom:8px; color:var(--muted); font-size:12px; }
+.setting-segments { display:flex; padding:4px; gap:4px; border:1px solid #d5cab7; border-radius:12px; background:#e5dccd; }
+.setting-segments label { position:relative; flex:1; cursor:pointer; }
+.setting-segments input { position:absolute; inset:0; width:100%; height:100%; opacity:0; margin:0; cursor:pointer; }
+.setting-segments span { min-height:40px; display:flex; align-items:center; justify-content:center; gap:6px; padding:8px; font-size:13px; border-radius:8px; }
+.setting-segments input:checked+span { background:var(--paper); color:var(--ink); box-shadow:0 2px 5px #302e2910; font-weight:700; }
+.setting-segments input:focus-visible+span { outline:3px solid var(--gold); outline-offset:1px; }
+.arena-size-segments b { font-size:22px; color:var(--gold); font-weight:400; }
+.topic-selection-actions { display:flex; justify-content:space-between; gap:8px; margin-bottom:12px; }
+.topic-selection-actions button { padding:6px 0; background:none; border:0; color:var(--gold); font-size:12px; min-height:32px; }
+.bot-topic-list { display:grid; gap:8px; }
+.bot-topic { display:flex; align-items:center; gap:10px; padding:12px; border:1px solid var(--line); border-radius:12px; cursor:pointer; background:var(--paper); }
+.bot-topic:has(input:checked) { border-color:#9d8564; background:#f8f0e1; }
+.bot-topic input { flex:0 0 18px; width:18px; height:18px; min-height:0; margin:0; padding:0; accent-color:#755638; }
+.bot-topic-name { flex:1; font-size:13px; font-weight:600; }
+.bot-topic-name small { display:block; margin-top:3px; font-size:10px; font-weight:400; color:var(--muted); }
+.topic-badge { padding:4px 7px; background:#e9dfcc; border-radius:6px; color:#7a5c39; font-size:9px; }
+.topic-pagination { display:flex; align-items:center; justify-content:center; gap:16px; margin-top:auto; padding-top:12px; font-size:11px; color:var(--muted); }
+.topic-pagination button { min-height:32px; min-width:40px; }
+.bot-settings-footer { display:flex; align-items:center; justify-content:space-between; gap:16px; flex:none; }
+.bot-settings-footer p { font-size:12px; color:var(--muted); }
+.bot-settings-footer .primary { width:min(100%,340px); min-height:52px; letter-spacing:.06em; }
+@media(max-width:700px) {
+ .bot-settings-screen { padding:14px; gap:10px; border-radius:20px; }
+ .bot-settings-header .stats-back { margin-bottom:0; min-height:30px; padding:4px 0; font-size:11px; }
+ .bot-settings-header .kicker { display:none; }
+ .bot-settings-header h2 { font-size:21px; margin-top:5px; }
+ .bot-settings-groups { display:flex; flex-direction:column; gap:10px; }
+ .bot-settings-group { padding:10px; flex:none; }
+ .bot-topics-group { flex:1; }
+ .wood-heading { padding:8px 10px; margin:-10px -10px 8px; font-size:10px; }
+ .bot-settings-group fieldset { margin-top:6px; }
+ .bot-settings-group legend { font-size:11px; margin-bottom:4px; }
+ .setting-segments { padding:3px; }
+ .setting-segments span { min-height:34px; padding:6px 4px; font-size:12px; }
+ .arena-size-segments b { font-size:18px; }
+ .topic-selection-actions { margin-bottom:6px; }
+ .topic-selection-actions button { min-height:25px; padding:3px 0; font-size:11px; }
+ .bot-topic-list { grid-template-columns:1fr 1fr; gap:6px; }
+ .bot-topic { padding:8px; gap:6px; flex-wrap:wrap; }
+ .bot-topic-name { font-size:11px; }
+ .bot-topic-name small { font-size:9px; margin-top:2px; }
+ .topic-badge { display:none; }
+ .bot-settings-footer { flex-direction:column; gap:6px; }
+ .bot-settings-footer p { font-size:10px; }
+ .bot-settings-footer .primary { width:100%; min-height:44px; padding:10px; font-size:12px; }
+ .topic-pagination { padding-top:6px; }
+}
+@media(max-width:700px) and (max-height:700px) {
+ .bot-settings-screen { padding:10px; gap:7px; }
+ .bot-settings-header h2 { font-size:18px; }
+ .bot-settings-groups { gap:7px; }
+ .wood-heading { padding:6px 10px; margin-bottom:5px; }
+ .bot-settings-group { padding:8px 10px; }
+ .wood-heading { margin-top:-8px; }
+ .bot-settings-group fieldset { margin-top:4px; }
+ .setting-segments span { min-height:28px; padding:4px; font-size:11px; }
+ .bot-topic { padding:6px; }
+ .bot-topic-name small { display:none; }
+ .topic-pagination button { min-height:26px; }
+ .bot-settings-footer .primary { min-height:40px; }
+}
+@media(max-height:500px) and (min-width:501px) {
+ .bot-settings-screen { padding:12px; gap:8px; }
+ .bot-settings-header { display:flex; align-items:center; gap:20px; }
+ .bot-settings-header .kicker { display:none; }
+ .bot-settings-header .stats-back { margin:0; }
+ .bot-settings-header h2 { font-size:20px; margin:0; }
+ .bot-settings-groups { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto 1fr; gap:8px; }
+ .bot-settings-group { padding:8px; }
+ .wood-heading { margin:-8px -8px 6px; padding:6px 10px; font-size:10px; }
+ .bot-settings-group fieldset { margin-top:4px; }
+ .bot-settings-group legend { font-size:10px; margin-bottom:3px; }
+ .setting-segments { padding:2px; }
+ .setting-segments span { min-height:26px; padding:3px; font-size:11px; }
+ .bot-topic-list { grid-template-columns:1fr 1fr; gap:5px; }
+ .bot-topic { padding:7px; }
+ .bot-topic-name { font-size:10px; }
+ .bot-topic-name small,.topic-badge { display:none; }
+ .topic-selection-actions { margin-bottom:4px; }
+ .topic-selection-actions button { min-height:24px; padding:2px; font-size:11px; }
+ .topic-pagination { padding-top:5px; }
+ .topic-pagination button { min-height:26px; }
+ .bot-settings-footer { flex-direction:row; }
+ .bot-settings-footer .primary { min-height:36px; padding:7px; width:45%; font-size:11px; }
+}
+@media(max-width:700px) {
+ .bot-topic { display:grid; grid-template-columns:18px minmax(0,1fr); gap:3px 6px; }
+ .bot-topic input { grid-row:1/3; }
+ .bot-topic .topic-badge { display:inline-flex; grid-column:2; justify-self:start; padding:1px 5px; font-size:8px; }
+}
+@media(max-height:500px) and (min-width:501px) { .bot-topic .topic-badge { display:inline-flex; padding:1px 4px; font-size:8px; } }
+@media(max-width:700px) and (max-height:620px) {
+ .bot-settings-header h2 { font-size:17px; }
+ .bot-settings-header .stats-back { min-height:24px; }
+ .wood-heading { padding-top:4px; padding-bottom:4px; }
+ .bot-settings-group legend { margin-bottom:2px; font-size:10px; }
+ .setting-segments span { min-height:24px; padding:3px; }
+ .bot-settings-group fieldset { margin-top:2px; }
+ .bot-settings-group { padding-bottom:6px; }
+ .bot-topic-name { font-size:10px; }
+}

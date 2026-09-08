@@ -1,3 +1,5 @@
+import { BotGameSettings } from './components/BotGameSettings'
+import { BOT_SETTINGS_KEY, BOT_SKILL, parseBotSettings, botPlayerIds, arenaRadius, questionsForTopics, numericQuestionsForTopics, type BotSettings } from './game/botSettings'
 import { JeopardySolo } from './components/JeopardySolo'
 import { useEffect, useReducer, useRef, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -5,8 +7,7 @@ import { ArenaGrid } from './components/ArenaGrid'
 import { OnlineArenaGrid } from './components/OnlineArenaGrid'
 import { PlayerDock } from './components/PlayerDock'
 import { TimerRing } from './components/TimerRing'
-import { NUMERIC_QUESTIONS } from './data/questions'
-import { LOCALIZED_QUIZ_QUESTIONS } from './data/localizedQuestions'
+import { LOCALIZED_QUIZ_QUESTIONS, LOCALIZED_NUMERIC_QUESTIONS } from './data/localizedQuestions'
 import {
   captureCell,
   captureOpponentCell,
@@ -40,7 +41,7 @@ const QUESTION_BANK_CHUNK_SIZE = 100
 const QUESTION_BANK_FILE_COUNT = Math.ceil(LOCALIZED_QUIZ_QUESTIONS.length / QUESTION_BANK_CHUNK_SIZE)
 type Answers = Record<PlayerId, number | null>
 type RoundResult =
-  | { kind: 'quiz'; question: QuizQuestion; answers: Answers }
+  | { kind: 'quiz'; question: QuizQuestion; answers: Answers; participants?: PlayerId[] }
   | { kind: 'numeric'; question: NumericQuestion; answers: Record<PlayerId, number | null>; participants?: PlayerId[] }
 
 type PveStats = {
@@ -53,9 +54,16 @@ type PveStats = {
 }
 
 const STATS_STORAGE_KEY = 'strategi-quiz-pve-stats'
-let activeQuizQuestionBank = LOCALIZED_QUIZ_QUESTIONS
+const BOT_TOPICS = [...new Set([...LOCALIZED_QUIZ_QUESTIONS, ...LOCALIZED_NUMERIC_QUESTIONS].map(q => q.category ?? 'Общие знания'))].sort((a, b) => a.localeCompare(b, 'ru'))
+function readBotSettings(): BotSettings {
+  try { return parseBotSettings(localStorage.getItem(BOT_SETTINGS_KEY), BOT_TOPICS) } catch { return parseBotSettings(null, BOT_TOPICS) }
+}
 
 type Match = {
+  settings: BotSettings
+  playerIds: PlayerId[]
+  questions: QuizQuestion[]
+  numericQuestions: NumericQuestion[]
   scores: Record<PlayerId, number>
   mcStats: Record<PlayerId, { correct: number; total: number }>
   arena: ArenaCell[]
@@ -86,7 +94,7 @@ type Match = {
 type State = { phase: Phase; match: Match | null; completedRoundResult: RoundResult | null }
 
 type Action =
-  | { type: 'start' }
+  | { type: 'start'; settings: BotSettings; questions: QuizQuestion[] }
   | { type: 'exit' }
   | { type: 'answer-expansion'; id: PlayerId; pick: number | null; answeredAt: number }
   | { type: 'finish-expansion' }
@@ -203,8 +211,8 @@ function freeCellCount(arena: ArenaCell[]): number {
   return arena.filter((cell) => !cell.owner).length
 }
 
-function allAnswered(answers: Answers): boolean {
-  return PLAYER_IDS.every((id) => answers[id] !== null)
+function allAnswered(answers: Answers, ids: PlayerId[]): boolean {
+  return ids.every((id) => answers[id] !== null)
 }
 
 function addScore(scores: Record<PlayerId, number>, playerId: PlayerId, value: number): Record<PlayerId, number> {
@@ -235,9 +243,9 @@ function isExactNumericHit(value: number, answer: number): boolean {
   return Math.abs(value - answer) === 0
 }
 
-function nextAttacker(arena: ArenaCell[], startIndex = 0): PlayerId | null {
-  for (let offset = 0; offset < PLAYER_IDS.length; offset += 1) {
-    const id = PLAYER_IDS[(startIndex + offset) % PLAYER_IDS.length]
+function nextAttacker(arena: ArenaCell[], ids: PlayerId[], startIndex = 0): PlayerId | null {
+  for (let offset = 0; offset < ids.length; offset += 1) {
+    const id = ids[(startIndex + offset) % ids.length]
     if (getAttackTargets(arena, id).length > 0) return id
   }
   return null
@@ -256,25 +264,31 @@ function shuffleQuizOptions(question: QuizQuestion): QuizQuestion {
   }
 }
 
-function pickUnusedQuizQuestion(usedIds: string[]): QuizQuestion {
-  const available = activeQuizQuestionBank.filter((question) => !usedIds.includes(question.id))
+function pickUnusedQuizQuestion(usedIds: string[], bank: QuizQuestion[]): QuizQuestion {
+  const unused = bank.filter((question) => !usedIds.includes(question.id))
+  const available = unused.length ? unused : bank
   return shuffleQuizOptions(available[randomIndex(available.length)])
 }
 
-function pickUnusedNumericQuestion(usedIds: string[]): NumericQuestion {
-  const available = NUMERIC_QUESTIONS.filter((question) => !usedIds.includes(question.id))
+function pickUnusedNumericQuestion(usedIds: string[], bank: NumericQuestion[]): NumericQuestion {
+  const unused = bank.filter((question) => !usedIds.includes(question.id))
+  const available = unused.length ? unused : bank
   return available[randomIndex(available.length)]
 }
 
-function makeMatch(): Match {
-  const expansionQuestion = pickUnusedQuizQuestion([])
-  const warmupQuestion = pickUnusedQuizQuestion([expansionQuestion.id])
-  const numericQuestion = pickUnusedNumericQuestion([])
+function makeMatch(settings: BotSettings, questions: QuizQuestion[]): Match {
+  const playerIds = botPlayerIds(settings)
+  const suppliedNumeric = LOCALIZED_NUMERIC_QUESTIONS.filter(q => settings.categories.includes(q.category))
+  const numericQuestions = suppliedNumeric.length ? suppliedNumeric : numericQuestionsForTopics(questions)
+  const expansionQuestion = pickUnusedQuizQuestion([], questions)
+  const warmupQuestion = pickUnusedQuizQuestion([expansionQuestion.id], questions)
+  const numericQuestion = numericQuestions.length ? pickUnusedNumericQuestion([], numericQuestions) : { id: 'unused', prompt: '', answer: 0 }
 
   return {
+    settings, playerIds, questions, numericQuestions,
     scores: emptyScores(),
     mcStats: blankMcStats(),
-    arena: createArena(),
+    arena: createArena(arenaRadius(settings.arenaSize), playerIds),
     lastCapturedKey: null,
     usedQuizQuestionIds: [expansionQuestion.id, warmupQuestion.id],
     usedNumericQuestionIds: [numericQuestion.id],
@@ -301,13 +315,14 @@ function makeMatch(): Match {
 }
 
 function beginBattle(match: Match): State {
-  const attacker = nextAttacker(match.arena)
+  const attacker = nextAttacker(match.arena, match.playerIds)
   if (!attacker) return { phase: 'results', match, completedRoundResult: null }
   return { phase: 'battle-select', match: { ...match, attacker, battleRound: 0 }, completedRoundResult: null }
 }
 
 function beginFinalExpansion(match: Match): State {
-  const finalQuestion = pickUnusedNumericQuestion(match.usedNumericQuestionIds)
+  if (!match.numericQuestions.length) return beginNextExpansion(match)
+  const finalQuestion = pickUnusedNumericQuestion(match.usedNumericQuestionIds, match.numericQuestions)
   return {
     phase: 'expansion-final',
     match: {
@@ -322,7 +337,7 @@ function beginFinalExpansion(match: Match): State {
 }
 
 function beginNextExpansion(match: Match): State {
-  const expansionQuestion = pickUnusedQuizQuestion(match.usedQuizQuestionIds)
+  const expansionQuestion = pickUnusedQuizQuestion(match.usedQuizQuestionIds, match.questions)
   return {
     phase: 'expansion',
     match: {
@@ -372,8 +387,8 @@ function advanceCaptureQueue(match: Match): State {
 }
 
 function resolveFinalExpansion(match: Match): State {
-  const completedRoundResult: RoundResult = { kind: 'numeric', question: match.finalQuestion, answers: match.finalAnswers }
-  const winner = PLAYER_IDS
+  const completedRoundResult: RoundResult = { kind: 'numeric', question: match.finalQuestion, answers: match.finalAnswers, participants: match.playerIds }
+  const winner = match.playerIds
     .filter((id) => match.finalAnswers[id] !== null)
     .sort((left, right) => {
       const leftDistance = Math.abs((match.finalAnswers[left] ?? 0) - match.finalQuestion.answer)
@@ -384,7 +399,7 @@ function resolveFinalExpansion(match: Match): State {
     })[0]
   const lastCell = match.arena.find((cell) => !cell.owner)
   let scores = { ...match.scores }
-  for (const id of PLAYER_IDS) {
+  for (const id of match.playerIds) {
     const answer = match.finalAnswers[id]
     if (answer !== null && isExactNumericHit(answer, match.finalQuestion.answer)) {
       scores = addScore(scores, id, SCORE_VALUES.numericExactBonus)
@@ -400,7 +415,7 @@ function resolveFinalExpansion(match: Match): State {
 }
 
 function resolveExpansion(match: Match): State {
-  const completedRoundResult: RoundResult = { kind: 'quiz', question: match.expansionQuestion, answers: match.expansionAnswers }
+  const completedRoundResult: RoundResult = { kind: 'quiz', question: match.expansionQuestion, answers: match.expansionAnswers, participants: match.playerIds }
   const scores = { ...match.scores }
   for (const id of match.expansionQueue) {
     if (match.expansionAnswers[id] !== match.expansionQuestion.correctIndex) continue
@@ -416,7 +431,7 @@ function resolveExpansion(match: Match): State {
 function startNextBattle(match: Match): State {
   const nextRound = match.battleRound + 1
   if (nextRound >= MAX_BATTLE_ROUNDS) return { phase: 'results', match: { ...match, battleRound: nextRound }, completedRoundResult: null }
-  const attacker = nextAttacker(match.arena, (PLAYER_IDS.indexOf(match.attacker) + 1) % PLAYER_IDS.length)
+  const attacker = nextAttacker(match.arena, match.playerIds, (match.playerIds.indexOf(match.attacker) + 1) % match.playerIds.length)
   if (!attacker) return { phase: 'results', match: { ...match, battleRound: nextRound }, completedRoundResult: null }
   return {
     phase: 'battle-select',
@@ -446,7 +461,8 @@ function resolveWarmup(match: Match): State {
     })
     return { ...startNextBattle({ ...match, scores, arena, lastCapturedKey: cellKey(match.target.row, match.target.col) }), completedRoundResult }
   }
-  const numericQuestion = pickUnusedNumericQuestion(match.usedNumericQuestionIds)
+  if (!match.numericQuestions.length) return { ...startNextBattle({ ...match, scores: addScore(scores, match.defender, SCORE_VALUES.hold) }), completedRoundResult }
+  const numericQuestion = pickUnusedNumericQuestion(match.usedNumericQuestionIds, match.numericQuestions)
   return {
     phase: 'battle-number',
     match: {
@@ -500,7 +516,7 @@ function resolveNumber(match: Match): State {
 function reducer(state: State, action: Action): State {
   const match = state.match
   switch (action.type) {
-    case 'start': return { phase: 'expansion', match: makeMatch(), completedRoundResult: null }
+    case 'start': return { phase: 'expansion', match: makeMatch(action.settings, action.questions), completedRoundResult: null }
     case 'exit': return { phase: 'home', match: null, completedRoundResult: null }
     case 'answer-expansion': {
       if (!match || state.phase !== 'expansion' || match.expansionAnswers[action.id] !== null) return state
@@ -550,7 +566,7 @@ function reducer(state: State, action: Action): State {
           ? { ...match.pveStats, numericDeviationTotal: match.pveStats.numericDeviationTotal + Math.abs(action.value - match.finalQuestion.answer), numericAnswered: match.pveStats.numericAnswered + 1 }
           : match.pveStats,
       }
-      return allAnswered(next.finalAnswers) ? resolveFinalExpansion(next) : { ...state, match: next }
+      return allAnswered(next.finalAnswers, next.playerIds) ? resolveFinalExpansion(next) : { ...state, match: next }
     }
     case 'finish-final':
       return match && state.phase === 'expansion-final' ? resolveFinalExpansion(match) : state
@@ -558,7 +574,7 @@ function reducer(state: State, action: Action): State {
       if (!match || state.phase !== 'battle-select') return state
       const target = getAttackTargets(match.arena, match.attacker).find((cell) => cell.row === action.row && cell.col === action.col)
       if (!target || !target.owner) return state
-      const warmupQuestion = pickUnusedQuizQuestion(match.usedQuizQuestionIds)
+      const warmupQuestion = pickUnusedQuizQuestion(match.usedQuizQuestionIds, match.questions)
       return {
         phase: 'battle-warmup',
         match: {
@@ -609,18 +625,31 @@ function reducer(state: State, action: Action): State {
 export default function App() {
   useQuestionLayout()
   const [state, dispatch] = useReducer(reducer, { phase: 'home', match: null, completedRoundResult: null })
-  const [menuNotice, setMenuNotice] = useState('')
+  const [menuNotice] = useState('')
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [paused, setPaused] = useState(false)
   const [announcement, setAnnouncement] = useState(true)
   const [roundResult, setRoundResult] = useState<RoundResult | null>(null)
-  const [homeScreen, setHomeScreen] = useState<'menu' | 'stats' | 'ranked' | 'friends' | 'history' | 'solo'>('menu')
+  const [homeScreen, setHomeScreen] = useState<'menu' | 'stats' | 'ranked' | 'friends' | 'history' | 'solo' | 'bot-settings'>('menu')
   const [selectedQuestionBankFiles, setSelectedQuestionBankFiles] = useState(() => readQuestionBankSelection())
   const recordedMatch = useRef(false)
   const { phase, match, completedRoundResult } = state
   const quizQuestions = questionsForBankFiles(selectedQuestionBankFiles)
-  activeQuizQuestionBank = quizQuestions
-  const startMatch = () => { if (!quizQuestions.length) { setMenuNotice('Банк вопросов с вариантами ответов пока не подключён. Попробуй «Свою игру».'); return } setSettingsOpen(false); setHomeScreen('menu'); setPaused(false); setAnnouncement(false); recordedMatch.current = false; dispatch({ type: 'start' }) }
+  const [botSettings, setBotSettings] = useState(readBotSettings)
+  const updateBotSettings = (next: BotSettings) => {
+    setBotSettings(next)
+    try { localStorage.setItem(BOT_SETTINGS_KEY, JSON.stringify(next)) } catch { /* Settings remain usable without storage. */ }
+  }
+  const startMatch = () => {
+    const questions = questionsForTopics(LOCALIZED_QUIZ_QUESTIONS, botSettings.categories)
+    if (!questions.length) return
+    updateBotSettings(botSettings)
+    setSettingsOpen(false); setHomeScreen('menu'); setPaused(false); setAnnouncement(false)
+    recordedMatch.current = false
+    dispatch({ type: 'start', settings: { ...botSettings, categories: [...botSettings.categories] }, questions })
+  }
+  const openBotSettings = () => { setBotSettings(readBotSettings()); setHomeScreen('bot-settings') }
+
   const startSolo = () => { setSettingsOpen(false); setPaused(false); setAnnouncement(false); setHomeScreen('solo') }
   const updateQuestionBankFiles = (files: number[]) => {
     const next = normalizeQuestionBankSelection(files)
@@ -631,7 +660,7 @@ export default function App() {
   const exitGame = () => { setSettingsOpen(false); setPaused(false); dispatch({ type: 'exit' }) }
   useTelegramControls(() => { setHomeScreen('menu'); exitGame() }, null)
   const questionPhase = phase === 'expansion' || phase === 'expansion-final' || phase === 'battle-warmup' || phase === 'battle-number'
-  const expansionAllAnswered = match ? allAnswered(match.expansionAnswers) : false
+  const expansionAllAnswered = match ? allAnswered(match.expansionAnswers, match.playerIds) : false
   const completedRoundKey = completedRoundResult && phase === 'expansion-review' && match
     ? `${match.expansionRound}-${completedRoundResult.kind}`
     : null
@@ -711,17 +740,17 @@ export default function App() {
       }, fallbackDelay)
     }
     if (phase === 'expansion') {
-      PLAYERS.filter((player) => player.kind === 'bot' && match.expansionAnswers[player.id] === null)
+      PLAYERS.filter((player) => match.playerIds.includes(player.id) && player.kind === 'bot' && match.expansionAnswers[player.id] === null)
         .forEach((player) => {
-          const value = botQuizChoice(match.expansionQuestion.correctIndex, player.skill)
-          scheduleBotAnswer(player.id, botAnswerDelayMs(player.skill, QUIZ_TIME_MS), value, () => dispatch({ type: 'answer-expansion', id: player.id, pick: value, answeredAt: performance.now() }))
+          const value = botQuizChoice(match.expansionQuestion.correctIndex, BOT_SKILL[match.settings.difficulty])
+          scheduleBotAnswer(player.id, botAnswerDelayMs(BOT_SKILL[match.settings.difficulty], QUIZ_TIME_MS), value, () => dispatch({ type: 'answer-expansion', id: player.id, pick: value, answeredAt: performance.now() }))
         })
     }
     if (phase === 'expansion-final') {
-      PLAYERS.filter((player) => player.kind === 'bot' && match.finalAnswers[player.id] === null)
+      PLAYERS.filter((player) => match.playerIds.includes(player.id) && player.kind === 'bot' && match.finalAnswers[player.id] === null)
         .forEach((player) => {
-          const value = botNumericGuess(match.finalQuestion.answer, player.skill)
-          scheduleBotAnswer(player.id, botAnswerDelayMs(player.skill, QUIZ_TIME_MS), value, () => dispatch({ type: 'answer-final', id: player.id, value, answeredAt: performance.now() }))
+          const value = botNumericGuess(match.finalQuestion.answer, BOT_SKILL[match.settings.difficulty])
+          scheduleBotAnswer(player.id, botAnswerDelayMs(BOT_SKILL[match.settings.difficulty], QUIZ_TIME_MS), value, () => dispatch({ type: 'answer-final', id: player.id, value, answeredAt: performance.now() }))
         })
     }
     if (phase === 'battle-select' && PLAYER_BY_ID[match.attacker].kind === 'bot') {
@@ -732,16 +761,16 @@ export default function App() {
       [match.attacker, match.defender]
         .filter((id) => match.warmupAnswers[id] === null && PLAYER_BY_ID[id].kind === 'bot')
         .forEach((id) => {
-          const value = botQuizChoice(match.warmupQuestion.correctIndex, PLAYER_BY_ID[id].skill)
-          scheduleBotAnswer(id, botAnswerDelayMs(PLAYER_BY_ID[id].skill, QUIZ_TIME_MS), value, () => dispatch({ type: 'answer-warmup', id, pick: value }))
+          const value = botQuizChoice(match.warmupQuestion.correctIndex, BOT_SKILL[match.settings.difficulty])
+          scheduleBotAnswer(id, botAnswerDelayMs(BOT_SKILL[match.settings.difficulty], QUIZ_TIME_MS), value, () => dispatch({ type: 'answer-warmup', id, pick: value }))
         })
     }
     if (phase === 'battle-number' && match.defender) {
       [match.attacker, match.defender]
         .filter((id) => match.numericAnswers[id] === null && PLAYER_BY_ID[id].kind === 'bot')
         .forEach((id) => {
-          const value = botNumericGuess(match.numericQuestion.answer, PLAYER_BY_ID[id].skill)
-          scheduleBotAnswer(id, botAnswerDelayMs(PLAYER_BY_ID[id].skill, QUIZ_TIME_MS), value, () => dispatch({ type: 'answer-number', id, value }))
+          const value = botNumericGuess(match.numericQuestion.answer, BOT_SKILL[match.settings.difficulty])
+          scheduleBotAnswer(id, botAnswerDelayMs(BOT_SKILL[match.settings.difficulty], QUIZ_TIME_MS), value, () => dispatch({ type: 'answer-number', id, value }))
         })
     }
     return () => timers.forEach((id) => window.clearTimeout(id))
@@ -783,7 +812,7 @@ export default function App() {
 
   useEffect(() => {
     if (phase !== 'results' || !match || recordedMatch.current) return
-    const territory = PLAYER_IDS.map((id) => ({ id, count: match.arena.filter((cell) => cell.owner === id).length }))
+    const territory = match.playerIds.map((id) => ({ id, count: match.arena.filter((cell) => cell.owner === id).length }))
     const winner = territory.sort((a, b) => b.count - a.count)[0]?.id
     const previous = readPveStats()
     savePveStats({
@@ -800,15 +829,16 @@ export default function App() {
   return <div className={`arena ${phase === 'home' ? '' : `game-shell game-phase-${phase}`}`}>
     {phase !== 'home' ? <header className="topbar">
       <div><p className="kicker">Арена</p><h1>Ближе всех</h1></div>
-      {match ? <div className="topbar-tools"><TurnIndicator activePlayer={activeTurn} /><PhaseBadge phase={phase} match={match} /><PlayerDock scores={match.scores} highlight={activeTurn} badges={{ [match.attacker]: phase.startsWith('battle') ? 'атакует' : undefined }} /><div className={`settings-menu${settingsOpen ? ' is-open' : ''}`}><button type="button" className="settings-button" aria-label="Настройки" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((open) => !open)}><span aria-hidden="true">⚙</span></button>{settingsOpen ? <div className="settings-popover"><button type="button" className="pause-button" onClick={togglePause}>{paused ? 'Продолжить' : 'Приостановить игру'}</button><button type="button" className="exit-button" onClick={exitGame}>Выйти из игры</button></div> : null}</div></div> : null}
+      {match ? <div className="topbar-tools"><TurnIndicator playerIds={match.playerIds} activePlayer={activeTurn} /><PhaseBadge phase={phase} match={match} /><PlayerDock playerIds={match.playerIds} scores={match.scores} highlight={activeTurn} badges={{ [match.attacker]: phase.startsWith('battle') ? 'атакует' : undefined }} /><div className={`settings-menu${settingsOpen ? ' is-open' : ''}`}><button type="button" className="settings-button" aria-label="Настройки" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((open) => !open)}><span aria-hidden="true">⚙</span></button>{settingsOpen ? <div className="settings-popover"><button type="button" className="pause-button" onClick={togglePause}>{paused ? 'Продолжить' : 'Приостановить игру'}</button><button type="button" className="exit-button" onClick={exitGame}>Выйти из игры</button></div> : null}</div></div> : null}
     </header> : null}
     <main className="stage">
       {phase === 'home' && homeScreen === 'stats' ? <StatsScreen stats={readPveStats()} onBack={() => setHomeScreen('menu')} onHistory={() => setHomeScreen('history')} /> : null}
       {phase === 'home' && homeScreen === 'ranked' ? <RankedScreen onBack={() => setHomeScreen('menu')} /> : null}
       {phase === 'home' && homeScreen === 'friends' ? <FriendsScreen onBack={() => setHomeScreen('menu')} /> : null}
       {phase === 'home' && homeScreen === 'history' ? <HistoryScreen onBack={() => setHomeScreen('stats')} /> : null}
+      {phase === 'home' && homeScreen === 'bot-settings' ? <BotGameSettings settings={botSettings} topics={BOT_TOPICS.map(name => ({ name, count: [...LOCALIZED_QUIZ_QUESTIONS, ...LOCALIZED_NUMERIC_QUESTIONS].filter(q => (q.category ?? 'Общие знания') === name).length }))} onChange={updateBotSettings} onStart={startMatch} onBack={() => setHomeScreen('menu')} /> : null}
       {phase === 'home' && homeScreen === 'solo' ? <JeopardySolo onExit={() => setHomeScreen('menu')} /> : null}
-      {phase === 'home' && homeScreen === 'menu' ? <MenuScreen notice={menuNotice} selectedQuestionBankFiles={selectedQuestionBankFiles} connectedQuestionCount={quizQuestions.length} onQuestionBankFilesChange={updateQuestionBankFiles} onSolo={startSolo} onStart={startMatch} onStats={() => setHomeScreen('stats')} onRanked={() => setHomeScreen('ranked')} onFriends={() => setHomeScreen('friends')} /> : null}
+      {phase === 'home' && homeScreen === 'menu' ? <MenuScreen notice={menuNotice} selectedQuestionBankFiles={selectedQuestionBankFiles} connectedQuestionCount={quizQuestions.length} onQuestionBankFilesChange={updateQuestionBankFiles} onSolo={startSolo} onStart={openBotSettings} onStats={() => setHomeScreen('stats')} onRanked={() => setHomeScreen('ranked')} onFriends={() => setHomeScreen('friends')} /> : null}
       <AnimatePresence mode="wait">
         {match && (timeline.mapVisible || (phase !== 'home' && phase !== 'results' && phase !== 'expansion' && !questionPhase)) ? <motion.div key="map" className={`map-stage ${timeline.mapReturning ? 'is-returning' : ''}`} initial={{ opacity: 0.5, y: 10, filter: 'blur(10px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} exit={{ opacity: 0, y: -10, filter: 'blur(10px)' }} transition={{ duration: Math.max(ANIMATION_TIMINGS.minTransition, timeline.mapReturning ? ANIMATION_TIMINGS.mapReturn : ANIMATION_TIMINGS.minTransition) / 1000 }}><ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' && match.pendingCapture === 'you' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /></motion.div> : null}
         {((phase === 'expansion' && timeline.questionVisible) || (questionPhase && phase !== 'expansion' && !announcement)) ? <motion.div key="question" className={`question-stage ${timeline.inputExiting ? 'is-exiting' : ''}`} initial={{ opacity: 0, y: 50 }} animate={{ opacity: timeline.inputExiting ? 0 : 1, y: timeline.inputExiting ? -12 : 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: (timeline.inputExiting ? ANIMATION_TIMINGS.inputExit : ANIMATION_TIMINGS.questionEnter) / 1000 }}>
@@ -827,7 +857,7 @@ export default function App() {
       {phase === 'expansion-capture' && match?.pendingCapture && match.pendingCapture !== 'you' ? <section className="panel"><p className="kicker">Завоевание · правильный ответ</p><h2>{PLAYER_BY_ID[match.pendingCapture].name} выбирает территорию</h2><p className="hint">Следи за картой: захваты ботов теперь проходят по очереди.</p></section> : null}
       {phase === 'expansion-between' ? <section className="panel transition-panel"><p className="kicker">Переход</p><h2>Следующий раунд скоро начнется</h2><PauseProgress progress={timeline.progress} /></section> : null}
       {phase === 'battle-select' && match && match.attacker === 'you' ? <p className="map-instruction">Выбери подсвеченную вражескую соту на карте</p> : null}
-      {phase === 'results' && match ? <FinalResultsScreen players={PLAYER_IDS.map((playerId) => ({
+      {phase === 'results' && match ? <FinalResultsScreen players={match.playerIds.map((playerId) => ({
         playerId,
         name: PLAYER_BY_ID[playerId].name,
         color: PLAYER_BY_ID[playerId].accent,
@@ -902,12 +932,10 @@ function RoundResultOverlay({ result, humanCorrect = null }: { result: RoundResu
   return <motion.div className="round-result-overlay" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}><section className="round-result-card"><p className="kicker">Результаты числовой дуэли</p><h2>Правильный ответ: {result.question.answer}</h2><div className="numeric-result-cards">{rows.map((row, index) => <article key={row.id} className={`numeric-result-card ${index === 0 ? 'is-winner' : ''} ${row.exact ? 'has-exact-bonus' : ''}`} style={{ ['--accent' as string]: PLAYER_BY_ID[row.id].accent }}><strong>{PLAYER_BY_ID[row.id].name}</strong><span>{row.value === null ? 'нет ответа' : row.value}</span><small>{row.distance === null ? '—' : `Отклонение: ${row.value! - result.question.answer > 0 ? '+' : ''}${row.value! - result.question.answer}`}</small>{row.exact ? <em>Бонус за точный ответ: +5</em> : null}</article>)}</div></section></motion.div>
 }
 
-function TurnIndicator({ activePlayer }: { activePlayer: PlayerId | null }) {
+function TurnIndicator({ activePlayer, playerIds }: { activePlayer: PlayerId | null; playerIds: PlayerId[] }) {
   return <div className="turn-indicator" aria-label={activePlayer ? `Ход: ${PLAYER_BY_ID[activePlayer].name}` : 'Ход не выбран'}>
     <svg viewBox="0 0 40 40" role="img" aria-hidden="true">
-      <path className={activePlayer === 'you' ? 'is-active' : ''} fill={PLAYER_BY_ID.you.accent} d="M20 20 20 2A18 18 0 0 1 35.6 29Z" />
-      <path className={activePlayer === 'alex' ? 'is-active' : ''} fill={PLAYER_BY_ID.alex.accent} d="M20 20 35.6 29A18 18 0 0 1 4.4 29Z" />
-      <path className={activePlayer === 'marina' ? 'is-active' : ''} fill={PLAYER_BY_ID.marina.accent} d="M20 20 4.4 29A18 18 0 0 1 20 2Z" />
+      {playerIds.map((id, index) => <circle key={id} cx={playerIds.length === 2 ? 12 + index * 16 : 8 + index * 12} cy="20" r={activePlayer === id ? 7 : 5} fill={PLAYER_BY_ID[id].accent} opacity={activePlayer === id ? 1 : 0.4} />)}
     </svg>
     <span>{activePlayer ? PLAYER_BY_ID[activePlayer].name : 'Ожидание'}</span>
   </div>

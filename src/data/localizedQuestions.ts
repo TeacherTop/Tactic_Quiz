@@ -1,4 +1,4 @@
-import type { QuizQuestion } from '../game/types'
+import type { NumericQuestion, QuizQuestion } from '../game/types'
 
 type LocalizedQuestion = {
   id?: string
@@ -10,10 +10,10 @@ type LocalizedQuestion = {
   answers: string[]
 }
 
-const questionBankFiles = import.meta.glob('../../question_bank/my_game_question*.json', {
+const questionBankFiles = import.meta.glob('../../question_bank/**/*.json', {
   eager: true,
   import: 'default',
-}) as Record<string, LocalizedQuestion[]>
+}) as Record<string, (LocalizedQuestion | { id: string; category: string; type: 'numeric'; question: string; correct_answer: number })[]>
 
 const source = Object.entries(questionBankFiles)
   .sort(([left], [right]) => questionBankFileNumber(left) - questionBankFileNumber(right))
@@ -49,4 +49,6 @@ function toQuizQuestion(question: LocalizedQuestion, index: number): QuizQuestio
   }
 }
 
-export const LOCALIZED_QUIZ_QUESTIONS: QuizQuestion[] = source.map(toQuizQuestion)
+export const LOCALIZED_QUIZ_QUESTIONS: QuizQuestion[] = source.filter((q): q is LocalizedQuestion => q.type !== 'numeric').map(toQuizQuestion)
+
+export const LOCALIZED_NUMERIC_QUESTIONS: (NumericQuestion & { category: string })[] = source.flatMap(q => q.type === 'numeric' ? [{ id: q.id, category: q.category, prompt: q.question, answer: Number(q.correct_answer) }] : [])
