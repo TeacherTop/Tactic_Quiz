@@ -31,34 +31,6 @@ body::after,.arena::before,.arena::after {
   background:var(--paper-fill);
   gap:16px
 }
-.identity-bar {
-  display:grid;
-  grid-template-columns:44px 1fr 44px;
-  align-items:center;
-  flex:none;
-  min-height:88px;
-  padding:12px 0 10px;
-  gap:10px;
-  border-bottom:1px solid var(--line)
-}
-.game-wordmark {
-  font:700 34px/1 var(--serif);
-  text-align:center;
-  letter-spacing:-1px
-}
-.game-wordmark span {
-  display:block;
-  color:var(--gold);
-  font-size:21px;
-  margin-top:4px
-}
-.identity-close {
-  height:44px;
-  background:linear-gradient(#f6e9ce,#eaddc2);
-  border-color:var(--line);
-  font-size:32px;
-  line-height:1
-}
 .stage {
   min-height:0;
   flex:1
@@ -625,13 +597,6 @@ h1,h2,h3 {
     padding:0 12px;
     gap:12px;
     min-height:var(--tg-viewport-height)
-  }
-  .identity-bar {
-    min-height:76px;
-    padding-top:max(10px,env(safe-area-inset-top))
-  }
-  .game-wordmark {
-    font-size:29px
   }
   .topbar-tools {
     gap:7px
