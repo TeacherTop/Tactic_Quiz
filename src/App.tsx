@@ -35,9 +35,6 @@ const ANNOUNCEMENT_MS = 4500
 const ROUND_RESULT_MS = 6000
 const BOT_FALLBACK_BUFFER_MS = 500
 const PLAYER_IDS: PlayerId[] = ['you', 'alex', 'marina']
-const QUESTION_BANK_SELECTION_KEY = 'question_bank_selection'
-const QUESTION_BANK_CHUNK_SIZE = 100
-const QUESTION_BANK_FILE_COUNT = Math.ceil(LOCALIZED_QUIZ_QUESTIONS.length / QUESTION_BANK_CHUNK_SIZE)
 type Answers = Record<PlayerId, number | null>
 type RoundResult =
   | { kind: 'quiz'; question: QuizQuestion; answers: Answers; participants?: PlayerId[] }
@@ -144,52 +141,6 @@ function savePveStats(stats: PveStats): void {
   } catch {
     // Local storage can be unavailable in private browsing; gameplay should continue.
   }
-}
-
-function allQuestionBankFiles(): number[] {
-  return Array.from({ length: QUESTION_BANK_FILE_COUNT }, (_, index) => index + 1)
-}
-
-function normalizeQuestionBankSelection(files: number[]): number[] {
-  const unique = new Set<number>()
-  files.forEach((file) => {
-    if (Number.isInteger(file) && file >= 1 && file <= QUESTION_BANK_FILE_COUNT) unique.add(file)
-  })
-  return [...unique].sort((a, b) => a - b)
-}
-
-function parseQuestionBankSelection(value: string): number[] {
-  return normalizeQuestionBankSelection((value.match(/\d+/g) ?? []).map(Number))
-}
-
-function readQuestionBankSelection(): number[] {
-  try {
-    const raw = localStorage.getItem(QUESTION_BANK_SELECTION_KEY)
-    if (!raw) return allQuestionBankFiles()
-    const parsed = JSON.parse(raw)
-    if (!Array.isArray(parsed)) return allQuestionBankFiles()
-    const selection = normalizeQuestionBankSelection(parsed.map(Number))
-    return selection.length > 0 ? selection : allQuestionBankFiles()
-  } catch {
-    return allQuestionBankFiles()
-  }
-}
-
-function saveQuestionBankSelection(files: number[]): void {
-  try {
-    localStorage.setItem(QUESTION_BANK_SELECTION_KEY, JSON.stringify(normalizeQuestionBankSelection(files)))
-  } catch {
-    // The selected bank files are allowed to fall back to the in-memory state.
-  }
-}
-
-function questionsForBankFiles(files: number[]): QuizQuestion[] {
-  const normalized = normalizeQuestionBankSelection(files)
-  const selectedFiles = normalized.length > 0 ? normalized : allQuestionBankFiles()
-  return selectedFiles.flatMap((file) => {
-    const start = (file - 1) * QUESTION_BANK_CHUNK_SIZE
-    return LOCALIZED_QUIZ_QUESTIONS.slice(start, start + QUESTION_BANK_CHUNK_SIZE)
-  })
 }
 
 function randomIndex(length: number): number {
@@ -630,10 +581,8 @@ export default function App() {
   const [announcement, setAnnouncement] = useState(true)
   const [roundResult, setRoundResult] = useState<RoundResult | null>(null)
   const [homeScreen, setHomeScreen] = useState<'menu' | 'stats' | 'ranked' | 'friends' | 'history' | 'bot-settings'>('menu')
-  const [selectedQuestionBankFiles, setSelectedQuestionBankFiles] = useState(() => readQuestionBankSelection())
   const recordedMatch = useRef(false)
   const { phase, match, completedRoundResult } = state
-  const quizQuestions = questionsForBankFiles(selectedQuestionBankFiles)
   const [botSettings, setBotSettings] = useState(readBotSettings)
   const updateBotSettings = (next: BotSettings) => {
     setBotSettings(next)
@@ -649,12 +598,6 @@ export default function App() {
   }
   const openBotSettings = () => { setBotSettings(readBotSettings()); setHomeScreen('bot-settings') }
 
-  const updateQuestionBankFiles = (files: number[]) => {
-    const next = normalizeQuestionBankSelection(files)
-    if (next.length === 0) return
-    saveQuestionBankSelection(next)
-    setSelectedQuestionBankFiles(next)
-  }
   const exitGame = () => { setSettingsOpen(false); setPaused(false); dispatch({ type: 'exit' }) }
   useTelegramControls(() => { setHomeScreen('menu'); exitGame() }, null)
   const questionPhase = phase === 'expansion' || phase === 'expansion-final' || phase === 'battle-warmup' || phase === 'battle-number'
@@ -835,7 +778,7 @@ export default function App() {
       {phase === 'home' && homeScreen === 'friends' ? <FriendsScreen onBack={() => setHomeScreen('menu')} /> : null}
       {phase === 'home' && homeScreen === 'history' ? <HistoryScreen onBack={() => setHomeScreen('stats')} /> : null}
       {phase === 'home' && homeScreen === 'bot-settings' ? <BotGameSettings settings={botSettings} topics={BOT_TOPICS.map(name => ({ name, count: [...LOCALIZED_QUIZ_QUESTIONS, ...LOCALIZED_NUMERIC_QUESTIONS].filter(q => (q.category ?? 'Общие знания') === name).length }))} onChange={updateBotSettings} onStart={startMatch} onBack={() => setHomeScreen('menu')} /> : null}
-      {phase === 'home' && homeScreen === 'menu' ? <MenuScreen notice={menuNotice} selectedQuestionBankFiles={selectedQuestionBankFiles} connectedQuestionCount={quizQuestions.length} onQuestionBankFilesChange={updateQuestionBankFiles} onStart={openBotSettings} onStats={() => setHomeScreen('stats')} onRanked={() => setHomeScreen('ranked')} onFriends={() => setHomeScreen('friends')} /> : null}
+      {phase === 'home' && homeScreen === 'menu' ? <MenuScreen notice={menuNotice} onStart={openBotSettings} onStats={() => setHomeScreen('stats')} onRanked={() => setHomeScreen('ranked')} onFriends={() => setHomeScreen('friends')} /> : null}
       <AnimatePresence mode="wait">
         {match && (timeline.mapVisible || (phase !== 'home' && phase !== 'results' && phase !== 'expansion' && !questionPhase)) ? <motion.div key="map" className={`map-stage ${timeline.mapReturning ? 'is-returning' : ''}`} initial={{ opacity: 0.5, y: 10, filter: 'blur(10px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} exit={{ opacity: 0, y: -10, filter: 'blur(10px)' }} transition={{ duration: Math.max(ANIMATION_TIMINGS.minTransition, timeline.mapReturning ? ANIMATION_TIMINGS.mapReturn : ANIMATION_TIMINGS.minTransition) / 1000 }}><ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' && match.pendingCapture === 'you' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /></motion.div> : null}
         {((phase === 'expansion' && timeline.questionVisible) || (questionPhase && phase !== 'expansion' && !announcement)) ? <motion.div key="question" className={`question-stage ${timeline.inputExiting ? 'is-exiting' : ''}`} initial={{ opacity: 0, y: 50 }} animate={{ opacity: timeline.inputExiting ? 0 : 1, y: timeline.inputExiting ? -12 : 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: (timeline.inputExiting ? ANIMATION_TIMINGS.inputExit : ANIMATION_TIMINGS.questionEnter) / 1000 }}>
@@ -1043,7 +986,8 @@ function StatsScreen({ stats, onBack, onHistory }: { stats: PveStats; onBack: ()
     <header className="stats-title"><p className="menu-eyebrow">Летопись сражений</p><h2>СТАТИСТИКА</h2><div className="title-rule" aria-hidden="true"><i /><b /><i /></div><button type="button" className="wood-plaque stats-history-button plaque-light" onClick={onHistory}>ИСТОРИЯ ИГР</button></header>
     <div className="stats-dashboard">
       <section className="stats-block stats-pvp"><p className="stats-block-kicker">Блок A · Рейтинговые игры (PvP)</p><div className="stats-columns"><StatsColumn title="Дуэль · 1v1" rows={[['Побед', '0'], ['Поражений', '0'], ['% правильных MC', '0%']]} /><StatsColumn title="Троица · 1v1v1" rows={[['1-е места', '0 🥇'], ['2-е места', '0 🥈'], ['3-е места', '0 🥉'], ['% правильных MC', '0%']]} /></div><p className="stats-empty-note">Рейтинговый режим пока не подключён</p></section>
-      <section className="stats-block stats-pve"><p className="stats-block-kicker">Блок B · Игра с ботами (PvE)</p><div className="pve-grid"><StatMetric label="Всего игр" value={stats.games} /><StatMetric label="Побед над ботами" value={stats.wins} /><StatMetric label="% правильных MC" value={mcAccuracy === null ? '0%' : `${mcAccuracy}%`} progress={mcAccuracy ?? 0} /><StatMetric label="Точность числовых ответов" value={numericAccuracy === null ? '—' : `${numericAccuracy}%`} progress={numericAccuracy ?? 0} /></div></section>
+      <section className="stats-block stats-pve"><p className="stats-block-kicker">Блок B · Игра с ботами (PvE)</p><div className="stats-columns"><StatsColumn title="Дуэль · 1 бот" rows={[['Игр', String(stats.games)], ['Побед', String(stats.wins)], ['% правильных MC', mcAccuracy === null ? '0%' : `${mcAccuracy}%`]]} /><StatsColumn title="Троица · 2 бота" rows={[['1-е места', String(stats.wins)], ['Всего игр', String(stats.games)], ['Точность числовых', numericAccuracy === null ? '—' : `${numericAccuracy}%`]]} /></div></section>
+      <section className="stats-block stats-friends"><p className="stats-block-kicker">Блок C · Игра с друзьями</p><div className="stats-columns"><StatsColumn title="Дуэль · 1v1" rows={[['Побед', '0'], ['Поражений', '0'], ['% правильных MC', '0%']]} /><StatsColumn title="Троица · 1v1v1" rows={[['1-е места', '0 🥇'], ['2-е места', '0 🥈'], ['3-е места', '0 🥉'], ['% правильных MC', '0%']]} /></div><p className="stats-empty-note">Статистика игр с друзьями появится после первых завершённых матчей</p></section>
     </div>
     <p className="menu-version">Данные хранятся на этом устройстве · v1.0</p>
   </section>
@@ -1238,51 +1182,20 @@ function StatsColumn({ title, rows }: { title: string; rows: string[][] }) {
   return <div className="stats-column"><h3>{title}</h3>{rows.map(([label, value]) => <div className="stats-row" key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>
 }
 
-function StatMetric({ label, value, progress }: { label: string; value: number | string; progress?: number }) {
-  return <div className="stat-metric"><span>{label}</span><strong>{value}</strong>{progress !== undefined ? <i><b style={{ width: `${progress}%` }} /></i> : null}</div>
-}
-
 function MenuScreen({
   notice,
-  selectedQuestionBankFiles,
-  connectedQuestionCount,
-  onQuestionBankFilesChange,
   onStart,
   onStats,
   onRanked,
   onFriends,
 }: {
   notice: string
-  selectedQuestionBankFiles: number[]
-  connectedQuestionCount: number
-  onQuestionBankFilesChange: (files: number[]) => void
   onStart: () => void
   onStats: () => void
   onRanked: () => void
   onFriends: () => void
 }) {
   const [settingsOpen, setSettingsOpen] = useState(false)
-  const [bankOpen, setBankOpen] = useState(false)
-  const [bankPage, setBankPage] = useState(0)
-  const [bankInput, setBankInput] = useState(() => selectedQuestionBankFiles.join(', '))
-  const selectedBankSet = new Set(selectedQuestionBankFiles)
-
-  useEffect(() => {
-    setBankInput(selectedQuestionBankFiles.join(', '))
-  }, [selectedQuestionBankFiles])
-
-  const applyBankInput = () => {
-    const next = parseQuestionBankSelection(bankInput)
-    if (next.length > 0) onQuestionBankFilesChange(next)
-    else setBankInput(selectedQuestionBankFiles.join(', '))
-  }
-
-  const toggleQuestionBankFile = (file: number) => {
-    const next = selectedBankSet.has(file)
-      ? selectedQuestionBankFiles.filter((item) => item !== file)
-      : [...selectedQuestionBankFiles, file]
-    if (next.length > 0) onQuestionBankFilesChange(next)
-  }
 
   return <section className="menu-map-screen">
     <div className="map-ornament map-ornament-top" aria-hidden="true" />
@@ -1291,45 +1204,7 @@ function MenuScreen({
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2Zm8.2 3.6c0-.5-.1-1-.2-1.5l2-1.5-2-3.4-2.4 1a9 9 0 0 0-2.6-1.5L14.7 2H9.3L9 5.1a9 9 0 0 0-2.6 1.5L4 5.6 2 9l2 1.5a8 8 0 0 0 0 3L2 15l2 3.4 2.4-1A9 9 0 0 0 9 18.9l.3 3.1h5.4l.3-3.1a9 9 0 0 0 2.6-1.5l2.4 1 2-3.4-2-1.5c.1-.5.2-1 .2-1.5Z" /></svg>
       </button>
       {settingsOpen ? <div className="menu-settings-popover">
-        <button type="button" className="menu-bank-toggle" onClick={() => setBankOpen((open) => !open)}>банк вопросов</button>
-        {bankOpen ? <div className="menu-bank-control">
-          <div className="menu-bank-summary">
-            <span>Файлов: {selectedQuestionBankFiles.length} / {QUESTION_BANK_FILE_COUNT}</span>
-            <strong>Вопросов: {connectedQuestionCount}</strong>
-          </div>
-          <div className="menu-bank-actions">
-            <button type="button" onClick={() => onQuestionBankFilesChange(allQuestionBankFiles())}>Все файлы</button>
-            <button type="button" onClick={() => onQuestionBankFilesChange([1])}>Только 1</button>
-          </div>
-          <label className="menu-bank-input">
-            <span>Номера файлов</span>
-            <input
-              type="text"
-              value={bankInput}
-              placeholder="Например: 3, 5, 7"
-              onChange={(event) => setBankInput(event.target.value)}
-              onBlur={applyBankInput}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  event.currentTarget.blur()
-                  applyBankInput()
-                }
-              }}
-            />
-          </label>
-          <div className="menu-bank-files" aria-label="Файлы банка вопросов">
-            {allQuestionBankFiles().slice(bankPage * 30, (bankPage + 1) * 30).map((file) => <button
-              type="button"
-              key={file}
-              className={`menu-bank-file${selectedBankSet.has(file) ? ' is-selected' : ''}`}
-              title={`question_bank/my_game_question${file}.json`}
-              onClick={() => toggleQuestionBankFile(file)}
-            >
-              {file}
-            </button>)}
-          </div>
-          <div className="bank-pagination"><button disabled={bankPage === 0} onClick={() => setBankPage(bankPage - 1)}>←</button><span>{bankPage + 1} / {Math.ceil(QUESTION_BANK_FILE_COUNT / 30)}</span><button disabled={(bankPage + 1) * 30 >= QUESTION_BANK_FILE_COUNT} onClick={() => setBankPage(bankPage + 1)}>→</button></div>
-        </div> : null}
+        <p className="menu-settings-empty">Настройки матча открываются перед игрой с ботами.</p>
       </div> : null}
     </div>
     <header className="menu-title">

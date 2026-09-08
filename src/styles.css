@@ -210,42 +210,10 @@ button {
   box-shadow:0 20px 65px #302e2930;
   z-index:60;
 }
-.menu-bank-toggle,.pause-button,.exit-button {
+.pause-button,.exit-button {
   width:100%;
   padding:12px;
   text-align:left;
-}
-.menu-bank-control {
-  display:grid;
-  gap:10px;
-  margin-top:10px;
-  font-size:12px;
-}
-.menu-bank-summary,.menu-bank-actions,.bank-pagination {
-  display:flex;
-  gap:8px;
-  justify-content:space-between;
-  align-items:center;
-}
-.menu-bank-actions button,.bank-pagination button {
-  padding:8px 12px;
-}
-.menu-bank-input {
-  display:grid;
-  gap:4px;
-}
-.menu-bank-files {
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:4px;
-}
-.menu-bank-file {
-  min-height:30px;
-  font-size:11px;
-}
-.menu-bank-file.is-selected {
-  background:var(--wood);
-  color:var(--paper);
 }
 .map-scene {
   position:relative;
@@ -555,12 +523,14 @@ button {
 }
 .result-option.is-gold-correct {
   border-color:#f2c553;
-  box-shadow:0 0 0 3px #f2c55355,0 0 28px #e4a72f75;
+  outline:5px solid #f6ce55;
+  outline-offset:2px;
+  box-shadow:0 0 0 8px #f2c55355,0 0 34px #e4a72fa0,inset 0 0 0 3px #fff1a7;
   animation:gold-answer-pulse .8s ease-in-out infinite alternate;
 }
 @keyframes gold-answer-pulse {
-  from { box-shadow:0 0 0 2px #f2c55355,0 0 14px #e4a72f55; }
-  to { box-shadow:0 0 0 6px #f7d87f95,0 0 36px #e4a72fa0; }
+  from { outline-color:#f0bd32; box-shadow:0 0 0 5px #f2c55355,0 0 18px #e4a72f70,inset 0 0 0 2px #fff1a7; }
+  to { outline-color:#fff0a8; box-shadow:0 0 0 10px #f7d87f95,0 0 42px #e4a72fd0,inset 0 0 0 4px #fff1a7; }
 }
 .timer {
   position:relative;
@@ -912,7 +882,7 @@ button {
   color:var(--muted);
   margin-bottom:18px;
 }
-.stats-columns,.pve-grid {
+.stats-columns {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:22px;
@@ -1263,7 +1233,7 @@ button {
     margin-bottom:10px;
     font-size:10px;
   }
-  .stats-columns,.pve-grid {
+  .stats-columns {
     gap:16px;
   }
   .stats-row {
@@ -1638,9 +1608,6 @@ button {
   }
   .stats-screen .stats-empty-note {
     font-size:9px;
-  }
-  .stats-screen .pve-grid {
-    gap:8px;
   }
   .stats-screen .stats-dashboard {
     gap:8px;
@@ -2131,17 +2098,19 @@ body::after {
 }
 @media(max-height:700px) and (max-width:700px) {
   .arena { padding-top:66px; }
-  .menu-map-screen { padding-top:24px; }
+  .menu-map-screen { padding:20px 24px 18px; }
   .map-scene {
-    min-height:190px;
-    transform:scale(.82);
-    margin:-36px 0 -18px;
+    min-height:145px;
+    transform:scale(.68);
+    margin:-54px 0 -42px;
   }
-  .menu-title h2 { font-size:50px; }
-  .menu-subtitle { font-size:17px; }
-  .wood-plaque { min-height:66px; }
-  .wood-plaque span { font-size:24px; }
-  .wood-plaque small { font-size:14px; }
+  .menu-title h2 { font-size:45px; }
+  .menu-subtitle { font-size:16px; }
+  .wood-plaque { min-height:58px; padding:10px 12px; }
+  .wood-plaque span { font-size:22px; }
+  .wood-plaque small { font-size:13px; margin-top:2px; }
+  .mode-icon { width:52px; height:44px; font-size:22px; }
+  .stats-link { font-size:19px; margin-top:2px; }
   .question-card,.online-question-panel { padding:70px 22px 18px; }
   .question-card>.kicker,.online-question-panel>.kicker {
     top:24px;
