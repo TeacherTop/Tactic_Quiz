@@ -51,9 +51,45 @@ type PveStats = {
 }
 
 const STATS_STORAGE_KEY = 'strategi-quiz-pve-stats'
+const HISTORY_STORAGE_KEY = 'strategi-quiz-pve-history'
+const HISTORY_LIMIT = 30
 const BOT_TOPICS = [...new Set([...LOCALIZED_QUIZ_QUESTIONS, ...LOCALIZED_NUMERIC_QUESTIONS].map(q => q.category ?? 'Общие знания'))].sort((a, b) => a.localeCompare(b, 'ru'))
 function readBotSettings(): BotSettings {
   try { return parseBotSettings(localStorage.getItem(BOT_SETTINGS_KEY), BOT_TOPICS) } catch { return parseBotSettings(null, BOT_TOPICS) }
+}
+
+type PveHistoryPlayer = {
+  id: PlayerId
+  name: string
+  score: number
+  territories: number
+  mcCorrect: number
+  mcTotal: number
+}
+
+type PveHistoryEntry = {
+  id: string
+  finishedAt: string
+  mode: 'duel' | 'trio'
+  difficulty: BotSettings['difficulty']
+  arenaSize: BotSettings['arenaSize']
+  categories: string[]
+  winnerId: PlayerId
+  winnerName: string
+  playerPlace: number
+  rounds: {
+    expansion: number
+    battle: number
+  }
+  player: {
+    score: number
+    territories: number
+    mcCorrect: number
+    mcTotal: number
+    numericAnswered: number
+    averageNumericError: number | null
+  }
+  players: PveHistoryPlayer[]
 }
 
 type Match = {
@@ -144,6 +180,35 @@ function savePveStats(stats: PveStats): void {
   }
 }
 
+function readPveHistory(): PveHistoryEntry[] {
+  try {
+    const raw = localStorage.getItem(HISTORY_STORAGE_KEY)
+    if (!raw) return []
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed.filter(isPveHistoryEntry) : []
+  } catch {
+    return []
+  }
+}
+
+function savePveHistory(history: PveHistoryEntry[]): void {
+  try {
+    localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(history.slice(0, HISTORY_LIMIT)))
+  } catch {
+    // History is a convenience layer; stats and gameplay should keep working without storage.
+  }
+}
+
+function isPveHistoryEntry(value: unknown): value is PveHistoryEntry {
+  if (!value || typeof value !== 'object') return false
+  const entry = value as Partial<PveHistoryEntry>
+  return typeof entry.id === 'string'
+    && typeof entry.finishedAt === 'string'
+    && typeof entry.winnerName === 'string'
+    && typeof entry.playerPlace === 'number'
+    && Array.isArray(entry.players)
+}
+
 function randomIndex(length: number): number {
   if (length <= 0) return 0
   const cryptoApi = globalThis.crypto
@@ -192,6 +257,69 @@ function recordMcAnswer(
 
 function isExactNumericHit(value: number, answer: number): boolean {
   return Math.abs(value - answer) === 0
+}
+
+function playerAccuracyLabel(correct: number, total: number): string {
+  return total ? `${Math.round((correct / total) * 100)}%` : '—'
+}
+
+function difficultyLabel(difficulty: BotSettings['difficulty']): string {
+  return difficulty === 'easy' ? 'Легко' : difficulty === 'hard' ? 'Сложно' : 'Средне'
+}
+
+function arenaSizeLabel(size: BotSettings['arenaSize']): string {
+  return `${size} сот`
+}
+
+function historyEntryFromMatch(match: Match): PveHistoryEntry {
+  const players = match.playerIds.map((id) => ({
+    id,
+    name: PLAYER_BY_ID[id].name,
+    score: match.scores[id],
+    territories: match.arena.filter((cell) => cell.owner === id).length,
+    mcCorrect: match.mcStats[id].correct,
+    mcTotal: match.mcStats[id].total,
+  })).sort((left, right) => {
+    if (right.territories !== left.territories) return right.territories - left.territories
+    if (right.score !== left.score) return right.score - left.score
+    return right.mcCorrect - left.mcCorrect
+  })
+  const winner = players[0] ?? {
+    id: 'you' as PlayerId,
+    name: PLAYER_BY_ID.you.name,
+    score: 0,
+    territories: 0,
+    mcCorrect: 0,
+    mcTotal: 0,
+  }
+  const player = players.find((item) => item.id === 'you') ?? winner
+
+  return {
+    id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    finishedAt: new Date().toISOString(),
+    mode: match.playerIds.length > 2 ? 'trio' : 'duel',
+    difficulty: match.settings.difficulty,
+    arenaSize: match.settings.arenaSize,
+    categories: match.settings.categories.slice(0, 3),
+    winnerId: winner.id,
+    winnerName: winner.name,
+    playerPlace: players.findIndex((item) => item.id === 'you') + 1,
+    rounds: {
+      expansion: match.expansionRound,
+      battle: match.battleRound,
+    },
+    player: {
+      score: player.score,
+      territories: player.territories,
+      mcCorrect: player.mcCorrect,
+      mcTotal: player.mcTotal,
+      numericAnswered: match.pveStats.numericAnswered,
+      averageNumericError: match.pveStats.numericAnswered
+        ? Math.round(match.pveStats.numericDeviationTotal / match.pveStats.numericAnswered)
+        : null,
+    },
+    players,
+  }
 }
 
 function nextAttacker(arena: ArenaCell[], ids: PlayerId[], startIndex = 0): PlayerId | null {
@@ -765,15 +893,11 @@ export default function App() {
       numericDeviationTotal: previous.numericDeviationTotal + match.pveStats.numericDeviationTotal,
       numericAnswered: previous.numericAnswered + match.pveStats.numericAnswered,
     })
+    savePveHistory([historyEntryFromMatch(match), ...readPveHistory()])
     recordedMatch.current = true
   }, [phase, match])
 
   return <div className={`arena ${phase === 'home' ? '' : `game-shell game-phase-${phase}`}`}>
-    <header className="identity-bar">
-      {phase !== 'home' ? <button type="button" className="identity-close" aria-label="Выйти в меню" onClick={exitGame}>×</button> : <span />}
-      <div className="game-wordmark">Ближе всех<span aria-hidden="true">♛</span></div>
-      <span />
-    </header>
     {phase !== 'home' ? <header className="topbar">
       <div><p className="kicker">Арена</p><h1>Ближе всех</h1></div>
       {match ? <div className="topbar-tools"><TurnIndicator playerIds={match.playerIds} activePlayer={activeTurn} /><PhaseBadge phase={phase} match={match} /><PlayerDock playerIds={match.playerIds} scores={match.scores} highlight={activeTurn} badges={{ [match.attacker]: phase.startsWith('battle') ? 'атакует' : undefined }} /><div className={`settings-menu${settingsOpen ? ' is-open' : ''}`}><button type="button" className="settings-button" aria-label="Настройки" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((open) => !open)}><span aria-hidden="true">⚙</span></button>{settingsOpen ? <div className="settings-popover"><button type="button" className="pause-button" onClick={togglePause}>{paused ? 'Продолжить' : 'Приостановить игру'}</button><button type="button" className="exit-button" onClick={exitGame}>Выйти из игры</button></div> : null}</div></div> : null}
@@ -782,7 +906,7 @@ export default function App() {
       {phase === 'home' && homeScreen === 'stats' ? <StatsScreen stats={readPveStats()} onBack={() => setHomeScreen('menu')} onHistory={() => setHomeScreen('history')} /> : null}
       {phase === 'home' && homeScreen === 'ranked' ? <RankedScreen onBack={() => setHomeScreen('menu')} /> : null}
       {phase === 'home' && homeScreen === 'friends' ? <FriendsScreen onBack={() => setHomeScreen('menu')} /> : null}
-      {phase === 'home' && homeScreen === 'history' ? <HistoryScreen onBack={() => setHomeScreen('stats')} /> : null}
+      {phase === 'home' && homeScreen === 'history' ? <HistoryScreen entries={readPveHistory()} onBack={() => setHomeScreen('stats')} /> : null}
       {phase === 'home' && homeScreen === 'bot-settings' ? <BotGameSettings settings={botSettings} topics={BOT_TOPICS.map(name => ({ name, count: [...LOCALIZED_QUIZ_QUESTIONS, ...LOCALIZED_NUMERIC_QUESTIONS].filter(q => (q.category ?? 'Общие знания') === name).length }))} onChange={updateBotSettings} onStart={startMatch} onBack={() => setHomeScreen('menu')} /> : null}
       {phase === 'home' && homeScreen === 'menu' ? <MenuScreen notice={menuNotice} onStart={openBotSettings} onStats={() => setHomeScreen('stats')} onRanked={() => setHomeScreen('ranked')} onFriends={() => setHomeScreen('friends')} /> : null}
       <AnimatePresence mode="wait">
@@ -1177,12 +1301,50 @@ function OnlineFinalResults({ state }: { state: MultiplayerGameState }) {
   }))} onMenu={() => window.location.reload()} />
 }
 
-function HistoryScreen({ onBack }: { onBack: () => void }) {
+function HistoryScreen({ entries, onBack }: { entries: PveHistoryEntry[]; onBack: () => void }) {
   return <section className="history-screen">
     <button type="button" className="stats-back" onClick={onBack}>← Статистика</button>
     <header className="stats-title"><p className="menu-eyebrow">Летопись матчей</p><h2>ИСТОРИЯ ИГР</h2><div className="title-rule" aria-hidden="true"><i /><b /><i /></div></header>
-    <div className="history-empty"><span aria-hidden="true">✦</span><h3>История пуста</h3><p>Завершённые матчи появятся здесь.</p></div>
+    {entries.length ? <div className="history-list">
+      {entries.map((entry, index) => <HistoryEntryCard key={entry.id} entry={entry} index={index} />)}
+    </div> : <div className="history-empty"><span aria-hidden="true">✦</span><h3>История пуста</h3><p>Завершённые матчи появятся здесь.</p></div>}
   </section>
+}
+
+function HistoryEntryCard({ entry, index }: { entry: PveHistoryEntry; index: number }) {
+  const finishedAt = new Date(entry.finishedAt)
+  const date = Number.isNaN(finishedAt.getTime())
+    ? 'Дата неизвестна'
+    : new Intl.DateTimeFormat('ru-RU', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(finishedAt)
+  const result = entry.winnerId === 'you' ? 'Победа' : `Победил ${entry.winnerName}`
+  const categories = entry.categories.length ? entry.categories.join(' · ') : 'Все темы'
+
+  return <article className={`history-entry ${entry.winnerId === 'you' ? 'is-win' : ''}`}>
+    <header className="history-entry-head">
+      <div>
+        <p className="history-entry-kicker">Партия {entriesNumber(index)} · {date}</p>
+        <h3>{result}</h3>
+      </div>
+      <span className="history-place">{entry.playerPlace}</span>
+    </header>
+    <div className="history-entry-map" aria-hidden="true">
+      {entry.players.map((player) => <i key={player.id} style={{ ['--size' as string]: `${Math.max(16, 20 + player.territories * 5)}px`, ['--color' as string]: PLAYER_BY_ID[player.id].accent }} />)}
+    </div>
+    <div className="history-metrics">
+      <span><b>{entry.player.score}</b> очков</span>
+      <span><b>{entry.player.territories}</b> территорий</span>
+      <span><b>{playerAccuracyLabel(entry.player.mcCorrect, entry.player.mcTotal)}</b> точность</span>
+      <span><b>{entry.player.averageNumericError === null ? '—' : entry.player.averageNumericError}</b> ср. ошибка</span>
+    </div>
+    <footer className="history-entry-foot">
+      <span>{entry.mode === 'trio' ? 'Троица' : 'Дуэль'} · {difficultyLabel(entry.difficulty)} · {arenaSizeLabel(entry.arenaSize)}</span>
+      <span>{categories}</span>
+    </footer>
+  </article>
+}
+
+function entriesNumber(index: number): string {
+  return String(index + 1).padStart(2, '0')
 }
 
 function StatsColumn({ title, rows }: { title: string; rows: string[][] }) {
