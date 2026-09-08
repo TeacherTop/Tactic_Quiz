@@ -1,3 +1,4 @@
+import { TerrainMark } from './TerrainMark'
 import { motion } from 'framer-motion'
 import type { MultiplayerGameState } from '../../shared/multiplayer'
 
@@ -59,7 +60,8 @@ export function OnlineArenaGrid({ state, onChoose }: { state: MultiplayerGameSta
           }}
         >
           <polygon points={pointsFor(cell.row, cell.col)} className="arena-cell-fill" />
-          {owner ? <text x={centerFor(cell.row, cell.col)[0]} y={centerFor(cell.row, cell.col)[1] + 5} textAnchor="middle" className="online-cell-owner">{owner.name.slice(0, 1)}</text> : null}
+          <TerrainMark x={centerFor(cell.row, cell.col)[0]} y={centerFor(cell.row, cell.col)[1]} />
+          {owner ? <text x={centerFor(cell.row, cell.col)[0]} y={centerFor(cell.row, cell.col)[1] + 25} textAnchor="middle" className="online-cell-owner">{owner.name.slice(0, 1)}</text> : null}
         </motion.g>
       })}
     </svg>

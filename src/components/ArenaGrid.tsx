@@ -1,3 +1,4 @@
+import { TerrainMark } from './TerrainMark'
 import { cellKey, getAvailableCells, getNeighbors } from '../game/arena'
 import { PLAYER_BY_ID } from '../game/players'
 import type { ArenaCell, PlayerId } from '../game/types'
@@ -35,9 +36,8 @@ export function ArenaGrid({ cells, activePlayer, selectableKeys, lastCapturedKey
   const activeColor = activePlayer ? PLAYER_BY_ID[activePlayer].accent : '#ffffff'
 
   const radius = Math.max(...cells.map(cell => Math.max(Math.abs(cell.row), Math.abs(cell.col), Math.abs(cell.row + cell.col))))
-  const scale = (radius + 0.7) / 2.7
-  const width = VIEWBOX_WIDTH * scale
-  const height = VIEWBOX_HEIGHT * scale
+  const width = (3 * radius + 3.5) * HEX_SIZE
+  const height = (2 * radius + 1) * HEX_HEIGHT + HEX_SIZE * 2
 
   return (
     <section className="arena-board-wrap" aria-label={`Гексагональная арена, радиус ${radius}`}>
@@ -92,6 +92,7 @@ export function ArenaGrid({ cells, activePlayer, selectableKeys, lastCapturedKey
               }}
             >
               <polygon points={pointsFor(cell)} className="arena-cell-fill" />
+              <TerrainMark x={centerFor(cell)[0]} y={centerFor(cell)[1]} botanical={cell.owner === 'alex'} />
               {isCaptured ? <circle cx={centerFor(cell)[0]} cy={centerFor(cell)[1]} r={HEX_SIZE * 0.2} className="arena-ripple" /> : null}
             </g>
           )

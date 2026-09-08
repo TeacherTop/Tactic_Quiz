@@ -2122,4 +2122,46 @@ body::after {
     min-height:58px;
     font-size:20px;
   }
+  .stats-screen {
+    padding:12px;
+    gap:8px;
+  }
+  .stats-title {
+    gap:5px;
+  }
+  .stats-title h2 {
+    font-size:24px;
+  }
+  .stats-history-button {
+    min-height:42px;
+    padding:8px 14px;
+    font-size:11px;
+  }
+  .stats-dashboard {
+    gap:8px;
+  }
+  .stats-block {
+    padding:9px;
+  }
+  .stats-block-kicker {
+    margin-bottom:5px;
+    font-size:9px;
+  }
+  .stats-columns {
+    gap:10px;
+  }
+  .stats-column h3 {
+    margin-bottom:5px;
+    font-size:12px;
+  }
+  .stats-row {
+    padding:2px 0;
+    font-size:10px;
+  }
+  .stats-empty-note {
+    display:none;
+  }
+  .stats-screen>.menu-version {
+    display:none;
+  }
 }

@@ -28,6 +28,7 @@ import { connectMultiplayerSocket, createMultiplayerRoom, joinMultiplayerRoom, t
 import { getInviteRoomCode, getTelegramInviteUrl, shareTelegramInvite } from './telegram'
 import type { MultiplayerGameState } from '../shared/multiplayer'
 import './styles.css'
+import './parchment.css'
 
 type Phase = 'home' | 'expansion' | 'expansion-review' | 'expansion-capture' | 'expansion-between' | 'expansion-final' | 'battle-select' | 'battle-warmup' | 'battle-number' | 'results'
 const MAX_BATTLE_ROUNDS = 9
@@ -768,6 +769,11 @@ export default function App() {
   }, [phase, match])
 
   return <div className={`arena ${phase === 'home' ? '' : `game-shell game-phase-${phase}`}`}>
+    <header className="identity-bar">
+      {phase !== 'home' ? <button type="button" className="identity-close" aria-label="Выйти в меню" onClick={exitGame}>×</button> : <span />}
+      <div className="game-wordmark">Ближе всех<span aria-hidden="true">♛</span></div>
+      <span />
+    </header>
     {phase !== 'home' ? <header className="topbar">
       <div><p className="kicker">Арена</p><h1>Ближе всех</h1></div>
       {match ? <div className="topbar-tools"><TurnIndicator playerIds={match.playerIds} activePlayer={activeTurn} /><PhaseBadge phase={phase} match={match} /><PlayerDock playerIds={match.playerIds} scores={match.scores} highlight={activeTurn} badges={{ [match.attacker]: phase.startsWith('battle') ? 'атакует' : undefined }} /><div className={`settings-menu${settingsOpen ? ' is-open' : ''}`}><button type="button" className="settings-button" aria-label="Настройки" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((open) => !open)}><span aria-hidden="true">⚙</span></button>{settingsOpen ? <div className="settings-popover"><button type="button" className="pause-button" onClick={togglePause}>{paused ? 'Продолжить' : 'Приостановить игру'}</button><button type="button" className="exit-button" onClick={exitGame}>Выйти из игры</button></div> : null}</div></div> : null}
@@ -795,7 +801,7 @@ export default function App() {
       {roundResult ? <RoundResultOverlay result={roundResult} /> : null}
       {phase === 'expansion-capture' && match?.pendingCapture === 'you' ? <section className="panel"><p className="kicker">Завоевание · правильный ответ</p><h2>{isExpansionBreakthrough(match.arena, 'you') ? 'Прорыв блокады: выбери любую свободную соту' : 'Выбери свободную соседнюю соту'}</h2><p className="hint">{isExpansionBreakthrough(match.arena, 'you') ? 'Твоя территория окружена. Десант можно высадить в любой свободной точке карты.' : 'Только соседняя свободная сота доступна для расширения.'}</p></section> : null}
       {phase === 'expansion-capture' && match?.pendingCapture && match.pendingCapture !== 'you' ? <section className="panel"><p className="kicker">Завоевание · правильный ответ</p><h2>{PLAYER_BY_ID[match.pendingCapture].name} выбирает территорию</h2><p className="hint">Следи за картой: захваты ботов теперь проходят по очереди.</p></section> : null}
-      {phase === 'expansion-between' ? <section className="panel transition-panel"><p className="kicker">Переход</p><h2>Следующий раунд скоро начнется</h2><PauseProgress progress={timeline.progress} /></section> : null}
+      {phase === 'expansion-between' ? <section className="panel transition-panel"><p className="kicker">Переход</p><h2>Следующий раунд скоро начнется</h2><PauseProgress progress={timeline.progress} /><div className="transition-dots" aria-hidden="true"><i /><i /><i /></div></section> : null}
       {phase === 'battle-select' && match && match.attacker === 'you' ? <p className="map-instruction">Выбери подсвеченную вражескую соту на карте</p> : null}
       {phase === 'results' && match ? <FinalResultsScreen players={match.playerIds.map((playerId) => ({
         playerId,
@@ -807,6 +813,7 @@ export default function App() {
         hexCount: match.arena.filter((cell) => cell.owner === playerId).length,
       }))} onMenu={exitGame} /> : null}
     </main>
+    <footer className="cartographic-footer" aria-hidden="true"><span>Знания объединяют</span></footer>
   </div>
 }
 
