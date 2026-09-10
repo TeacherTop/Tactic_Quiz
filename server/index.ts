@@ -9,7 +9,10 @@ import { verifyTelegramInitData } from './telegramAuth'
 import type { ClientToServerEvents, MultiplayerGameState, ServerToClientEvents, TelegramUser } from '../shared/multiplayer'
 
 const PORT = Number(process.env.PORT ?? 4000)
-const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN ?? 'http://127.0.0.1:5173'
+const CLIENT_ORIGINS = (process.env.CLIENT_ORIGIN ?? 'http://127.0.0.1:5173')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean)
 const DEV_AUTH = process.env.NODE_ENV === 'test' || process.env.ALLOW_DEV_AUTH === 'true'
 const RATE_LIMIT_PER_SECOND = 10
 
@@ -26,7 +29,7 @@ const store = new GameRoomStore()
 const actionBuckets = new Map<string, { startedAt: number; count: number }>()
 const scheduledBotTurns = new Set<string>()
 const corsOrigin: cors.CorsOptions['origin'] = (origin, callback) => {
-  if (!origin || origin === CLIENT_ORIGIN || /^http:\/\/(127\.0\.0\.1|localhost):\d+$/.test(origin)) {
+  if (!origin || CLIENT_ORIGINS.includes(origin) || /^http:\/\/(127\.0\.0\.1|localhost):\d+$/.test(origin)) {
     callback(null, true)
     return
   }

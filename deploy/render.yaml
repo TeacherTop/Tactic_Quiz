@@ -3,12 +3,14 @@ services:
     name: strategi-quiz-backend
     env: node
     plan: free
-    buildCommand: npm install --include=dev
-    startCommand: npm run server
+    buildCommand: npm ci
+    startCommand: npm run server:start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
+      - key: NODE_VERSION
+        value: 22
       - key: CLIENT_ORIGIN
         sync: false
       - key: TELEGRAM_BOT_TOKEN

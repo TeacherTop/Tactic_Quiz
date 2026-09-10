@@ -3,6 +3,13 @@ import type { ClientToServerEvents, CreateRoomResponse, JoinRoomResponse, Multip
 import { getTelegramInitData } from '../telegram'
 
 const API_URL = import.meta.env.VITE_MULTIPLAYER_API_URL ?? 'http://127.0.0.1:4000'
+
+function multiplayerFetchError(error: unknown): Error {
+  if (error instanceof TypeError && /fetch/i.test(error.message)) {
+    return new Error(`Не удалось подключиться к серверу комнат (${API_URL}). Проверь, что multiplayer API запущен и доступен с этого устройства.`)
+  }
+  return error instanceof Error ? error : new Error('Ошибка мультиплеера')
+}
 export type MultiplayerSocket = Socket<ServerToClientEvents, ClientToServerEvents>
 
 function devUserQuery(): string {
@@ -11,14 +18,18 @@ function devUserQuery(): string {
 }
 
 async function postJson<T>(path: string, body: unknown): Promise<T> {
-  const response = await fetch(`${API_URL}${path}${devUserQuery()}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  })
-  const data = await response.json()
-  if (!response.ok) throw new Error(data.error ?? 'Ошибка мультиплеера')
-  return data as T
+  try {
+    const response = await fetch(`${API_URL}${path}${devUserQuery()}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    })
+    const data = await response.json()
+    if (!response.ok) throw new Error(data.error ?? 'Ошибка мультиплеера')
+    return data as T
+  } catch (error) {
+    throw multiplayerFetchError(error)
+  }
 }
 
 export function createMultiplayerRoom(): Promise<CreateRoomResponse> {

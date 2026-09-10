@@ -36,21 +36,29 @@ npm run dev
 
 ## Деплой Backend
 
-Для реального Telegram нужны публичные HTTPS URL для frontend и backend. Локальный `127.0.0.1` виден только на твоем компьютере.
+Для реального Telegram нужны публичные HTTPS URL для frontend и backend. Локальный `127.0.0.1` виден только на твоем компьютере и не работает с телефона внутри Telegram.
 
-Backend можно развернуть на Render через `deploy/render.yaml`.
+Backend подготовлен для Render Blueprint через `deploy/render.yaml`. Production-команда запуска — `npm run server:start`; она поднимает Express + Socket.IO сервер и отвечает на `/health`.
 
-Нужные переменные backend:
+Порядок на Render:
 
-- `CLIENT_ORIGIN` - HTTPS URL frontend, например `https://quiz.example.com`.
-- `TELEGRAM_BOT_TOKEN` - токен Telegram-бота из BotFather.
-- `SUPABASE_URL` - опционально, если нужно сохранять комнаты в Supabase.
-- `SUPABASE_SERVICE_ROLE_KEY` - опционально, service-role ключ Supabase.
+1. Создай Web Service или Blueprint из GitHub repo `TeacherTop/Tactic_Quiz`.
+2. Если создаёшь вручную, укажи:
+   - build command: `npm ci`;
+   - start command: `npm run server:start`;
+   - health check path: `/health`;
+   - Node version: `22`.
+3. Добавь переменные backend:
+   - `CLIENT_ORIGIN` — HTTPS URL frontend, например `https://quiz.example.com`. Можно указать несколько URL через запятую.
+   - `TELEGRAM_BOT_TOKEN` — токен Telegram-бота из BotFather.
+   - `SUPABASE_URL` — опционально, если нужно сохранять комнаты в Supabase.
+   - `SUPABASE_SERVICE_ROLE_KEY` — опционально, service-role ключ Supabase.
+4. После деплоя Render даст backend URL вида `https://strategi-quiz-backend.onrender.com`. Проверь `https://.../health` — должен быть ответ `{"ok":true}`.
 
 Нужные переменные frontend:
 
-- `VITE_MULTIPLAYER_API_URL` - HTTPS URL backend, например `https://strategi-quiz-backend.onrender.com`.
-- `VITE_TELEGRAM_BOT_USERNAME` - username бота без `@`, чтобы приглашения открывались через `startapp`.
+- `VITE_MULTIPLAYER_API_URL` — HTTPS URL backend, например `https://strategi-quiz-backend.onrender.com`.
+- `VITE_TELEGRAM_BOT_USERNAME` — username бота без `@`, чтобы приглашения открывались через `startapp`.
 
 Шаблон переменных лежит в `.env.example`.
 

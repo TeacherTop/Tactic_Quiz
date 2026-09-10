@@ -9,7 +9,10 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "server:dev": "ALLOW_DEV_AUTH=true tsx server/index.ts",
+    "server:start": "node --import tsx server/index.ts",
+    "deploy:check": "npm run build && npm test"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.115.0",
