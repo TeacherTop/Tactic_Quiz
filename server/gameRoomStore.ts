@@ -13,7 +13,7 @@ type StoredQuestion = {
   answers: string[]
 }
 
-const PLAYER_COLORS = ['#b55239', '#2f7d7a', '#4969a8']
+const PLAYER_COLORS = ['#b55239', '#6f8d32', '#58758f']
 const ROOM_SIZE = 3
 const ANSWER_MS = 20000
 const MAX_BATTLE_ROUNDS = 9
@@ -352,15 +352,17 @@ export class GameRoomStore {
     player.status = 'disconnected'
     player.socketId = null
     player.disconnectedAt = Date.now()
-    room.players.push({
-      ...player,
-      id: crypto.randomUUID(),
-      telegramId: null,
-      name: `${player.name} Bot`,
-      status: 'bot',
-      socketId: null,
-      botReplacementFor: player.id,
-    })
+    if (room.status === 'playing') {
+      room.players.push({
+        ...player,
+        id: crypto.randomUUID(),
+        telegramId: null,
+        name: `${player.name} Bot`,
+        status: 'bot',
+        socketId: null,
+        botReplacementFor: player.id,
+      })
+    }
     room.updatedAt = Date.now()
     void this.persist(room)
     return room

@@ -38,6 +38,17 @@ describe('GameRoomStore', () => {
 
 
 
+
+
+  it('assigns distinct map colors to three friends', () => {
+    const store = new GameRoomStore()
+    const { state: room } = store.createRoom(user(1))
+    store.joinRoom(room.roomCode, user(2), 's2')
+    const ready = store.joinRoom(room.roomCode, user(3), 's3').state
+    expect(ready.players.map((player) => player.color)).toEqual(['#b55239', '#6f8d32', '#58758f'])
+    expect(new Set(ready.players.map((player) => player.color)).size).toBe(3)
+  })
+
   it('keeps the room in lobby until the host starts it', () => {
     const store = new GameRoomStore()
     const { state: room } = store.createRoom(user(1))
@@ -71,10 +82,20 @@ describe('GameRoomStore', () => {
     vi.useRealTimers()
   })
 
+  it('does not add bot replacements while players are still in lobby', () => {
+    const store = new GameRoomStore()
+    const { state: room } = store.createRoom(user(1))
+    store.joinRoom(room.roomCode, user(2), 'socket-two')
+    const updated = store.markDisconnected('socket-two')
+    expect(updated?.status).toBe('waiting')
+    expect(updated?.players.some((player) => player.status === 'bot')).toBe(false)
+  })
+
   it('marks disconnected players and creates a bot replacement', () => {
     const store = new GameRoomStore()
     const { state: room } = store.createRoom(user(1))
     store.joinRoom(room.roomCode, user(2), 'socket-two')
+    store.startGame(room.roomId, room.hostPlayerId)
     const updated = store.markDisconnected('socket-two')
     expect(updated?.players.find((player) => player.socketId === null && player.telegramId === 2)?.status).toBe('disconnected')
     expect(updated?.players.some((player) => player.status === 'bot' && player.botReplacementFor)).toBe(true)
