@@ -1293,7 +1293,7 @@ function FriendsScreen({ onBack }: { onBack: () => void }) {
   return <section className="ranked-screen friends-screen">
     <button type="button" className="stats-back" onClick={onBack}>← Главное меню</button>
     <header className="stats-title"><p className="menu-eyebrow">Сражение за одним столом</p><h2>ИГРА С ДРУЗЬЯМИ</h2><div className="title-rule" aria-hidden="true"><i /><b /><i /></div></header>
-    <div className="friends-room-card">
+    {!state ? <div className="friends-room-card">
       <p className="stats-block-kicker">Комната по коду</p>
       <button type="button" className="wood-plaque plaque-red friends-create" onClick={createRoom}><span>Создать комнату</span><small>Настройки и старт будут только у создателя</small></button>
       <label className="room-code-field">
@@ -1302,12 +1302,13 @@ function FriendsScreen({ onBack }: { onBack: () => void }) {
       </label>
       <button type="button" className="wood-plaque plaque-light friends-join" disabled={roomCode.length !== 6} onClick={joinRoom}><span>Войти по коду</span><small>{roomCode.length === 6 ? 'Подключиться к партии' : 'Введите 6 цифр'}</small></button>
       {currentRoomCode ? <button type="button" className="wood-plaque plaque-light friends-invite" onClick={() => { shareTelegramInvite(currentRoomCode); setNotice(`Ссылка-приглашение готова: ${getTelegramInviteUrl(currentRoomCode)}`) }}><span>Пригласить друга</span><small>Через Telegram</small></button> : null}
-    </div>
-    {state ? <div className="online-room-panel friends-lobby-panel">
+    </div> : null}
+    {state?.status === 'waiting' ? <div className="online-room-panel friends-lobby-panel">
       <p className="menu-eyebrow">Комната {state.roomCode}</p>
-      <h3>{state.status === 'playing' ? `Раунд ${state.round}` : state.status === 'finished' ? 'Матч завершен' : isHost ? 'Ты создатель комнаты' : 'Ждём создателя комнаты'}</h3>
+      <button type="button" className="friends-share" onClick={() => shareTelegramInvite(state.roomCode)}>Пригласить друга ↗</button>
+      <h3>{isHost ? 'Ты создатель комнаты' : 'Ждём создателя комнаты'}</h3>
       <div className="online-player-list">
-        {state.players.map((player) => <span key={player.id} className={player.id === state.hostPlayerId ? 'is-host' : ''} style={{ borderColor: player.color, color: player.color }}>{player.name}{player.id === state.hostPlayerId ? ' · создатель' : ''} · {player.status}</span>)}
+        {humanPlayers.map((player) => <span key={player.id} className={player.id === state.hostPlayerId ? 'is-host' : ''} style={{ borderColor: player.color, color: player.color }}>{player.name}{player.id === state.hostPlayerId ? ' · создатель' : ''} · {player.status === 'connected' ? 'в комнате' : 'нет связи'}</span>)}
       </div>
       {state.status === 'waiting' ? <div className="friends-settings-panel">
         <div className="friends-settings-summary">
@@ -1326,20 +1327,20 @@ function FriendsScreen({ onBack }: { onBack: () => void }) {
             <button type="button" className={state.settings.arenaRadius === 1 ? 'is-selected' : ''} onClick={() => patchSettings({ arenaRadius: 1 })}>Быстрая · 7 сот</button>
             <button type="button" className={state.settings.arenaRadius === 2 ? 'is-selected' : ''} onClick={() => patchSettings({ arenaRadius: 2 })}>Классика · 19 сот</button>
           </div>
-          <div className="friends-category-grid" aria-label="Темы комнаты">
+          <details className="friends-topics"><summary>Темы вопросов · {state.settings.categories.length || 'все'}</summary><div className="friends-category-grid" aria-label="Темы комнаты">
             {categoryOptions.map((category) => <button key={category} type="button" className={state.settings.categories.includes(category) ? 'is-selected' : ''} onClick={() => toggleCategory(category)}>{category}</button>)}
-          </div>
+          </div></details>
           <button type="button" className="wood-plaque plaque-red friends-start" disabled={!canStart} onClick={startGame}><span>Начать игру</span><small>{canStart ? 'Все готовы — открываем первый вопрос' : 'Нужно минимум два игрока'}</small></button>
         </> : <p className="friends-wait-note">Настройки выбирает создатель. Когда он нажмёт старт, матч начнётся у всех игроков одновременно.</p>}
       </div> : null}
     </div> : null}
-    {state && (state.status === 'playing' || state.status === 'finished') ? <OnlineGameView state={state} socket={socket} /> : null}
-    {notice ? <p className="ranked-notice">{notice}</p> : null}
+    {state && (state.status === 'playing' || state.status === 'finished') ? <OnlineGameView state={state} socket={socket} viewerPlayerId={viewerPlayerId} /> : null}
+    {notice && state?.status !== 'playing' ? <p className="ranked-notice">{notice}</p> : null}
   </section>
 }
 
 function useServerRemainingMs(timerEndsAt: number | null): number {
-  const [now, setNow] = useState(0)
+  const [now, setNow] = useState(() => Date.now())
   useEffect(() => {
     if (!timerEndsAt) return
     setNow(Date.now())
@@ -1349,13 +1350,25 @@ function useServerRemainingMs(timerEndsAt: number | null): number {
   return timerEndsAt ? Math.max(0, timerEndsAt - now) : 0
 }
 
-function OnlineGameView({ state, socket }: { state: MultiplayerGameState; socket: MultiplayerSocket | null }) {
+function OnlineGameView({ state, socket, viewerPlayerId }: { state: MultiplayerGameState; socket: MultiplayerSocket | null; viewerPlayerId: string | null }) {
   const remainingMs = useServerRemainingMs(state.timerEndsAt)
   const active = state.players.find((player) => player.id === state.activePlayerId)
   const [notice, setNotice] = useState('')
-  const sendAnswer = (answer: number) => socket?.emit('answer_submitted', { roomId: state.roomId, answer }, (response) => {
-    setNotice(response.ok ? 'Ответ принят' : response.error)
-  })
+  const questionKey = `${state.round}:${state.battleRound}:${state.currentQuestion?.id}`
+  const pending = useRef<string | null>(null)
+  const [submitted, setSubmitted] = useState<string | null>(null)
+  const isParticipant = Boolean(viewerPlayerId && (state.phase === 'expansion' || (state.phase === 'battle-number' && [state.activePlayerId, state.selectedAttack?.ownerId].includes(viewerPlayerId))))
+  const answered = submitted === questionKey || Boolean(viewerPlayerId && state.answerTimes[viewerPlayerId] !== undefined)
+  const canAnswer = isParticipant && !answered && remainingMs > 0
+  const sendAnswer = (answer: number) => {
+    if (!socket?.connected || !canAnswer || pending.current === questionKey) return
+    pending.current = questionKey
+    setSubmitted(questionKey)
+    socket.emit('answer_submitted', { roomId: state.roomId, answer }, (response) => {
+      if (!response.ok) { pending.current = null; setSubmitted(null) }
+      setNotice(response.ok ? '' : response.error)
+    })
+  }
   const chooseHex = (row: number, col: number) => {
     const event = state.phase === 'battle-select' ? 'attack_chosen' : 'hex_selected'
     socket?.emit(event, { roomId: state.roomId, row, col }, (response) => {
@@ -1366,7 +1379,7 @@ function OnlineGameView({ state, socket }: { state: MultiplayerGameState; socket
   return <motion.section className="online-game-view" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
     <div className="online-topline">
       <strong>{state.phase === 'battle-select' ? 'Битва' : state.phase === 'battle-number' ? 'Числовая дуэль' : 'Завоевание'}</strong>
-      <span>{active ? `Ход: ${active.name}` : 'Ожидание сервера'}</span>
+      <span>{active ? `Ход: ${active.name}` : state.phase === 'expansion' ? `Раунд ${state.round} · отвечают все` : state.phase === 'results' ? 'Матч завершён' : 'Итоги вопроса'}</span>
     </div>
     <div className="online-score-row">
       {state.players.filter((player) => !player.botReplacementFor).map((player) => <article key={player.id} className={state.activePlayerId === player.id ? 'is-active' : ''} style={{ ['--accent' as string]: player.color }}>
@@ -1374,19 +1387,19 @@ function OnlineGameView({ state, socket }: { state: MultiplayerGameState; socket
         <span>{state.scores[player.id] ?? 0}</span>
       </article>)}
     </div>
-    <OnlineArenaGrid state={state} onChoose={chooseHex} />
+    <OnlineArenaGrid state={state} viewerPlayerId={viewerPlayerId} onChoose={chooseHex} />
     {state.currentQuestion && state.currentQuestion.type !== 'numeric' && state.phase === 'expansion' ? <section className="panel online-question-panel">
       <p className="kicker">Онлайн · общий вопрос · {state.currentQuestion.category}</p>
       <h2>{state.currentQuestion.prompt}</h2>
       <TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} />
       <div className="options">
-        {state.currentQuestion.options.map((option, index) => <motion.button key={`${option}-${index}`} type="button" className="option" style={{ ['--answer-color' as string]: active?.color ?? '#b55239' }} whileTap={{ scale: 0.95 }} onClick={() => sendAnswer(index)}>
+        {state.currentQuestion.options.map((option, index) => <motion.button key={`${option}-${index}`} type="button" className="option" disabled={!canAnswer} style={{ ['--answer-color' as string]: active?.color ?? '#b55239' }} whileTap={{ scale: 0.95 }} onClick={() => sendAnswer(index)}>
           <span className="opt-key">{['А', 'Б', 'В', 'Г'][index]}</span>{option}
         </motion.button>)}
       </div>
-      <p className="hint">Выбери один ответ. Каждый верный ответ приближает к победе.</p>
+      <p className="hint">{answered ? 'Ответ принят. Ждём остальных игроков.' : 'Выбери один ответ. Изменить его после отправки нельзя.'}</p>
     </section> : null}
-    {state.currentQuestion?.type === 'numeric' && state.phase === 'battle-number' ? <OnlineNumberPanel state={state} remainingMs={remainingMs} onAnswer={(answer) => sendAnswer(answer)} /> : null}
+    {state.currentQuestion?.type === 'numeric' && state.phase === 'battle-number' ? <OnlineNumberPanel key={questionKey} disabled={!canAnswer} state={state} remainingMs={remainingMs} onAnswer={(answer) => sendAnswer(answer)} /> : null}
     {state.phase === 'expansion-review' && state.roundResult ? <OnlineRoundResults state={state} /> : null}
     {state.phase === 'expansion-capture' ? <p className="map-instruction">{active ? `${active.name} выбирает территорию` : 'Ожидание хода'}</p> : null}
     {state.phase === 'battle-select' ? <p className="map-instruction">{active ? `${active.name} выбирает цель атаки` : 'Ожидание атаки'}</p> : null}
@@ -1410,15 +1423,15 @@ function OnlineRoundResults({ state }: { state: MultiplayerGameState }) {
   </motion.section>
 }
 
-function OnlineNumberPanel({ state, remainingMs, onAnswer }: { state: MultiplayerGameState; remainingMs: number; onAnswer: (answer: number) => void }) {
+function OnlineNumberPanel({ state, remainingMs, onAnswer, disabled }: { disabled: boolean; state: MultiplayerGameState; remainingMs: number; onAnswer: (answer: number) => void }) {
   const [value, setValue] = useState('')
   return <section className="panel online-question-panel">
     <p className="kicker">Онлайн · числовая дуэль · {state.currentQuestion?.category ?? 'Общие знания'}</p>
     <h2>{state.currentQuestion?.prompt}</h2>
       <TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} />
-    <form className="guess-form" onSubmit={(event) => { event.preventDefault(); const parsed = Number(value.replace(',', '.')); if (Number.isFinite(parsed)) onAnswer(parsed) }}>
-      <input value={value} onChange={(event) => setValue(event.target.value)} inputMode="decimal" placeholder="Твоё число" />
-      <button type="submit">Ответить</button>
+    <form className="guess-form" onSubmit={(event) => { event.preventDefault(); const parsed = Number(value.replace(',', '.')); if (!disabled && value.trim() && Number.isFinite(parsed)) onAnswer(parsed) }}>
+      <input disabled={disabled} aria-label="Числовой ответ" value={value} onChange={(event) => setValue(event.target.value)} inputMode="decimal" placeholder="Твоё число" />
+      <button type="submit" disabled={disabled || !value.trim()}>Ответить</button>
     </form>
     <p className="hint">Побеждает тот, чей ответ ближе к правильному числу.</p>
   </section>

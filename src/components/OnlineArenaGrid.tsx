@@ -26,7 +26,7 @@ function cellKey(row: number, col: number): string {
   return `${row}:${col}`
 }
 
-export function OnlineArenaGrid({ state, onChoose }: { state: MultiplayerGameState; onChoose: (row: number, col: number) => void }) {
+export function OnlineArenaGrid({ state, onChoose, viewerPlayerId }: { viewerPlayerId: string | null; state: MultiplayerGameState; onChoose: (row: number, col: number) => void }) {
   const available = new Set(state.availableHexes)
   const ownerById = new Map(state.players.map((player) => [player.id, player]))
   const active = state.players.find((player) => player.id === state.activePlayerId)
@@ -36,7 +36,7 @@ export function OnlineArenaGrid({ state, onChoose }: { state: MultiplayerGameSta
       {state.arena.map((cell) => {
         const key = cellKey(cell.row, cell.col)
         const owner = cell.ownerId ? ownerById.get(cell.ownerId) : null
-        const selectable = available.has(key)
+        const selectable = available.has(key) && state.activePlayerId === viewerPlayerId
         return <motion.g
           key={key}
           className={[

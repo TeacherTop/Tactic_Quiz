@@ -115,7 +115,7 @@ describe('GameRoomStore', () => {
     const reviewed = store.submitAnswer(room.roomId, playing.players[0].id, correct)
     expect(reviewed.phase).toBe('expansion')
     vi.setSystemTime(300)
-    const closed = store.submitAnswer(room.roomId, playing.players[2].id, 99)
+    const closed = store.submitAnswer(room.roomId, playing.players[2].id, (correct + 1) % 4)
     expect(closed.phase).toBe('expansion-review')
     expect(closed.turnQueue).toEqual([playing.players[1].id, playing.players[0].id])
     const capture = store.beginCapture(room.roomId)
@@ -152,4 +152,75 @@ describe('GameRoomStore', () => {
     expect(battle.phase).toBe('results')
     vi.useRealTimers()
   })
+  it('rejects outsiders, invalid choices and answers during review', () => {
+    const store = new GameRoomStore()
+    const { state: room } = store.createRoom(user(1))
+    const guest = store.joinRoom(room.roomCode, user(2), 's2')
+    store.startGame(room.roomId)
+    expect(() => store.submitAnswer(room.roomId, 'outsider', 0)).toThrow()
+    for (const answer of [NaN, Infinity, -1, 99, 0.5]) {
+      expect(() => store.submitAnswer(room.roomId, guest.playerId, answer)).toThrow()
+    }
+    store.submitAnswer(room.roomId, guest.playerId, 0)
+    store.submitAnswer(room.roomId, room.hostPlayerId, 0)
+    expect(() => store.submitAnswer(room.roomId, guest.playerId, 1)).toThrow()
+  })
+
+  it('reuses the selected bank when all questions have been used', () => {
+    const store = new GameRoomStore()
+    const { state: room } = store.createRoom(user(1))
+    store.joinRoom(room.roomCode, user(2), 's2')
+    store.updateSettings(room.roomId, room.hostPlayerId, { maxPlayers: 2, arenaRadius: 1, categories: ['Тест'] })
+    store.startGame(room.roomId)
+    store.finishAnswering(room.roomId)
+    store.beginCapture(room.roomId)
+    expect(room.round).toBe(2)
+    expect(room.currentQuestion?.prompt).toBe('Два плюс два?')
+  })
+
+  it('rotates attacks and excludes the third player from a duel', () => {
+    const store = new GameRoomStore()
+    const { state: room } = store.createRoom(user(1))
+    const guest = store.joinRoom(room.roomCode, user(2), 's2')
+    const spectator = store.joinRoom(room.roomCode, user(3), 's3')
+    store.startGame(room.roomId)
+    room.phase = 'battle-select'
+    room.activePlayerId = room.hostPlayerId
+    room.arena = [{ row: 0, col: 0, ownerId: room.hostPlayerId }, { row: 1, col: 0, ownerId: guest.playerId }]
+    store.chooseAttack(room.roomId, room.hostPlayerId, 1, 0)
+    expect(() => store.submitAnswer(room.roomId, spectator.playerId, 1)).toThrow()
+    store.submitAnswer(room.roomId, guest.playerId, 1)
+    store.finishAnswering(room.roomId)
+    expect(room.activePlayerId).toBe(guest.playerId)
+  })
+
+})
+
+it.each([2, 3] as const)('completes a full match with %i friends', count => {
+  const store = new GameRoomStore()
+  const { state: room } = store.createRoom(user(51))
+  for (let i = 1; i < count; i++) store.joinRoom(room.roomCode, user(51 + i), `full-${i}`)
+  store.updateSettings(room.roomId, room.hostPlayerId, {maxPlayers:count,arenaRadius:1,categories:['Тест']})
+  store.startGame(room.roomId)
+  let steps = 0
+  while (room.status !== 'finished' && steps++ < 150) {
+    const correct = (store as unknown as { questionAnswers: Map<string, number> }).questionAnswers.get(room.roomId)!
+    if (room.phase === 'expansion') {
+      for (const player of room.players) store.submitAnswer(room.roomId, player.id, correct)
+    } else if (room.phase === 'expansion-review') store.beginCapture(room.roomId)
+    else if (room.phase === 'expansion-capture' || room.phase === 'battle-select') {
+      const [row, col] = room.availableHexes[0].split(':').map(Number)
+      if (room.phase === 'battle-select') store.chooseAttack(room.roomId, room.activePlayerId!, row, col)
+      else store.selectHex(room.roomId, room.activePlayerId!, row, col)
+    } else if (room.phase === 'battle-number') {
+      const attacker = room.activePlayerId!
+      const defender = room.selectedAttack!.ownerId!
+      store.submitAnswer(room.roomId, defender, correct)
+      store.submitAnswer(room.roomId, attacker, correct + 1)
+    }
+  }
+  expect(room.status).toBe('finished')
+  expect(room.battleRound).toBe(count === 2 ? 8 : 9)
+  expect(room.arena.every(cell => cell.ownerId)).toBe(true)
+  expect(Object.values(room.scores).every(Number.isFinite)).toBe(true)
 })

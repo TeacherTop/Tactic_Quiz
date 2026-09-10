@@ -1204,3 +1204,59 @@ h1,h2,h3 {
     grid-template-columns:1fr;
   }
 }
+
+/* Friends share the parchment palette and the same compact game stage. */
+.friends-lobby-panel {
+  padding:18px;
+  border:1px solid #b9955e;
+  border-radius:16px;
+  background:linear-gradient(135deg,#fff5dfeb,#e8d3aee8);
+  box-shadow:0 10px 28px #69492120,inset 0 1px #fff8e8;
+}
+.friends-lobby-panel h3 { margin:8px 0 14px; font-family:var(--serif); color:#503723; }
+.friends-share { float:right; padding:8px 12px; border:1px solid #b9955e; border-radius:8px; background:#f6e7c9; color:#654525; }
+.online-player-list { flex-wrap:wrap; }
+.online-player-list span { overflow-wrap:anywhere; background:#fff5df; }
+.friends-topics summary { cursor:pointer; color:#654525; font-weight:700; padding:8px 0; }
+.friends-category-grid { margin-top:8px; }
+.friends-setting-row { grid-template-columns:65px repeat(2,minmax(0,1fr)); }
+.friends-settings-summary { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.friends-screen:has(.online-game-view) { height:100%; min-height:0; width:100%; gap:8px; }
+.online-score-row article { min-width:0; border:2px solid var(--accent); background:color-mix(in srgb,var(--accent) 12%,#fff3d9); color:#422e20; }
+.online-score-row b { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.online-svg-arena .arena-cell.is-owned .arena-cell-fill { fill:var(--owner-color); fill-opacity:1; }
+.online-svg-arena .arena-cell.is-owned .terrain-mark { opacity:.35; }
+.online-cell-owner { fill:#fff8e7; font-weight:900; }
+.online-game-view .option:disabled { cursor:default; opacity:.65; }
+.online-game-view .online-question-panel { min-height:0; }
+.online-game-view .online-question-panel h2 { font-size:clamp(20px,3.4vh,34px); }
+.online-game-view .options { gap:8px; }
+.online-game-view .option { min-height:48px; padding:10px 14px; }
+.online-game-view .hint { margin:8px 0 0; }
+@media(max-height:740px) {
+  .online-game-view { gap:6px; }
+  .online-game-view .online-question-panel { padding-bottom:12px; }
+  .online-game-view .option { min-height:40px; font-size:15px; }
+  .online-game-view .online-question-panel h2 { margin-bottom:12px; }
+}
+.friends-start { display:flex; flex-direction:column; gap:4px; padding:12px; min-height:66px; }
+.friends-start span { font-size:24px; line-height:1.1; }
+.friends-start small { font:600 11px/1.3 var(--sans); }
+@media(max-width:480px) {
+  .friends-lobby-panel { padding:12px; }
+  .friends-settings-panel { padding:10px; gap:10px; }
+  .friends-share { float:none; margin:4px 0; }
+}
+.arena:has(.friends-screen .online-game-view) { height:100dvh; min-height:0; }
+.arena:has(.friends-screen .online-game-view) > .cartographic-footer { display:none; }
+.friends-screen:has(.online-game-view) { flex:1; padding:14px; }
+.online-game-view .online-question-panel { flex:1; overflow:hidden; }
+.online-game-view .arena-board-wrap { flex:1; min-height:0; }
+.online-game-view .arena-board { height:100%; max-height:100%; }
+@media(max-height:740px) {
+  .online-game-view .online-question-panel { padding:64px 14px 10px; gap:8px; }
+  .online-game-view .online-question-panel h2 { line-height:1.18; margin:0 0 8px; }
+  .online-game-view .option { padding:6px 10px; }
+  .online-game-view .opt-key { height:26px; flex-basis:26px; font-size:14px; }
+  .online-game-view .hint { font-size:11px; }
+}

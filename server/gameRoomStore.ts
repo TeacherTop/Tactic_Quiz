@@ -140,7 +140,7 @@ function pickQuestionIndex(usedIds: string[], categories: string[]): number {
   const available = QUESTIONS
     .map((_, index) => index)
     .filter((index) => !usedIds.includes(String(index)) && (categorySet.size === 0 || categorySet.has(QUESTIONS[index].category)))
-  const pool = available.length > 0 ? available : QUESTIONS.map((_, index) => index).filter((index) => !usedIds.includes(String(index)))
+  const pool = available.length > 0 ? available : QUESTIONS.map((_, index) => index).filter(index => categorySet.size === 0 || categorySet.has(QUESTIONS[index].category))
   return pool[crypto.randomInt(pool.length)]
 }
 
@@ -286,6 +286,8 @@ export class GameRoomStore {
     if (room.status !== 'playing' || !room.timerEndsAt || Date.now() > room.timerEndsAt) {
       throw new Error('Время ответа истекло')
     }
+    if (!['expansion', 'battle-number'].includes(room.phase) || !expectedAnswerers(room).includes(playerId)) throw new Error('Сейчас вы не можете отвечать')
+    if (!Number.isFinite(answer) || (room.phase === 'expansion' && (!Number.isInteger(answer) || answer < 0 || answer >= (room.currentQuestion?.options.length ?? 0)))) throw new Error('Некорректный ответ')
     if (room.answers[playerId] !== undefined) return room
     room.answers[playerId] = answer
     room.answerTimes[playerId] = Date.now()
@@ -397,7 +399,7 @@ export class GameRoomStore {
     room.turnQueue = correctPlayerIds.sort((left, right) => (room.answerTimes[left] ?? 0) - (room.answerTimes[right] ?? 0))
     room.roundResult = { correctOption: correct, correctPlayerIds, exactBonusPlayerIds: [] }
     room.phase = 'expansion-review'
-    room.timerEndsAt = Date.now() + 600
+    room.timerEndsAt = Date.now() + 3500
     room.activePlayerId = null
     room.updatedAt = Date.now()
     void this.persist(room)
@@ -406,6 +408,7 @@ export class GameRoomStore {
 
   beginCapture(roomId: string): MultiplayerGameState {
     const room = this.requireRoom(roomId)
+    if (room.phase !== 'expansion-review') return room
     this.advanceExpansionCapture(room)
     room.updatedAt = Date.now()
     void this.persist(room)
@@ -497,7 +500,9 @@ export class GameRoomStore {
     if (room.battleRound >= maxBattleRounds) {
       finishRoom(room)
     } else {
-      const attackerNext = firstAttacker(room)
+      const ids = playerIds(room)
+      const offset = ids.indexOf(attacker) + 1
+      const attackerNext = [...ids.slice(offset), ...ids.slice(0, offset)].find(id => attackTargets(room.arena, id).length > 0)
       if (!attackerNext) {
         finishRoom(room)
         room.selectedAttack = null

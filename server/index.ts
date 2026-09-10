@@ -28,6 +28,7 @@ const app = express()
 const server = http.createServer(app)
 const store = new GameRoomStore()
 const actionBuckets = new Map<string, { startedAt: number; count: number }>()
+const phaseTimers = new Map<string, ReturnType<typeof setTimeout>>()
 const scheduledBotTurns = new Set<string>()
 function isAllowedOrigin(origin: string | undefined): boolean {
   return !origin
@@ -89,18 +90,21 @@ function publicState(state: MultiplayerGameState): MultiplayerGameState {
   return { ...state, answers: {} }
 }
 
-function emitState(state: MultiplayerGameState): void {
+export function emitState(state: MultiplayerGameState): void {
   io.to(state.roomId).emit('state_update', publicState(state))
   schedulePhaseTimer(state)
   scheduleBotTurn(state)
 }
 
 function schedulePhaseTimer(state: MultiplayerGameState): void {
+  clearTimeout(phaseTimers.get(state.roomId))
+  phaseTimers.delete(state.roomId)
   if (!state.timerEndsAt) return
+  const { timerEndsAt, phase, round, battleRound } = state
   const delay = Math.max(0, state.timerEndsAt - Date.now())
-  setTimeout(() => {
+  phaseTimers.set(state.roomId, setTimeout(() => {
     const current = store.getRoomById(state.roomId)
-    if (!current || current.timerEndsAt !== state.timerEndsAt || current.phase !== state.phase) return
+    if (!current || current.timerEndsAt !== timerEndsAt || current.phase !== phase || current.round !== round || current.battleRound !== battleRound) return
     if (current.phase === 'expansion') {
       const reviewed = store.finishAnswering(current.roomId)
       log(reviewed.roomId, `Раунд ${reviewed.round}: ответы закрыты`)
@@ -118,19 +122,21 @@ function schedulePhaseTimer(state: MultiplayerGameState): void {
       log(next.roomId, `Битва ${next.battleRound}: числовые ответы закрыты`)
       emitState(next)
     }
-  }, delay)
+  }, delay))
 }
 
 function scheduleBotTurn(state: MultiplayerGameState): void {
   if (!state.activePlayerId) return
   const active = state.players.find((player) => player.id === state.activePlayerId)
-  if (active?.status !== 'bot') return
+  if (!active || active.status !== 'disconnected' || !['expansion-capture', 'battle-select'].includes(state.phase)) return
+  const { phase, activePlayerId: scheduledPlayer, round, battleRound } = state
   const key = `${state.roomId}:${state.phase}:${state.activePlayerId}:${state.updatedAt}`
   if (scheduledBotTurns.has(key)) return
   scheduledBotTurns.add(key)
   setTimeout(() => {
     const current = store.getRoomById(state.roomId)
-    if (!current || current.activePlayerId !== state.activePlayerId || current.phase !== state.phase) return
+    scheduledBotTurns.delete(key)
+    if (!current || current.activePlayerId !== scheduledPlayer || current.phase !== phase || current.round !== round || current.battleRound !== battleRound || current.players.find(p => p.id === scheduledPlayer)?.status !== 'disconnected') return
     const activePlayerId = current.activePlayerId
     if (!activePlayerId) return
     const targetKey = current.availableHexes[0]
@@ -211,6 +217,7 @@ io.on('connection', (socket) => {
   socket.on('room_settings_updated', (payload, ack) => {
     acknowledge(ack, () => {
       rateLimit(socket.id)
+      if (socket.data.roomId !== payload.roomId) throw new Error('Игрок не привязан к этой комнате')
       if (!socket.data.playerId) throw new Error('Игрок не привязан к комнате')
       const state = store.updateSettings(payload.roomId, socket.data.playerId, payload.settings)
       log(payload.roomId, `${socket.data.playerId} обновил настройки комнаты`)
@@ -221,6 +228,7 @@ io.on('connection', (socket) => {
   socket.on('game_started', (payload, ack) => {
     acknowledge(ack, () => {
       rateLimit(socket.id)
+      if (socket.data.roomId !== payload.roomId) throw new Error('Игрок не привязан к этой комнате')
       if (!socket.data.playerId) throw new Error('Игрок не привязан к комнате')
       const state = store.startGame(payload.roomId, socket.data.playerId)
       log(payload.roomId, `Матч стартовал, раунд ${state.round}`)
@@ -231,6 +239,7 @@ io.on('connection', (socket) => {
   socket.on('answer_submitted', (payload, ack) => {
     acknowledge(ack, () => {
       rateLimit(socket.id)
+      if (socket.data.roomId !== payload.roomId) throw new Error('Игрок не привязан к этой комнате')
       if (!socket.data.playerId) throw new Error('Игрок не привязан к комнате')
       const answer = Array.isArray(payload.answer) ? payload.answer[0] : payload.answer
       const state = store.submitAnswer(payload.roomId, socket.data.playerId, answer)
@@ -242,6 +251,7 @@ io.on('connection', (socket) => {
   socket.on('hex_selected', (payload, ack) => {
     acknowledge(ack, () => {
       rateLimit(socket.id)
+      if (socket.data.roomId !== payload.roomId) throw new Error('Игрок не привязан к этой комнате')
       if (!socket.data.playerId) throw new Error('Игрок не привязан к комнате')
       const state = store.selectHex(payload.roomId, socket.data.playerId, payload.row, payload.col)
       log(payload.roomId, `${socket.data.playerId} выбрал соту ${payload.row}:${payload.col}`)
@@ -252,6 +262,7 @@ io.on('connection', (socket) => {
   socket.on('attack_chosen', (payload, ack) => {
     acknowledge(ack, () => {
       rateLimit(socket.id)
+      if (socket.data.roomId !== payload.roomId) throw new Error('Игрок не привязан к этой комнате')
       if (!socket.data.playerId) throw new Error('Игрок не привязан к комнате')
       const state = store.chooseAttack(payload.roomId, socket.data.playerId, payload.row, payload.col)
       log(payload.roomId, `${socket.data.playerId} выбрал атаку ${payload.row}:${payload.col}`)
