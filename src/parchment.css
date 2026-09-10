@@ -275,6 +275,49 @@ h1,h2,h3 {
   padding:16px;
   isolation:isolate
 }
+.map-action-banner {
+  position:relative;
+  z-index:3;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:min(100%,430px);
+  margin:0 auto 8px;
+  padding:10px 12px;
+  border:1px solid #c8aa75;
+  border-radius:12px;
+  background:linear-gradient(120deg,#fff3db,#ead9b8);
+  box-shadow:0 5px 14px #64451f18,inset 0 0 0 2px #fff8e9
+}
+.map-action-banner span {
+  display:grid;
+  place-items:center;
+  flex:0 0 36px;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:color-mix(in srgb,var(--accent,#a87b38) 82%,#f2dfba);
+  color:#fff3df;
+  font:700 18px/1 var(--serif);
+  box-shadow:inset 0 0 0 2px #ffffff4d
+}
+.map-action-banner strong {
+  display:block;
+  color:var(--ink);
+  font:700 17px/1.15 var(--serif)
+}
+.map-action-banner small {
+  display:block;
+  margin-top:2px;
+  color:var(--muted);
+  font:12px/1.25 var(--serif)
+}
+.map-action-banner.is-battle span {
+  background:#3d4035
+}
+.map-action-banner.is-final span {
+  background:#ad7045
+}
 .arena-board-wrap {
   position:relative;
   z-index:1;
@@ -300,14 +343,14 @@ h1,h2,h3 {
 .arena-cell.is-available .arena-cell-fill {
   fill:color-mix(in srgb,var(--active-color) 15%,#f5ead4);
   stroke:#b58a45;
-  stroke-width:3;
-  filter:drop-shadow(0 2px 1px #76583155)
+  stroke-width:4;
+  filter:drop-shadow(0 0 5px #d4a23f7a) drop-shadow(0 2px 1px #76583155)
 }
 .arena-cell.is-attack-target .arena-cell-fill {
-  stroke:#654522;
-  stroke-width:3;
+  stroke:#d3a148;
+  stroke-width:4;
   stroke-dasharray:4 2;
-  filter:drop-shadow(0 2px 1px #76583155)
+  filter:drop-shadow(0 0 5px #d4a23f80) drop-shadow(0 2px 1px #76583155)
 }
 .arena-cell.is-captured .arena-cell-fill {
   stroke:#f1cd79;
@@ -415,6 +458,27 @@ h1,h2,h3 {
   font:700 clamp(20px,3vw,28px)/1.25 var(--serif);
   margin:8px 0
 }
+.battle-event {
+  position:relative;
+  overflow:hidden;
+  padding-left:86px
+}
+.battle-event::after {
+  content:'';
+  position:absolute;
+  left:22px;
+  top:50%;
+  width:44px;
+  height:44px;
+  transform:translateY(-50%);
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--attacker),var(--defender));
+  box-shadow:0 0 0 5px #efe2c8,inset 0 0 0 2px #fff0c0
+}
+.battle-event h2 {
+  font:700 24px/1.15 var(--serif);
+  margin:4px 0
+}
 .transition-dots {
   display:flex;
   justify-content:center;
@@ -454,6 +518,74 @@ h1,h2,h3 {
 .bot-settings-screen,.stats-screen,.ranked-screen,.history-screen {
   overflow:auto;
   min-height:480px
+}
+.stats-hero {
+  display:grid;
+  grid-template-columns:1.35fr repeat(3,1fr);
+  gap:10px;
+  padding:14px;
+  border:1px solid #cbb181;
+  border-radius:15px;
+  background:url('/art/cartography.svg') center/cover no-repeat,linear-gradient(120deg,#efe0bf,#f8eedb);
+  box-shadow:var(--card-shadow)
+}
+.stats-hero div {
+  display:grid;
+  gap:4px;
+  min-width:0;
+  padding:10px;
+  border-radius:11px;
+  background:#fff5e485;
+  border:1px solid #d6c09580
+}
+.stats-hero .stats-block-kicker {
+  margin:0;
+  grid-column:1/-1
+}
+.stats-hero strong {
+  color:var(--ink);
+  font:700 30px/1 var(--serif)
+}
+.stats-hero span {
+  color:var(--muted);
+  font:700 10px/1.25 var(--serif);
+  letter-spacing:.1em;
+  text-transform:uppercase
+}
+.stats-pve {
+  border-color:#b79b62;
+  background:linear-gradient(120deg,#f9efdc,#ead7b6)
+}
+.friends-screen {
+  gap:18px
+}
+.friends-room-card {
+  display:grid;
+  gap:13px;
+  width:100%;
+  max-width:520px;
+  margin:auto;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:var(--paper-fill);
+  box-shadow:var(--card-shadow)
+}
+.friends-create,.friends-join,.friends-invite {
+  min-height:68px
+}
+.friends-create span,.friends-join span,.friends-invite span {
+  font:700 22px/1.1 var(--serif);
+  text-transform:none
+}
+.friends-create small,.friends-join small,.friends-invite small {
+  font:13px/1.25 var(--serif);
+  letter-spacing:0;
+  text-transform:none
+}
+.friends-join:disabled {
+  opacity:.62;
+  filter:saturate(.65)
 }
 .bot-settings-screen {
   flex:none
@@ -724,6 +856,22 @@ h1,h2,h3 {
     padding:10px;
     min-height:290px
   }
+  .map-action-banner {
+    padding:8px 10px;
+    margin-bottom:6px
+  }
+  .map-action-banner span {
+    flex-basis:32px;
+    width:32px;
+    height:32px;
+    font-size:16px
+  }
+  .map-action-banner strong {
+    font-size:15px
+  }
+  .map-action-banner small {
+    font-size:11px
+  }
   .arena-board-wrap {
     min-height:260px;
     max-height:510px
@@ -770,6 +918,17 @@ h1,h2,h3 {
   .stage>.panel {
     padding:18px
   }
+  .battle-event {
+    padding-left:66px
+  }
+  .battle-event::after {
+    left:16px;
+    width:36px;
+    height:36px
+  }
+  .battle-event h2 {
+    font-size:20px
+  }
   .bot-settings-screen {
     min-height:560px;
     padding:18px
@@ -782,6 +941,22 @@ h1,h2,h3 {
   }
   .bot-settings-footer {
     margin-top:12px
+  }
+  .stats-hero {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    padding:12px
+  }
+  .stats-hero div:first-child {
+    grid-column:1/-1
+  }
+  .stats-hero strong {
+    font-size:27px
+  }
+  .friends-room-card {
+    padding:14px
+  }
+  .friends-create span,.friends-join span,.friends-invite span {
+    font-size:21px
   }
   .settings-popover {
     width:min(250px,calc(100vw - 30px))
@@ -805,7 +980,8 @@ h1,h2,h3 {
 }
 @media(max-width:360px) {
   .arena {
-    padding:0 8px
+    padding:0 6px;
+    gap:6px
   }
   .phase-badge {
     font-size:11px;
@@ -824,13 +1000,72 @@ h1,h2,h3 {
     gap:5px
   }
   .menu-map-screen {
-    padding:24px 15px 12px
+    min-height:500px;
+    padding:14px 15px 8px;
+    gap:6px
+  }
+  .menu-eyebrow {
+    font-size:8px;
+    letter-spacing:.15em
+  }
+  .menu-title h2 {
+    font-size:31px;
+    margin:4px 0 2px
+  }
+  .menu-subtitle {
+    font-size:13px;
+    line-height:1.2
+  }
+  .map-scene {
+    min-height:112px
+  }
+  .hero-monogram {
+    width:72px;
+    height:72px;
+    font-size:54px
+  }
+  .orbit-one {
+    width:110px;
+    height:110px
+  }
+  .orbit-two {
+    width:160px;
+    height:88px
+  }
+  .hex-token {
+    width:40px
+  }
+  .menu-plaques {
+    gap:7px
+  }
+  .menu-plaques .wood-plaque {
+    min-height:54px;
+    padding:7px 10px;
+    gap:8px
   }
   .menu-plaques .wood-plaque>span {
-    font-size:19px
+    font-size:17px
   }
   .menu-plaques .wood-plaque small {
-    font-size:12px
+    font-size:10px;
+    margin-top:2px
+  }
+  .mode-icon {
+    flex-basis:31px;
+    width:31px;
+    height:32px;
+    font-size:20px
+  }
+  .stats-link {
+    min-height:28px;
+    font-size:13px;
+    padding:2px
+  }
+  .cartographic-footer {
+    height:42px
+  }
+  .cartographic-footer span {
+    font-size:7px
   }
   .question-card,.online-question-panel {
     padding-left:16px;

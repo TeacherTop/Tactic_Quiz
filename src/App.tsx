@@ -32,6 +32,7 @@ import './parchment.css'
 
 type Phase = 'home' | 'expansion' | 'expansion-review' | 'expansion-capture' | 'expansion-between' | 'expansion-final' | 'battle-select' | 'battle-warmup' | 'battle-number' | 'results'
 const MAX_BATTLE_ROUNDS = 9
+const DUEL_BATTLE_ROUNDS = 8
 const ANNOUNCEMENT_MS = 4500
 const ROUND_RESULT_MS = 6000
 const BOT_FALLBACK_BUFFER_MS = 500
@@ -121,6 +122,9 @@ type Match = {
   finalQuestion: NumericQuestion
   finalAnswers: Record<PlayerId, number | null>
   finalAnsweredAt: Record<PlayerId, number | null>
+  finalParticipants: PlayerId[]
+  finalCellKeys: string[]
+  finalCellIndex: number
   pveStats: Omit<PveStats, 'games' | 'wins'>
 }
 
@@ -225,6 +229,10 @@ function randomIndex(length: number): number {
 
 function freeCellCount(arena: ArenaCell[]): number {
   return arena.filter((cell) => !cell.owner).length
+}
+
+function maxBattleRoundsFor(match: Match): number {
+  return match.playerIds.length === 2 ? DUEL_BATTLE_ROUNDS : MAX_BATTLE_ROUNDS
 }
 
 function allAnswered(answers: Answers, ids: PlayerId[]): boolean {
@@ -389,6 +397,9 @@ function makeMatch(settings: BotSettings, questions: QuizQuestion[]): Match {
     finalQuestion: numericQuestion,
     finalAnswers: blankAnswers(),
     finalAnsweredAt: blankAnswerTimes(),
+    finalParticipants: playerIds,
+    finalCellKeys: [],
+    finalCellIndex: 0,
     pveStats: { mcCorrect: 0, mcAnswered: 0, numericDeviationTotal: 0, numericAnswered: 0 },
   }
 }
@@ -399,7 +410,7 @@ function beginBattle(match: Match): State {
   return { phase: 'battle-select', match: { ...match, attacker, battleRound: 0 }, completedRoundResult: null }
 }
 
-function beginFinalExpansion(match: Match): State {
+function beginFinalExpansion(match: Match, participants = match.playerIds, cellKeys = match.arena.filter((cell) => !cell.owner).map((cell) => cellKey(cell.row, cell.col)), cellIndex = 0): State {
   if (!match.numericQuestions.length) return beginNextExpansion(match)
   const finalQuestion = pickUnusedNumericQuestion(match.usedNumericQuestionIds, match.numericQuestions)
   return {
@@ -410,9 +421,18 @@ function beginFinalExpansion(match: Match): State {
       usedNumericQuestionIds: [...match.usedNumericQuestionIds, finalQuestion.id],
       finalAnswers: blankAnswers(),
       finalAnsweredAt: blankAnswerTimes(),
+      finalParticipants: participants,
+      finalCellKeys: cellKeys,
+      finalCellIndex: cellIndex,
     },
     completedRoundResult: null,
   }
+}
+
+function needsFinalCellContest(match: Match): boolean {
+  const remainingContestants = match.expansionQueue.slice(match.captureIndex)
+  const freeCells = freeCellCount(match.arena)
+  return freeCells > 0 && remainingContestants.length > freeCells
 }
 
 function beginNextExpansion(match: Match): State {
@@ -435,10 +455,17 @@ function beginNextExpansion(match: Match): State {
 }
 
 function advanceCaptureQueue(match: Match): State {
+  if (needsFinalCellContest(match)) {
+    return beginFinalExpansion(match, match.expansionQueue.slice(match.captureIndex))
+  }
   let arena = match.arena
   let captureIndex = match.captureIndex
   let lastCapturedKey = match.lastCapturedKey
   while (captureIndex < match.expansionQueue.length) {
+    const pendingMatch = { ...match, arena, captureIndex, lastCapturedKey }
+    if (needsFinalCellContest(pendingMatch)) {
+      return beginFinalExpansion(pendingMatch, match.expansionQueue.slice(captureIndex))
+    }
     const id = match.expansionQueue[captureIndex]
     const available = getAvailableCells(arena, id)
     if (available.size > 0) {
@@ -466,8 +493,9 @@ function advanceCaptureQueue(match: Match): State {
 }
 
 function resolveFinalExpansion(match: Match): State {
-  const completedRoundResult: RoundResult = { kind: 'numeric', question: match.finalQuestion, answers: match.finalAnswers, participants: match.playerIds }
-  const winner = match.playerIds
+  const participants = match.finalParticipants.length ? match.finalParticipants : match.playerIds
+  const completedRoundResult: RoundResult = { kind: 'numeric', question: match.finalQuestion, answers: match.finalAnswers, participants }
+  const winner = participants
     .filter((id) => match.finalAnswers[id] !== null)
     .sort((left, right) => {
       const leftDistance = Math.abs((match.finalAnswers[left] ?? 0) - match.finalQuestion.answer)
@@ -476,9 +504,12 @@ function resolveFinalExpansion(match: Match): State {
       return (match.finalAnsweredAt[left] ?? Number.POSITIVE_INFINITY)
         - (match.finalAnsweredAt[right] ?? Number.POSITIVE_INFINITY)
     })[0]
-  const lastCell = match.arena.find((cell) => !cell.owner)
+  const targetKey = match.finalCellKeys[match.finalCellIndex]
+  const lastCell = targetKey
+    ? match.arena.find((cell) => cellKey(cell.row, cell.col) === targetKey)
+    : match.arena.find((cell) => !cell.owner)
   let scores = { ...match.scores }
-  for (const id of match.playerIds) {
+  for (const id of participants) {
     const answer = match.finalAnswers[id]
     if (answer !== null && isExactNumericHit(answer, match.finalQuestion.answer)) {
       scores = addScore(scores, id, SCORE_VALUES.numericExactBonus)
@@ -490,6 +521,19 @@ function resolveFinalExpansion(match: Match): State {
     cell.row === lastCell.row && cell.col === lastCell.col ? { ...cell, owner: winner } : cell
   ))
   scores = addScore(scores, winner, SCORE_VALUES.capture)
+  const nextCellIndex = match.finalCellIndex + 1
+  const nextParticipants = participants.filter((id) => id !== winner)
+  if (nextCellIndex < match.finalCellKeys.length && nextParticipants.length) {
+    return {
+      ...beginFinalExpansion(
+        { ...match, scores, arena, lastCapturedKey: cellKey(lastCell.row, lastCell.col) },
+        nextParticipants,
+        match.finalCellKeys,
+        nextCellIndex,
+      ),
+      completedRoundResult,
+    }
+  }
   return { ...beginBattle({ ...match, scores, arena, lastCapturedKey: cellKey(lastCell.row, lastCell.col) }), completedRoundResult }
 }
 
@@ -509,7 +553,8 @@ function resolveExpansion(match: Match): State {
 
 function startNextBattle(match: Match): State {
   const nextRound = match.battleRound + 1
-  if (nextRound >= MAX_BATTLE_ROUNDS) return { phase: 'results', match: { ...match, battleRound: nextRound }, completedRoundResult: null }
+  const maxBattleRounds = maxBattleRoundsFor(match)
+  if (nextRound >= maxBattleRounds) return { phase: 'results', match: { ...match, battleRound: nextRound }, completedRoundResult: null }
   const attacker = nextAttacker(match.arena, match.playerIds, (match.playerIds.indexOf(match.attacker) + 1) % match.playerIds.length)
   if (!attacker) return { phase: 'results', match: { ...match, battleRound: nextRound }, completedRoundResult: null }
   return {
@@ -645,7 +690,7 @@ function reducer(state: State, action: Action): State {
           ? { ...match.pveStats, numericDeviationTotal: match.pveStats.numericDeviationTotal + Math.abs(action.value - match.finalQuestion.answer), numericAnswered: match.pveStats.numericAnswered + 1 }
           : match.pveStats,
       }
-      return allAnswered(next.finalAnswers, next.playerIds) ? resolveFinalExpansion(next) : { ...state, match: next }
+      return allAnswered(next.finalAnswers, next.finalParticipants) ? resolveFinalExpansion(next) : { ...state, match: next }
     }
     case 'finish-final':
       return match && state.phase === 'expansion-final' ? resolveFinalExpansion(match) : state
@@ -817,7 +862,7 @@ export default function App() {
         })
     }
     if (phase === 'expansion-final') {
-      PLAYERS.filter((player) => match.playerIds.includes(player.id) && player.kind === 'bot' && match.finalAnswers[player.id] === null)
+      PLAYERS.filter((player) => match.finalParticipants.includes(player.id) && player.kind === 'bot' && match.finalAnswers[player.id] === null)
         .forEach((player) => {
           const value = botNumericGuess(match.finalQuestion.answer, BOT_SKILL[match.settings.difficulty])
           scheduleBotAnswer(player.id, botAnswerDelayMs(BOT_SKILL[match.settings.difficulty], QUIZ_TIME_MS), value, () => dispatch({ type: 'answer-final', id: player.id, value, answeredAt: performance.now() }))
@@ -878,7 +923,7 @@ export default function App() {
         ? match.expansionQueue[0] ?? null
         : match.pendingCapture ?? null
     : null
-  const finalHumanLocked = match?.finalAnswers.you !== null
+  const finalHumanLocked = !match?.finalParticipants.includes('you') || match?.finalAnswers.you !== null
 
   useEffect(() => {
     if (phase !== 'results' || !match || recordedMatch.current) return
@@ -910,12 +955,12 @@ export default function App() {
       {phase === 'home' && homeScreen === 'bot-settings' ? <BotGameSettings settings={botSettings} topics={BOT_TOPICS.map(name => ({ name, count: [...LOCALIZED_QUIZ_QUESTIONS, ...LOCALIZED_NUMERIC_QUESTIONS].filter(q => (q.category ?? 'Общие знания') === name).length }))} onChange={updateBotSettings} onStart={startMatch} onBack={() => setHomeScreen('menu')} /> : null}
       {phase === 'home' && homeScreen === 'menu' ? <MenuScreen notice={menuNotice} onStart={openBotSettings} onStats={() => setHomeScreen('stats')} onRanked={() => setHomeScreen('ranked')} onFriends={() => setHomeScreen('friends')} /> : null}
       <AnimatePresence mode="wait">
-        {match && (timeline.mapVisible || (phase !== 'home' && phase !== 'results' && phase !== 'expansion' && !questionPhase)) ? <motion.div key="map" className={`map-stage ${timeline.mapReturning ? 'is-returning' : ''}`} initial={{ opacity: 0.5, y: 10, filter: 'blur(10px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} exit={{ opacity: 0, y: -10, filter: 'blur(10px)' }} transition={{ duration: Math.max(ANIMATION_TIMINGS.minTransition, timeline.mapReturning ? ANIMATION_TIMINGS.mapReturn : ANIMATION_TIMINGS.minTransition) / 1000 }}><ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' && match.pendingCapture === 'you' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /></motion.div> : null}
+        {match && (timeline.mapVisible || (phase !== 'home' && phase !== 'results' && phase !== 'expansion' && !questionPhase)) ? <motion.div key="map" className={`map-stage ${timeline.mapReturning ? 'is-returning' : ''}`} initial={{ opacity: 0.5, y: 10, filter: 'blur(10px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} exit={{ opacity: 0, y: -10, filter: 'blur(10px)' }} transition={{ duration: Math.max(ANIMATION_TIMINGS.minTransition, timeline.mapReturning ? ANIMATION_TIMINGS.mapReturn : ANIMATION_TIMINGS.minTransition) / 1000 }}><MapActionBanner phase={phase} match={match} /><ArenaGrid cells={match.arena} activePlayer={phase === 'expansion-capture' && match.pendingCapture === 'you' ? 'you' : null} selectableKeys={battleTargetKeys} lastCapturedKey={match.lastCapturedKey} onCapture={(row, col) => phase === 'battle-select' ? dispatch({ type: 'select-attack', row, col }) : dispatch({ type: 'capture-expansion', row, col })} /></motion.div> : null}
         {((phase === 'expansion' && timeline.questionVisible) || (questionPhase && phase !== 'expansion' && !announcement)) ? <motion.div key="question" className={`question-stage ${timeline.inputExiting ? 'is-exiting' : ''}`} initial={{ opacity: 0, y: 50 }} animate={{ opacity: timeline.inputExiting ? 0 : 1, y: timeline.inputExiting ? -12 : 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: (timeline.inputExiting ? ANIMATION_TIMINGS.inputExit : ANIMATION_TIMINGS.questionEnter) / 1000 }}>
           {phase === 'expansion' && match ? <>{expansionQueuePosition >= 0 ? <p className="queue-status">Ты в очереди захвата: {expansionQueuePosition + 1}-й</p> : null}{humanQuestion(match.expansionQuestion, match.expansionAnswers, 'expansion')}{match.expansionAnswers.you !== null && !expansionAllAnswered ? <p className="timeline-status">Ожидание соперников...</p> : null}</> : null}
-          {phase === 'expansion-final' && match ? <FinalRoundPanel match={match} remainingMs={remainingMs} locked={finalHumanLocked || paused} onAnswer={(value) => dispatch({ type: 'answer-final', id: 'you', value, answeredAt: performance.now() })} /> : null}
-          {phase === 'battle-warmup' && match && match.defender ? <><section className="panel battle-step"><p className="kicker">Битва · шаг 1 из 2 · Разминка</p><p className="hint">{PLAYER_BY_ID[match.attacker].name} атакует {PLAYER_BY_ID[match.defender].name}.</p></section>{match.attacker === 'you' || match.defender === 'you' ? humanQuestion(match.warmupQuestion, match.warmupAnswers, 'warmup') : <BotWaiting remainingMs={remainingMs} />}</> : null}
-          {phase === 'battle-number' && match && match.defender ? <><section className="panel battle-step"><p className="kicker">Битва · шаг 2 из 2 · Числовая дуэль</p><h2>Ближе к правильному числу побеждает</h2><p className="hint">Скорость не влияет на результат.</p></section>{match.attacker === 'you' || match.defender === 'you' ? <NumberDuel match={match} remainingMs={remainingMs} paused={paused} onAnswer={(value) => dispatch({ type: 'answer-number', id: 'you', value })} /> : <BotWaiting remainingMs={remainingMs} />}</> : null}
+          {phase === 'expansion-final' && match ? match.finalParticipants.includes('you') ? <FinalRoundPanel match={match} remainingMs={remainingMs} locked={finalHumanLocked || paused} onAnswer={(value) => dispatch({ type: 'answer-final', id: 'you', value, answeredAt: performance.now() })} /> : <BotWaiting remainingMs={remainingMs} /> : null}
+          {phase === 'battle-warmup' && match && match.defender ? <><section className="panel battle-step battle-event" style={{ ['--attacker' as string]: PLAYER_BY_ID[match.attacker].accent, ['--defender' as string]: PLAYER_BY_ID[match.defender].accent }}><p className="kicker">Битва · шаг 1 из 2 · Разминка</p><h2>{PLAYER_BY_ID[match.attacker].name} атакует границу</h2><p className="hint">Защитник: {PLAYER_BY_ID[match.defender].name}. Первый вопрос решает, будет ли числовая дуэль.</p></section>{match.attacker === 'you' || match.defender === 'you' ? humanQuestion(match.warmupQuestion, match.warmupAnswers, 'warmup') : <BotWaiting remainingMs={remainingMs} />}</> : null}
+          {phase === 'battle-number' && match && match.defender ? <><section className="panel battle-step battle-event" style={{ ['--attacker' as string]: PLAYER_BY_ID[match.attacker].accent, ['--defender' as string]: PLAYER_BY_ID[match.defender].accent }}><p className="kicker">Битва · шаг 2 из 2 · Числовая дуэль</p><h2>{PLAYER_BY_ID[match.attacker].name} и {PLAYER_BY_ID[match.defender].name}: спор за соту</h2><p className="hint">Ближайшее число решает судьбу территории.</p></section>{match.attacker === 'you' || match.defender === 'you' ? <NumberDuel match={match} remainingMs={remainingMs} paused={paused} onAnswer={(value) => dispatch({ type: 'answer-number', id: 'you', value })} /> : <BotWaiting remainingMs={remainingMs} />}</> : null}
         </motion.div> : null}
       </AnimatePresence>
       {phase === 'expansion' && (timeline.step === 'announcing' || timeline.step === 'pre-timer') ? <TimelineOverlay><RoundAnnouncement phase={phase} match={match} /></TimelineOverlay> : null}
@@ -941,17 +986,43 @@ export default function App() {
   </div>
 }
 
+function MapActionBanner({ phase, match }: { phase: Phase; match: Match }) {
+  if (phase === 'expansion-capture' && match.pendingCapture) {
+    const player = PLAYER_BY_ID[match.pendingCapture]
+    return <div className="map-action-banner" style={{ ['--accent' as string]: player.accent }}>
+      <span>{player.name.slice(0, 1)}</span>
+      <div><strong>{match.pendingCapture === 'you' ? 'Твой захват' : `${player.name} выбирает соту`}</strong><small>{match.pendingCapture === 'you' ? 'Выбери подсвеченную соседнюю территорию' : 'Граница карты меняется прямо сейчас'}</small></div>
+    </div>
+  }
+  if (phase === 'battle-select') {
+    const player = PLAYER_BY_ID[match.attacker]
+    return <div className="map-action-banner is-battle" style={{ ['--accent' as string]: player.accent }}>
+      <span>⚔</span>
+      <div><strong>{match.attacker === 'you' ? 'Выбери цель атаки' : `${player.name} готовит атаку`}</strong><small>Доступные вражеские соты подсвечены на карте</small></div>
+    </div>
+  }
+  if (phase === 'expansion-final') {
+    return <div className="map-action-banner is-final">
+      <span>?</span>
+      <div><strong>Спор за последние земли</strong><small>Каждая оставшаяся сота решается числовым раундом</small></div>
+    </div>
+  }
+  return null
+}
+
 function PhaseBadge({ phase, match }: { phase: Phase; match: Match }) {
   const battle = phase.startsWith('battle') || phase === 'results'
-  return <div className="phase-badge"><strong>{battle ? 'Битва' : 'Завоевание'}</strong><small>{battle ? `Раунд ${Math.min(match.battleRound + 1, MAX_BATTLE_ROUNDS)} / ${MAX_BATTLE_ROUNDS}` : `Раунд ${match.expansionRound}`}</small></div>
+  const maxBattleRounds = maxBattleRoundsFor(match)
+  return <div className="phase-badge"><strong>{battle ? 'Битва' : 'Завоевание'}</strong><small>{battle ? `Раунд ${Math.min(match.battleRound + 1, maxBattleRounds)} / ${maxBattleRounds}` : `Раунд ${match.expansionRound}`}</small></div>
 }
 
 function RoundAnnouncement({ phase, match }: { phase: Phase; match: Match | null }) {
   const battle = phase.startsWith('battle')
   const numeric = phase === 'expansion-final' || phase === 'battle-number'
+  const maxBattleRounds = match ? maxBattleRoundsFor(match) : MAX_BATTLE_ROUNDS
   return <motion.section className="round-announcement" initial={{ opacity: 0, scale: 0.8, y: 18 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96, y: -12 }} transition={{ duration: ANIMATION_TIMINGS.announcementScale / 1000 }}>
     <p className="kicker">Новый раунд</p>
-    <h2>{battle ? `Раунд ${Math.min((match?.battleRound ?? 0) + 1, MAX_BATTLE_ROUNDS)} из ${MAX_BATTLE_ROUNDS}` : `Раунд ${match?.expansionRound ?? 1}`}</h2>
+    <h2>{battle ? `Раунд ${Math.min((match?.battleRound ?? 0) + 1, maxBattleRounds)} из ${maxBattleRounds}` : `Раунд ${match?.expansionRound ?? 1}`}</h2>
     <p>{numeric ? 'Числовая дуэль' : 'Викторина'}</p>
     <span className="announcement-mark">✦</span>
   </motion.section>
@@ -1024,7 +1095,8 @@ function NumberDuel({ match, remainingMs, paused, onAnswer }: { match: Match; re
 
 function FinalRoundPanel({ match, remainingMs, locked, onAnswer }: { match: Match; remainingMs: number; locked: boolean; onAnswer: (value: number | null) => void }) {
   const [value, setValue] = useState('')
-  return <section className="panel question-card final-round-panel"><p className="kicker">Финальная сота · {match.finalQuestion.category ?? 'Общие знания'}</p><h2 className="question-text">{match.finalQuestion.prompt}</h2><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><form className="guess-form" onSubmit={(event) => { event.preventDefault(); const parsed = Number(value.replace(',', '.')); if (!Number.isFinite(parsed)) return; onAnswer(parsed) }}><input value={value} onChange={(event) => setValue(event.target.value)} disabled={locked} inputMode="decimal" placeholder="Твоё число" aria-label="Ответ финального раунда" /><button type="submit" disabled={locked}>{locked ? 'Принято' : 'Ответить'}</button></form><p className="hint">Осталась одна сота. Побеждает ближайший ответ; при равенстве решает время отправки.</p></section>
+  const totalCells = match.finalCellKeys.length || 1
+  return <section className="panel question-card final-round-panel"><p className="kicker">Финальная сота {match.finalCellIndex + 1} из {totalCells} · {match.finalQuestion.category ?? 'Общие знания'}</p><h2 className="question-text">{match.finalQuestion.prompt}</h2><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><form className="guess-form" onSubmit={(event) => { event.preventDefault(); const parsed = Number(value.replace(',', '.')); if (!Number.isFinite(parsed)) return; onAnswer(parsed) }}><input value={value} onChange={(event) => setValue(event.target.value)} disabled={locked} inputMode="decimal" placeholder="Твоё число" aria-label="Ответ финального раунда" /><button type="submit" disabled={locked}>{locked ? 'Принято' : 'Ответить'}</button></form><p className="hint">Побеждает ближайший ответ. Победитель этой соты уступает место другим претендентам в следующем финальном раунде.</p></section>
 }
 
 function BotWaiting({ remainingMs }: { remainingMs: number }) { return <section className="panel"><p className="kicker">Одновременный ответ</p><TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} /><p className="hint">Боты отвечают…</p></section> }
@@ -1112,12 +1184,19 @@ function ConfettiBurst() {
 function StatsScreen({ stats, onBack, onHistory }: { stats: PveStats; onBack: () => void; onHistory: () => void }) {
   const mcAccuracy = stats.mcAnswered ? Math.round((stats.mcCorrect / stats.mcAnswered) * 100) : null
   const numericAccuracy = stats.numericAnswered ? Math.max(0, Math.round(100 - (stats.numericDeviationTotal / stats.numericAnswered))) : null
+  const winRate = stats.games ? Math.round((stats.wins / stats.games) * 100) : 0
   return <section className="stats-screen">
     <button type="button" className="stats-back" onClick={onBack}>← Главное меню</button>
-    <header className="stats-title"><p className="menu-eyebrow">Летопись сражений</p><h2>СТАТИСТИКА</h2><div className="title-rule" aria-hidden="true"><i /><b /><i /></div><button type="button" className="wood-plaque stats-history-button plaque-light" onClick={onHistory}>ИСТОРИЯ ИГР</button></header>
+    <header className="stats-title"><p className="menu-eyebrow">Летопись сражений</p><h2>МОЯ СТАТИСТИКА</h2><div className="title-rule" aria-hidden="true"><i /><b /><i /></div><button type="button" className="wood-plaque stats-history-button plaque-light" onClick={onHistory}>ИСТОРИЯ ИГР</button></header>
+    <section className="stats-hero">
+      <div><p className="stats-block-kicker">Текущая кампания PvE</p><strong>{stats.games}</strong><span>сыграно партий</span></div>
+      <div><strong>{stats.wins}</strong><span>побед</span></div>
+      <div><strong>{winRate}%</strong><span>винрейт</span></div>
+      <div><strong>{mcAccuracy === null ? '—' : `${mcAccuracy}%`}</strong><span>точность</span></div>
+    </section>
     <div className="stats-dashboard">
+      <section className="stats-block stats-pve"><p className="stats-block-kicker">Активный режим · Игра с ботами</p><div className="stats-columns"><StatsColumn title="Дуэль · 1 бот" rows={[['Игр', String(stats.games)], ['Побед', String(stats.wins)], ['% правильных MC', mcAccuracy === null ? '0%' : `${mcAccuracy}%`]]} /><StatsColumn title="Троица · 2 бота" rows={[['1-е места', String(stats.wins)], ['Всего игр', String(stats.games)], ['Точность числовых', numericAccuracy === null ? '—' : `${numericAccuracy}%`]]} /></div></section>
       <section className="stats-block stats-pvp"><p className="stats-block-kicker">Блок A · Рейтинговые игры (PvP)</p><div className="stats-columns"><StatsColumn title="Дуэль · 1v1" rows={[['Побед', '0'], ['Поражений', '0'], ['% правильных MC', '0%']]} /><StatsColumn title="Троица · 1v1v1" rows={[['1-е места', '0 🥇'], ['2-е места', '0 🥈'], ['3-е места', '0 🥉'], ['% правильных MC', '0%']]} /></div><p className="stats-empty-note">Рейтинговый режим пока не подключён</p></section>
-      <section className="stats-block stats-pve"><p className="stats-block-kicker">Блок B · Игра с ботами (PvE)</p><div className="stats-columns"><StatsColumn title="Дуэль · 1 бот" rows={[['Игр', String(stats.games)], ['Побед', String(stats.wins)], ['% правильных MC', mcAccuracy === null ? '0%' : `${mcAccuracy}%`]]} /><StatsColumn title="Троица · 2 бота" rows={[['1-е места', String(stats.wins)], ['Всего игр', String(stats.games)], ['Точность числовых', numericAccuracy === null ? '—' : `${numericAccuracy}%`]]} /></div></section>
       <section className="stats-block stats-friends"><p className="stats-block-kicker">Блок C · Игра с друзьями</p><div className="stats-columns"><StatsColumn title="Дуэль · 1v1" rows={[['Побед', '0'], ['Поражений', '0'], ['% правильных MC', '0%']]} /><StatsColumn title="Троица · 1v1v1" rows={[['1-е места', '0 🥇'], ['2-е места', '0 🥈'], ['3-е места', '0 🥉'], ['% правильных MC', '0%']]} /></div><p className="stats-empty-note">Статистика игр с друзьями появится после первых завершённых матчей</p></section>
     </div>
     <p className="menu-version">Данные хранятся на этом устройстве · v1.0</p>
@@ -1179,17 +1258,18 @@ function FriendsScreen({ onBack }: { onBack: () => void }) {
     }
   }
 
-  return <section className="ranked-screen">
+  return <section className="ranked-screen friends-screen">
     <button type="button" className="stats-back" onClick={onBack}>← Главное меню</button>
     <header className="stats-title"><p className="menu-eyebrow">Сражение за одним столом</p><h2>ИГРА С ДРУЗЬЯМИ</h2><div className="title-rule" aria-hidden="true"><i /><b /><i /></div></header>
-    <div className="ranked-actions">
-      <button type="button" className="wood-plaque plaque-red" onClick={createRoom}><span>СОЗДАТЬ КОМНАТУ</span><small>КОД НА 3 ИГРОКОВ</small></button>
+    <div className="friends-room-card">
+      <p className="stats-block-kicker">Комната для троих игроков</p>
+      <button type="button" className="wood-plaque plaque-red friends-create" onClick={createRoom}><span>Создать комнату</span><small>Получить код приглашения</small></button>
       <label className="room-code-field">
         <span>Код комнаты</span>
         <input value={roomCode} onChange={(event) => setRoomCode(event.target.value.replace(/\D/g, '').slice(0, 6))} inputMode="numeric" placeholder="000000" />
       </label>
-      <button type="button" className="wood-plaque plaque-light" disabled={roomCode.length !== 6} onClick={joinRoom}><span>ВОЙТИ ПО КОДУ</span><small>ПО КОДУ ПРИГЛАШЕНИЯ</small></button>
-      {currentRoomCode ? <button type="button" className="wood-plaque plaque-light" onClick={() => { shareTelegramInvite(currentRoomCode); setNotice(`Ссылка-приглашение готова: ${getTelegramInviteUrl(currentRoomCode)}`) }}><span>ПРИГЛАСИТЬ ДРУГА</span><small>ЧЕРЕЗ TELEGRAM</small></button> : null}
+      <button type="button" className="wood-plaque plaque-light friends-join" disabled={roomCode.length !== 6} onClick={joinRoom}><span>Войти по коду</span><small>{roomCode.length === 6 ? 'Подключиться к партии' : 'Введите 6 цифр'}</small></button>
+      {currentRoomCode ? <button type="button" className="wood-plaque plaque-light friends-invite" onClick={() => { shareTelegramInvite(currentRoomCode); setNotice(`Ссылка-приглашение готова: ${getTelegramInviteUrl(currentRoomCode)}`) }}><span>Пригласить друга</span><small>Через Telegram</small></button> : null}
     </div>
     {state ? <div className="online-room-panel">
       <p className="menu-eyebrow">Комната {state.roomCode}</p>
