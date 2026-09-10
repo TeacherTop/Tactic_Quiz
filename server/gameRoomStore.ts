@@ -27,7 +27,7 @@ const SCORE_VALUES = {
   hold: 5,
 } as const
 const QUESTION_BANK_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../question_bank')
-const BANK = [QUESTION_BANK_DIR, path.join(QUESTION_BANK_DIR, 'question_text')]
+const BANK = [QUESTION_BANK_DIR, path.join(QUESTION_BANK_DIR, 'question_text'), path.join(QUESTION_BANK_DIR, 'question_num')]
   .flatMap(directory => (fs.existsSync(directory) ? fs.readdirSync(directory) : [])
     .filter(file => file.endsWith('.json'))
     .sort((left, right) => questionBankFileNumber(left) - questionBankFileNumber(right) || left.localeCompare(right))
@@ -46,7 +46,7 @@ const FALLBACK_NUMERIC_QUESTIONS = [
   { id: 'numeric-periodic-table', prompt: 'Сколько химических элементов официально входит в современную периодическую таблицу?', answer: 118, unit: '' },
   { id: 'numeric-bones', prompt: 'Сколько костей в скелете взрослого человека?', answer: 206, unit: '' },
 ] as const
-const numericBank = (BANK as unknown as {type:string; id:string; question:string; correct_answer:number}[]).filter(question => question.type === 'numeric').map(question => ({id:question.id, prompt:question.question, answer:Number(question.correct_answer), unit:''}))
+const numericBank = (BANK as unknown as {type:string; id:string; category:string; question:string; correct_answer:number}[]).filter(question => question.type === 'numeric').map(question => ({id:question.id, category:question.category, prompt:question.question, answer:Number(question.correct_answer), unit:''}))
 const NUMERIC_QUESTIONS = numericBank.length ? numericBank : FALLBACK_NUMERIC_QUESTIONS
 const DIRECTIONS: [number, number][] = [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]]
 
@@ -149,9 +149,11 @@ function pickQuestionIndex(usedIds: string[], categories: string[]): number {
   return pool[crypto.randomInt(pool.length)]
 }
 
-function pickNumericQuestion(usedIds: string[]): typeof NUMERIC_QUESTIONS[number] {
-  const available = NUMERIC_QUESTIONS.filter((question) => !usedIds.includes(question.id))
-  const pool = available.length > 0 ? available : NUMERIC_QUESTIONS
+function pickNumericQuestion(usedIds: string[], categories: string[] = []): typeof NUMERIC_QUESTIONS[number] {
+  const selected = NUMERIC_QUESTIONS.filter(question => categories.length === 0 || ('category' in question && categories.includes(String(question.category))))
+  const bank = selected.length ? selected : NUMERIC_QUESTIONS
+  const available = bank.filter((question) => !usedIds.includes(question.id))
+  const pool = available.length > 0 ? available : bank
   return pool[crypto.randomInt(pool.length)]
 }
 
@@ -501,7 +503,7 @@ export class GameRoomStore {
     const exactBonusPlayerIds = [result.attackerExact ? attacker : null, result.defenderExact ? defender : null].filter((id): id is string => id !== null)
     if (result.replay) {
       for (const id of exactBonusPlayerIds) room.scores[id] += SCORE_VALUES.numericExactBonus
-      const question = pickNumericQuestion([room.currentQuestion!.id])
+      const question = pickNumericQuestion([room.currentQuestion!.id], room.settings.categories)
       room.currentQuestion = { id: question.id, category: 'Оба ответили точно · новая дуэль', type: 'numeric', prompt: question.prompt, options: [], unit: question.unit }
       room.usedQuestionIds.push(question.id)
       this.questionAnswers.set(room.roomId, question.answer)
@@ -569,7 +571,7 @@ export class GameRoomStore {
       const defender = room.selectedAttack!.ownerId!
       const correctIds = room.roundResult!.correctPlayerIds
       if (correctIds.includes(attacker) && correctIds.includes(defender)) {
-        const question = pickNumericQuestion(room.usedQuestionIds)
+        const question = pickNumericQuestion(room.usedQuestionIds, room.settings.categories)
         room.currentQuestion = { id: question.id, category: 'Числовая дуэль', type: 'numeric', prompt: question.prompt, options: [], unit: question.unit }
         room.usedQuestionIds.push(question.id)
         this.questionAnswers.set(room.roomId, question.answer)

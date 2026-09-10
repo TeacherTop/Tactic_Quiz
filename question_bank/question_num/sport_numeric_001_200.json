@@ -1,0 +1,1402 @@
+[
+  {
+    "id": "sport_num_001",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году прошли первые Олимпийские игры современности?",
+    "correct_answer": 1896
+  },
+  {
+    "id": "sport_num_002",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько колец изображено на олимпийской эмблеме?",
+    "correct_answer": 5
+  },
+  {
+    "id": "sport_num_003",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько континентов символизируют пять олимпийских колец в традиционной интерпретации МОК?",
+    "correct_answer": 5
+  },
+  {
+    "id": "sport_num_004",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году впервые прошли зимние Олимпийские игры?",
+    "correct_answer": 1924
+  },
+  {
+    "id": "sport_num_005",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году прошли летние Олимпийские игры в Москве?",
+    "correct_answer": 1980
+  },
+  {
+    "id": "sport_num_006",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году прошли летние Олимпийские игры в Пекине?",
+    "correct_answer": 2008
+  },
+  {
+    "id": "sport_num_007",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году прошли летние Олимпийские игры в Лондоне?",
+    "correct_answer": 2012
+  },
+  {
+    "id": "sport_num_008",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году прошли зимние Олимпийские игры в Сочи?",
+    "correct_answer": 2014
+  },
+  {
+    "id": "sport_num_009",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько золотых олимпийских медалей выиграл Майкл Фелпс за карьеру?",
+    "correct_answer": 23
+  },
+  {
+    "id": "sport_num_010",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько золотых медалей выиграл Джесси Оуэнс на Олимпиаде 1936 года?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_011",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет длина стандартного круга на открытом легкоатлетическом стадионе?",
+    "correct_answer": 400
+  },
+  {
+    "id": "sport_num_012",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет классическая спринтерская дистанция, на которой Усэйн Болт установил рекорд 9,58 секунды?",
+    "correct_answer": 100
+  },
+  {
+    "id": "sport_num_013",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет второй классический спринт Усэйна Болта с рекордом 19,19 секунды?",
+    "correct_answer": 200
+  },
+  {
+    "id": "sport_num_014",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет дистанция одного круга эстафеты 4×400 метров для одного бегуна?",
+    "correct_answer": 400
+  },
+  {
+    "id": "sport_num_015",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько участников в одной команде эстафеты 4×100 метров?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_016",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет марафонская дистанция без учёта метров после километровой части, то есть в целых километрах?",
+    "correct_answer": 42
+  },
+  {
+    "id": "sport_num_017",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров добавляется к 42 километрам в официальной марафонской дистанции?",
+    "correct_answer": 195
+  },
+  {
+    "id": "sport_num_018",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько дисциплин входит в мужское легкоатлетическое десятиборье?",
+    "correct_answer": 10
+  },
+  {
+    "id": "sport_num_019",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько дисциплин входит в женское легкоатлетическое семиборье?",
+    "correct_answer": 7
+  },
+  {
+    "id": "sport_num_020",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет высота барьеров в мужском беге 110 м с барьерами в сантиметрах?",
+    "correct_answer": 107
+  },
+  {
+    "id": "sport_num_021",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько игроков одной футбольной команды одновременно находится на поле при полном составе?",
+    "correct_answer": 11
+  },
+  {
+    "id": "sport_num_022",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько минут длится основное время футбольного матча?",
+    "correct_answer": 90
+  },
+  {
+    "id": "sport_num_023",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько минут длится один тайм футбольного матча?",
+    "correct_answer": 45
+  },
+  {
+    "id": "sport_num_024",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков получает команда за победу в большинстве современных футбольных чемпионатов?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_025",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков получает команда за ничью в большинстве современных футбольных чемпионатов?",
+    "correct_answer": 1
+  },
+  {
+    "id": "sport_num_026",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет расстояние от точки пенальти до линии ворот примерно в метрической системе?",
+    "correct_answer": 11
+  },
+  {
+    "id": "sport_num_027",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько замен максимум разрешено одной команде в большинстве официальных футбольных матчей по современным правилам?",
+    "correct_answer": 5
+  },
+  {
+    "id": "sport_num_028",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько сборных участвовало в первом чемпионате мира по футболу 1930 года?",
+    "correct_answer": 13
+  },
+  {
+    "id": "sport_num_029",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году прошёл первый чемпионат мира по футболу?",
+    "correct_answer": 1930
+  },
+  {
+    "id": "sport_num_030",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году Англия выиграла свой первый и пока единственный чемпионат мира по футболу?",
+    "correct_answer": 1966
+  },
+  {
+    "id": "sport_num_031",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько игроков одной баскетбольной команды одновременно находится на площадке?",
+    "correct_answer": 5
+  },
+  {
+    "id": "sport_num_032",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит обычный бросок изнутри трёхочковой линии?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_033",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит штрафной бросок в баскетболе?",
+    "correct_answer": 1
+  },
+  {
+    "id": "sport_num_034",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит бросок из-за трёхочковой линии?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_035",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько минут длится матч NBA без овертайма?",
+    "correct_answer": 48
+  },
+  {
+    "id": "sport_num_036",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько минут длится матч по правилам FIBA без овертайма?",
+    "correct_answer": 40
+  },
+  {
+    "id": "sport_num_037",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько секунд длится владение мячом по правилам NBA и FIBA?",
+    "correct_answer": 24
+  },
+  {
+    "id": "sport_num_038",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков набрал Уилт Чемберлен в одном матче NBA в 1962 году?",
+    "correct_answer": 100
+  },
+  {
+    "id": "sport_num_039",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько чемпионских титулов NBA выиграл Майкл Джордан как игрок Chicago Bulls?",
+    "correct_answer": 6
+  },
+  {
+    "id": "sport_num_040",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько периодов в стандартном баскетбольном матче?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_041",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько игроков одной команды находится на площадке в классическом волейболе?",
+    "correct_answer": 6
+  },
+  {
+    "id": "sport_num_042",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "До скольких очков играется обычная партия в волейболе?",
+    "correct_answer": 25
+  },
+  {
+    "id": "sport_num_043",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "До скольких очков играется решающая пятая партия в волейболе?",
+    "correct_answer": 15
+  },
+  {
+    "id": "sport_num_044",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько партий нужно выиграть команде для победы в волейбольном матче формата best of 5?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_045",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько игроков одной команды одновременно находится на площадке в гандболе?",
+    "correct_answer": 7
+  },
+  {
+    "id": "sport_num_046",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько минут длится стандартный взрослый матч по гандболу?",
+    "correct_answer": 60
+  },
+  {
+    "id": "sport_num_047",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько минут длится один тайм в гандболе?",
+    "correct_answer": 30
+  },
+  {
+    "id": "sport_num_048",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько шагов можно сделать с мячом без ведения в гандболе?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_049",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько секунд игрок может держать мяч без активного действия в гандболе?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_050",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "С какого расстояния выполняется штрафной семиметровый бросок в гандболе?",
+    "correct_answer": 7
+  },
+  {
+    "id": "sport_num_051",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько турниров входит в теннисный Большой шлем?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_052",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько сетов максимум может быть сыграно в мужском матче Большого шлема?",
+    "correct_answer": 5
+  },
+  {
+    "id": "sport_num_053",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько сетов нужно выиграть мужчине для победы в матче формата best of 5?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_054",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько геймов обычно нужно выиграть для победы в сете без тай-брейка при преимуществе в два гейма?",
+    "correct_answer": 6
+  },
+  {
+    "id": "sport_num_055",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков минимум нужно выиграть в тай-брейке стандартного сета при преимуществе в два очка?",
+    "correct_answer": 7
+  },
+  {
+    "id": "sport_num_056",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько титулов «Ролан Гаррос» в мужском одиночном разряде выиграл Рафаэль Надаль?",
+    "correct_answer": 14
+  },
+  {
+    "id": "sport_num_057",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году Род Лейвер выиграл календарный Большой шлем в Открытой эре?",
+    "correct_answer": 1969
+  },
+  {
+    "id": "sport_num_058",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году Штеффи Граф выиграла календарный «Золотой шлем»?",
+    "correct_answer": 1988
+  },
+  {
+    "id": "sport_num_059",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков обозначает счёт 40 в теннисном гейме по внутреннему счёту, если считать выигранные розыгрыши?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_060",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько мячей обычно используется в одном стандартном теннисном гейме до счёта 40:0 минимум?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_061",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько полевых игроков и вратарь одной хоккейной команды одновременно находятся на льду при полном составе?",
+    "correct_answer": 6
+  },
+  {
+    "id": "sport_num_062",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько минут длится основное время хоккейного матча?",
+    "correct_answer": 60
+  },
+  {
+    "id": "sport_num_063",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько минут длится один период в хоккее?",
+    "correct_answer": 20
+  },
+  {
+    "id": "sport_num_064",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько периодов в стандартном хоккейном матче?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_065",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько минут обычно составляет малый штраф в хоккее?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_066",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков начисляется игроку за гол в личной статистике NHL?",
+    "correct_answer": 1
+  },
+  {
+    "id": "sport_num_067",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько матчей включала знаменитая Суперсерия СССР — Канада 1972 года?",
+    "correct_answer": 8
+  },
+  {
+    "id": "sport_num_068",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году состоялась Суперсерия СССР — Канада?",
+    "correct_answer": 1972
+  },
+  {
+    "id": "sport_num_069",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году произошло «Чудо на льду» на Олимпиаде в Лейк-Плэсиде?",
+    "correct_answer": 1980
+  },
+  {
+    "id": "sport_num_070",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько шайб нужно забросить одному игроку в матче, чтобы оформить хет-трик?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_071",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько раундов максимум проводится в современном чемпионском бою по профессиональному боксу?",
+    "correct_answer": 12
+  },
+  {
+    "id": "sport_num_072",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько минут длится стандартный раунд в мужском профессиональном боксе?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_073",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько секунд обычно длится отсчёт нокдауна до нокаута в боксе?",
+    "correct_answer": 10
+  },
+  {
+    "id": "sport_num_074",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году состоялся бой Мухаммеда Али и Джорджа Формана «Грохот в джунглях»?",
+    "correct_answer": 1974
+  },
+  {
+    "id": "sport_num_075",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году Майк Тайсон стал самым молодым чемпионом мира в тяжёлом весе?",
+    "correct_answer": 1986
+  },
+  {
+    "id": "sport_num_076",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько олимпийских золотых медалей выиграл Александр Карелин?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_077",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько минут длится стандартная схватка у мужчин в дзюдо по современным правилам IJF?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_078",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков в старой системе дзюдо соответствовало оценке иппон как полная победа?",
+    "correct_answer": 10
+  },
+  {
+    "id": "sport_num_079",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько спортсменов борются друг с другом одновременно в обычной схватке по борьбе?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_080",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько периодов обычно проводится в современной олимпийской борьбе?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_081",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков получает победитель гонки Формулы-1 по системе начисления, действующей с 2010 года без учёта бонусов?",
+    "correct_answer": 25
+  },
+  {
+    "id": "sport_num_082",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько гонщиков одновременно представляет одна команда Формулы-1 в гонке?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_083",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько часов длится знаменитая гонка в Ле-Мане?",
+    "correct_answer": 24
+  },
+  {
+    "id": "sport_num_084",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько гонок входят в классическую «Тройную корону автоспорта»?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_085",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "В каком году Айртон Сенна погиб на трассе Имола?",
+    "correct_answer": 1994
+  },
+  {
+    "id": "sport_num_086",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько этапов обычно включает Тур де Франс в современной стандартной структуре?",
+    "correct_answer": 21
+  },
+  {
+    "id": "sport_num_087",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько великих многодневок существует в шоссейном велоспорте?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_088",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько километров составляет олимпийская дистанция индивидуальной гонки преследования на треке у мужчин в классическом формате?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_089",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько колёс имеет стандартный гоночный велосипед?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_090",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько гонщиков стартует в командной гонке преследования на треке от одной команды?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_091",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет длина олимпийского бассейна?",
+    "correct_answer": 50
+  },
+  {
+    "id": "sport_num_092",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет длина короткого спортивного бассейна?",
+    "correct_answer": 25
+  },
+  {
+    "id": "sport_num_093",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько стандартных индивидуальных стилей плавания входят в комплексное плавание?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_094",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет олимпийская дистанция 100 м в количестве длин 50-метрового бассейна?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_095",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько спортсменов входит в экипаж бобслейной четвёрки?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_096",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько кругов стрельбы обычно проходит спортсмен в индивидуальной гонке биатлона на 20 км у мужчин?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_097",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько мишеней находится на стандартной биатлонной установке для одного спортсмена?",
+    "correct_answer": 5
+  },
+  {
+    "id": "sport_num_098",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько камней имеет одна команда в одном энде кёрлинга?",
+    "correct_answer": 8
+  },
+  {
+    "id": "sport_num_099",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько эндов проводится в стандартном международном матче по кёрлингу?",
+    "correct_answer": 10
+  },
+  {
+    "id": "sport_num_100",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько фигур каждого цвета начинает шахматную партию на доске?",
+    "correct_answer": 16
+  },
+  {
+    "id": "sport_num_101",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько игроков одной бейсбольной команды одновременно находится в защите на поле?",
+    "correct_answer": 9
+  },
+  {
+    "id": "sport_num_102",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько страйков приводит к страйк-ауту отбивающего в бейсболе?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_103",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько болов даёт отбивающему право занять первую базу в бейсболе?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_104",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько баз, включая домашнюю, образуют стандартное бейсбольное поле?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_105",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько иннингов длится стандартный матч MLB без дополнительных иннингов?",
+    "correct_answer": 9
+  },
+  {
+    "id": "sport_num_106",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько аутов должна сделать защита, чтобы завершить половину иннинга в бейсболе?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_107",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит хоум-ран с пустыми базами в бейсболе?",
+    "correct_answer": 1
+  },
+  {
+    "id": "sport_num_108",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков максимум может принести гранд-слэм в бейсболе?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_109",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько ярдов составляет стандартная длина поля для американского футбола между линиями зачётных зон?",
+    "correct_answer": 100
+  },
+  {
+    "id": "sport_num_110",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит тачдаун в американском футболе?",
+    "correct_answer": 6
+  },
+  {
+    "id": "sport_num_111",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит обычный филд-гол в американском футболе?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_112",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит стандартная реализация ударом после тачдауна?",
+    "correct_answer": 1
+  },
+  {
+    "id": "sport_num_113",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько даунов имеет команда, чтобы пройти минимум 10 ярдов в американском футболе?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_114",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько игроков одной команды одновременно находится на поле в американском футболе?",
+    "correct_answer": 11
+  },
+  {
+    "id": "sport_num_115",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько четвертей в стандартном матче NFL?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_116",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько игроков одной команды одновременно находится на поле в регби-15?",
+    "correct_answer": 15
+  },
+  {
+    "id": "sport_num_117",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько игроков одной команды находится на поле в регби-7?",
+    "correct_answer": 7
+  },
+  {
+    "id": "sport_num_118",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит попытка в регби-15?",
+    "correct_answer": 5
+  },
+  {
+    "id": "sport_num_119",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит реализация после попытки в регби-15?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_120",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит штрафной удар по воротам в регби-15?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_121",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит дроп-гол в регби-15?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_122",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько игроков одной команды находится на площадке в пляжном волейболе?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_123",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько касаний мяча максимум имеет команда в волейболе перед отправкой мяча сопернику, не считая некоторых касаний блока по правилам?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_124",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков нужно минимум набрать для победы в стандартном гейме настольного тенниса?",
+    "correct_answer": 11
+  },
+  {
+    "id": "sport_num_125",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько подач подряд обычно выполняет один игрок в настольном теннисе до счёта 10:10?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_126",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков нужно минимум набрать для победы в стандартном гейме бадминтона?",
+    "correct_answer": 21
+  },
+  {
+    "id": "sport_num_127",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько геймов нужно выиграть для победы в матче по бадминтону формата best of 3?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_128",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков максимально может длиться гейм в бадминтоне при счёте 29:29?",
+    "correct_answer": 30
+  },
+  {
+    "id": "sport_num_129",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько игроков участвуют в одиночном матче по бадминтону?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_130",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько игроков участвуют в парном матче по бадминтону всего?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_131",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько лунок составляет стандартный полный раунд в гольфе?",
+    "correct_answer": 18
+  },
+  {
+    "id": "sport_num_132",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько ударов ниже пара означает результат eagle на одной лунке?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_133",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько ударов ниже пара означает результат birdie на одной лунке?",
+    "correct_answer": 1
+  },
+  {
+    "id": "sport_num_134",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько ударов выше пара означает bogey на одной лунке?",
+    "correct_answer": 1
+  },
+  {
+    "id": "sport_num_135",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько мейджоров традиционно входит в мужской профессиональный гольф?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_136",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько красных шаров находится на столе в начале стандартного фрейма снукера?",
+    "correct_answer": 15
+  },
+  {
+    "id": "sport_num_137",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит чёрный шар в снукере?",
+    "correct_answer": 7
+  },
+  {
+    "id": "sport_num_138",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит синий шар в снукере?",
+    "correct_answer": 5
+  },
+  {
+    "id": "sport_num_139",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит розовый шар в снукере?",
+    "correct_answer": 6
+  },
+  {
+    "id": "sport_num_140",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит красный шар в снукере?",
+    "correct_answer": 1
+  },
+  {
+    "id": "sport_num_141",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Чему равен максимальный стандартный брейк в снукере без свободного шара?",
+    "correct_answer": 147
+  },
+  {
+    "id": "sport_num_142",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков приносит попадание в сектор triple 20 в дартсе?",
+    "correct_answer": 60
+  },
+  {
+    "id": "sport_num_143",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Какой максимальный счёт можно набрать тремя дротиками за один подход в дартсе?",
+    "correct_answer": 180
+  },
+  {
+    "id": "sport_num_144",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков имеет внешний булл в стандартном дартсе?",
+    "correct_answer": 25
+  },
+  {
+    "id": "sport_num_145",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков имеет внутренний булл в стандартном дартсе?",
+    "correct_answer": 50
+  },
+  {
+    "id": "sport_num_146",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько клеток на стандартной шахматной доске?",
+    "correct_answer": 64
+  },
+  {
+    "id": "sport_num_147",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько фигур всего находится на шахматной доске в начальной позиции?",
+    "correct_answer": 32
+  },
+  {
+    "id": "sport_num_148",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько пешек начинает партию у каждого игрока в шахматах?",
+    "correct_answer": 8
+  },
+  {
+    "id": "sport_num_149",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько ферзей находится на доске в начальной позиции?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_150",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько коней находится на доске в начальной позиции?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_151",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько оборотов вокруг продольной оси содержит четверной прыжок в фигурном катании?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_152",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько оборотов в воздухе содержит тройной аксель?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_153",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько спортсменов выступают вместе в спортивной паре в фигурном катании?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_154",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько спортсменов выступают вместе в танцах на льду в одной паре?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_155",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет стандартная длина овала в конькобежном спорте?",
+    "correct_answer": 400
+  },
+  {
+    "id": "sport_num_156",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько спортсменов стартуют одновременно в одном забеге классического конькобежного спорта на отдельных дорожках?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_157",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько огневых рубежей проходит биатлонист в спринтерской гонке?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_158",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько огневых рубежей проходит биатлонист в гонке преследования?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_159",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько штрафных кругов получает биатлонист за один промах в спринте?",
+    "correct_answer": 1
+  },
+  {
+    "id": "sport_num_160",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет длина стандартного штрафного круга в биатлоне?",
+    "correct_answer": 150
+  },
+  {
+    "id": "sport_num_161",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков получает победитель гонки Формулы-1 по базовой системе начисления очков?",
+    "correct_answer": 25
+  },
+  {
+    "id": "sport_num_162",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков получает занявший второе место в гонке Формулы-1 по базовой системе?",
+    "correct_answer": 18
+  },
+  {
+    "id": "sport_num_163",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько очков получает занявший третье место в гонке Формулы-1 по базовой системе?",
+    "correct_answer": 15
+  },
+  {
+    "id": "sport_num_164",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько гонщиков получают очки за финиш в обычном Гран-при Формулы-1 по системе топ-10?",
+    "correct_answer": 10
+  },
+  {
+    "id": "sport_num_165",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько колёс имеет болид Формулы-1?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_166",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько часов длится гонка «24 часа Ле-Мана»?",
+    "correct_answer": 24
+  },
+  {
+    "id": "sport_num_167",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько гонок входит в неофициальную «Тройную корону автоспорта»?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_168",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько кругов составляет гонка Indianapolis 500 на овальном треке Indianapolis Motor Speedway?",
+    "correct_answer": 200
+  },
+  {
+    "id": "sport_num_169",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько миль составляет дистанция Indianapolis 500?",
+    "correct_answer": 500
+  },
+  {
+    "id": "sport_num_170",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько этапов обычно составляет классический трёхнедельный Гранд-тур в велоспорте, включая Тур де Франс?",
+    "correct_answer": 21
+  },
+  {
+    "id": "sport_num_171",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько великих Гранд-туров существует в мужском шоссейном велоспорте?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_172",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько километров составляет индивидуальная гонка преследования на треке у мужчин в классической дисциплине?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_173",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько гонщиков стартует от одной команды в командной гонке преследования на треке?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_174",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько колёс имеет стандартный трековый велосипед?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_175",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько спортсменов участвуют в заезде MotoGP от одной заводской команды в типичной конфигурации?",
+    "correct_answer": 2
+  },
+  {
+    "id": "sport_num_176",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько дорожек обычно используется в олимпийском финале по плаванию?",
+    "correct_answer": 8
+  },
+  {
+    "id": "sport_num_177",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет олимпийская дистанция бассейна в одном полном круге туда и обратно?",
+    "correct_answer": 100
+  },
+  {
+    "id": "sport_num_178",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько стилей входят в индивидуальное комплексное плавание?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_179",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько этапов включает комплексная эстафета 4×100 метров?",
+    "correct_answer": 4
+  },
+  {
+    "id": "sport_num_180",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров плывёт каждый участник эстафеты 4×100 метров?",
+    "correct_answer": 100
+  },
+  {
+    "id": "sport_num_181",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько спортсменов находится в лодке-одиночке в академической гребле?",
+    "correct_answer": 1
+  },
+  {
+    "id": "sport_num_182",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько гребцов находится в восьмёрке по академической гребле, не считая рулевого?",
+    "correct_answer": 8
+  },
+  {
+    "id": "sport_num_183",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет олимпийская дистанция академической гребли?",
+    "correct_answer": 2000
+  },
+  {
+    "id": "sport_num_184",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько дисциплин включает классический триатлон?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_185",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько километров составляет беговая часть олимпийского триатлона?",
+    "correct_answer": 10
+  },
+  {
+    "id": "sport_num_186",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько километров составляет велосипедная часть олимпийского триатлона?",
+    "correct_answer": 40
+  },
+  {
+    "id": "sport_num_187",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько метров составляет плавательная часть олимпийского триатлона?",
+    "correct_answer": 1500
+  },
+  {
+    "id": "sport_num_188",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько километров составляет велосипедный этап полного Ironman?",
+    "correct_answer": 180
+  },
+  {
+    "id": "sport_num_189",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько километров составляет беговой этап полного Ironman в целых километрах?",
+    "correct_answer": 42
+  },
+  {
+    "id": "sport_num_190",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько игроков одной команды одновременно находится в воде в водном поло, включая вратаря?",
+    "correct_answer": 7
+  },
+  {
+    "id": "sport_num_191",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько олимпийских золотых медалей выиграла гимнастка Лариса Латынина?",
+    "correct_answer": 9
+  },
+  {
+    "id": "sport_num_192",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько олимпийских медалей всего выиграла Лариса Латынина?",
+    "correct_answer": 18
+  },
+  {
+    "id": "sport_num_193",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько золотых медалей выиграл Марк Спитц на Олимпиаде 1972 года?",
+    "correct_answer": 7
+  },
+  {
+    "id": "sport_num_194",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько золотых медалей выиграл Майкл Фелпс на Олимпиаде 2008 года в Пекине?",
+    "correct_answer": 8
+  },
+  {
+    "id": "sport_num_195",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько титулов чемпиона Формулы-1 выиграл Михаэль Шумахер?",
+    "correct_answer": 7
+  },
+  {
+    "id": "sport_num_196",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько титулов чемпиона мира Формулы-1 выиграл Льюис Хэмилтон к концу сезона 2025 года?",
+    "correct_answer": 7
+  },
+  {
+    "id": "sport_num_197",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько раз Пеле становился чемпионом мира по футболу как игрок?",
+    "correct_answer": 3
+  },
+  {
+    "id": "sport_num_198",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько золотых олимпийских медалей выиграл Карл Льюис за карьеру?",
+    "correct_answer": 9
+  },
+  {
+    "id": "sport_num_199",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько олимпийских золотых медалей выиграл Усэйн Болт после аннулирования одного золота эстафеты 2008 года?",
+    "correct_answer": 8
+  },
+  {
+    "id": "sport_num_200",
+    "category": "Спорт",
+    "type": "numeric",
+    "question": "Сколько титулов чемпиона мира по шахматам подряд защитил Анатолий Карпов до матча с Каспаровым 1985 года, если считать его чемпионские циклы 1975–1984?",
+    "correct_answer": 3
+  }
+]

@@ -1244,7 +1244,7 @@ function FriendsScreen({ onBack }: { onBack: () => void }) {
   const isHost = Boolean(state && viewerPlayerId && state.hostPlayerId === viewerPlayerId)
   const humanPlayers = state?.players.filter((player) => !player.botReplacementFor) ?? []
   const canStart = Boolean(isHost && state?.status === 'waiting' && humanPlayers.length >= 2)
-  const categoryOptions = BOT_TOPICS.slice(0, 12)
+  const categoryOptions = BOT_TOPICS
   useTelegramControls(onBack, currentRoomCode)
 
   useEffect(() => {

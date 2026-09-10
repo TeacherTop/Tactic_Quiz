@@ -1,0 +1,3502 @@
+[
+  {
+    "id": "science_num_001",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько джоулей работы совершает сила 10 Н на пути 5 м?",
+    "correct_answer": 50
+  },
+  {
+    "id": "science_num_002",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ватт мощности соответствует работе 100 Дж за 20 секунд?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_003",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько паскалей создаёт сила 100 Н на площади 2 м²?",
+    "correct_answer": 50
+  },
+  {
+    "id": "science_num_004",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько кулонов проходит при токе 2 А за 5 секунд?",
+    "correct_answer": 10
+  },
+  {
+    "id": "science_num_005",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько вольт нужно для тока 3 А через сопротивление 4 Ом?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_006",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ом составляет сопротивление при 24 В и 6 А?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_007",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ампер течёт через 10 Ом при 20 В?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_008",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько джоулей кинетической энергии у тела 2 кг при 3 м/с?",
+    "correct_answer": 9
+  },
+  {
+    "id": "science_num_009",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько джоулей потенциальной энергии у тела 2 кг на высоте 5 м при g≈10?",
+    "correct_answer": 100
+  },
+  {
+    "id": "science_num_010",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько кг·м/с импульса у тела 4 кг при 3 м/с?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_011",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько м/с² ускорения получает тело 5 кг под силой 20 Н?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_012",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ньютонов весит тело 7 кг при g≈10?",
+    "correct_answer": 70
+  },
+  {
+    "id": "science_num_013",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ньютонов даёт пружина 200 Н/м при растяжении 0,05 м?",
+    "correct_answer": 10
+  },
+  {
+    "id": "science_num_014",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько герц имеет колебание с периодом 0,25 с?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_015",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько колебаний при 5 Гц за 10 секунд?",
+    "correct_answer": 50
+  },
+  {
+    "id": "science_num_016",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько метров длина волны при 340 м/с и 170 Гц?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_017",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько кулонов несёт ток 1 А за 60 секунд?",
+    "correct_answer": 60
+  },
+  {
+    "id": "science_num_018",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько метров в секунду соответствует 36 км/ч?",
+    "correct_answer": 10
+  },
+  {
+    "id": "science_num_019",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров в час соответствует 20 м/с?",
+    "correct_answer": 72
+  },
+  {
+    "id": "science_num_020",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько метров пройдёт тело за 5 с при 12 м/с?",
+    "correct_answer": 60
+  },
+  {
+    "id": "science_num_021",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько метров пройдёт тело за 4 с из покоя при a=2 м/с²?",
+    "correct_answer": 16
+  },
+  {
+    "id": "science_num_022",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько джоулей выделит прибор 10 Вт за 30 секунд?",
+    "correct_answer": 300
+  },
+  {
+    "id": "science_num_023",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ватт выделяется на 6 Ом при токе 2 А?",
+    "correct_answer": 24
+  },
+  {
+    "id": "science_num_024",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько джоулей запасено в конденсаторе 2 Ф при 3 В?",
+    "correct_answer": 9
+  },
+  {
+    "id": "science_num_025",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ньютонов действует на заряд 2 Кл в поле 5 Н/Кл?",
+    "correct_answer": 10
+  },
+  {
+    "id": "science_num_026",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ньютонов магнитной силы на заряд 1 Кл при 2 м/с в поле 3 Т перпендикулярно полю?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_027",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько джоулей работы совершит сила 8 Н на пути 4 м?",
+    "correct_answer": 32
+  },
+  {
+    "id": "science_num_028",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ньютонов примерно весит масса 100 кг при g≈10?",
+    "correct_answer": 1000
+  },
+  {
+    "id": "science_num_029",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько джоулей в 1 кВт·ч?",
+    "correct_answer": 3600000
+  },
+  {
+    "id": "science_num_030",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько секунд свет проходит 300000 км в вакууме примерно?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_031",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов Земля поворачивается примерно за час?",
+    "correct_answer": 15
+  },
+  {
+    "id": "science_num_032",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько минут времени соответствует одному градусу вращения Земли?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_033",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько процентов скорости света составляет 0,5c?",
+    "correct_answer": 50
+  },
+  {
+    "id": "science_num_034",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ватт в 2 киловаттах?",
+    "correct_answer": 2000
+  },
+  {
+    "id": "science_num_035",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько джоулей в 3 килоджоулях?",
+    "correct_answer": 3000
+  },
+  {
+    "id": "science_num_036",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько паскалей в 5 килопаскалях?",
+    "correct_answer": 5000
+  },
+  {
+    "id": "science_num_037",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллиметров в 2 метрах?",
+    "correct_answer": 2000
+  },
+  {
+    "id": "science_num_038",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько сантиметров в 3 метрах?",
+    "correct_answer": 300
+  },
+  {
+    "id": "science_num_039",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько граммов в 2 килограммах?",
+    "correct_answer": 2000
+  },
+  {
+    "id": "science_num_040",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько килограммов в 3 тоннах?",
+    "correct_answer": 3000
+  },
+  {
+    "id": "science_num_041",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько законов движения сформулировал Ньютон?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_042",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько фундаментальных взаимодействий выделяют в современной физике?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_043",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько пространственных измерений имеет обычное пространство?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_044",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько измерений имеет пространство-время в СТО?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_045",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько км/с составляет скорость света, округлённо до тысяч?",
+    "correct_answer": 300000
+  },
+  {
+    "id": "science_num_046",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько м/с составляет скорость звука в воздухе при комнатной температуре примерно?",
+    "correct_answer": 343
+  },
+  {
+    "id": "science_num_047",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько м/с составляет первая космическая скорость у Земли, округлённо до сотен?",
+    "correct_answer": 7900
+  },
+  {
+    "id": "science_num_048",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько м/с составляет вторая космическая скорость у Земли, округлённо до сотен?",
+    "correct_answer": 11200
+  },
+  {
+    "id": "science_num_049",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов полный оборот?",
+    "correct_answer": 360
+  },
+  {
+    "id": "science_num_050",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов прямой угол?",
+    "correct_answer": 90
+  },
+  {
+    "id": "science_num_051",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов развёрнутый угол?",
+    "correct_answer": 180
+  },
+  {
+    "id": "science_num_052",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько секунд в минуте?",
+    "correct_answer": 60
+  },
+  {
+    "id": "science_num_053",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько секунд в часе?",
+    "correct_answer": 3600
+  },
+  {
+    "id": "science_num_054",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько джоулей в килоджоуле?",
+    "correct_answer": 1000
+  },
+  {
+    "id": "science_num_055",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ватт в киловатте?",
+    "correct_answer": 1000
+  },
+  {
+    "id": "science_num_056",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько паскалей в килопаскале?",
+    "correct_answer": 1000
+  },
+  {
+    "id": "science_num_057",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько метров в километре?",
+    "correct_answer": 1000
+  },
+  {
+    "id": "science_num_058",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько сантиметров в метре?",
+    "correct_answer": 100
+  },
+  {
+    "id": "science_num_059",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллиметров в метре?",
+    "correct_answer": 1000
+  },
+  {
+    "id": "science_num_060",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько квадратных метров в квадратном километре?",
+    "correct_answer": 1000000
+  },
+  {
+    "id": "science_num_061",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько кубических сантиметров в литре?",
+    "correct_answer": 1000
+  },
+  {
+    "id": "science_num_062",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько килограммов в тонне?",
+    "correct_answer": 1000
+  },
+  {
+    "id": "science_num_063",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько граммов в килограмме?",
+    "correct_answer": 1000
+  },
+  {
+    "id": "science_num_064",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллиграммов в грамме?",
+    "correct_answer": 1000
+  },
+  {
+    "id": "science_num_065",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько протонов в водороде-1?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_066",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько протонов в гелии?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_067",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько протонов в углероде?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_068",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько протонов в уране?",
+    "correct_answer": 92
+  },
+  {
+    "id": "science_num_069",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько нейтронов в углероде-12?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_070",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько нейтронов в дейтерии?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_071",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько нуклонов в гелии-4?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_072",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электронов у нейтрального кислорода?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_073",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электронов у нейтрального неона?",
+    "correct_answer": 10
+  },
+  {
+    "id": "science_num_074",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электронов максимум на первом энергетическом уровне?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_075",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электронов максимум на втором энергетическом уровне?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_076",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько кварков в протоне?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_077",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько кварков в нейтроне?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_078",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько типов кварков в Стандартной модели?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_079",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько поколений фермионов в Стандартной модели?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_080",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько типов лептонов, включая нейтрино, в Стандартной модели?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_081",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Какой заряд протона в элементарных единицах?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_082",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Какой заряд нейтрона в элементарных единицах?",
+    "correct_answer": 0
+  },
+  {
+    "id": "science_num_083",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Какой заряд электрона в элементарных единицах?",
+    "correct_answer": -1
+  },
+  {
+    "id": "science_num_084",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько кельвинов примерно соответствует 0 °C?",
+    "correct_answer": 273
+  },
+  {
+    "id": "science_num_085",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько °C соответствует абсолютному нулю, округлённо?",
+    "correct_answer": -273
+  },
+  {
+    "id": "science_num_086",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов между замерзанием и кипением воды при нормальном давлении?",
+    "correct_answer": 100
+  },
+  {
+    "id": "science_num_087",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько законов термодинамики нумеруют от нулевого до третьего?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_088",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько классических агрегатных состояний обычно называют вместе с плазмой?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_089",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько фазовых переходов между твёрдым, жидким и газом в обоих направлениях?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_090",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ватт в одной механической лошадиной силе примерно?",
+    "correct_answer": 746
+  },
+  {
+    "id": "science_num_091",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько минут примерно идёт свет от Солнца до Земли?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_092",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько км/с примерно скорость Земли по орбите?",
+    "correct_answer": 30
+  },
+  {
+    "id": "science_num_093",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько суток примерно длится год Земли?",
+    "correct_answer": 365
+  },
+  {
+    "id": "science_num_094",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько часов в солнечных сутках?",
+    "correct_answer": 24
+  },
+  {
+    "id": "science_num_095",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов примерно наклон земной оси?",
+    "correct_answer": 23
+  },
+  {
+    "id": "science_num_096",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько паскалей в одной атмосфере, округлённо до тысячи?",
+    "correct_answer": 101000
+  },
+  {
+    "id": "science_num_097",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько метров примерно радиус Земли, если 6371 км перевести в метры?",
+    "correct_answer": 6371000
+  },
+  {
+    "id": "science_num_098",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электрон-вольт примерно энергия зелёного фотона, округлённо?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_099",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько бозонов W различают по знаку заряда?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_100",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько метров в секунду составляет скорость света, округлённая до миллиона?",
+    "correct_answer": 300000000
+  },
+  {
+    "id": "science_num_101",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько хромосом в обычной соматической клетке человека?",
+    "correct_answer": 46
+  },
+  {
+    "id": "science_num_102",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько пар хромосом в обычной соматической клетке человека?",
+    "correct_answer": 23
+  },
+  {
+    "id": "science_num_103",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько хромосом в нормальной человеческой гамете?",
+    "correct_answer": 23
+  },
+  {
+    "id": "science_num_104",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько половых хромосом в обычной соматической клетке человека?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_105",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько типов азотистых оснований входит в ДНК?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_106",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько типов азотистых оснований входит в РНК?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_107",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько нуклеотидов образуют один кодон?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_108",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько стандартных аминокислот кодируется генетическим кодом?",
+    "correct_answer": 20
+  },
+  {
+    "id": "science_num_109",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько стоп-кодонов в стандартном генетическом коде?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_110",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько старт-кодонов обычно выделяют в стандартном генетическом коде?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_111",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько цепей имеет типичная молекула ДНК?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_112",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько цепей обычно имеет молекула мРНК?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_113",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько дочерних клеток образуется после одного митоза?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_114",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько дочерних клеток образуется после одного полного мейоза?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_115",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько делений включает мейоз?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_116",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных фаз митоза традиционно выделяют без интерфазы?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_117",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько камер имеет сердце человека?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_118",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько предсердий имеет сердце человека?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_119",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько желудочков имеет сердце человека?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_120",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько створок имеет митральный клапан?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_121",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько створок имеет трёхстворчатый клапан?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_122",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько лёгких у человека?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_123",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько долей имеет правое лёгкое?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_124",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько долей имеет левое лёгкое?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_125",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько почек обычно у человека?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_126",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько мочеточников обычно у человека?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_127",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных отделов тонкого кишечника?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_128",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько постоянных зубов обычно у взрослого человека с зубами мудрости?",
+    "correct_answer": 32
+  },
+  {
+    "id": "science_num_129",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько молочных зубов обычно у ребёнка?",
+    "correct_answer": 20
+  },
+  {
+    "id": "science_num_130",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько резцов обычно у взрослого человека?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_131",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько клыков обычно у взрослого человека?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_132",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько премоляров обычно у взрослого человека?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_133",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько моляров обычно у взрослого человека с зубами мудрости?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_134",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько костей обычно насчитывает скелет взрослого человека?",
+    "correct_answer": 206
+  },
+  {
+    "id": "science_num_135",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько пар рёбер обычно у человека?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_136",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько шейных позвонков у человека?",
+    "correct_answer": 7
+  },
+  {
+    "id": "science_num_137",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько грудных позвонков у человека?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_138",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько поясничных позвонков у человека?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_139",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько костей в одной кисти человека?",
+    "correct_answer": 27
+  },
+  {
+    "id": "science_num_140",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько костей в одной стопе человека?",
+    "correct_answer": 26
+  },
+  {
+    "id": "science_num_141",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько камер имеет сердце птиц?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_142",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько камер имеет сердце большинства рыб?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_143",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько камер имеет сердце большинства земноводных?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_144",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько камер имеет сердце большинства пресмыкающихся, кроме крокодилов?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_145",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько камер имеет сердце крокодилов?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_146",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ног у насекомых?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_147",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько пар ног у насекомых?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_148",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ног у паукообразных?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_149",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько пар ходильных ног у паукообразных?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_150",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько щупалец у осьминога?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_151",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько лучей обычно у типичной морской звезды?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_152",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько камер имеет желудок жвачных животных в классическом описании?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_153",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько пар черепных нервов у человека?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_154",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько пар спинномозговых нервов у человека?",
+    "correct_answer": 31
+  },
+  {
+    "id": "science_num_155",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных групп крови по системе ABO?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_156",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько антигенов системы ABO определяют четыре основные группы крови?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_157",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько типов Rh-статуса обычно выделяют клинически?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_158",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных типов мышечной ткани у человека?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_159",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных типов тканей у животных обычно выделяют?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_160",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько доменов жизни выделяет трёхдоменная система?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_161",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько царств включала классическая система Уиттекера?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_162",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько слов включает биноминальное латинское название вида?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_163",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько молекул ДНК содержится в одной двухроматидной хромосоме после репликации?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_164",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько хроматид имеет одна реплицированная хромосома?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_165",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько дочерних молекул ДНК образуется из одной при репликации?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_166",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько молекул АТФ непосредственно расходуется на подготовительном этапе гликолиза?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_167",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько молекул пирувата образуется из одной глюкозы при гликолизе?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_168",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько чистых молекул АТФ даёт гликолиз с одной молекулы глюкозы?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_169",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов углерода в молекуле глюкозы?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_170",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько молекул кислорода требуется для полного окисления одной молекулы глюкозы в школьном уравнении?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_171",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько молекул углекислого газа образуется при полном окислении одной молекулы глюкозы?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_172",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько молекул углекислого газа требуется для синтеза одной молекулы глюкозы в школьном уравнении фотосинтеза?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_173",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько молекул кислорода выделяется при синтезе одной молекулы глюкозы в школьном уравнении фотосинтеза?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_174",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов кислорода содержит молекула O₂?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_175",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов азота содержит молекула N₂?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_176",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов водорода содержит молекула H₂?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_177",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько водородных связей образует пара A–T в ДНК?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_178",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько водородных связей образует пара G–C в ДНК?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_179",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько клеток получится из одной после трёх последовательных бинарных делений?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_180",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько клеток получится из одной после четырёх последовательных митотических делений?",
+    "correct_answer": 16
+  },
+  {
+    "id": "science_num_181",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько кругов кровообращения у человека?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_182",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько кругов кровообращения у рыб?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_183",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных типов сосудов выделяют: артерии, вены и капилляры?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_184",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных форменных элементов крови выделяют: эритроциты, лейкоциты, тромбоциты?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_185",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных компонентов центральной нервной системы: головной и спинной мозг?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_186",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных отделов нервной системы по анатомическому принципу: центральная и периферическая?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_187",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных отделов автономной нервной системы обычно выделяют: симпатический и парасимпатический?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_188",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько типов фоторецепторов сетчатки человека выделяют: палочки и колбочки?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_189",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных типов лимфоцитов обычно выделяют: T-, B- и NK-клетки?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_190",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько камер имеет сердце млекопитающих?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_191",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных типов симметрии часто выделяют у животных: лучевая, двусторонняя и отсутствие симметрии?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_192",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько зародышевых листков у трёхслойных животных?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_193",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько зародышевых листков у двуслойных животных?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_194",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько семядолей у типичного двудольного растения?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_195",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько семядолей у типичного однодольного растения?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_196",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных частей цветка обычно выделяют: чашечка, венчик, тычинки, пестик?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_197",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько типов нуклеиновых кислот обычно выделяют в базовом курсе: ДНК и РНК?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_198",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных компонентов нуклеотида: сахар, фосфат и азотистое основание?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_199",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько камер имеет сердце человека с учётом обоих предсердий и обоих желудочков?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_200",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных типов клеток крови обычно выделяют по крупным категориям: эритроциты, лейкоциты и тромбоциты?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_201",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер водорода?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_202",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер гелия?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_203",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер лития?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_204",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер углерода?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_205",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер азота?",
+    "correct_answer": 7
+  },
+  {
+    "id": "science_num_206",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер кислорода?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_207",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер фтора?",
+    "correct_answer": 9
+  },
+  {
+    "id": "science_num_208",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер неона?",
+    "correct_answer": 10
+  },
+  {
+    "id": "science_num_209",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер натрия?",
+    "correct_answer": 11
+  },
+  {
+    "id": "science_num_210",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер магния?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_211",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер алюминия?",
+    "correct_answer": 13
+  },
+  {
+    "id": "science_num_212",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер кремния?",
+    "correct_answer": 14
+  },
+  {
+    "id": "science_num_213",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер фосфора?",
+    "correct_answer": 15
+  },
+  {
+    "id": "science_num_214",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер серы?",
+    "correct_answer": 16
+  },
+  {
+    "id": "science_num_215",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер хлора?",
+    "correct_answer": 17
+  },
+  {
+    "id": "science_num_216",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер аргона?",
+    "correct_answer": 18
+  },
+  {
+    "id": "science_num_217",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер калия?",
+    "correct_answer": 19
+  },
+  {
+    "id": "science_num_218",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер кальция?",
+    "correct_answer": 20
+  },
+  {
+    "id": "science_num_219",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер железа?",
+    "correct_answer": 26
+  },
+  {
+    "id": "science_num_220",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер меди?",
+    "correct_answer": 29
+  },
+  {
+    "id": "science_num_221",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер цинка?",
+    "correct_answer": 30
+  },
+  {
+    "id": "science_num_222",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер серебра?",
+    "correct_answer": 47
+  },
+  {
+    "id": "science_num_223",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер олова?",
+    "correct_answer": 50
+  },
+  {
+    "id": "science_num_224",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер йода?",
+    "correct_answer": 53
+  },
+  {
+    "id": "science_num_225",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер ксенона?",
+    "correct_answer": 54
+  },
+  {
+    "id": "science_num_226",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер вольфрама?",
+    "correct_answer": 74
+  },
+  {
+    "id": "science_num_227",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер платины?",
+    "correct_answer": 78
+  },
+  {
+    "id": "science_num_228",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер золота?",
+    "correct_answer": 79
+  },
+  {
+    "id": "science_num_229",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер ртути?",
+    "correct_answer": 80
+  },
+  {
+    "id": "science_num_230",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер свинца?",
+    "correct_answer": 82
+  },
+  {
+    "id": "science_num_231",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер радона?",
+    "correct_answer": 86
+  },
+  {
+    "id": "science_num_232",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер радия?",
+    "correct_answer": 88
+  },
+  {
+    "id": "science_num_233",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков атомный номер урана?",
+    "correct_answer": 92
+  },
+  {
+    "id": "science_num_234",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько периодов в современной периодической таблице?",
+    "correct_answer": 7
+  },
+  {
+    "id": "science_num_235",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько групп в современной периодической таблице?",
+    "correct_answer": 18
+  },
+  {
+    "id": "science_num_236",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько элементов в первом периоде?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_237",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько элементов во втором периоде?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_238",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько элементов в третьем периоде?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_239",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электронов у нейтрального атома натрия?",
+    "correct_answer": 11
+  },
+  {
+    "id": "science_num_240",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электронов у нейтрального атома хлора?",
+    "correct_answer": 17
+  },
+  {
+    "id": "science_num_241",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько протонов в ядре кислорода?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_242",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько протонов в ядре углерода?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_243",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько протонов в ядре кальция?",
+    "correct_answer": 20
+  },
+  {
+    "id": "science_num_244",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В химическом контексте: сколько нейтронов в углероде-12?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_245",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько нейтронов в кислороде-16?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_246",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько нейтронов в натрии-23?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_247",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько нейтронов в хлоре-35?",
+    "correct_answer": 18
+  },
+  {
+    "id": "science_num_248",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько нуклонов в уране-238?",
+    "correct_answer": 238
+  },
+  {
+    "id": "science_num_249",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электронов у иона Na⁺?",
+    "correct_answer": 10
+  },
+  {
+    "id": "science_num_250",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электронов у иона Cl⁻?",
+    "correct_answer": 18
+  },
+  {
+    "id": "science_num_251",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов водорода в молекуле воды H₂O?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_252",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов кислорода в молекуле воды H₂O?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_253",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов кислорода в молекуле CO₂?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_254",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов водорода в молекуле метана CH₄?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_255",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов водорода в молекуле аммиака NH₃?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_256",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов кислорода в молекуле H₂SO₄?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_257",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов водорода в молекуле H₂SO₄?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_258",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов кислорода в молекуле HNO₃?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_259",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов углерода в молекуле этанола C₂H₅OH?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_260",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов водорода всего в молекуле этанола C₂H₅OH?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_261",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов кислорода в молекуле этанола C₂H₅OH?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_262",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов углерода в молекуле глюкозы C₆H₁₂O₆?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_263",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов водорода в молекуле глюкозы C₆H₁₂O₆?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_264",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов кислорода в молекуле глюкозы C₆H₁₂O₆?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_265",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов всего в одной молекуле воды?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_266",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов всего в молекуле CO₂?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_267",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов всего в молекуле CH₄?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_268",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов всего в молекуле NH₃?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_269",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов всего в молекуле H₂SO₄?",
+    "correct_answer": 7
+  },
+  {
+    "id": "science_num_270",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько атомов всего в молекуле HNO₃?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_271",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электронов максимум помещается на первом энергетическом уровне?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_272",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электронов максимум помещается на втором энергетическом уровне?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_273",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько валентных электронов у атома натрия?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_274",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько валентных электронов у атома магния?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_275",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько валентных электронов у атома алюминия?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_276",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько валентных электронов у атома углерода?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_277",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько валентных электронов у атома азота?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_278",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько валентных электронов у атома кислорода?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_279",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько валентных электронов у атома фтора?",
+    "correct_answer": 7
+  },
+  {
+    "id": "science_num_280",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько валентных электронов у атома неона?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_281",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько литров примерно занимает 1 моль идеального газа при 0 °C и 1 атм, округлённо?",
+    "correct_answer": 22
+  },
+  {
+    "id": "science_num_282",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Каков коэффициент в числе Авогадро 6×10^23, если округлить до целого?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_283",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько граммов составляет молярная масса воды H₂O примерно?",
+    "correct_answer": 18
+  },
+  {
+    "id": "science_num_284",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько граммов составляет молярная масса CO₂ примерно?",
+    "correct_answer": 44
+  },
+  {
+    "id": "science_num_285",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько граммов составляет молярная масса O₂ примерно?",
+    "correct_answer": 32
+  },
+  {
+    "id": "science_num_286",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько граммов составляет молярная масса N₂ примерно?",
+    "correct_answer": 28
+  },
+  {
+    "id": "science_num_287",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько граммов составляет молярная масса CH₄ примерно?",
+    "correct_answer": 16
+  },
+  {
+    "id": "science_num_288",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько граммов составляет молярная масса NaCl примерно, округлённо?",
+    "correct_answer": 58
+  },
+  {
+    "id": "science_num_289",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько граммов составляет молярная масса H₂SO₄ примерно?",
+    "correct_answer": 98
+  },
+  {
+    "id": "science_num_290",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько граммов составляет молярная масса NH₃ примерно?",
+    "correct_answer": 17
+  },
+  {
+    "id": "science_num_291",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Какой pH имеет нейтральная вода при 25 °C?",
+    "correct_answer": 7
+  },
+  {
+    "id": "science_num_292",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Какой pH имеет раствор при [H⁺]=10⁻³ моль/л?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_293",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электронов участвует в одной одинарной ковалентной связи?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_294",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ковалентных связей C–H содержит молекула метана CH₄?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_295",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электронов теряет атом натрия при образовании Na⁺?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_296",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электронов принимает атом хлора при образовании Cl⁻?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_297",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько электронов участвует в одной обычной ковалентной связи?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_298",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько связей образует углерод в метане?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_299",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько связей O–H в молекуле воды?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_300",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько связей C–H в молекуле метана?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_301",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько планет в Солнечной системе?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_302",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько планет земной группы?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_303",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько планет-гигантов?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_304",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько естественных спутников имеет Земля?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_305",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько естественных спутников имеет Марс?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_306",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько галилеевых спутников у Юпитера?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_307",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько карликовых планет входит в классический официальный перечень МАС: Церера, Плутон, Хаумеа, Макемаке, Эрида?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_308",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько звёзд в системе Альфа Центавра, если считать Проксиму?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_309",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько звёзд образует астеризм Большой Ковш?",
+    "correct_answer": 7
+  },
+  {
+    "id": "science_num_310",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько планет находится ближе к Солнцу, чем Земля?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_311",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько планет находится дальше от Солнца, чем Земля?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_312",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько планет Солнечной системы имеют кольца?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_313",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько планет Солнечной системы не имеют естественных спутников?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_314",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько земных суток примерно длится год Меркурия?",
+    "correct_answer": 88
+  },
+  {
+    "id": "science_num_315",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько земных суток примерно длится год Венеры?",
+    "correct_answer": 225
+  },
+  {
+    "id": "science_num_316",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько земных суток примерно длится год Земли?",
+    "correct_answer": 365
+  },
+  {
+    "id": "science_num_317",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько земных суток примерно длится год Марса?",
+    "correct_answer": 687
+  },
+  {
+    "id": "science_num_318",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько земных лет примерно длится год Юпитера?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_319",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько земных лет примерно длится год Сатурна?",
+    "correct_answer": 29
+  },
+  {
+    "id": "science_num_320",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько земных лет примерно длится год Урана?",
+    "correct_answer": 84
+  },
+  {
+    "id": "science_num_321",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько земных лет примерно длится год Нептуна?",
+    "correct_answer": 165
+  },
+  {
+    "id": "science_num_322",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько земных суток примерно длится сидерический период Луны?",
+    "correct_answer": 27
+  },
+  {
+    "id": "science_num_323",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько земных суток примерно длится синодический месяц?",
+    "correct_answer": 29
+  },
+  {
+    "id": "science_num_324",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В астрономическом контексте: сколько минут примерно идёт свет от Солнца до Земли?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_325",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько секунд примерно идёт свет от Луны до Земли?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_326",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько световых лет примерно до Проксимы Центавра, округлённо?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_327",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько световых лет примерно до Сириуса, округлённо?",
+    "correct_answer": 9
+  },
+  {
+    "id": "science_num_328",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллионов световых лет примерно до Андромеды, округлённо?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_329",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько тысяч километров составляет среднее расстояние от Земли до Луны?",
+    "correct_answer": 384
+  },
+  {
+    "id": "science_num_330",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллионов километров составляет среднее расстояние от Земли до Солнца, округлённо?",
+    "correct_answer": 150
+  },
+  {
+    "id": "science_num_331",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллионов километров примерно от Солнца до Марса?",
+    "correct_answer": 228
+  },
+  {
+    "id": "science_num_332",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллионов километров примерно от Солнца до Юпитера?",
+    "correct_answer": 778
+  },
+  {
+    "id": "science_num_333",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллионов километров примерно от Солнца до Сатурна?",
+    "correct_answer": 1430
+  },
+  {
+    "id": "science_num_334",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров составляет диаметр Земли примерно?",
+    "correct_answer": 12742
+  },
+  {
+    "id": "science_num_335",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров составляет диаметр Луны примерно?",
+    "correct_answer": 3474
+  },
+  {
+    "id": "science_num_336",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров составляет диаметр Солнца примерно?",
+    "correct_answer": 1392700
+  },
+  {
+    "id": "science_num_337",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров составляет диаметр Юпитера примерно?",
+    "correct_answer": 139820
+  },
+  {
+    "id": "science_num_338",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров составляет диаметр Марса примерно?",
+    "correct_answer": 6779
+  },
+  {
+    "id": "science_num_339",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров составляет диаметр Меркурия примерно?",
+    "correct_answer": 4879
+  },
+  {
+    "id": "science_num_340",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров составляет диаметр Венеры примерно?",
+    "correct_answer": 12104
+  },
+  {
+    "id": "science_num_341",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров составляет диаметр Сатурна примерно?",
+    "correct_answer": 116460
+  },
+  {
+    "id": "science_num_342",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров составляет диаметр Урана примерно?",
+    "correct_answer": 50724
+  },
+  {
+    "id": "science_num_343",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров составляет диаметр Нептуна примерно?",
+    "correct_answer": 49244
+  },
+  {
+    "id": "science_num_344",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров составляет радиус Земли примерно?",
+    "correct_answer": 6371
+  },
+  {
+    "id": "science_num_345",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров составляет радиус Луны примерно?",
+    "correct_answer": 1737
+  },
+  {
+    "id": "science_num_346",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров составляет радиус Солнца примерно?",
+    "correct_answer": 696340
+  },
+  {
+    "id": "science_num_347",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько раз масса Солнца превышает массу Земли примерно, округлённо до тысяч?",
+    "correct_answer": 333000
+  },
+  {
+    "id": "science_num_348",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько раз диаметр Солнца больше диаметра Земли примерно?",
+    "correct_answer": 109
+  },
+  {
+    "id": "science_num_349",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В астрономическом контексте: сколько км/с примерно скорость Земли по орбите?",
+    "correct_answer": 30
+  },
+  {
+    "id": "science_num_350",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько км/с примерно скорость Меркурия по орбите?",
+    "correct_answer": 47
+  },
+  {
+    "id": "science_num_351",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько км/с примерно скорость Юпитера по орбите?",
+    "correct_answer": 13
+  },
+  {
+    "id": "science_num_352",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько минут дуги в одном градусе?",
+    "correct_answer": 60
+  },
+  {
+    "id": "science_num_353",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько секунд дуги в одной минуте?",
+    "correct_answer": 60
+  },
+  {
+    "id": "science_num_354",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько секунд дуги в одном градусе?",
+    "correct_answer": 3600
+  },
+  {
+    "id": "science_num_355",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов в полном круге?",
+    "correct_answer": 360
+  },
+  {
+    "id": "science_num_356",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько часов прямого восхождения соответствует полному кругу небесной сферы?",
+    "correct_answer": 24
+  },
+  {
+    "id": "science_num_357",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов соответствует одному часу прямого восхождения?",
+    "correct_answer": 15
+  },
+  {
+    "id": "science_num_358",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов примерно наклонена ось Земли?",
+    "correct_answer": 23
+  },
+  {
+    "id": "science_num_359",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов примерно наклонена ось Урана?",
+    "correct_answer": 98
+  },
+  {
+    "id": "science_num_360",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов примерно наклонена ось Марса?",
+    "correct_answer": 25
+  },
+  {
+    "id": "science_num_361",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов примерно наклонена ось Сатурна?",
+    "correct_answer": 27
+  },
+  {
+    "id": "science_num_362",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько слоёв Солнца обычно выделяют в упрощённой схеме: ядро, радиационная зона, конвективная зона, фотосфера, хромосфера, корона?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_363",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных фаз Луны обычно выделяют?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_364",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько точек Лагранжа существует в ограниченной задаче трёх тел?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_365",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько типов солнечных затмений обычно выделяют: полное, частное, кольцеобразное, гибридное?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_366",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько типов лунных затмений обычно выделяют: полное, частичное, полутеневое?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_367",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров составляет высота линии Кармана?",
+    "correct_answer": 100
+  },
+  {
+    "id": "science_num_368",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров примерно высота орбиты МКС?",
+    "correct_answer": 400
+  },
+  {
+    "id": "science_num_369",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько минут примерно длится один оборот МКС вокруг Земли?",
+    "correct_answer": 90
+  },
+  {
+    "id": "science_num_370",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько оборотов вокруг Земли совершает МКС примерно за сутки?",
+    "correct_answer": 16
+  },
+  {
+    "id": "science_num_371",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько человек впервые ступило на Луну в миссии Apollo 11?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_372",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В каком году Юрий Гагарин совершил первый полёт человека в космос?",
+    "correct_answer": 1961
+  },
+  {
+    "id": "science_num_373",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В каком году состоялась первая высадка людей на Луну?",
+    "correct_answer": 1969
+  },
+  {
+    "id": "science_num_374",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В каком году был запущен первый искусственный спутник Земли?",
+    "correct_answer": 1957
+  },
+  {
+    "id": "science_num_375",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В каком году запустили телескоп Hubble?",
+    "correct_answer": 1990
+  },
+  {
+    "id": "science_num_376",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В каком году запустили James Webb Space Telescope?",
+    "correct_answer": 2021
+  },
+  {
+    "id": "science_num_377",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В каком году Плутон переклассифицировали в карликовую планету?",
+    "correct_answer": 2006
+  },
+  {
+    "id": "science_num_378",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В каком году Галилей открыл четыре крупных спутника Юпитера?",
+    "correct_answer": 1610
+  },
+  {
+    "id": "science_num_379",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В каком году Коперник опубликовал «Об обращениях небесных сфер»?",
+    "correct_answer": 1543
+  },
+  {
+    "id": "science_num_380",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В каком году Хаббл опубликовал работу о связи скорости удаления галактик с расстоянием?",
+    "correct_answer": 1929
+  },
+  {
+    "id": "science_num_381",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В каком году открыли реликтовое микроволновое излучение?",
+    "correct_answer": 1965
+  },
+  {
+    "id": "science_num_382",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллиардов лет возраст Вселенной примерно, округлённо?",
+    "correct_answer": 14
+  },
+  {
+    "id": "science_num_383",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллиардов лет возраст Солнечной системы примерно, округлённо?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_384",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллиардов лет возраст Земли примерно, округлённо?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_385",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллиардов лет примерно осталось Солнцу до стадии красного гиганта?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_386",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько созвездий официально признаёт Международный астрономический союз?",
+    "correct_answer": 88
+  },
+  {
+    "id": "science_num_387",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько знаков традиционно в зодиакальном круге?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_388",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько созвездий пересекает эклиптика, если учитывать Змееносца?",
+    "correct_answer": 13
+  },
+  {
+    "id": "science_num_389",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров примерно радиус Шварцшильда чёрной дыры солнечной массы?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_390",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров примерно диаметр горизонта событий чёрной дыры солнечной массы?",
+    "correct_answer": 6
+  },
+  {
+    "id": "science_num_391",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов составляет наклон эклиптики к небесному экватору примерно?",
+    "correct_answer": 23
+  },
+  {
+    "id": "science_num_392",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько часов в звёздных сутках примерно, округлённо?",
+    "correct_answer": 24
+  },
+  {
+    "id": "science_num_393",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько минут примерно длится солнечное затмение в точке наблюдения максимум порядка единиц минут; укажите классический теоретический максимум, округлённый до минут?",
+    "correct_answer": 7
+  },
+  {
+    "id": "science_num_394",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров примерно составляет высота самой высокой горы Марса Олимп, округлённо?",
+    "correct_answer": 22
+  },
+  {
+    "id": "science_num_395",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров примерно составляет глубина каньонов Долины Маринер местами, округлённо?",
+    "correct_answer": 7
+  },
+  {
+    "id": "science_num_396",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько километров примерно составляет диаметр Большого Красного Пятна Юпитера по порядку величины?",
+    "correct_answer": 16000
+  },
+  {
+    "id": "science_num_397",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько земных часов примерно длится сутки Юпитера?",
+    "correct_answer": 10
+  },
+  {
+    "id": "science_num_398",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько земных часов примерно длится сутки Сатурна?",
+    "correct_answer": 11
+  },
+  {
+    "id": "science_num_399",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько земных часов примерно длится сутки Нептуна?",
+    "correct_answer": 16
+  },
+  {
+    "id": "science_num_400",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько земных часов примерно длится сутки Урана?",
+    "correct_answer": 17
+  },
+  {
+    "id": "science_num_401",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько камер имеет сердце человека?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_402",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько предсердий у сердца человека?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_403",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько желудочков у сердца человека?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_404",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько створок у митрального клапана?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_405",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько створок у трёхстворчатого клапана?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_406",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных клапанов у сердца человека?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_407",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько пар рёбер у взрослого человека обычно?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_408",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько шейных позвонков у человека?",
+    "correct_answer": 7
+  },
+  {
+    "id": "science_num_409",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько грудных позвонков у человека?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_410",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько поясничных позвонков у человека?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_411",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько костей обычно насчитывает скелет взрослого человека?",
+    "correct_answer": 206
+  },
+  {
+    "id": "science_num_412",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько костей в одной кисти?",
+    "correct_answer": 27
+  },
+  {
+    "id": "science_num_413",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько костей в одной стопе?",
+    "correct_answer": 26
+  },
+  {
+    "id": "science_num_414",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько постоянных зубов обычно у взрослого человека с зубами мудрости?",
+    "correct_answer": 32
+  },
+  {
+    "id": "science_num_415",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько молочных зубов обычно у ребёнка?",
+    "correct_answer": 20
+  },
+  {
+    "id": "science_num_416",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько резцов обычно у взрослого человека?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_417",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько клыков обычно у взрослого человека?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_418",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько премоляров обычно у взрослого человека?",
+    "correct_answer": 8
+  },
+  {
+    "id": "science_num_419",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько моляров обычно у взрослого человека с зубами мудрости?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_420",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько лёгких у человека?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_421",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько долей у правого лёгкого?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_422",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько долей у левого лёгкого?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_423",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько почек обычно у человека?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_424",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько мочеточников обычно у человека?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_425",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько основных отделов тонкого кишечника?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_426",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллилитров примерно составляет стандартная донация цельной крови?",
+    "correct_answer": 450
+  },
+  {
+    "id": "science_num_427",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько литров крови примерно у среднего взрослого человека, округлённо?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_428",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько процентов массы тела примерно составляет кровь, округлённо?",
+    "correct_answer": 7
+  },
+  {
+    "id": "science_num_429",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ударов в минуту составляет нижняя граница типичного нормального пульса взрослого в покое?",
+    "correct_answer": 60
+  },
+  {
+    "id": "science_num_430",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько ударов в минуту составляет верхняя граница типичного нормального пульса взрослого в покое?",
+    "correct_answer": 100
+  },
+  {
+    "id": "science_num_431",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько мм рт. ст. составляет систолическое давление в условной записи 120/80?",
+    "correct_answer": 120
+  },
+  {
+    "id": "science_num_432",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько мм рт. ст. составляет диастолическое давление в условной записи 120/80?",
+    "correct_answer": 80
+  },
+  {
+    "id": "science_num_433",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько дыхательных движений в минуту составляет нижняя граница типичной нормы взрослого в покое?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_434",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько дыхательных движений в минуту составляет верхняя граница типичной нормы взрослого в покое?",
+    "correct_answer": 20
+  },
+  {
+    "id": "science_num_435",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов Цельсия составляет ориентировочная верхняя граница нормальной температуры тела, если округлить?",
+    "correct_answer": 37
+  },
+  {
+    "id": "science_num_436",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько градусов Цельсия соответствует выраженной лихорадке 39 °C?",
+    "correct_answer": 39
+  },
+  {
+    "id": "science_num_437",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько процентов кислорода примерно во вдыхаемом атмосферном воздухе?",
+    "correct_answer": 21
+  },
+  {
+    "id": "science_num_438",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько процентов углекислого газа примерно в выдыхаемом воздухе, округлённо?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_439",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько процентов кислорода примерно в выдыхаемом воздухе, округлённо?",
+    "correct_answer": 16
+  },
+  {
+    "id": "science_num_440",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько процентов сатурации кислорода обычно считают нижней границей нормального диапазона у здорового взрослого на уровне моря?",
+    "correct_answer": 95
+  },
+  {
+    "id": "science_num_441",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько процентов соответствует полной сатурации гемоглобина кислородом?",
+    "correct_answer": 100
+  },
+  {
+    "id": "science_num_442",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько групп крови в системе ABO?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_443",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных Rh-статусов обычно выделяют клинически?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_444",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько пар черепных нервов у человека?",
+    "correct_answer": 12
+  },
+  {
+    "id": "science_num_445",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько пар спинномозговых нервов у человека?",
+    "correct_answer": 31
+  },
+  {
+    "id": "science_num_446",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных оболочек головного мозга выделяют?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_447",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных типов мышечной ткани выделяют у человека?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_448",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных типов тканей у человека обычно выделяют?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_449",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько фаз традиционно выделяют в упрощённой схеме сердечного цикла?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_450",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько кругов кровообращения у человека?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_451",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных типов сосудов выделяют: артерии, вены, капилляры?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_452",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько основных форменных элементов крови выделяют: эритроциты, лейкоциты, тромбоциты?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_453",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "В медицинском контексте: сколько основных компонентов центральной нервной системы: головной и спинной мозг?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_454",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько долей обычно выделяют в каждом полушарии большого мозга?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_455",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько желудочков имеет головной мозг человека?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_456",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных частей нейрона выделяют в школьной схеме: тело, дендриты, аксон?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_457",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных типов фоторецепторов сетчатки: палочки и колбочки?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_458",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько слуховых косточек в одном среднем ухе?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_459",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько полукружных каналов во внутреннем ухе с каждой стороны?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_460",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных оболочек сердца обычно выделяют: эндокард, миокард, эпикард?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_461",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько надпочечников обычно у человека?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_462",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько долей обычно имеет щитовидная железа?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_463",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько гипофизов у человека?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_464",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько недель примерно длится доношенная беременность?",
+    "correct_answer": 40
+  },
+  {
+    "id": "science_num_465",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько триместров в беременности?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_466",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько месяцев примерно длится доношенная беременность?",
+    "correct_answer": 9
+  },
+  {
+    "id": "science_num_467",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько дней составляет классический учебный пример менструального цикла?",
+    "correct_answer": 28
+  },
+  {
+    "id": "science_num_468",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько дней примерно длится беременность от первого дня последней менструации?",
+    "correct_answer": 280
+  },
+  {
+    "id": "science_num_469",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько зубов мудрости максимально бывает у человека обычно?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_470",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько крупных долей печени обычно выделяют: правую и левую?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_471",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько поджелудочных желез у человека?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_472",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько щитовидных желез у человека?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_473",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько селезёнок обычно у человека?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_474",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько килокалорий даёт 1 грамм белка примерно?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_475",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько килокалорий даёт 1 грамм углеводов примерно?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_476",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько килокалорий даёт 1 грамм жира примерно?",
+    "correct_answer": 9
+  },
+  {
+    "id": "science_num_477",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько килокалорий даёт 1 грамм этанола примерно?",
+    "correct_answer": 7
+  },
+  {
+    "id": "science_num_478",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько секунд рекомендуется мыть руки с мылом как минимум?",
+    "correct_answer": 20
+  },
+  {
+    "id": "science_num_479",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько доз обычно включает стандартная серия вакцины MMR в детском календаре многих стран?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_480",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных типов диабета обычно выделяют в базовой классификации: 1, 2 и гестационный?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_481",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных типов инсульта обычно выделяют: ишемический и геморрагический?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_482",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько основных клинических категорий инфаркта по подъёму ST часто выделяют: STEMI и NSTEMI?",
+    "correct_answer": 2
+  },
+  {
+    "id": "science_num_483",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько процентов поверхности тела взрослого приходится на одну верхнюю конечность по правилу девяток?",
+    "correct_answer": 9
+  },
+  {
+    "id": "science_num_484",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько процентов поверхности тела взрослого приходится на переднюю поверхность туловища по правилу девяток?",
+    "correct_answer": 18
+  },
+  {
+    "id": "science_num_485",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько процентов поверхности тела взрослого приходится на одну нижнюю конечность по правилу девяток?",
+    "correct_answer": 18
+  },
+  {
+    "id": "science_num_486",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько процентов поверхности тела взрослого приходится на голову и шею по правилу девяток?",
+    "correct_answer": 9
+  },
+  {
+    "id": "science_num_487",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько процентов поверхности тела взрослого приходится на промежность по правилу девяток?",
+    "correct_answer": 1
+  },
+  {
+    "id": "science_num_488",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько процентов поверхности тела взрослого приходится на заднюю поверхность туловища по правилу девяток?",
+    "correct_answer": 18
+  },
+  {
+    "id": "science_num_489",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллилитров в одной чайной ложке в бытовых медицинских расчётах?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_490",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллилитров в одной столовой ложке в распространённом бытовом медицинском расчёте?",
+    "correct_answer": 15
+  },
+  {
+    "id": "science_num_491",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллиграммов составляет 0,5 грамма лекарства?",
+    "correct_answer": 500
+  },
+  {
+    "id": "science_num_492",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько микрограммов составляет 1 миллиграмм?",
+    "correct_answer": 1000
+  },
+  {
+    "id": "science_num_493",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллилитров составляет 0,5 литра раствора?",
+    "correct_answer": 500
+  },
+  {
+    "id": "science_num_494",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько таблеток по 250 мг нужно для суммарной дозы 1000 мг?",
+    "correct_answer": 4
+  },
+  {
+    "id": "science_num_495",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллилитров раствора нужно для дозы 500 мг при концентрации 100 мг/мл?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_496",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллилитров раствора нужно для дозы 250 мг при концентрации 50 мг/мл?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_497",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько таблеток по 500 мг нужно для дозы 1500 мг?",
+    "correct_answer": 3
+  },
+  {
+    "id": "science_num_498",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллилитров раствора нужно для дозы 1000 мг при концентрации 200 мг/мл?",
+    "correct_answer": 5
+  },
+  {
+    "id": "science_num_499",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллиграммов содержится в 2 граммах вещества?",
+    "correct_answer": 2000
+  },
+  {
+    "id": "science_num_500",
+    "category": "Наука",
+    "type": "numeric",
+    "question": "Сколько миллилитров содержится в 2 литрах жидкости?",
+    "correct_answer": 2000
+  }
+]

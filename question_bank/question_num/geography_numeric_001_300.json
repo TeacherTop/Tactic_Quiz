@@ -1,0 +1,2102 @@
+[
+  {
+    "id": "geo_num_001",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран граничит с Германией по суше?",
+    "correct_answer": 9
+  },
+  {
+    "id": "geo_num_002",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран граничит с Францией по суше в Европе?",
+    "correct_answer": 8
+  },
+  {
+    "id": "geo_num_003",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран граничит с Китаем по суше?",
+    "correct_answer": 14
+  },
+  {
+    "id": "geo_num_004",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран граничит с Россией по суше?",
+    "correct_answer": 14
+  },
+  {
+    "id": "geo_num_005",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран граничит с Бразилией по суше?",
+    "correct_answer": 10
+  },
+  {
+    "id": "geo_num_006",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран граничит с Австрией по суше?",
+    "correct_answer": 8
+  },
+  {
+    "id": "geo_num_007",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран граничит с Швейцарией по суше?",
+    "correct_answer": 5
+  },
+  {
+    "id": "geo_num_008",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран граничит с Польшей по суше?",
+    "correct_answer": 7
+  },
+  {
+    "id": "geo_num_009",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран граничит с Казахстаном по суше?",
+    "correct_answer": 5
+  },
+  {
+    "id": "geo_num_010",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран граничит с Монголией по суше?",
+    "correct_answer": 2
+  },
+  {
+    "id": "geo_num_011",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь России в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 17098
+  },
+  {
+    "id": "geo_num_012",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Канады в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 9985
+  },
+  {
+    "id": "geo_num_013",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Китая в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 9597
+  },
+  {
+    "id": "geo_num_014",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь США в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 9834
+  },
+  {
+    "id": "geo_num_015",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Бразилии в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 8516
+  },
+  {
+    "id": "geo_num_016",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Австралии в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 7692
+  },
+  {
+    "id": "geo_num_017",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Индии в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 3287
+  },
+  {
+    "id": "geo_num_018",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Аргентины в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 2780
+  },
+  {
+    "id": "geo_num_019",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Казахстана в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 2725
+  },
+  {
+    "id": "geo_num_020",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Алжира в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 2382
+  },
+  {
+    "id": "geo_num_021",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота Эвереста над уровнем моря в метрах по официально принятому значению 2020 года?",
+    "correct_answer": 8849
+  },
+  {
+    "id": "geo_num_022",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота К2 над уровнем моря в метрах?",
+    "correct_answer": 8611
+  },
+  {
+    "id": "geo_num_023",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота Канченджанги над уровнем моря в метрах?",
+    "correct_answer": 8586
+  },
+  {
+    "id": "geo_num_024",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота Лхоцзе над уровнем моря в метрах?",
+    "correct_answer": 8516
+  },
+  {
+    "id": "geo_num_025",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота Макалу над уровнем моря в метрах?",
+    "correct_answer": 8485
+  },
+  {
+    "id": "geo_num_026",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота Килиманджаро над уровнем моря в метрах?",
+    "correct_answer": 5895
+  },
+  {
+    "id": "geo_num_027",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота Эльбруса над уровнем моря в метрах?",
+    "correct_answer": 5642
+  },
+  {
+    "id": "geo_num_028",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота Монблана над уровнем моря в метрах, округлённая до целого метра?",
+    "correct_answer": 4808
+  },
+  {
+    "id": "geo_num_029",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота Аконкагуа над уровнем моря в метрах?",
+    "correct_answer": 6961
+  },
+  {
+    "id": "geo_num_030",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота Денали над уровнем моря в метрах?",
+    "correct_answer": 6190
+  },
+  {
+    "id": "geo_num_031",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Нила в километрах по распространённой справочной оценке?",
+    "correct_answer": 6650
+  },
+  {
+    "id": "geo_num_032",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Амазонки в километрах по распространённой справочной оценке?",
+    "correct_answer": 6400
+  },
+  {
+    "id": "geo_num_033",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Янцзы в километрах?",
+    "correct_answer": 6300
+  },
+  {
+    "id": "geo_num_034",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Миссисипи в километрах без Миссури, округлённая до десятков?",
+    "correct_answer": 3770
+  },
+  {
+    "id": "geo_num_035",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Волги в километрах?",
+    "correct_answer": 3530
+  },
+  {
+    "id": "geo_num_036",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Дуная в километрах, округлённая до десятков?",
+    "correct_answer": 2850
+  },
+  {
+    "id": "geo_num_037",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Ганга в километрах по распространённой оценке?",
+    "correct_answer": 2525
+  },
+  {
+    "id": "geo_num_038",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Рейна в километрах, округлённая до целого?",
+    "correct_answer": 1233
+  },
+  {
+    "id": "geo_num_039",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Темзы в километрах?",
+    "correct_answer": 346
+  },
+  {
+    "id": "geo_num_040",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Сены в километрах?",
+    "correct_answer": 777
+  },
+  {
+    "id": "geo_num_041",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина Байкала в метрах?",
+    "correct_answer": 1642
+  },
+  {
+    "id": "geo_num_042",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина озера Танганьика в метрах?",
+    "correct_answer": 1470
+  },
+  {
+    "id": "geo_num_043",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина Каспийского моря в метрах?",
+    "correct_answer": 1025
+  },
+  {
+    "id": "geo_num_044",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина озера Верхнее в метрах?",
+    "correct_answer": 406
+  },
+  {
+    "id": "geo_num_045",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина озера Виктория в метрах?",
+    "correct_answer": 84
+  },
+  {
+    "id": "geo_num_046",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Каспийского моря в тысячах квадратных километров, округлённая до целой тысячи?",
+    "correct_answer": 371
+  },
+  {
+    "id": "geo_num_047",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь озера Верхнее в тысячах квадратных километров, округлённая до целой тысячи?",
+    "correct_answer": 82
+  },
+  {
+    "id": "geo_num_048",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь озера Виктория в тысячах квадратных километров, округлённая до целой тысячи?",
+    "correct_answer": 59
+  },
+  {
+    "id": "geo_num_049",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Байкала в тысячах квадратных километров, округлённая до целой тысячи?",
+    "correct_answer": 32
+  },
+  {
+    "id": "geo_num_050",
+    "category": "География",
+    "type": "numeric",
+    "question": "На сколько метров примерно ниже уровня моря находится поверхность Мёртвого моря по современному округлённому значению?",
+    "correct_answer": 430
+  },
+  {
+    "id": "geo_num_051",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Гренландии в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 2166
+  },
+  {
+    "id": "geo_num_052",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Новой Гвинеи в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 786
+  },
+  {
+    "id": "geo_num_053",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Борнео в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 748
+  },
+  {
+    "id": "geo_num_054",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Мадагаскара в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 587
+  },
+  {
+    "id": "geo_num_055",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько основных крупных островов образуют Японию?",
+    "correct_answer": 4
+  },
+  {
+    "id": "geo_num_056",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько главных островов традиционно выделяют в составе Гавайского архипелага?",
+    "correct_answer": 8
+  },
+  {
+    "id": "geo_num_057",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько основных островов входит в Канарский архипелаг?",
+    "correct_answer": 8
+  },
+  {
+    "id": "geo_num_058",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько населённых крупных островов традиционно выделяют в Мальтийском архипелаге?",
+    "correct_answer": 3
+  },
+  {
+    "id": "geo_num_059",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько главных островов образуют Новую Зеландию?",
+    "correct_answer": 2
+  },
+  {
+    "id": "geo_num_060",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран делят остров Борнео?",
+    "correct_answer": 3
+  },
+  {
+    "id": "geo_num_061",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Сахары в миллионах квадратных километров, округлённая до целого?",
+    "correct_answer": 9
+  },
+  {
+    "id": "geo_num_062",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Большого Барьерного рифа в километрах, округлённая до сотен?",
+    "correct_answer": 2300
+  },
+  {
+    "id": "geo_num_063",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота водопада Анхель в метрах?",
+    "correct_answer": 979
+  },
+  {
+    "id": "geo_num_064",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова общая высота водопада Виктория в метрах примерно?",
+    "correct_answer": 108
+  },
+  {
+    "id": "geo_num_065",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота Ниагарского водопада в метрах примерно?",
+    "correct_answer": 51
+  },
+  {
+    "id": "geo_num_066",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Большого каньона в километрах, округлённая до целого?",
+    "correct_answer": 446
+  },
+  {
+    "id": "geo_num_067",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина Большого каньона в метрах примерно?",
+    "correct_answer": 1800
+  },
+  {
+    "id": "geo_num_068",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота вулкана Фудзи в метрах?",
+    "correct_answer": 3776
+  },
+  {
+    "id": "geo_num_069",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота вулкана Везувий в метрах примерно?",
+    "correct_answer": 1281
+  },
+  {
+    "id": "geo_num_070",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота вулкана Этна в метрах по округлённому современному значению?",
+    "correct_answer": 3357
+  },
+  {
+    "id": "geo_num_071",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько градусов широты имеет экватор?",
+    "correct_answer": 0
+  },
+  {
+    "id": "geo_num_072",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько градусов долготы имеет Гринвичский меридиан?",
+    "correct_answer": 0
+  },
+  {
+    "id": "geo_num_073",
+    "category": "География",
+    "type": "numeric",
+    "question": "На какой широте примерно проходит Северный полярный круг в целых градусах?",
+    "correct_answer": 66
+  },
+  {
+    "id": "geo_num_074",
+    "category": "География",
+    "type": "numeric",
+    "question": "На какой широте примерно проходит Южный полярный круг в целых градусах?",
+    "correct_answer": 66
+  },
+  {
+    "id": "geo_num_075",
+    "category": "География",
+    "type": "numeric",
+    "question": "На какой широте примерно проходит Тропик Рака в целых градусах?",
+    "correct_answer": 23
+  },
+  {
+    "id": "geo_num_076",
+    "category": "География",
+    "type": "numeric",
+    "question": "На какой широте примерно проходит Тропик Козерога в целых градусах?",
+    "correct_answer": 23
+  },
+  {
+    "id": "geo_num_077",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько градусов составляет полный круг долготы вокруг Земли?",
+    "correct_answer": 360
+  },
+  {
+    "id": "geo_num_078",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько градусов составляет половина земного меридиана?",
+    "correct_answer": 180
+  },
+  {
+    "id": "geo_num_079",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько часовых поясов теоретически соответствует делению Земли по 15 градусов долготы?",
+    "correct_answer": 24
+  },
+  {
+    "id": "geo_num_080",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько градусов долготы в среднем соответствует одному часовому поясу?",
+    "correct_answer": 15
+  },
+  {
+    "id": "geo_num_081",
+    "category": "География",
+    "type": "numeric",
+    "question": "Каков средний радиус Земли в километрах, округлённый до целого?",
+    "correct_answer": 6371
+  },
+  {
+    "id": "geo_num_082",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина экватора Земли в километрах, округлённая до целого?",
+    "correct_answer": 40075
+  },
+  {
+    "id": "geo_num_083",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь поверхности Земли в миллионах квадратных километров, округлённая до целого?",
+    "correct_answer": 510
+  },
+  {
+    "id": "geo_num_084",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь суши Земли в миллионах квадратных километров, округлённая до целого?",
+    "correct_answer": 149
+  },
+  {
+    "id": "geo_num_085",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Мирового океана в миллионах квадратных километров, округлённая до целого?",
+    "correct_answer": 361
+  },
+  {
+    "id": "geo_num_086",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько материков обычно выделяют в русской школьной географической традиции?",
+    "correct_answer": 6
+  },
+  {
+    "id": "geo_num_087",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько океанов выделяет современная международная географическая традиция?",
+    "correct_answer": 5
+  },
+  {
+    "id": "geo_num_088",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько частей света традиционно выделяют в русской географии?",
+    "correct_answer": 6
+  },
+  {
+    "id": "geo_num_089",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран полностью расположены в Южной Америке?",
+    "correct_answer": 12
+  },
+  {
+    "id": "geo_num_090",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько суверенных государств обычно относят к Южной Америке?",
+    "correct_answer": 12
+  },
+  {
+    "id": "geo_num_091",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько государств-членов входит в ООН?",
+    "correct_answer": 193
+  },
+  {
+    "id": "geo_num_092",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран входит в Европейский союз после выхода Великобритании?",
+    "correct_answer": 27
+  },
+  {
+    "id": "geo_num_093",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран входит в Африканский союз?",
+    "correct_answer": 55
+  },
+  {
+    "id": "geo_num_094",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран входит в ассоциацию ASEAN после вступления Восточного Тимора как полного члена не учитывать, по составу до 2026 года?",
+    "correct_answer": 10
+  },
+  {
+    "id": "geo_num_095",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько федеральных земель входит в состав Германии?",
+    "correct_answer": 16
+  },
+  {
+    "id": "geo_num_096",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько штатов входит в состав США?",
+    "correct_answer": 50
+  },
+  {
+    "id": "geo_num_097",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько провинций входит в состав Канады?",
+    "correct_answer": 10
+  },
+  {
+    "id": "geo_num_098",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько территорий входит в состав Канады?",
+    "correct_answer": 3
+  },
+  {
+    "id": "geo_num_099",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько штатов и союзных территорий вместе имеет Индия по административному делению 2026 года?",
+    "correct_answer": 36
+  },
+  {
+    "id": "geo_num_100",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько кантонов входит в состав Швейцарии?",
+    "correct_answer": 26
+  },
+  {
+    "id": "geo_num_101",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота вершины Маттерхорн в метрах?",
+    "correct_answer": 4478
+  },
+  {
+    "id": "geo_num_102",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота вершины Юнгфрау в метрах?",
+    "correct_answer": 4158
+  },
+  {
+    "id": "geo_num_103",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота горы Олимп в Греции в метрах?",
+    "correct_answer": 2918
+  },
+  {
+    "id": "geo_num_104",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота горы Арарат в метрах?",
+    "correct_answer": 5137
+  },
+  {
+    "id": "geo_num_105",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота вулкана Ключевская Сопка в метрах по распространённому значению?",
+    "correct_answer": 4750
+  },
+  {
+    "id": "geo_num_106",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота горы Косцюшко в метрах?",
+    "correct_answer": 2228
+  },
+  {
+    "id": "geo_num_107",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота массива Винсон в Антарктиде в метрах?",
+    "correct_answer": 4892
+  },
+  {
+    "id": "geo_num_108",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота пика Орисаба в Мексике в метрах?",
+    "correct_answer": 5636
+  },
+  {
+    "id": "geo_num_109",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота горы Кения в метрах?",
+    "correct_answer": 5199
+  },
+  {
+    "id": "geo_num_110",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота массива Рувензори — пика Маргерита на горе Стэнли — в метрах?",
+    "correct_answer": 5109
+  },
+  {
+    "id": "geo_num_111",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота вулкана Котопахи в Эквадоре в метрах?",
+    "correct_answer": 5897
+  },
+  {
+    "id": "geo_num_112",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота вулкана Попокатепетль в Мексике в метрах?",
+    "correct_answer": 5426
+  },
+  {
+    "id": "geo_num_113",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота горы Рейнир в США в метрах?",
+    "correct_answer": 4392
+  },
+  {
+    "id": "geo_num_114",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота горы Уитни в США в метрах?",
+    "correct_answer": 4421
+  },
+  {
+    "id": "geo_num_115",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота пика Логан в Канаде в метрах?",
+    "correct_answer": 5959
+  },
+  {
+    "id": "geo_num_116",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота горы Тубкаль в Марокко в метрах?",
+    "correct_answer": 4167
+  },
+  {
+    "id": "geo_num_117",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота горы Дамаванд в Иране в метрах?",
+    "correct_answer": 5610
+  },
+  {
+    "id": "geo_num_118",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота массива Пунчак-Джая в Индонезии в метрах?",
+    "correct_answer": 4884
+  },
+  {
+    "id": "geo_num_119",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота вулкана Мауна-Лоа над уровнем моря в метрах?",
+    "correct_answer": 4169
+  },
+  {
+    "id": "geo_num_120",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота вулкана Мауна-Кеа над уровнем моря в метрах?",
+    "correct_answer": 4207
+  },
+  {
+    "id": "geo_num_121",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина реки Меконг в километрах по распространённой оценке?",
+    "correct_answer": 4350
+  },
+  {
+    "id": "geo_num_122",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина реки Нигер в километрах?",
+    "correct_answer": 4180
+  },
+  {
+    "id": "geo_num_123",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина реки Конго в километрах по распространённой оценке?",
+    "correct_answer": 4700
+  },
+  {
+    "id": "geo_num_124",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина реки Замбези в километрах?",
+    "correct_answer": 2574
+  },
+  {
+    "id": "geo_num_125",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина реки Ориноко в километрах?",
+    "correct_answer": 2140
+  },
+  {
+    "id": "geo_num_126",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина реки Парана в километрах?",
+    "correct_answer": 4880
+  },
+  {
+    "id": "geo_num_127",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина реки Колорадо в США и Мексике в километрах?",
+    "correct_answer": 2330
+  },
+  {
+    "id": "geo_num_128",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина реки Муррей в Австралии в километрах?",
+    "correct_answer": 2508
+  },
+  {
+    "id": "geo_num_129",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина реки Инд в километрах по распространённой оценке?",
+    "correct_answer": 3180
+  },
+  {
+    "id": "geo_num_130",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина реки Хуанхэ в километрах?",
+    "correct_answer": 5464
+  },
+  {
+    "id": "geo_num_131",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова общая высота водопада Йосемити в метрах?",
+    "correct_answer": 739
+  },
+  {
+    "id": "geo_num_132",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота водопада Тугела в метрах по распространённой оценке?",
+    "correct_answer": 948
+  },
+  {
+    "id": "geo_num_133",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота водопада Кайетур в Гайане в метрах?",
+    "correct_answer": 226
+  },
+  {
+    "id": "geo_num_134",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Суэцкого канала в километрах примерно?",
+    "correct_answer": 193
+  },
+  {
+    "id": "geo_num_135",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Панамского канала в километрах примерно?",
+    "correct_answer": 82
+  },
+  {
+    "id": "geo_num_136",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Кильского канала в километрах примерно?",
+    "correct_answer": 98
+  },
+  {
+    "id": "geo_num_137",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Коринфского канала в километрах примерно?",
+    "correct_answer": 6
+  },
+  {
+    "id": "geo_num_138",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова ширина Гибралтарского пролива в самом узком месте в километрах примерно?",
+    "correct_answer": 14
+  },
+  {
+    "id": "geo_num_139",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова ширина Берингова пролива в самом узком месте в километрах примерно?",
+    "correct_answer": 82
+  },
+  {
+    "id": "geo_num_140",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова длина Магелланова пролива в километрах примерно?",
+    "correct_answer": 570
+  },
+  {
+    "id": "geo_num_141",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина озера Малави в метрах?",
+    "correct_answer": 706
+  },
+  {
+    "id": "geo_num_142",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина озера Титикака в метрах?",
+    "correct_answer": 281
+  },
+  {
+    "id": "geo_num_143",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина озера Мичиган в метрах?",
+    "correct_answer": 281
+  },
+  {
+    "id": "geo_num_144",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина озера Гурон в метрах?",
+    "correct_answer": 229
+  },
+  {
+    "id": "geo_num_145",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина озера Эри в метрах?",
+    "correct_answer": 64
+  },
+  {
+    "id": "geo_num_146",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина озера Онтарио в метрах?",
+    "correct_answer": 244
+  },
+  {
+    "id": "geo_num_147",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь озера Танганьика в тысячах квадратных километров, округлённая до целой тысячи?",
+    "correct_answer": 33
+  },
+  {
+    "id": "geo_num_148",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь озера Малави в тысячах квадратных километров, округлённая до целой тысячи?",
+    "correct_answer": 30
+  },
+  {
+    "id": "geo_num_149",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь озера Титикака в тысячах квадратных километров, округлённая до целой тысячи?",
+    "correct_answer": 8
+  },
+  {
+    "id": "geo_num_150",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Мёртвого моря в квадратных километрах примерно по современному округлённому значению?",
+    "correct_answer": 605
+  },
+  {
+    "id": "geo_num_151",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь острова Куба в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 110
+  },
+  {
+    "id": "geo_num_152",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Суматры в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 473
+  },
+  {
+    "id": "geo_num_153",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Хонсю в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 228
+  },
+  {
+    "id": "geo_num_154",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Великобритании в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 209
+  },
+  {
+    "id": "geo_num_155",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Исландии в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 103
+  },
+  {
+    "id": "geo_num_156",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько крупных островов традиционно выделяют в составе Филиппинского архипелага как три основные островные группы?",
+    "correct_answer": 3
+  },
+  {
+    "id": "geo_num_157",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько островов приблизительно входит в архипелаг Филиппин по официально обновлённому счёту?",
+    "correct_answer": 7641
+  },
+  {
+    "id": "geo_num_158",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько островов насчитывает Индонезия по официально зарегистрированному счёту, округлённо используемому в справочниках?",
+    "correct_answer": 17000
+  },
+  {
+    "id": "geo_num_159",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько основных островов образуют архипелаг Кабо-Верде?",
+    "correct_answer": 10
+  },
+  {
+    "id": "geo_num_160",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько основных островов образуют Азорский архипелаг?",
+    "correct_answer": 9
+  },
+  {
+    "id": "geo_num_161",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько федеральных субъектов входит в состав Бразилии вместе с Федеральным округом?",
+    "correct_answer": 27
+  },
+  {
+    "id": "geo_num_162",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько провинций составляет Аргентину без отдельного учёта автономного Буэнос-Айреса?",
+    "correct_answer": 23
+  },
+  {
+    "id": "geo_num_163",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько регионов административно имеет Италия?",
+    "correct_answer": 20
+  },
+  {
+    "id": "geo_num_164",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько автономных сообществ имеет Испания?",
+    "correct_answer": 17
+  },
+  {
+    "id": "geo_num_165",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько провинций имеет Нидерланды?",
+    "correct_answer": 12
+  },
+  {
+    "id": "geo_num_166",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько регионов имеет материковая и заморская Франция на верхнем уровне административного деления?",
+    "correct_answer": 18
+  },
+  {
+    "id": "geo_num_167",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько воеводств имеет Польша?",
+    "correct_answer": 16
+  },
+  {
+    "id": "geo_num_168",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько краёв имеет Чехия вместе с Прагой как единицей краевого уровня?",
+    "correct_answer": 14
+  },
+  {
+    "id": "geo_num_169",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько земель имеет Австрия?",
+    "correct_answer": 9
+  },
+  {
+    "id": "geo_num_170",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько округов имеет Португалия на материковой части?",
+    "correct_answer": 18
+  },
+  {
+    "id": "geo_num_171",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько штатов имеет Мексика, если отдельно считать Мехико как федеральную единицу?",
+    "correct_answer": 32
+  },
+  {
+    "id": "geo_num_172",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько штатов имеет Бразилия без Федерального округа?",
+    "correct_answer": 26
+  },
+  {
+    "id": "geo_num_173",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько провинций имеет Южная Африка?",
+    "correct_answer": 9
+  },
+  {
+    "id": "geo_num_174",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько провинций имеет Китай на уровне провинций, если учитывать только провинции без автономных районов, муниципалитетов и специальных административных районов?",
+    "correct_answer": 23
+  },
+  {
+    "id": "geo_num_175",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько префектур имеет Япония?",
+    "correct_answer": 47
+  },
+  {
+    "id": "geo_num_176",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько административных регионов имеет Новая Зеландия в системе regional councils и unitary authorities вместе?",
+    "correct_answer": 16
+  },
+  {
+    "id": "geo_num_177",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько эмиратов входит в состав ОАЭ?",
+    "correct_answer": 7
+  },
+  {
+    "id": "geo_num_178",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько кантонов входит в Федерацию Боснии и Герцеговины?",
+    "correct_answer": 10
+  },
+  {
+    "id": "geo_num_179",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько федеральных штатов имеет Малайзия?",
+    "correct_answer": 13
+  },
+  {
+    "id": "geo_num_180",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько регионов имеет Чили по современному административному делению?",
+    "correct_answer": 16
+  },
+  {
+    "id": "geo_num_181",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова средняя глубина Мирового океана в метрах, округлённая до десятков?",
+    "correct_answer": 3680
+  },
+  {
+    "id": "geo_num_182",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина Марианской впадины в метрах по округлённому справочному значению?",
+    "correct_answer": 10984
+  },
+  {
+    "id": "geo_num_183",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько процентов поверхности Земли примерно покрыто океанами, округлённо до целого?",
+    "correct_answer": 71
+  },
+  {
+    "id": "geo_num_184",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько процентов поверхности Земли примерно занимает суша, округлённо до целого?",
+    "correct_answer": 29
+  },
+  {
+    "id": "geo_num_185",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько процентов всей пресной воды Земли примерно заключено в ледниках и ледяных щитах, округлённо до целого?",
+    "correct_answer": 69
+  },
+  {
+    "id": "geo_num_186",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько процентов атмосферы Земли по объёму составляет азот, округлённо до целого?",
+    "correct_answer": 78
+  },
+  {
+    "id": "geo_num_187",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько процентов атмосферы Земли по объёму составляет кислород, округлённо до целого?",
+    "correct_answer": 21
+  },
+  {
+    "id": "geo_num_188",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова стандартная высота границы космоса по линии Кармана в километрах?",
+    "correct_answer": 100
+  },
+  {
+    "id": "geo_num_189",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько километров составляет один градус широты на поверхности Земли примерно?",
+    "correct_answer": 111
+  },
+  {
+    "id": "geo_num_190",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько минут времени соответствует одному градусу долготы при вращении Земли?",
+    "correct_answer": 4
+  },
+  {
+    "id": "geo_num_191",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько градусов Земля поворачивается вокруг своей оси примерно за один час?",
+    "correct_answer": 15
+  },
+  {
+    "id": "geo_num_192",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько суток занимает обычный календарный год?",
+    "correct_answer": 365
+  },
+  {
+    "id": "geo_num_193",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько суток занимает високосный год?",
+    "correct_answer": 366
+  },
+  {
+    "id": "geo_num_194",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько времён года традиционно выделяют в умеренных широтах?",
+    "correct_answer": 4
+  },
+  {
+    "id": "geo_num_195",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько климатических поясов выделяют в классической школьной классификации Алисовa, включая основные и переходные?",
+    "correct_answer": 13
+  },
+  {
+    "id": "geo_num_196",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько основных климатических поясов выделяют в этой классификации?",
+    "correct_answer": 7
+  },
+  {
+    "id": "geo_num_197",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько переходных климатических поясов выделяют в этой классификации?",
+    "correct_answer": 6
+  },
+  {
+    "id": "geo_num_198",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран мира не имеют выхода к морю по общепринятому современному счёту?",
+    "correct_answer": 44
+  },
+  {
+    "id": "geo_num_199",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько государств являются двойными внутриконтинентальными странами, то есть окружены только странами без выхода к морю?",
+    "correct_answer": 2
+  },
+  {
+    "id": "geo_num_200",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран пересекает экватор по суше и островным территориям в общепринятом перечне суверенных государств?",
+    "correct_answer": 13
+  },
+  {
+    "id": "geo_num_201",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина Тихого океана в метрах по значению Марианской впадины, округлённому до целого?",
+    "correct_answer": 10984
+  },
+  {
+    "id": "geo_num_202",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина Атлантического океана в метрах по впадине Пуэрто-Рико, округлённая до десятков?",
+    "correct_answer": 8370
+  },
+  {
+    "id": "geo_num_203",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина Индийского океана в метрах по Зондскому жёлобу, округлённая до десятков?",
+    "correct_answer": 7250
+  },
+  {
+    "id": "geo_num_204",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина Северного Ледовитого океана в метрах, округлённая до десятков?",
+    "correct_answer": 5550
+  },
+  {
+    "id": "geo_num_205",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Средиземного моря в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 2500
+  },
+  {
+    "id": "geo_num_206",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Карибского моря в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 2754
+  },
+  {
+    "id": "geo_num_207",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Южно-Китайского моря в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 3500
+  },
+  {
+    "id": "geo_num_208",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Аравийского моря в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 3862
+  },
+  {
+    "id": "geo_num_209",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Чёрного моря в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 436
+  },
+  {
+    "id": "geo_num_210",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Красного моря в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 438
+  },
+  {
+    "id": "geo_num_211",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина Средиземного моря в метрах, округлённая до десятков?",
+    "correct_answer": 5260
+  },
+  {
+    "id": "geo_num_212",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина Чёрного моря в метрах?",
+    "correct_answer": 2212
+  },
+  {
+    "id": "geo_num_213",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина Красного моря в метрах, округлённая до десятков?",
+    "correct_answer": 2210
+  },
+  {
+    "id": "geo_num_214",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина Балтийского моря в метрах?",
+    "correct_answer": 459
+  },
+  {
+    "id": "geo_num_215",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная глубина Северного моря в метрах примерно?",
+    "correct_answer": 700
+  },
+  {
+    "id": "geo_num_216",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько океанов омывают берега Азии?",
+    "correct_answer": 3
+  },
+  {
+    "id": "geo_num_217",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько океанов омывают берега Северной Америки?",
+    "correct_answer": 3
+  },
+  {
+    "id": "geo_num_218",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько океанов омывают берега Южной Америки?",
+    "correct_answer": 2
+  },
+  {
+    "id": "geo_num_219",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько океанов омывают берега Африки?",
+    "correct_answer": 2
+  },
+  {
+    "id": "geo_num_220",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько океанов омывают берега Австралии в школьной классификации?",
+    "correct_answer": 2
+  },
+  {
+    "id": "geo_num_221",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь пустыни Гоби в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 1295
+  },
+  {
+    "id": "geo_num_222",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь пустыни Калахари в тысячах квадратных километров примерно?",
+    "correct_answer": 900
+  },
+  {
+    "id": "geo_num_223",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь пустыни Атакама в тысячах квадратных километров примерно?",
+    "correct_answer": 105
+  },
+  {
+    "id": "geo_num_224",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь пустыни Намиб в тысячах квадратных километров примерно?",
+    "correct_answer": 81
+  },
+  {
+    "id": "geo_num_225",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь пустыни Тар в тысячах квадратных километров примерно?",
+    "correct_answer": 200
+  },
+  {
+    "id": "geo_num_226",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь пустыни Такла-Макан в тысячах квадратных километров примерно?",
+    "correct_answer": 337
+  },
+  {
+    "id": "geo_num_227",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь пустыни Руб-эль-Хали в тысячах квадратных километров примерно?",
+    "correct_answer": 650
+  },
+  {
+    "id": "geo_num_228",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова средняя высота Тибетского нагорья над уровнем моря в метрах, округлённо?",
+    "correct_answer": 4500
+  },
+  {
+    "id": "geo_num_229",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова средняя высота плато Альтиплано в метрах примерно?",
+    "correct_answer": 3750
+  },
+  {
+    "id": "geo_num_230",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота перевала Хайбер над уровнем моря в метрах примерно?",
+    "correct_answer": 1070
+  },
+  {
+    "id": "geo_num_231",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота перевала Сен-Готард в Швейцарии в метрах?",
+    "correct_answer": 2106
+  },
+  {
+    "id": "geo_num_232",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота перевала Бреннер в Альпах в метрах?",
+    "correct_answer": 1370
+  },
+  {
+    "id": "geo_num_233",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота перевала Большой Сен-Бернар в Альпах в метрах?",
+    "correct_answer": 2469
+  },
+  {
+    "id": "geo_num_234",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота перевала Торугарт между Кыргызстаном и Китаем в метрах примерно?",
+    "correct_answer": 3752
+  },
+  {
+    "id": "geo_num_235",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова средняя высота Деканского плоскогорья в метрах примерно?",
+    "correct_answer": 600
+  },
+  {
+    "id": "geo_num_236",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова средняя высота Эфиопского нагорья в метрах примерно?",
+    "correct_answer": 2000
+  },
+  {
+    "id": "geo_num_237",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова средняя высота Бразильского плоскогорья в метрах примерно?",
+    "correct_answer": 900
+  },
+  {
+    "id": "geo_num_238",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова средняя высота Центрального плато Испании — Месеты — в метрах примерно?",
+    "correct_answer": 660
+  },
+  {
+    "id": "geo_num_239",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова максимальная высота плато Путорана в метрах?",
+    "correct_answer": 1701
+  },
+  {
+    "id": "geo_num_240",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова высота плато Колорадо в метрах примерно в среднем?",
+    "correct_answer": 2000
+  },
+  {
+    "id": "geo_num_241",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Франции в тысячах квадратных километров, округлённая до ближайшей тысячи для метрополии?",
+    "correct_answer": 552
+  },
+  {
+    "id": "geo_num_242",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Испании в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 506
+  },
+  {
+    "id": "geo_num_243",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Швеции в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 450
+  },
+  {
+    "id": "geo_num_244",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Норвегии в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 385
+  },
+  {
+    "id": "geo_num_245",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Германии в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 357
+  },
+  {
+    "id": "geo_num_246",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Финляндии в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 338
+  },
+  {
+    "id": "geo_num_247",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Польши в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 313
+  },
+  {
+    "id": "geo_num_248",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Италии в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 301
+  },
+  {
+    "id": "geo_num_249",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Греции в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 132
+  },
+  {
+    "id": "geo_num_250",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Румынии в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 238
+  },
+  {
+    "id": "geo_num_251",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Японии в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 378
+  },
+  {
+    "id": "geo_num_252",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Вьетнама в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 331
+  },
+  {
+    "id": "geo_num_253",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Малайзии в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 331
+  },
+  {
+    "id": "geo_num_254",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Филиппин в тысячах квадратных километров примерно?",
+    "correct_answer": 300
+  },
+  {
+    "id": "geo_num_255",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Новой Зеландии в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 268
+  },
+  {
+    "id": "geo_num_256",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Эквадора в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 256
+  },
+  {
+    "id": "geo_num_257",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Ганы в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 239
+  },
+  {
+    "id": "geo_num_258",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Уганды в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 241
+  },
+  {
+    "id": "geo_num_259",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Сенегала в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 197
+  },
+  {
+    "id": "geo_num_260",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь Непала в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 147
+  },
+  {
+    "id": "geo_num_261",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь острова Ява в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 139
+  },
+  {
+    "id": "geo_num_262",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь острова Лусон в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 110
+  },
+  {
+    "id": "geo_num_263",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь острова Исландия в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 103
+  },
+  {
+    "id": "geo_num_264",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь острова Ирландия в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 84
+  },
+  {
+    "id": "geo_num_265",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь острова Шри-Ланка в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 66
+  },
+  {
+    "id": "geo_num_266",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь острова Тасмания в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 68
+  },
+  {
+    "id": "geo_num_267",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь острова Хоккайдо в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 83
+  },
+  {
+    "id": "geo_num_268",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь острова Сицилия в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 26
+  },
+  {
+    "id": "geo_num_269",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь острова Сардиния в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 24
+  },
+  {
+    "id": "geo_num_270",
+    "category": "География",
+    "type": "numeric",
+    "question": "Какова площадь острова Кипр в тысячах квадратных километров, округлённая до ближайшей тысячи?",
+    "correct_answer": 9
+  },
+  {
+    "id": "geo_num_271",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран имеют береговую линию на Каспийском море?",
+    "correct_answer": 5
+  },
+  {
+    "id": "geo_num_272",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран имеют береговую линию на Чёрном море?",
+    "correct_answer": 6
+  },
+  {
+    "id": "geo_num_273",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран имеют береговую линию на Балтийском море?",
+    "correct_answer": 9
+  },
+  {
+    "id": "geo_num_274",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран имеют береговую линию на Красном море?",
+    "correct_answer": 8
+  },
+  {
+    "id": "geo_num_275",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран непосредственно граничат с Германией?",
+    "correct_answer": 9
+  },
+  {
+    "id": "geo_num_276",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран непосредственно граничат с Афганистаном?",
+    "correct_answer": 6
+  },
+  {
+    "id": "geo_num_277",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран непосредственно граничат с Ираном по суше?",
+    "correct_answer": 7
+  },
+  {
+    "id": "geo_num_278",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран непосредственно граничат с Турцией по суше?",
+    "correct_answer": 8
+  },
+  {
+    "id": "geo_num_279",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран непосредственно граничат с Таиландом по суше?",
+    "correct_answer": 4
+  },
+  {
+    "id": "geo_num_280",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько стран непосредственно граничат с Боливией по суше?",
+    "correct_answer": 5
+  },
+  {
+    "id": "geo_num_281",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько миллионов жителей насчитывало население мира примерно в 1800 году, округлённо?",
+    "correct_answer": 1000
+  },
+  {
+    "id": "geo_num_282",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько миллиардов жителей насчитывало население мира примерно в 2000 году, округлённо до целого?",
+    "correct_answer": 6
+  },
+  {
+    "id": "geo_num_283",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько миллиардов жителей мира было достигнуто по оценке ООН в 2022 году?",
+    "correct_answer": 8
+  },
+  {
+    "id": "geo_num_284",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько миллионов жителей примерно имеет крупнейшая агломерация Токио по порядку величины, округлённо?",
+    "correct_answer": 37
+  },
+  {
+    "id": "geo_num_285",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько километров примерно по прямой между Лондоном и Парижем?",
+    "correct_answer": 344
+  },
+  {
+    "id": "geo_num_286",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько километров примерно по прямой между Москвой и Санкт-Петербургом?",
+    "correct_answer": 635
+  },
+  {
+    "id": "geo_num_287",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько километров примерно по прямой между Нью-Йорком и Вашингтоном?",
+    "correct_answer": 330
+  },
+  {
+    "id": "geo_num_288",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько километров примерно по прямой между Мадридом и Барселоной?",
+    "correct_answer": 505
+  },
+  {
+    "id": "geo_num_289",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько километров примерно по прямой между Римом и Миланом?",
+    "correct_answer": 477
+  },
+  {
+    "id": "geo_num_290",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько километров примерно по прямой между Пекином и Шанхаем?",
+    "correct_answer": 1068
+  },
+  {
+    "id": "geo_num_291",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько метров составляет высота Бурдж-Халифы в Дубае?",
+    "correct_answer": 828
+  },
+  {
+    "id": "geo_num_292",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько метров составляет высота башни Тайбэй 101 без антенны по архитектурной высоте?",
+    "correct_answer": 508
+  },
+  {
+    "id": "geo_num_293",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько метров составляет архитектурная высота башни One World Trade Center в Нью-Йорке?",
+    "correct_answer": 541
+  },
+  {
+    "id": "geo_num_294",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько километров составляет длина Великой Китайской стены по официальной китайской оценке, округлённо до целого?",
+    "correct_answer": 21196
+  },
+  {
+    "id": "geo_num_295",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько километров примерно составляет длина береговой линии Норвегии без учёта всех мелких островов и фьордов в упрощённой оценке?",
+    "correct_answer": 2532
+  },
+  {
+    "id": "geo_num_296",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько километров составляет протяжённость Панамериканского шоссе примерно в распространённой оценке?",
+    "correct_answer": 30000
+  },
+  {
+    "id": "geo_num_297",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько километров составляет длина Транссибирской магистрали примерно?",
+    "correct_answer": 9289
+  },
+  {
+    "id": "geo_num_298",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько километров составляет расстояние от Северного до Южного полюса по поверхности Земли вдоль меридиана примерно?",
+    "correct_answer": 20004
+  },
+  {
+    "id": "geo_num_299",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько километров составляет диаметр Земли примерно, округлённо до целого?",
+    "correct_answer": 12742
+  },
+  {
+    "id": "geo_num_300",
+    "category": "География",
+    "type": "numeric",
+    "question": "Сколько километров составляет длина экватора Марса примерно, округлённо до целого?",
+    "correct_answer": 21344
+  }
+]
