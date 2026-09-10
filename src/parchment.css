@@ -1115,3 +1115,92 @@ h1,h2,h3 {
     transition:none!important
   }
 }
+.friends-lobby-panel {
+  width:100%;
+  max-width:560px;
+  margin:0 auto;
+}
+.online-player-list .is-host {
+  background:linear-gradient(135deg,#fff6df,#ead4a5);
+  box-shadow:0 8px 16px #6a4a2314;
+}
+.friends-settings-panel {
+  display:grid;
+  gap:13px;
+  margin-top:14px;
+  padding:14px;
+  border:1px solid #d8c39885;
+  border-radius:14px;
+  background:linear-gradient(145deg,#fff8e9c7,#eadbbd9e);
+  box-shadow:inset 0 1px 0 #fffaf0,0 10px 20px #6a4a2310;
+}
+.friends-settings-summary {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+.friends-settings-summary span {
+  display:grid;
+  place-items:center;
+  min-height:38px;
+  padding:8px;
+  border:1px solid #c9ab7280;
+  border-radius:10px;
+  background:#fff4df9c;
+  color:#5b4632;
+  font:800 10px/1.25 var(--sans);
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  text-align:center;
+}
+.friends-setting-row {
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+  align-items:center;
+}
+.friends-setting-row p {
+  margin:0;
+  color:#8b6d45;
+  font:800 10px/1 var(--sans);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.friends-setting-row button,.friends-category-grid button {
+  min-height:38px;
+  padding:8px 10px;
+  border:1px solid #cfb485;
+  border-radius:10px;
+  background:#fbf0da;
+  color:#4a3525;
+  font:800 11px/1.2 var(--sans);
+  box-shadow:inset 0 1px 0 #fffaf0,0 6px 12px #6a4a2310;
+}
+.friends-setting-row button.is-selected,.friends-category-grid button.is-selected {
+  border-color:#9f6b30;
+  background:linear-gradient(145deg,#c79645,#a46f2e);
+  color:#fff8df;
+}
+.friends-category-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+.friends-start {
+  min-height:72px;
+}
+.friends-start:disabled {
+  opacity:.6;
+  filter:saturate(.65);
+}
+.friends-wait-note {
+  margin:0;
+  color:#6c5740;
+  font:700 14px/1.45 var(--serif);
+  text-align:center;
+}
+@media (max-width:420px) {
+  .friends-settings-summary,.friends-setting-row {
+    grid-template-columns:1fr;
+  }
+}

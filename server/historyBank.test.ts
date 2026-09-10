@@ -26,10 +26,10 @@ describe('Russian history batch 001–100', () => {
   it('is loaded by the multiplayer game and keeps the correct answer after shuffling', () => {
     const store = new GameRoomStore()
     expect(store.hasQuestions()).toBe(true)
-    const room = store.createRoom({ id: 501, first_name: 'Проверка' })
+    const { state: room } = store.createRoom({ id: 501, first_name: 'Проверка' })
     store.joinRoom(room.roomCode, { id: 502, first_name: 'Второй' }, 'test-2')
     store.joinRoom(room.roomCode, { id: 503, first_name: 'Третий' }, 'test-3')
-    const state = store.startGame(room.roomId)
+    const state = store.startGame(room.roomId, room.hostPlayerId)
     const directory = new URL('../question_bank/question_text/', import.meta.url)
     const allQuestions = fs.readdirSync(directory).filter(file => file.endsWith('.json')).flatMap(file => JSON.parse(fs.readFileSync(new URL(file, directory), 'utf8')) as Entry[])
     const q = allQuestions.find(q => q.question === state.currentQuestion?.prompt)

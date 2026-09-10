@@ -25,7 +25,7 @@ import { useTelegramControls } from './hooks/useTelegramControls'
 import { ANIMATION_TIMINGS, useGameTimeline } from './hooks/useGameTimeline'
 import { connectMultiplayerSocket, createMultiplayerRoom, joinMultiplayerRoom, type MultiplayerSocket } from './multiplayer/client'
 import { getInviteRoomCode, getTelegramInviteUrl, shareTelegramInvite } from './telegram'
-import type { MultiplayerGameState } from '../shared/multiplayer'
+import type { MultiplayerGameState, MultiplayerRoomSettings } from '../shared/multiplayer'
 import './styles.css'
 import './parchment.css'
 
@@ -1218,14 +1218,19 @@ function RankedScreen({ onBack }: { onBack: () => void }) {
 function FriendsScreen({ onBack }: { onBack: () => void }) {
   const [roomCode, setRoomCode] = useState(() => getInviteRoomCode())
   const [state, setState] = useState<MultiplayerGameState | null>(null)
+  const [viewerPlayerId, setViewerPlayerId] = useState<string | null>(null)
   const [notice, setNotice] = useState('')
   const [socket, setSocket] = useState<MultiplayerSocket | null>(null)
   const currentRoomCode = state?.roomCode ?? null
+  const isHost = Boolean(state && viewerPlayerId && state.hostPlayerId === viewerPlayerId)
+  const humanPlayers = state?.players.filter((player) => !player.botReplacementFor) ?? []
+  const canStart = Boolean(isHost && state?.status === 'waiting' && humanPlayers.length >= 2)
+  const categoryOptions = BOT_TOPICS.slice(0, 12)
   useTelegramControls(onBack, currentRoomCode)
 
   useEffect(() => {
     if (!currentRoomCode) return
-    const socket = connectMultiplayerSocket(currentRoomCode, setState, setNotice)
+    const socket = connectMultiplayerSocket(currentRoomCode, setState, setNotice, setViewerPlayerId)
     socket.on('connect_error', (error) => setNotice(`Ошибка подключения: ${error.message}`))
     socket.on('error_message', setNotice)
     setSocket(socket)
@@ -1239,8 +1244,9 @@ function FriendsScreen({ onBack }: { onBack: () => void }) {
     try {
       const response = await createMultiplayerRoom()
       setState(response.state)
+      setViewerPlayerId(response.playerId)
       setRoomCode(response.roomCode)
-      setNotice(`Комната ${response.roomCode} создана. Ждем 3 игроков.`)
+      setNotice(`Комната ${response.roomCode} создана. Настрой матч и отправь код друзьям.`)
     } catch (error) {
       setNotice(error instanceof Error ? error.message : 'Не удалось создать комнату')
     }
@@ -1250,18 +1256,46 @@ function FriendsScreen({ onBack }: { onBack: () => void }) {
     try {
       const response = await joinMultiplayerRoom(roomCode)
       setState(response.state)
-      setNotice(`Подключение к комнате ${response.state.roomCode}`)
+      setViewerPlayerId(response.playerId)
+      setNotice(`Ты вошёл в комнату ${response.state.roomCode}. Ждём создателя.`)
     } catch (error) {
       setNotice(error instanceof Error ? error.message : 'Не удалось войти в комнату')
     }
+  }
+
+  const updateSettings = (settings: MultiplayerRoomSettings) => {
+    if (!socket || !state || !isHost) return
+    socket.emit('room_settings_updated', { roomId: state.roomId, settings }, (response) => {
+      setNotice(response.ok ? 'Настройки комнаты обновлены' : response.error)
+    })
+  }
+
+  const patchSettings = (patch: Partial<MultiplayerRoomSettings>) => {
+    if (!state) return
+    updateSettings({ ...state.settings, ...patch })
+  }
+
+  const toggleCategory = (category: string) => {
+    if (!state) return
+    const selected = new Set(state.settings.categories)
+    if (selected.has(category)) selected.delete(category)
+    else selected.add(category)
+    patchSettings({ categories: [...selected] })
+  }
+
+  const startGame = () => {
+    if (!socket || !state) return
+    socket.emit('game_started', { roomId: state.roomId }, (response) => {
+      setNotice(response.ok ? 'Матч запущен' : response.error)
+    })
   }
 
   return <section className="ranked-screen friends-screen">
     <button type="button" className="stats-back" onClick={onBack}>← Главное меню</button>
     <header className="stats-title"><p className="menu-eyebrow">Сражение за одним столом</p><h2>ИГРА С ДРУЗЬЯМИ</h2><div className="title-rule" aria-hidden="true"><i /><b /><i /></div></header>
     <div className="friends-room-card">
-      <p className="stats-block-kicker">Комната для троих игроков</p>
-      <button type="button" className="wood-plaque plaque-red friends-create" onClick={createRoom}><span>Создать комнату</span><small>Получить код приглашения</small></button>
+      <p className="stats-block-kicker">Комната по коду</p>
+      <button type="button" className="wood-plaque plaque-red friends-create" onClick={createRoom}><span>Создать комнату</span><small>Настройки и старт будут только у создателя</small></button>
       <label className="room-code-field">
         <span>Код комнаты</span>
         <input value={roomCode} onChange={(event) => setRoomCode(event.target.value.replace(/\D/g, '').slice(0, 6))} inputMode="numeric" placeholder="000000" />
@@ -1269,12 +1303,35 @@ function FriendsScreen({ onBack }: { onBack: () => void }) {
       <button type="button" className="wood-plaque plaque-light friends-join" disabled={roomCode.length !== 6} onClick={joinRoom}><span>Войти по коду</span><small>{roomCode.length === 6 ? 'Подключиться к партии' : 'Введите 6 цифр'}</small></button>
       {currentRoomCode ? <button type="button" className="wood-plaque plaque-light friends-invite" onClick={() => { shareTelegramInvite(currentRoomCode); setNotice(`Ссылка-приглашение готова: ${getTelegramInviteUrl(currentRoomCode)}`) }}><span>Пригласить друга</span><small>Через Telegram</small></button> : null}
     </div>
-    {state ? <div className="online-room-panel">
+    {state ? <div className="online-room-panel friends-lobby-panel">
       <p className="menu-eyebrow">Комната {state.roomCode}</p>
-      <h3>{state.status === 'preparing' ? 'Матч скоро начнется' : state.status === 'playing' ? `Раунд ${state.round}` : state.status === 'finished' ? 'Матч завершен' : 'Ожидание игроков'}</h3>
+      <h3>{state.status === 'playing' ? `Раунд ${state.round}` : state.status === 'finished' ? 'Матч завершен' : isHost ? 'Ты создатель комнаты' : 'Ждём создателя комнаты'}</h3>
       <div className="online-player-list">
-        {state.players.map((player) => <span key={player.id} style={{ borderColor: player.color, color: player.color }}>{player.name} · {player.status}</span>)}
+        {state.players.map((player) => <span key={player.id} className={player.id === state.hostPlayerId ? 'is-host' : ''} style={{ borderColor: player.color, color: player.color }}>{player.name}{player.id === state.hostPlayerId ? ' · создатель' : ''} · {player.status}</span>)}
       </div>
+      {state.status === 'waiting' ? <div className="friends-settings-panel">
+        <div className="friends-settings-summary">
+          <span>{state.settings.maxPlayers === 2 ? 'Дуэль' : 'Трое игроков'}</span>
+          <span>{state.settings.arenaRadius === 1 ? '7 сот' : '19 сот'}</span>
+          <span>{state.settings.categories.length ? `${state.settings.categories.length} тем` : 'Все темы'}</span>
+        </div>
+        {isHost ? <>
+          <div className="friends-setting-row">
+            <p>Формат</p>
+            <button type="button" className={state.settings.maxPlayers === 2 ? 'is-selected' : ''} onClick={() => patchSettings({ maxPlayers: 2 })}>1 на 1</button>
+            <button type="button" className={state.settings.maxPlayers === 3 ? 'is-selected' : ''} onClick={() => patchSettings({ maxPlayers: 3 })}>Трое</button>
+          </div>
+          <div className="friends-setting-row">
+            <p>Карта</p>
+            <button type="button" className={state.settings.arenaRadius === 1 ? 'is-selected' : ''} onClick={() => patchSettings({ arenaRadius: 1 })}>Быстрая · 7 сот</button>
+            <button type="button" className={state.settings.arenaRadius === 2 ? 'is-selected' : ''} onClick={() => patchSettings({ arenaRadius: 2 })}>Классика · 19 сот</button>
+          </div>
+          <div className="friends-category-grid" aria-label="Темы комнаты">
+            {categoryOptions.map((category) => <button key={category} type="button" className={state.settings.categories.includes(category) ? 'is-selected' : ''} onClick={() => toggleCategory(category)}>{category}</button>)}
+          </div>
+          <button type="button" className="wood-plaque plaque-red friends-start" disabled={!canStart} onClick={startGame}><span>Начать игру</span><small>{canStart ? 'Все готовы — открываем первый вопрос' : 'Нужно минимум два игрока'}</small></button>
+        </> : <p className="friends-wait-note">Настройки выбирает создатель. Когда он нажмёт старт, матч начнётся у всех игроков одновременно.</p>}
+      </div> : null}
     </div> : null}
     {state && (state.status === 'playing' || state.status === 'finished') ? <OnlineGameView state={state} socket={socket} /> : null}
     {notice ? <p className="ranked-notice">{notice}</p> : null}

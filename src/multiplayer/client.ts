@@ -29,14 +29,16 @@ export function joinMultiplayerRoom(roomCode: string): Promise<JoinRoomResponse>
   return postJson<JoinRoomResponse>('/api/join-room', { roomCode, initData: getTelegramInitData() })
 }
 
-export function connectMultiplayerSocket(roomCode: string, onState: (state: MultiplayerGameState) => void, onError?: (message: string) => void): MultiplayerSocket {
+export function connectMultiplayerSocket(roomCode: string, onState: (state: MultiplayerGameState) => void, onError?: (message: string) => void, onJoined?: (playerId: string) => void): MultiplayerSocket {
   const socket: MultiplayerSocket = io(API_URL, { transports: ['websocket'], query: Object.fromEntries(new URLSearchParams(devUserQuery())) })
   socket.on('state_update', onState)
   socket.on('connect', () => {
     socket.emit('join_room', { roomCode, initData: getTelegramInitData() }, ((response) => {
-      if (response.ok) onState(response.data)
-      else onError?.(response.error)
-    }) as SocketAck<MultiplayerGameState>)
+      if (response.ok) {
+        onJoined?.(response.data.playerId)
+        onState(response.data.state)
+      } else onError?.(response.error)
+    }) as SocketAck<JoinRoomResponse>)
   })
   return socket
 }

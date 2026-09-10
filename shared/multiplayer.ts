@@ -1,7 +1,13 @@
 export type MultiplayerPlayerStatus = 'connected' | 'disconnected' | 'bot'
-export type MultiplayerRoomStatus = 'waiting' | 'preparing' | 'playing' | 'finished'
+export type MultiplayerRoomStatus = 'waiting' | 'playing' | 'finished'
 export type MultiplayerPhase = 'lobby' | 'expansion' | 'expansion-review' | 'expansion-capture' | 'battle-select' | 'battle-number' | 'results'
 export type MultiplayerPlayerId = string
+
+export type MultiplayerRoomSettings = {
+  maxPlayers: 2 | 3
+  arenaRadius: 1 | 2
+  categories: string[]
+}
 
 export type TelegramUser = {
   id: number
@@ -43,6 +49,8 @@ export type MultiplayerGameState = {
   roomCode: string
   status: MultiplayerRoomStatus
   phase: MultiplayerPhase
+  hostPlayerId: MultiplayerPlayerId
+  settings: MultiplayerRoomSettings
   players: MultiplayerPlayer[]
   arena: MultiplayerHex[]
   currentQuestion: PublicQuestion | null
@@ -68,7 +76,9 @@ export type MultiplayerGameState = {
 }
 
 export type ClientToServerEvents = {
-  join_room: (payload: { roomCode: string; initData: string }, ack: SocketAck<MultiplayerGameState>) => void
+  join_room: (payload: { roomCode: string; initData: string }, ack: SocketAck<JoinRoomResponse>) => void
+  room_settings_updated: (payload: { roomId: string; settings: MultiplayerRoomSettings }, ack: SocketAck<void>) => void
+  game_started: (payload: { roomId: string }, ack: SocketAck<void>) => void
   answer_submitted: (payload: { roomId: string; answer: number | number[] }, ack: SocketAck<void>) => void
   hex_selected: (payload: { roomId: string; row: number; col: number }, ack: SocketAck<void>) => void
   attack_chosen: (payload: { roomId: string; row: number; col: number }, ack: SocketAck<void>) => void
@@ -84,9 +94,11 @@ export type SocketAck<T> = (response: { ok: true; data: T } | { ok: false; error
 
 export type CreateRoomResponse = {
   roomCode: string
+  playerId: MultiplayerPlayerId
   state: MultiplayerGameState
 }
 
 export type JoinRoomResponse = {
+  playerId: MultiplayerPlayerId
   state: MultiplayerGameState
 }

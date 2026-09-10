@@ -73,19 +73,6 @@ function emitState(state: MultiplayerGameState): void {
   scheduleBotTurn(state)
 }
 
-function schedulePreparation(state: MultiplayerGameState): void {
-  if (state.status !== 'preparing' || !state.timerEndsAt) return
-  const scheduledTimerEndsAt = state.timerEndsAt
-  const delay = Math.max(0, state.timerEndsAt - Date.now())
-  setTimeout(() => {
-    const current = store.getRoomById(state.roomId)
-    if (!current || current.status !== 'preparing' || current.timerEndsAt !== scheduledTimerEndsAt) return
-    const next = store.startGame(current.roomId)
-    log(next.roomId, `Матч стартовал, раунд ${next.round}`)
-    emitState(next)
-  }, delay)
-}
-
 function schedulePhaseTimer(state: MultiplayerGameState): void {
   if (!state.timerEndsAt) return
   const delay = Math.max(0, state.timerEndsAt - Date.now())
@@ -162,9 +149,9 @@ app.post('/api/create-room', (req, res) => {
   try {
     if (!store.hasQuestions()) throw new Error('Банк вопросов для игры с друзьями ещё не подключён.')
     const { initData } = initDataSchema.parse(req.body)
-    const state = store.createRoom(authenticate(initData, req.query.devUser))
-    log(state.roomId, `Создана комната ${state.roomCode}`)
-    res.json({ roomCode: state.roomCode, state: publicState(state) })
+    const created = store.createRoom(authenticate(initData, req.query.devUser))
+    log(created.state.roomId, `Создана комната ${created.state.roomCode}`)
+    res.json({ roomCode: created.state.roomCode, playerId: created.playerId, state: publicState(created.state) })
   } catch (error) {
     res.status(400).json({ error: error instanceof Error ? error.message : 'Не удалось создать комнату' })
   }
@@ -173,10 +160,9 @@ app.post('/api/create-room', (req, res) => {
 app.post('/api/join-room', (req, res) => {
   try {
     const { roomCode, initData } = joinRoomSchema.parse(req.body)
-    const state = store.joinRoom(roomCode, authenticate(initData, req.query.devUser), null)
-    schedulePreparation(state)
-    log(state.roomId, `Игрок вошел по коду ${roomCode}`)
-    res.json({ state: publicState(state) })
+    const joined = store.joinRoom(roomCode, authenticate(initData, req.query.devUser), null)
+    log(joined.state.roomId, `Игрок вошел по коду ${roomCode}`)
+    res.json({ playerId: joined.playerId, state: publicState(joined.state) })
   } catch (error) {
     res.status(400).json({ error: error instanceof Error ? error.message : 'Не удалось войти в комнату' })
   }
@@ -190,15 +176,33 @@ io.on('connection', (socket) => {
       rateLimit(socket.id)
       const { roomCode, initData } = joinRoomSchema.parse(payload)
       const user = authenticate(initData, socket.handshake.query.devUser)
-      const state = store.joinRoom(roomCode, user, socket.id)
-      const player = state.players.find((candidate) => candidate.telegramId === user.id)
-      socket.data.roomId = state.roomId
-      socket.data.playerId = player?.id
-      socket.join(state.roomId)
-      schedulePreparation(state)
-      log(state.roomId, `${user.first_name} подключился`)
+      const joined = store.joinRoom(roomCode, user, socket.id)
+      socket.data.roomId = joined.state.roomId
+      socket.data.playerId = joined.playerId
+      socket.join(joined.state.roomId)
+      log(joined.state.roomId, `${user.first_name} подключился`)
+      emitState(joined.state)
+      return { playerId: joined.playerId, state: publicState(joined.state) }
+    })
+  })
+
+  socket.on('room_settings_updated', (payload, ack) => {
+    acknowledge(ack, () => {
+      rateLimit(socket.id)
+      if (!socket.data.playerId) throw new Error('Игрок не привязан к комнате')
+      const state = store.updateSettings(payload.roomId, socket.data.playerId, payload.settings)
+      log(payload.roomId, `${socket.data.playerId} обновил настройки комнаты`)
       emitState(state)
-      return publicState(state)
+    })
+  })
+
+  socket.on('game_started', (payload, ack) => {
+    acknowledge(ack, () => {
+      rateLimit(socket.id)
+      if (!socket.data.playerId) throw new Error('Игрок не привязан к комнате')
+      const state = store.startGame(payload.roomId, socket.data.playerId)
+      log(payload.roomId, `Матч стартовал, раунд ${state.round}`)
+      emitState(state)
     })
   })
 

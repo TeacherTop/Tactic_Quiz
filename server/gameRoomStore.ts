@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
-import type { MultiplayerGameState, MultiplayerHex, PublicQuestion, TelegramUser } from '../shared/multiplayer'
+import type { MultiplayerGameState, MultiplayerHex, MultiplayerPlayerId, MultiplayerRoomSettings, PublicQuestion, TelegramUser } from '../shared/multiplayer'
 
 type StoredQuestion = {
   category: string
@@ -15,8 +15,7 @@ type StoredQuestion = {
 
 const PLAYER_COLORS = ['#b55239', '#2f7d7a', '#4969a8']
 const ROOM_SIZE = 3
-const PREPARE_MS = 5000
-const ANSWER_MS = 25000
+const ANSWER_MS = 20000
 const MAX_BATTLE_ROUNDS = 9
 const SCORE_VALUES = {
   mcCorrect: 10,
@@ -47,9 +46,8 @@ const NUMERIC_QUESTIONS = [
 ] as const
 const DIRECTIONS: [number, number][] = [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]]
 
-function createArena(): MultiplayerHex[] {
+function createArena(radius: 1 | 2 = 2): MultiplayerHex[] {
   const cells: MultiplayerHex[] = []
-  const radius = 2
   for (let row = -radius; row <= radius; row += 1) {
     for (let col = -radius; col <= radius; col += 1) {
       if (Math.abs(row + col) > radius) continue
@@ -63,8 +61,7 @@ function cellKey(row: number, col: number): string {
   return `${row}:${col}`
 }
 
-function getNeighbors(row: number, col: number): [number, number][] {
-  const radius = 2
+function getNeighbors(row: number, col: number, radius: 1 | 2 = 2): [number, number][] {
   return DIRECTIONS
     .map(([rowOffset, colOffset]) => [row + rowOffset, col + colOffset] as [number, number])
     .filter(([neighborRow, neighborCol]) => Math.abs(neighborRow) <= radius
@@ -84,12 +81,16 @@ function blankMcStats(room: MultiplayerGameState): Record<string, { correct: num
   return Object.fromEntries(playerIds(room).map((id) => [id, { correct: 0, total: 0 }]))
 }
 
+function arenaRadiusFromCells(arena: MultiplayerHex[]): 1 | 2 {
+  return arena.length <= 7 ? 1 : 2
+}
+
 function availableCells(arena: MultiplayerHex[], playerId: string): string[] {
   const occupied = new Set(arena.filter((cell) => cell.ownerId).map((cell) => cellKey(cell.row, cell.col)))
   const owned = arena.filter((cell) => cell.ownerId === playerId)
   const available = new Set<string>()
   for (const cell of owned) {
-    for (const [row, col] of getNeighbors(cell.row, cell.col)) {
+    for (const [row, col] of getNeighbors(cell.row, cell.col, arenaRadiusFromCells(arena))) {
       const key = cellKey(row, col)
       if (!occupied.has(key)) available.add(key)
     }
@@ -101,7 +102,7 @@ function availableCells(arena: MultiplayerHex[], playerId: string): string[] {
 function attackTargets(arena: MultiplayerHex[], playerId: string): MultiplayerHex[] {
   const targets = new Set<string>()
   for (const cell of arena.filter((candidate) => candidate.ownerId === playerId)) {
-    for (const [row, col] of getNeighbors(cell.row, cell.col)) {
+    for (const [row, col] of getNeighbors(cell.row, cell.col, arenaRadiusFromCells(arena))) {
       const target = arena.find((candidate) => candidate.row === row && candidate.col === col)
       if (target?.ownerId && target.ownerId !== playerId) targets.add(cellKey(target.row, target.col))
     }
@@ -134,16 +135,19 @@ function questionBankFileNumber(file: string): number {
   return Number(file.match(/^my_game_question(\d+)\.json$/)?.[1] ?? Number.MAX_SAFE_INTEGER)
 }
 
-function pickQuestionIndex(usedIds: string[]): number {
+function pickQuestionIndex(usedIds: string[], categories: string[]): number {
+  const categorySet = new Set(categories)
   const available = QUESTIONS
     .map((_, index) => index)
-    .filter((index) => !usedIds.includes(String(index)))
-  return available[crypto.randomInt(available.length)]
+    .filter((index) => !usedIds.includes(String(index)) && (categorySet.size === 0 || categorySet.has(QUESTIONS[index].category)))
+  const pool = available.length > 0 ? available : QUESTIONS.map((_, index) => index).filter((index) => !usedIds.includes(String(index)))
+  return pool[crypto.randomInt(pool.length)]
 }
 
 function pickNumericQuestion(usedIds: string[]): typeof NUMERIC_QUESTIONS[number] {
   const available = NUMERIC_QUESTIONS.filter((question) => !usedIds.includes(question.id))
-  return available[crypto.randomInt(available.length)]
+  const pool = available.length > 0 ? available : NUMERIC_QUESTIONS
+  return pool[crypto.randomInt(pool.length)]
 }
 
 function shuffleOptions(question: StoredQuestion): { options: string[]; correctOption: number } {
@@ -184,7 +188,7 @@ export class GameRoomStore {
     this.supabase = url && key ? createClient(url, key) : null
   }
 
-  createRoom(host: TelegramUser): MultiplayerGameState {
+  createRoom(host: TelegramUser): { state: MultiplayerGameState; playerId: MultiplayerPlayerId } {
     let code = roomCode()
     while (this.rooms.has(code)) code = roomCode()
     const state: MultiplayerGameState = {
@@ -192,8 +196,10 @@ export class GameRoomStore {
       roomCode: code,
       status: 'waiting',
       phase: 'lobby',
+      hostPlayerId: '',
+      settings: { maxPlayers: ROOM_SIZE, arenaRadius: 2, categories: [] },
       players: [],
-      arena: createArena(),
+      arena: createArena(2),
       currentQuestion: null,
       usedQuestionIds: [],
       answers: {},
@@ -211,11 +217,13 @@ export class GameRoomStore {
       updatedAt: Date.now(),
     }
     this.rooms.set(code, this.addPlayer(state, host, null))
-    void this.persist(this.rooms.get(code)!)
-    return this.rooms.get(code)!
+    const room = this.rooms.get(code)!
+    room.hostPlayerId = room.players[0].id
+    void this.persist(room)
+    return { state: room, playerId: room.hostPlayerId }
   }
 
-  joinRoom(code: string, user: TelegramUser, socketId: string | null): MultiplayerGameState {
+  joinRoom(code: string, user: TelegramUser, socketId: string | null): { state: MultiplayerGameState; playerId: MultiplayerPlayerId } {
     const room = this.rooms.get(code)
     if (!room) throw new Error('Комната не найдена')
     const existing = room.players.find((player) => player.telegramId === user.id)
@@ -226,49 +234,51 @@ export class GameRoomStore {
       room.players = room.players.filter((player) => player.botReplacementFor !== existing.id)
       room.updatedAt = Date.now()
       void this.persist(room)
-      return room
+      return { state: room, playerId: existing.id }
     }
-    if (room.players.filter((player) => !player.botReplacementFor).length >= ROOM_SIZE) {
-      throw new Error('В комнате уже 3 игрока')
+    if (room.status !== 'waiting') throw new Error('Матч уже начался')
+    if (room.players.filter((player) => !player.botReplacementFor).length >= room.settings.maxPlayers) {
+      throw new Error('В комнате уже максимум игроков')
     }
     const next = this.addPlayer(room, user, socketId)
-    if (next.players.filter((player) => !player.botReplacementFor).length === ROOM_SIZE && next.status === 'waiting') {
-      next.status = 'preparing'
-      next.timerEndsAt = Date.now() + PREPARE_MS
-    }
     next.updatedAt = Date.now()
     void this.persist(next)
-    return next
+    const player = next.players.find((candidate) => candidate.telegramId === user.id)
+    if (!player) throw new Error('Игрок не найден в комнате')
+    return { state: next, playerId: player.id }
   }
 
   getRoomById(roomId: string): MultiplayerGameState | undefined {
     return [...this.rooms.values()].find((room) => room.roomId === roomId)
   }
 
-  startGame(roomId: string): MultiplayerGameState {
-    if (!QUESTIONS.length) throw new Error('Банк вопросов для игры с друзьями ещё не подключён.')
+  updateSettings(roomId: string, playerId: string, settings: MultiplayerRoomSettings): MultiplayerGameState {
     const room = this.requireRoom(roomId)
-    const questionIndex = pickQuestionIndex(room.usedQuestionIds ?? [])
-    const question = QUESTIONS[questionIndex]
-    const nextQuestion = publicQuestion(question, questionIndex)
-    room.status = 'playing'
-    room.phase = 'expansion'
-    room.round += 1
-    room.currentQuestion = nextQuestion.publicQuestion
-    room.usedQuestionIds = [...(room.usedQuestionIds ?? []), room.currentQuestion.id]
-    room.answers = {}
-    room.answerTimes = {}
-    if (Object.keys(room.scores).length === 0) room.scores = blankScores(room)
-    if (Object.keys(room.mcStats).length === 0) room.mcStats = blankMcStats(room)
-    room.turnQueue = []
-    room.availableHexes = []
-    room.selectedAttack = null
-    room.roundResult = null
-    room.timerEndsAt = Date.now() + ANSWER_MS
-    this.questionAnswers.set(room.roomId, nextQuestion.correctOption)
+    if (room.hostPlayerId !== playerId) throw new Error('Настройки может менять только создатель комнаты')
+    if (room.status !== 'waiting') throw new Error('Настройки можно менять только до старта')
+    const maxPlayers = settings.maxPlayers === 2 ? 2 : 3
+    const arenaRadius = settings.arenaRadius === 1 ? 1 : 2
+    const categories = [...new Set(settings.categories.map((category) => category.trim()).filter(Boolean))]
+    if (categories.length > 0 && !categories.some((category) => QUESTIONS.some((question) => question.category === category))) {
+      throw new Error('В выбранных категориях нет вопросов')
+    }
+    if (room.players.filter((player) => !player.botReplacementFor).length > maxPlayers) throw new Error('В комнате уже больше игроков')
+    room.settings = { maxPlayers, arenaRadius, categories }
+    room.arena = createArena(arenaRadius)
     room.updatedAt = Date.now()
     void this.persist(room)
     return room
+  }
+
+  startGame(roomId: string, playerId?: string): MultiplayerGameState {
+    if (!QUESTIONS.length) throw new Error('Банк вопросов для игры с друзьями ещё не подключён.')
+    const room = this.requireRoom(roomId)
+    if (playerId && room.hostPlayerId !== playerId) throw new Error('Запускать игру может только создатель комнаты')
+    if (room.status !== 'waiting') throw new Error('Матч уже запущен')
+    if (room.players.filter((player) => !player.botReplacementFor).length < 2) throw new Error('Нужно минимум два игрока')
+    room.arena = createArena(room.settings.arenaRadius)
+    room.status = 'playing'
+    return this.startExpansionRound(room)
   }
 
   submitAnswer(roomId: string, playerId: string, answer: number): MultiplayerGameState {
@@ -371,16 +381,6 @@ export class GameRoomStore {
     room.updatedAt = Date.now()
     room.scores = blankScores(room)
     room.mcStats = blankMcStats(room)
-    const starters = [
-      [0, -2],
-      [-2, 2],
-      [2, 0],
-    ]
-    const starter = starters[index]
-    if (starter) {
-      const cell = room.arena.find((candidate) => candidate.row === starter[0] && candidate.col === starter[1])
-      if (cell) cell.ownerId = room.players[index].id
-    }
     return room
   }
 
@@ -437,7 +437,31 @@ export class GameRoomStore {
       room.battleRound = 0
       return
     }
-    this.startGame(room.roomId)
+    this.startExpansionRound(room)
+  }
+
+  private startExpansionRound(room: MultiplayerGameState): MultiplayerGameState {
+    const questionIndex = pickQuestionIndex(room.usedQuestionIds ?? [], room.settings.categories)
+    const question = QUESTIONS[questionIndex]
+    const nextQuestion = publicQuestion(question, questionIndex)
+    room.status = 'playing'
+    room.phase = 'expansion'
+    room.round += 1
+    room.currentQuestion = nextQuestion.publicQuestion
+    room.usedQuestionIds = [...(room.usedQuestionIds ?? []), room.currentQuestion.id]
+    room.answers = {}
+    room.answerTimes = {}
+    if (Object.keys(room.scores).length === 0) room.scores = blankScores(room)
+    if (Object.keys(room.mcStats).length === 0) room.mcStats = blankMcStats(room)
+    room.turnQueue = []
+    room.availableHexes = []
+    room.selectedAttack = null
+    room.roundResult = null
+    room.timerEndsAt = Date.now() + ANSWER_MS
+    this.questionAnswers.set(room.roomId, nextQuestion.correctOption)
+    room.updatedAt = Date.now()
+    void this.persist(room)
+    return room
   }
 
   private finishBattleNumber(room: MultiplayerGameState): MultiplayerGameState {
@@ -467,7 +491,8 @@ export class GameRoomStore {
     }
     room.roundResult = { correctPlayerIds: [], numericWinnerId: winner, exactBonusPlayerIds }
     room.battleRound += 1
-    if (room.battleRound >= MAX_BATTLE_ROUNDS) {
+    const maxBattleRounds = playerIds(room).length === 2 ? 8 : MAX_BATTLE_ROUNDS
+    if (room.battleRound >= maxBattleRounds) {
       finishRoom(room)
     } else {
       const attackerNext = firstAttacker(room)
