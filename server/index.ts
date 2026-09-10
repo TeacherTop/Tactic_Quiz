@@ -28,12 +28,19 @@ const server = http.createServer(app)
 const store = new GameRoomStore()
 const actionBuckets = new Map<string, { startedAt: number; count: number }>()
 const scheduledBotTurns = new Set<string>()
+function isAllowedOrigin(origin: string | undefined): boolean {
+  return !origin
+    || CLIENT_ORIGINS.includes(origin)
+    || /^http:\/\/(127\.0\.0\.1|localhost):\d+$/.test(origin)
+    || /^https:\/\/[a-z0-9-]+(?:-[a-z0-9]+)?\.vercel\.app$/.test(origin)
+}
+
 const corsOrigin: cors.CorsOptions['origin'] = (origin, callback) => {
-  if (!origin || CLIENT_ORIGINS.includes(origin) || /^http:\/\/(127\.0\.0\.1|localhost):\d+$/.test(origin)) {
+  if (isAllowedOrigin(origin)) {
     callback(null, true)
     return
   }
-  callback(new Error('Origin is not allowed by CORS'))
+  callback(null, false)
 }
 
 export const io = new Server<ClientToServerEvents, ServerToClientEvents, Record<string, never>, SocketData>(server, {
@@ -41,6 +48,7 @@ export const io = new Server<ClientToServerEvents, ServerToClientEvents, Record<
 })
 
 app.use(cors({ origin: corsOrigin, credentials: true }))
+app.options(/.*/, cors({ origin: corsOrigin, credentials: true }))
 app.use(express.json({ limit: '512kb' }))
 
 function log(roomId: string, message: string): void {
