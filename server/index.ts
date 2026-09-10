@@ -117,7 +117,15 @@ function schedulePhaseTimer(state: MultiplayerGameState): void {
       emitState(capture)
       return
     }
-    if (current.phase === 'battle-number') {
+    if (current.phase === 'expansion-between') {
+      emitState(store.completeCapturePause(current.roomId))
+      return
+    }
+    if (['battle-approach', 'battle-review', 'battle-result'].includes(current.phase)) {
+      emitState(store.advanceBattle(current.roomId))
+      return
+    }
+    if (current.phase === 'battle-number' || current.phase === 'battle-warmup') {
       const next = store.finishAnswering(current.roomId)
       log(next.roomId, `Битва ${next.battleRound}: числовые ответы закрыты`)
       emitState(next)

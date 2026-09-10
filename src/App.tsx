@@ -1357,7 +1357,7 @@ function OnlineGameView({ state, socket, viewerPlayerId }: { state: MultiplayerG
   const questionKey = `${state.round}:${state.battleRound}:${state.currentQuestion?.id}`
   const pending = useRef<string | null>(null)
   const [submitted, setSubmitted] = useState<string | null>(null)
-  const isParticipant = Boolean(viewerPlayerId && (state.phase === 'expansion' || (state.phase === 'battle-number' && [state.activePlayerId, state.selectedAttack?.ownerId].includes(viewerPlayerId))))
+  const isParticipant = Boolean(viewerPlayerId && (state.phase === 'expansion' || (['battle-number', 'battle-warmup'].includes(state.phase) && [state.activePlayerId, state.selectedAttack?.ownerId].includes(viewerPlayerId))))
   const answered = submitted === questionKey || Boolean(viewerPlayerId && state.answerTimes[viewerPlayerId] !== undefined)
   const canAnswer = isParticipant && !answered && remainingMs > 0
   const sendAnswer = (answer: number) => {
@@ -1378,7 +1378,7 @@ function OnlineGameView({ state, socket, viewerPlayerId }: { state: MultiplayerG
 
   return <motion.section className="online-game-view" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
     <div className="online-topline">
-      <strong>{state.phase === 'battle-select' ? 'Битва' : state.phase === 'battle-number' ? 'Числовая дуэль' : 'Завоевание'}</strong>
+      <strong>{state.phase.startsWith('battle-') && state.phase !== 'battle-number' ? 'Битва' : state.phase === 'battle-number' ? 'Числовая дуэль' : 'Завоевание'}</strong>
       <span>{active ? `Ход: ${active.name}` : state.phase === 'expansion' ? `Раунд ${state.round} · отвечают все` : state.phase === 'results' ? 'Матч завершён' : 'Итоги вопроса'}</span>
     </div>
     <div className="online-score-row">
@@ -1388,8 +1388,8 @@ function OnlineGameView({ state, socket, viewerPlayerId }: { state: MultiplayerG
       </article>)}
     </div>
     <OnlineArenaGrid state={state} viewerPlayerId={viewerPlayerId} onChoose={chooseHex} />
-    {state.currentQuestion && state.currentQuestion.type !== 'numeric' && state.phase === 'expansion' ? <section className="panel online-question-panel">
-      <p className="kicker">Онлайн · общий вопрос · {state.currentQuestion.category}</p>
+    {state.currentQuestion && state.currentQuestion.type !== 'numeric' && ['expansion', 'battle-warmup'].includes(state.phase) ? <section className="panel online-question-panel">
+      <p className="kicker">{state.phase === 'battle-warmup' ? 'Битва · выбор ответа' : 'Онлайн · общий вопрос'} · {state.currentQuestion.category}</p>
       <h2>{state.currentQuestion.prompt}</h2>
       <TimerRing remainingMs={remainingMs} totalMs={QUIZ_TIME_MS} />
       <div className="options">
@@ -1397,10 +1397,13 @@ function OnlineGameView({ state, socket, viewerPlayerId }: { state: MultiplayerG
           <span className="opt-key">{['А', 'Б', 'В', 'Г'][index]}</span>{option}
         </motion.button>)}
       </div>
-      <p className="hint">{answered ? 'Ответ принят. Ждём остальных игроков.' : 'Выбери один ответ. Изменить его после отправки нельзя.'}</p>
+      <p className="hint">{!isParticipant ? 'Отвечают нападающий и защитник. Ты наблюдаешь за дуэлью.' : answered ? 'Ответ принят. Ждём остальных игроков.' : 'Выбери один ответ. Изменить его после отправки нельзя.'}</p>
     </section> : null}
     {state.currentQuestion?.type === 'numeric' && state.phase === 'battle-number' ? <OnlineNumberPanel key={questionKey} disabled={!canAnswer} state={state} remainingMs={remainingMs} onAnswer={(answer) => sendAnswer(answer)} /> : null}
-    {state.phase === 'expansion-review' && state.roundResult ? <OnlineRoundResults state={state} /> : null}
+    {['expansion-review', 'battle-review'].includes(state.phase) && state.roundResult ? <OnlineRoundResults state={state} /> : null}
+    {state.phase === 'battle-approach' ? <p className="map-instruction">{active?.name} отправляется в атаку</p> : null}
+    {state.phase === 'battle-result' ? <p className="map-instruction">{state.roundResult?.battleWinnerId === state.activePlayerId ? `${active?.name} захватывает соту!` : 'Атака отбита — территория остаётся защитнику'}</p> : null}
+    {state.phase === 'expansion-between' ? <p className="map-instruction">Территории заняты · следующий этап через 2 секунды</p> : null}
     {state.phase === 'expansion-capture' ? <p className="map-instruction">{active ? `${active.name} выбирает территорию` : 'Ожидание хода'}</p> : null}
     {state.phase === 'battle-select' ? <p className="map-instruction">{active ? `${active.name} выбирает цель атаки` : 'Ожидание атаки'}</p> : null}
     {notice ? <p className="online-action-notice">{notice}</p> : null}
@@ -1419,7 +1422,7 @@ function OnlineRoundResults({ state }: { state: MultiplayerGameState }) {
         <span>{option}</span>
       </motion.div>)}
     </div> : null}
-    <p className="hint">К захвату допущены: {state.roundResult?.correctPlayerIds.map((id) => state.players.find((player) => player.id === id)?.name ?? id).join(', ') || 'никто'}</p>
+    <p className="hint">{state.phase === 'battle-review' ? 'Верно ответили: ' : 'К захвату допущены: '}{state.roundResult?.correctPlayerIds.map((id) => state.players.find((player) => player.id === id)?.name ?? id).join(', ') || 'никто'}</p>
   </motion.section>
 }
 

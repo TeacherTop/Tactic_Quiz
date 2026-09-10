@@ -1260,3 +1260,16 @@ h1,h2,h3 {
   .online-game-view .opt-key { height:26px; flex-basis:26px; font-size:14px; }
   .online-game-view .hint { font-size:11px; }
 }
+.online-svg-arena .arena-cell-fill { transition:fill .6s ease, stroke .2s ease; }
+.online-warrior { filter:drop-shadow(0 2px 1px #30261960); }
+@media(prefers-reduced-motion:reduce) {
+  .online-svg-arena .arena-cell-fill { transition:none; }
+}
+.online-svg-arena .arena-cell-fill.is-battle-won { animation:online-capture-color 1s ease both; }
+@keyframes online-capture-color {
+  0%,20% { fill:var(--capture-from); }
+  100% { fill:var(--capture-to); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .online-svg-arena .arena-cell-fill.is-battle-won { animation:none; }
+}

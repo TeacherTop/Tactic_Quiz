@@ -123,7 +123,7 @@ function finishRoom(room: MultiplayerGameState): void {
 }
 
 function expectedAnswerers(room: MultiplayerGameState): string[] {
-  if (room.phase !== 'battle-number') return playerIds(room)
+  if (!['battle-number', 'battle-warmup'].includes(room.phase)) return playerIds(room)
   return [room.activePlayerId, room.selectedAttack?.ownerId].filter((id): id is string => Boolean(id))
 }
 
@@ -286,8 +286,8 @@ export class GameRoomStore {
     if (room.status !== 'playing' || !room.timerEndsAt || Date.now() > room.timerEndsAt) {
       throw new Error('Время ответа истекло')
     }
-    if (!['expansion', 'battle-number'].includes(room.phase) || !expectedAnswerers(room).includes(playerId)) throw new Error('Сейчас вы не можете отвечать')
-    if (!Number.isFinite(answer) || (room.phase === 'expansion' && (!Number.isInteger(answer) || answer < 0 || answer >= (room.currentQuestion?.options.length ?? 0)))) throw new Error('Некорректный ответ')
+    if (!['expansion', 'battle-warmup', 'battle-number'].includes(room.phase) || !expectedAnswerers(room).includes(playerId)) throw new Error('Сейчас вы не можете отвечать')
+    if (!Number.isFinite(answer) || (room.phase !== 'battle-number' && (!Number.isInteger(answer) || answer < 0 || answer >= (room.currentQuestion?.options.length ?? 0)))) throw new Error('Некорректный ответ')
     if (room.answers[playerId] !== undefined) return room
     room.answers[playerId] = answer
     room.answerTimes[playerId] = Date.now()
@@ -303,6 +303,7 @@ export class GameRoomStore {
   finishAnswering(roomId: string): MultiplayerGameState {
     const room = this.requireRoom(roomId)
     if (room.phase === 'expansion') return this.finishExpansionQuestion(room)
+    if (room.phase === 'battle-warmup') return this.finishBattleWarmup(room)
     if (room.phase === 'battle-number') return this.finishBattleNumber(room)
     return room
   }
@@ -319,7 +320,12 @@ export class GameRoomStore {
     cell.ownerId = playerId
     room.scores[playerId] = (room.scores[playerId] ?? 0) + SCORE_VALUES.capture
     room.turnQueue.shift()
-    this.advanceExpansionCapture(room)
+    if (room.turnQueue.length === 0 || room.arena.every(cell => cell.ownerId)) {
+      room.phase = 'expansion-between'
+      room.activePlayerId = null
+      room.availableHexes = []
+      room.timerEndsAt = Date.now() + 2000
+    } else this.advanceExpansionCapture(room)
     room.updatedAt = Date.now()
     void this.persist(room)
     return room
@@ -331,16 +337,18 @@ export class GameRoomStore {
     if (room.activePlayerId !== playerId) throw new Error('Сейчас ход другого игрока')
     const target = attackTargets(room.arena, playerId).find((cell) => cell.row === row && cell.col === col)
     if (!target) throw new Error('Эту соту нельзя атаковать')
-    const question = pickNumericQuestion(room.usedQuestionIds ?? [])
-    room.selectedAttack = target
-    room.phase = 'battle-number'
-    room.currentQuestion = { id: question.id, category: 'Числовая дуэль', type: 'numeric', prompt: question.prompt, options: [], unit: question.unit }
-    room.usedQuestionIds = [...(room.usedQuestionIds ?? []), question.id]
-    this.questionAnswers.set(room.roomId, question.answer)
+    const index = pickQuestionIndex(room.usedQuestionIds, room.settings.categories)
+    const question = publicQuestion(QUESTIONS[index], index)
+    room.selectedAttack = { ...target }
+    room.phase = 'battle-approach'
+    room.availableHexes = []
+    room.currentQuestion = question.publicQuestion
+    room.usedQuestionIds.push(String(index))
+    this.questionAnswers.set(room.roomId, question.correctOption)
     room.answers = {}
     room.answerTimes = {}
     room.roundResult = null
-    room.timerEndsAt = Date.now() + ANSWER_MS
+    room.timerEndsAt = Date.now() + 1000
     room.updatedAt = Date.now()
     void this.persist(room)
     return room
@@ -409,6 +417,16 @@ export class GameRoomStore {
   beginCapture(roomId: string): MultiplayerGameState {
     const room = this.requireRoom(roomId)
     if (room.phase !== 'expansion-review') return room
+    this.advanceExpansionCapture(room)
+    room.updatedAt = Date.now()
+    void this.persist(room)
+    return room
+  }
+
+  completeCapturePause(roomId: string): MultiplayerGameState {
+    const room = this.requireRoom(roomId)
+    if (room.phase !== 'expansion-between' || (room.timerEndsAt !== null && Date.now() < room.timerEndsAt)) return room
+    room.timerEndsAt = null
     this.advanceExpansionCapture(room)
     room.updatedAt = Date.now()
     void this.persist(room)
@@ -495,6 +513,71 @@ export class GameRoomStore {
       }
     }
     room.roundResult = { correctPlayerIds: [], numericWinnerId: winner, exactBonusPlayerIds }
+    return this.resolveBattle(room, winner)
+  }
+
+  private finishBattleWarmup(room: MultiplayerGameState): MultiplayerGameState {
+    const correct = this.questionAnswers.get(room.roomId)
+    const correctPlayerIds = expectedAnswerers(room).filter(id => room.answers[id] === correct)
+    for (const id of expectedAnswerers(room)) {
+      const stat = room.mcStats[id] ?? { correct: 0, total: 0 }
+      room.mcStats[id] = { correct: stat.correct + Number(correctPlayerIds.includes(id)), total: stat.total + 1 }
+      if (correctPlayerIds.includes(id)) room.scores[id] += SCORE_VALUES.mcCorrect
+    }
+    room.roundResult = { correctOption: correct, correctPlayerIds, exactBonusPlayerIds: [] }
+    room.phase = 'battle-review'
+    room.timerEndsAt = Date.now() + 2000
+    room.updatedAt = Date.now()
+    void this.persist(room)
+    return room
+  }
+
+  private resolveBattle(room: MultiplayerGameState, winner?: string): MultiplayerGameState {
+    room.roundResult = { ...room.roundResult!, battleWinnerId: winner }
+    room.phase = 'battle-result'
+    room.timerEndsAt = Date.now() + 2500
+    room.updatedAt = Date.now()
+    void this.persist(room)
+    return room
+  }
+
+  advanceBattle(roomId: string): MultiplayerGameState {
+    const room = this.requireRoom(roomId)
+    if (!room.timerEndsAt || Date.now() < room.timerEndsAt) return room
+    if (room.phase === 'battle-approach') {
+      room.phase = 'battle-warmup'
+      room.timerEndsAt = Date.now() + ANSWER_MS
+    } else if (room.phase === 'battle-review') {
+      const attacker = room.activePlayerId!
+      const defender = room.selectedAttack!.ownerId!
+      const correctIds = room.roundResult!.correctPlayerIds
+      if (correctIds.includes(attacker) && correctIds.includes(defender)) {
+        const question = pickNumericQuestion(room.usedQuestionIds)
+        room.currentQuestion = { id: question.id, category: 'Числовая дуэль', type: 'numeric', prompt: question.prompt, options: [], unit: question.unit }
+        room.usedQuestionIds.push(question.id)
+        this.questionAnswers.set(room.roomId, question.answer)
+        room.phase = 'battle-number'
+        room.answers = {}
+        room.answerTimes = {}
+        room.roundResult = null
+        room.timerEndsAt = Date.now() + ANSWER_MS
+      } else {
+        const winner = correctIds.includes(attacker) ? attacker : defender
+        if (winner === attacker) {
+          room.arena.find(cell => cell.row === room.selectedAttack!.row && cell.col === room.selectedAttack!.col)!.ownerId = attacker
+          room.scores[attacker] += SCORE_VALUES.capture
+          room.scores[defender] += SCORE_VALUES.lostTerritory
+        } else room.scores[defender] += SCORE_VALUES.hold
+        return this.resolveBattle(room, winner)
+      }
+    } else if (room.phase === 'battle-result') return this.nextBattle(room)
+    room.updatedAt = Date.now()
+    void this.persist(room)
+    return room
+  }
+
+  private nextBattle(room: MultiplayerGameState): MultiplayerGameState {
+    const attacker = room.activePlayerId!
     room.battleRound += 1
     const maxBattleRounds = playerIds(room).length === 2 ? 8 : MAX_BATTLE_ROUNDS
     if (room.battleRound >= maxBattleRounds) {

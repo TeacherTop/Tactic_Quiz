@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { GameRoomStore } from './gameRoomStore'
 import type { TelegramUser } from '../shared/multiplayer'
 
@@ -12,6 +12,18 @@ vi.mock('node:fs', async () => {
     readFileSync: (path: string, encoding: BufferEncoding) => String(path).endsWith('my_game_question1.json') ? fixture : actual.readFileSync(path, encoding),
   } }
 })
+
+afterEach(() => vi.useRealTimers())
+
+function enterNumeric(store: GameRoomStore, room: import('../shared/multiplayer').MultiplayerGameState) {
+  vi.setSystemTime(room.timerEndsAt!)
+  store.advanceBattle(room.roomId)
+  const correct = (store as unknown as { questionAnswers: Map<string, number> }).questionAnswers.get(room.roomId)!
+  const ids = [room.activePlayerId!, room.selectedAttack!.ownerId!]
+  ids.forEach(id => store.submitAnswer(room.roomId, id, correct))
+  vi.setSystemTime(room.timerEndsAt!)
+  store.advanceBattle(room.roomId)
+}
 
 function user(id: number): TelegramUser {
   return { id, first_name: `Player ${id}` }
@@ -141,14 +153,18 @@ describe('GameRoomStore', () => {
       { row: 1, col: 0, ownerId: defender },
     ]
     const battle = store.chooseAttack(room.roomId, attacker, 1, 0)
+    enterNumeric(store, room)
     const correct = (store as unknown as { questionAnswers: Map<string, number> }).questionAnswers.get(room.roomId) ?? 0
     vi.setSystemTime(100)
     store.submitAnswer(room.roomId, attacker, correct)
     vi.setSystemTime(200)
     const resolved = store.submitAnswer(room.roomId, defender, correct + 1)
-    expect(resolved.scores[attacker]).toBe(40)
-    expect(resolved.scores[defender]).toBe(-20)
+    expect(resolved.scores[attacker]).toBe(50)
+    expect(resolved.scores[defender]).toBe(-10)
     expect(resolved.arena.find((cell) => cell.row === 1 && cell.col === 0)?.ownerId).toBe(attacker)
+    expect(battle.phase).toBe('battle-result')
+    vi.setSystemTime(room.timerEndsAt!)
+    store.advanceBattle(room.roomId)
     expect(battle.phase).toBe('results')
     vi.useRealTimers()
   })
@@ -179,6 +195,7 @@ describe('GameRoomStore', () => {
   })
 
   it('rotates attacks and excludes the third player from a duel', () => {
+    vi.useFakeTimers()
     const store = new GameRoomStore()
     const { state: room } = store.createRoom(user(1))
     const guest = store.joinRoom(room.roomCode, user(2), 's2')
@@ -188,15 +205,19 @@ describe('GameRoomStore', () => {
     room.activePlayerId = room.hostPlayerId
     room.arena = [{ row: 0, col: 0, ownerId: room.hostPlayerId }, { row: 1, col: 0, ownerId: guest.playerId }]
     store.chooseAttack(room.roomId, room.hostPlayerId, 1, 0)
+    enterNumeric(store, room)
     expect(() => store.submitAnswer(room.roomId, spectator.playerId, 1)).toThrow()
     store.submitAnswer(room.roomId, guest.playerId, 1)
     store.finishAnswering(room.roomId)
+    vi.setSystemTime(room.timerEndsAt!)
+    store.advanceBattle(room.roomId)
     expect(room.activePlayerId).toBe(guest.playerId)
   })
 
 })
 
 it.each([2, 3] as const)('completes a full match with %i friends', count => {
+  vi.useFakeTimers()
   const store = new GameRoomStore()
   const { state: room } = store.createRoom(user(51))
   for (let i = 1; i < count; i++) store.joinRoom(room.roomCode, user(51 + i), `full-${i}`)
@@ -208,10 +229,19 @@ it.each([2, 3] as const)('completes a full match with %i friends', count => {
     if (room.phase === 'expansion') {
       for (const player of room.players) store.submitAnswer(room.roomId, player.id, correct)
     } else if (room.phase === 'expansion-review') store.beginCapture(room.roomId)
-    else if (room.phase === 'expansion-capture' || room.phase === 'battle-select') {
+    else if (room.phase === 'expansion-between') {
+      vi.advanceTimersByTime(2000)
+      store.completeCapturePause(room.roomId)
+    } else if (room.phase === 'expansion-capture' || room.phase === 'battle-select') {
       const [row, col] = room.availableHexes[0].split(':').map(Number)
       if (room.phase === 'battle-select') store.chooseAttack(room.roomId, room.activePlayerId!, row, col)
       else store.selectHex(room.roomId, room.activePlayerId!, row, col)
+    } else if (['battle-approach', 'battle-review', 'battle-result'].includes(room.phase)) {
+      vi.setSystemTime(room.timerEndsAt!)
+      store.advanceBattle(room.roomId)
+    } else if (room.phase === 'battle-warmup') {
+      const ids = [room.activePlayerId!, room.selectedAttack!.ownerId!]
+      ids.forEach(id => store.submitAnswer(room.roomId, id, correct))
     } else if (room.phase === 'battle-number') {
       const attacker = room.activePlayerId!
       const defender = room.selectedAttack!.ownerId!
@@ -223,4 +253,47 @@ it.each([2, 3] as const)('completes a full match with %i friends', count => {
   expect(room.battleRound).toBe(count === 2 ? 8 : 9)
   expect(room.arena.every(cell => cell.ownerId)).toBe(true)
   expect(Object.values(room.scores).every(Number.isFinite)).toBe(true)
+  vi.useRealTimers()
+})
+
+it.each([
+  [true, false, 'a'], [false, true, 'b'], [false, false, 'b'], [null, null, 'b'], [true, true, 'numeric'],
+] as const)('resolves battle choices: attacker %s defender %s', (aCorrect,bCorrect,outcome) => {
+  vi.useFakeTimers()
+  const store = new GameRoomStore()
+  const {state:room} = store.createRoom(user(71))
+  const guest = store.joinRoom(room.roomCode,user(72),'battle-guest')
+  const third = store.joinRoom(room.roomCode,user(73),'battle-spectator')
+  store.startGame(room.roomId)
+  const attacker = room.hostPlayerId, defender = guest.playerId
+  room.arena = [{row:0,col:0,ownerId:attacker},{row:1,col:0,ownerId:defender}]
+  room.phase = 'battle-select'; room.activePlayerId = attacker
+  store.chooseAttack(room.roomId,attacker,1,0)
+  expect(room.phase).toBe('battle-approach')
+  expect(room.currentQuestion?.type).not.toBe('numeric')
+  expect(() => store.submitAnswer(room.roomId,attacker,0)).toThrow()
+  vi.setSystemTime(room.timerEndsAt!)
+  store.advanceBattle(room.roomId)
+  expect(room.phase).toBe('battle-warmup')
+  expect(() => store.submitAnswer(room.roomId,third.playerId,0)).toThrow()
+  const answer = (store as unknown as {questionAnswers:Map<string,number>}).questionAnswers.get(room.roomId)!
+  if(aCorrect !== null) store.submitAnswer(room.roomId,attacker,aCorrect ? answer : (answer+1)%4)
+  if(bCorrect !== null) store.submitAnswer(room.roomId,defender,bCorrect ? answer : (answer+1)%4)
+  store.finishAnswering(room.roomId)
+  expect(room.phase).toBe('battle-review')
+  vi.setSystemTime(room.timerEndsAt!)
+  store.advanceBattle(room.roomId)
+  if(outcome === 'numeric') {
+    expect(room.phase).toBe('battle-number')
+    expect(room.currentQuestion?.type).toBe('numeric')
+    expect(room.answers).toEqual({})
+    expect(room.timerEndsAt! - Date.now()).toBe(20000)
+  } else {
+    expect(room.phase).toBe('battle-result')
+    expect(room.roundResult?.battleWinnerId).toBe(outcome === 'a' ? attacker : defender)
+    expect(room.arena[1].ownerId).toBe(outcome === 'a' ? attacker : defender)
+    // Keep the original defender for the result animation after a capture.
+    expect(room.selectedAttack?.ownerId).toBe(defender)
+    expect(room.timerEndsAt! - Date.now()).toBe(2500)
+  }
 })

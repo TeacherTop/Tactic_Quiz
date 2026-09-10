@@ -1,6 +1,6 @@
 export type MultiplayerPlayerStatus = 'connected' | 'disconnected' | 'bot'
 export type MultiplayerRoomStatus = 'waiting' | 'playing' | 'finished'
-export type MultiplayerPhase = 'lobby' | 'expansion' | 'expansion-review' | 'expansion-capture' | 'battle-select' | 'battle-number' | 'results'
+export type MultiplayerPhase = 'lobby' | 'expansion' | 'expansion-review' | 'expansion-capture' | 'expansion-between' | 'battle-select' | 'battle-approach' | 'battle-warmup' | 'battle-review' | 'battle-result' | 'battle-number' | 'results'
 export type MultiplayerPlayerId = string
 
 export type MultiplayerRoomSettings = {
@@ -74,6 +74,7 @@ export type MultiplayerGameState = {
   availableHexes: string[]
   selectedAttack: MultiplayerHex | null
   roundResult: {
+    battleWinnerId?: MultiplayerPlayerId
     correctOption?: number
     correctPlayerIds: MultiplayerPlayerId[]
     numericWinnerId?: MultiplayerPlayerId
