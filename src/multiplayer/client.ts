@@ -8,6 +8,9 @@ function multiplayerFetchError(error: unknown): Error {
   if (error instanceof TypeError && /fetch/i.test(error.message)) {
     return new Error(`Не удалось подключиться к серверу комнат (${API_URL}). Проверь, что multiplayer API запущен и доступен с этого устройства.`)
   }
+  if (error instanceof Error && error.message === 'Telegram initData hash is missing') {
+    return new Error('Открой игру через Telegram Mini App. В обычном браузере Telegram не передаёт initData, поэтому комнаты недоступны.')
+  }
   return error instanceof Error ? error : new Error('Ошибка мультиплеера')
 }
 export type MultiplayerSocket = Socket<ServerToClientEvents, ClientToServerEvents>
