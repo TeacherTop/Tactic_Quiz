@@ -1,3 +1,4 @@
+import { numericDuel } from '../shared/battleRules'
 import crypto from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -26,13 +27,14 @@ const SCORE_VALUES = {
   hold: 5,
 } as const
 const QUESTION_BANK_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../question_bank')
-const QUESTIONS = [QUESTION_BANK_DIR, path.join(QUESTION_BANK_DIR, 'question_text')]
+const BANK = [QUESTION_BANK_DIR, path.join(QUESTION_BANK_DIR, 'question_text')]
   .flatMap(directory => (fs.existsSync(directory) ? fs.readdirSync(directory) : [])
     .filter(file => file.endsWith('.json'))
     .sort((left, right) => questionBankFileNumber(left) - questionBankFileNumber(right) || left.localeCompare(right))
     .flatMap(file => JSON.parse(fs.readFileSync(path.join(directory, file), 'utf8')) as StoredQuestion[]))
-  .filter(question => question.type === 'multiple' || question.type === 'boolean')
-const NUMERIC_QUESTIONS = [
+
+const QUESTIONS = BANK.filter(question => question.type === 'multiple' || question.type === 'boolean')
+const FALLBACK_NUMERIC_QUESTIONS = [
   { id: 'numeric-cube', prompt: 'Сколько граней у куба?', answer: 6, unit: '' },
   { id: 'numeric-piano', prompt: 'Сколько клавиш у стандартного фортепиано?', answer: 88, unit: '' },
   { id: 'numeric-chess-board', prompt: 'Сколько клеток на стандартной шахматной доске?', answer: 64, unit: '' },
@@ -44,9 +46,11 @@ const NUMERIC_QUESTIONS = [
   { id: 'numeric-periodic-table', prompt: 'Сколько химических элементов официально входит в современную периодическую таблицу?', answer: 118, unit: '' },
   { id: 'numeric-bones', prompt: 'Сколько костей в скелете взрослого человека?', answer: 206, unit: '' },
 ] as const
+const numericBank = (BANK as unknown as {type:string; id:string; question:string; correct_answer:number}[]).filter(question => question.type === 'numeric').map(question => ({id:question.id, prompt:question.question, answer:Number(question.correct_answer), unit:''}))
+const NUMERIC_QUESTIONS = numericBank.length ? numericBank : FALLBACK_NUMERIC_QUESTIONS
 const DIRECTIONS: [number, number][] = [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]]
 
-function createArena(radius: 1 | 2 = 2): MultiplayerHex[] {
+function createArena(radius: 1 | 2 | 3 = 2): MultiplayerHex[] {
   const cells: MultiplayerHex[] = []
   for (let row = -radius; row <= radius; row += 1) {
     for (let col = -radius; col <= radius; col += 1) {
@@ -61,7 +65,7 @@ function cellKey(row: number, col: number): string {
   return `${row}:${col}`
 }
 
-function getNeighbors(row: number, col: number, radius: 1 | 2 = 2): [number, number][] {
+function getNeighbors(row: number, col: number, radius: 1 | 2 | 3 = 2): [number, number][] {
   return DIRECTIONS
     .map(([rowOffset, colOffset]) => [row + rowOffset, col + colOffset] as [number, number])
     .filter(([neighborRow, neighborCol]) => Math.abs(neighborRow) <= radius
@@ -81,8 +85,8 @@ function blankMcStats(room: MultiplayerGameState): Record<string, { correct: num
   return Object.fromEntries(playerIds(room).map((id) => [id, { correct: 0, total: 0 }]))
 }
 
-function arenaRadiusFromCells(arena: MultiplayerHex[]): 1 | 2 {
-  return arena.length <= 7 ? 1 : 2
+function arenaRadiusFromCells(arena: MultiplayerHex[]): 1 | 2 | 3 {
+  return arena.length <= 7 ? 1 : arena.length <= 19 ? 2 : 3
 }
 
 function availableCells(arena: MultiplayerHex[], playerId: string): string[] {
@@ -100,6 +104,7 @@ function availableCells(arena: MultiplayerHex[], playerId: string): string[] {
 }
 
 function attackTargets(arena: MultiplayerHex[], playerId: string): MultiplayerHex[] {
+  if (!arena.some(cell => cell.ownerId === playerId)) return arena.filter(cell => cell.ownerId && cell.ownerId !== playerId)
   const targets = new Set<string>()
   for (const cell of arena.filter((candidate) => candidate.ownerId === playerId)) {
     for (const [row, col] of getNeighbors(cell.row, cell.col, arenaRadiusFromCells(arena))) {
@@ -257,7 +262,7 @@ export class GameRoomStore {
     if (room.hostPlayerId !== playerId) throw new Error('Настройки может менять только создатель комнаты')
     if (room.status !== 'waiting') throw new Error('Настройки можно менять только до старта')
     const maxPlayers = settings.maxPlayers === 2 ? 2 : 3
-    const arenaRadius = settings.arenaRadius === 1 ? 1 : 2
+    const arenaRadius = settings.arenaRadius === 1 ? 1 : settings.arenaRadius === 3 ? 3 : 2
     const categories = [...new Set(settings.categories.map((category) => category.trim()).filter(Boolean))]
     if (categories.length > 0 && !categories.some((category) => QUESTIONS.some((question) => question.category === category))) {
       throw new Error('В выбранных категориях нет вопросов')
@@ -492,12 +497,23 @@ export class GameRoomStore {
     const attacker = room.activePlayerId
     const defender = room.selectedAttack.ownerId
     const correct = this.questionAnswers.get(room.roomId)
-    const ranked = [attacker, defender]
-      .map((id) => ({ id, answer: Number(room.answers[id]), distance: Math.abs(Number(room.answers[id]) - Number(correct)), at: room.answerTimes[id] ?? Number.POSITIVE_INFINITY }))
-      .filter((row) => Number.isFinite(row.answer))
-      .sort((left, right) => left.distance - right.distance || left.at - right.at)
-    const winner = ranked[0]?.id
-    const exactBonusPlayerIds = ranked.filter((row) => row.distance === 0).map((row) => row.id)
+    const result = numericDuel(typeof room.answers[attacker] === 'number' ? room.answers[attacker] as number : null, typeof room.answers[defender] === 'number' ? room.answers[defender] as number : null, Number(correct))
+    const exactBonusPlayerIds = [result.attackerExact ? attacker : null, result.defenderExact ? defender : null].filter((id): id is string => id !== null)
+    if (result.replay) {
+      for (const id of exactBonusPlayerIds) room.scores[id] += SCORE_VALUES.numericExactBonus
+      const question = pickNumericQuestion([room.currentQuestion!.id])
+      room.currentQuestion = { id: question.id, category: 'Оба ответили точно · новая дуэль', type: 'numeric', prompt: question.prompt, options: [], unit: question.unit }
+      room.usedQuestionIds.push(question.id)
+      this.questionAnswers.set(room.roomId, question.answer)
+      room.answers = {}
+      room.answerTimes = {}
+      room.roundResult = null
+      room.timerEndsAt = Date.now() + ANSWER_MS
+      room.updatedAt = Date.now()
+      void this.persist(room)
+      return room
+    }
+    const winner = result.winner === 'attacker' ? attacker : result.winner === 'defender' ? defender : undefined
     if (winner) {
       room.scores[winner] = (room.scores[winner] ?? 0) + SCORE_VALUES.numericWin
       for (const id of exactBonusPlayerIds) room.scores[id] = (room.scores[id] ?? 0) + SCORE_VALUES.numericExactBonus
@@ -512,6 +528,7 @@ export class GameRoomStore {
         room.scores[defender] = (room.scores[defender] ?? 0) + SCORE_VALUES.hold
       }
     }
+    if (!winner) room.scores[defender] += SCORE_VALUES.hold
     room.roundResult = { correctPlayerIds: [], numericWinnerId: winner, exactBonusPlayerIds }
     return this.resolveBattle(room, winner)
   }

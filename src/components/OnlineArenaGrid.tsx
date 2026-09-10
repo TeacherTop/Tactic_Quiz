@@ -26,7 +26,7 @@ function cellKey(row: number, col: number): string {
   return `${row}:${col}`
 }
 
-export function OnlineArenaGrid({ state, onChoose, viewerPlayerId }: { viewerPlayerId: string | null; state: MultiplayerGameState; onChoose: (row: number, col: number) => void }) {
+export function OnlineArenaGrid({ state, onChoose, viewerPlayerId }: { viewerPlayerId: string | null; state: Pick<MultiplayerGameState, 'arena' | 'players' | 'availableHexes' | 'activePlayerId' | 'selectedAttack' | 'phase' | 'roundResult' | 'battleRound'>; onChoose: (row: number, col: number) => void }) {
   const reducedMotion = useReducedMotion()
   const available = new Set(state.availableHexes)
   const ownerById = new Map(state.players.map((player) => [player.id, player]))
@@ -72,10 +72,10 @@ export function OnlineArenaGrid({ state, onChoose, viewerPlayerId }: { viewerPla
         </motion.g>
       })}
       {target && active ? <motion.g
-        key={`attacker-${state.battleRound}`}
+        key={`attacker-${state.battleRound}-${state.phase === 'battle-result' ? 'result' : 'attack'}`}
         className="online-warrior"
         aria-label={`Воин: ${active.name}${lost ? ', атака отбита' : ''}`}
-        initial={{ x: originCenter[0], y: originCenter[1] - 12, opacity: 1 }}
+        initial={{ x: state.phase === 'battle-result' ? targetCenter[0] : originCenter[0], y: (state.phase === 'battle-result' ? targetCenter[1] : originCenter[1]) - 12, opacity: 1 }}
         animate={{ x: targetCenter[0], y: reducedMotion ? targetCenter[1] - 12 : state.phase === 'battle-approach' ? [originCenter[1] - 12, Math.min(originCenter[1], targetCenter[1]) - 65, targetCenter[1] - 12] : targetCenter[1] - 12, opacity: lost ? 0 : 1, scale: lost ? 0.25 : 1 }}
         transition={{ duration: reducedMotion ? 0 : 0.8, opacity: { delay: reducedMotion ? 0 : 0.5, duration: 0.6 } }}
         style={{ pointerEvents: 'none' }}

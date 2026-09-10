@@ -165,7 +165,7 @@ describe('GameRoomStore', () => {
     expect(battle.phase).toBe('battle-result')
     vi.setSystemTime(room.timerEndsAt!)
     store.advanceBattle(room.roomId)
-    expect(battle.phase).toBe('results')
+    expect(battle.phase).toBe('battle-select')
     vi.useRealTimers()
   })
   it('rejects outsiders, invalid choices and answers during review', () => {
@@ -296,4 +296,33 @@ it.each([
     expect(room.selectedAttack?.ownerId).toBe(defender)
     expect(room.timerEndsAt! - Date.now()).toBe(2500)
   }
+})
+
+it('starts a fresh numeric question when both opponents are exact, regardless of speed', () => {
+ vi.useFakeTimers()
+ const store = new GameRoomStore()
+ const {state:room} = store.createRoom(user(81))
+ const guest = store.joinRoom(room.roomCode,user(82),'exact-guest')
+ store.startGame(room.roomId)
+ const attacker = room.hostPlayerId
+ room.arena = [{row:0,col:0,ownerId:attacker},{row:1,col:0,ownerId:guest.playerId}]
+ room.phase = 'battle-select'; room.activePlayerId = attacker
+ store.chooseAttack(room.roomId,attacker,1,0)
+ enterNumeric(store,room)
+ const firstId = room.currentQuestion!.id
+ const before = {...room.scores}
+ const answer = (store as unknown as {questionAnswers:Map<string,number>}).questionAnswers.get(room.roomId)!
+ store.submitAnswer(room.roomId,attacker,answer)
+ vi.advanceTimersByTime(1000)
+ store.submitAnswer(room.roomId,guest.playerId,answer)
+ expect(room.phase).toBe('battle-number')
+ expect(room.currentQuestion!.id).not.toBe(firstId)
+ expect(room.battleRound).toBe(0)
+ expect(room.selectedAttack?.ownerId).toBe(guest.playerId)
+ expect(room.arena[1].ownerId).toBe(guest.playerId)
+ expect(room.answers).toEqual({})
+ expect(room.answerTimes).toEqual({})
+ expect(room.scores[attacker]).toBe(before[attacker]+5)
+ expect(room.scores[guest.playerId]).toBe(before[guest.playerId]+5)
+ expect(room.timerEndsAt! - Date.now()).toBe(20000)
 })

@@ -5,7 +5,7 @@ export type MultiplayerPlayerId = string
 
 export type MultiplayerRoomSettings = {
   maxPlayers: 2 | 3
-  arenaRadius: 1 | 2
+  arenaRadius: 1 | 2 | 3
   categories: string[]
 }
 
