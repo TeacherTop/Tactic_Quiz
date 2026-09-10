@@ -1,6 +1,6 @@
 import { io, type Socket } from 'socket.io-client'
 import type { ClientToServerEvents, CreateRoomResponse, JoinRoomResponse, MultiplayerGameState, ServerToClientEvents, SocketAck } from '../../shared/multiplayer'
-import { getTelegramInitData } from '../telegram'
+import { getTelegramAuthDebug, getTelegramInitData } from '../telegram'
 
 const API_URL = import.meta.env.VITE_MULTIPLAYER_API_URL ?? 'http://127.0.0.1:4000'
 
@@ -9,7 +9,7 @@ function multiplayerFetchError(error: unknown): Error {
     return new Error(`Не удалось подключиться к серверу комнат (${API_URL}). Проверь, что multiplayer API запущен и доступен с этого устройства.`)
   }
   if (error instanceof Error && error.message === 'Telegram initData hash is missing') {
-    return new Error('Открой игру через Telegram Mini App. В обычном браузере Telegram не передаёт initData, поэтому комнаты недоступны.')
+    return new Error(`Telegram не передал подпись для входа в комнату. ${getTelegramAuthDebug()}. Открой игру именно через кнопку Mini App у бота, а не через обычную ссылку внутри Telegram.`)
   }
   return error instanceof Error ? error : new Error('Ошибка мультиплеера')
 }

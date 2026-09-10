@@ -1,20 +1,41 @@
 import WebApp from '@twa-dev/sdk'
 
+type TelegramWindow = Window & {
+  Telegram?: {
+    WebApp?: {
+      initData?: string
+      initDataUnsafe?: { start_param?: string }
+      ready?: () => void
+      expand?: () => void
+      viewportStableHeight?: number
+      viewportHeight?: number
+      themeParams?: Record<string, string | undefined>
+      onEvent?: (event: 'viewportChanged', callback: () => void) => void
+      openTelegramLink?: (url: string) => void
+    }
+  }
+}
+
+function nativeWebApp() {
+  return (window as TelegramWindow).Telegram?.WebApp
+}
+
 export function initializeTelegramWebApp(): void {
   try {
-    WebApp.ready()
-    WebApp.expand()
+    const native = nativeWebApp()
+    ;(native?.ready ?? WebApp.ready)?.()
+    ;(native?.expand ?? WebApp.expand)?.()
     const root = document.documentElement
     root.classList.add('is-telegram-webapp')
 
     const syncViewport = () => {
-      const viewportHeight = WebApp.viewportStableHeight || WebApp.viewportHeight || window.innerHeight
+      const viewportHeight = native?.viewportStableHeight || WebApp.viewportStableHeight || native?.viewportHeight || WebApp.viewportHeight || window.innerHeight
       root.style.setProperty('--tg-viewport-height', `${Math.max(1, viewportHeight)}px`)
     }
 
     syncViewport()
-    WebApp.onEvent('viewportChanged', syncViewport)
-    const theme = WebApp.themeParams
+    ;(native?.onEvent ?? WebApp.onEvent)?.('viewportChanged', syncViewport)
+    const theme = native?.themeParams ?? WebApp.themeParams
     if (theme.bg_color && theme.bg_color.toLowerCase() !== '#ffffff') {
       root.style.setProperty('--bg', theme.bg_color)
       root.style.setProperty('--paper', theme.secondary_bg_color ?? '#2b251f')
@@ -31,17 +52,23 @@ export function initializeTelegramWebApp(): void {
 
 export function getTelegramInitData(): string {
   try {
-    return WebApp.initData || ''
+    return nativeWebApp()?.initData || WebApp.initData || ''
   } catch {
-    return ''
+    return nativeWebApp()?.initData || ''
   }
+}
+
+export function getTelegramAuthDebug(): string {
+  const native = nativeWebApp()
+  const initData = getTelegramInitData()
+  return `Telegram WebApp: ${native ? 'yes' : 'no'}, initData: ${initData.length} chars, hash: ${new URLSearchParams(initData).has('hash') ? 'yes' : 'no'}`
 }
 
 export function getTelegramStartParam(): string {
   try {
-    return WebApp.initDataUnsafe.start_param || ''
+    return nativeWebApp()?.initDataUnsafe?.start_param || WebApp.initDataUnsafe.start_param || ''
   } catch {
-    return ''
+    return nativeWebApp()?.initDataUnsafe?.start_param || ''
   }
 }
 
@@ -64,7 +91,9 @@ export function shareTelegramInvite(roomCode: string): void {
   const inviteUrl = getTelegramInviteUrl(roomCode)
   const text = encodeURIComponent(`Присоединяйся к комнате Strategi Quiz: ${roomCode}`)
   try {
-    WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(inviteUrl)}&text=${text}`)
+    const native = nativeWebApp()
+    if (native?.openTelegramLink) native.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(inviteUrl)}&text=${text}`)
+    else WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(inviteUrl)}&text=${text}`)
   } catch {
     navigator.clipboard?.writeText(inviteUrl).catch(() => undefined)
   }
