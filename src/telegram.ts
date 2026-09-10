@@ -64,6 +64,39 @@ export function getTelegramAuthDebug(): string {
   return `Telegram WebApp: ${native ? 'yes' : 'no'}, initData: ${initData.length} chars, hash: ${new URLSearchParams(initData).has('hash') ? 'yes' : 'no'}`
 }
 
+
+const BROWSER_GUEST_STORAGE_KEY = 'strategi-quiz-browser-guest-v1'
+
+export type BrowserGuestIdentity = {
+  id: string
+  name: string
+}
+
+export function getBrowserGuestIdentity(): BrowserGuestIdentity {
+  try {
+    const existing = localStorage.getItem(BROWSER_GUEST_STORAGE_KEY)
+    if (existing) {
+      const parsed = JSON.parse(existing) as BrowserGuestIdentity
+      if (parsed.id && parsed.name) return parsed
+    }
+  } catch {
+    // Local storage may be unavailable in restricted webviews.
+  }
+  const random = Math.floor(1000 + Math.random() * 9000)
+  const identity = { id: crypto.randomUUID(), name: `Гость ${random}` }
+  try {
+    localStorage.setItem(BROWSER_GUEST_STORAGE_KEY, JSON.stringify(identity))
+  } catch {
+    // Keep the in-memory identity for this request.
+  }
+  return identity
+}
+
+export function getMultiplayerAuthPayload() {
+  const initData = getTelegramInitData()
+  return initData ? { initData } : { initData: '', browserGuest: getBrowserGuestIdentity() }
+}
+
 export function getTelegramStartParam(): string {
   try {
     return nativeWebApp()?.initDataUnsafe?.start_param || WebApp.initDataUnsafe.start_param || ''

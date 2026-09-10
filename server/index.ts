@@ -6,7 +6,7 @@ import { Server } from 'socket.io'
 import { z } from 'zod'
 import { GameRoomStore } from './gameRoomStore'
 import { verifyTelegramInitData } from './telegramAuth'
-import type { ClientToServerEvents, MultiplayerGameState, ServerToClientEvents, TelegramUser } from '../shared/multiplayer'
+import type { BrowserGuest, ClientToServerEvents, MultiplayerGameState, ServerToClientEvents, TelegramUser } from '../shared/multiplayer'
 
 const PORT = Number(process.env.PORT ?? 4000)
 const CLIENT_ORIGINS = (process.env.CLIENT_ORIGIN ?? 'http://127.0.0.1:5173')
@@ -16,7 +16,8 @@ const CLIENT_ORIGINS = (process.env.CLIENT_ORIGIN ?? 'http://127.0.0.1:5173')
 const DEV_AUTH = process.env.NODE_ENV === 'test' || process.env.ALLOW_DEV_AUTH === 'true'
 const RATE_LIMIT_PER_SECOND = 10
 
-const initDataSchema = z.object({ initData: z.string().default('') })
+const browserGuestSchema = z.object({ id: z.string().min(8).max(80), name: z.string().min(1).max(32) }).optional()
+const initDataSchema = z.object({ initData: z.string().default(''), browserGuest: browserGuestSchema })
 const joinRoomSchema = initDataSchema.extend({ roomCode: z.string().regex(/^\d{6}$/) })
 type SocketData = {
   roomId?: string
@@ -67,11 +68,21 @@ function devUser(seed = 'Игрок'): TelegramUser {
   }
 }
 
-function authenticate(initData: string, devSeed?: unknown): TelegramUser {
-  if (DEV_AUTH && !initData) return devUser(typeof devSeed === 'string' ? devSeed : process.env.DEV_TELEGRAM_NAME)
-  const token = process.env.TELEGRAM_BOT_TOKEN
-  if (!token) throw new Error('TELEGRAM_BOT_TOKEN is not configured')
-  return verifyTelegramInitData(initData, token).user
+function browserGuestUser(guest: BrowserGuest): TelegramUser {
+  let hash = 0
+  for (const char of guest.id) hash = (hash * 31 + char.charCodeAt(0)) >>> 0
+  return { id: -Math.max(1, hash), first_name: guest.name.trim().slice(0, 24) || 'Гость' }
+}
+
+function authenticate(initData: string, devSeed?: unknown, browserGuest?: BrowserGuest): TelegramUser {
+  if (initData) {
+    const token = process.env.TELEGRAM_BOT_TOKEN
+    if (!token) throw new Error('TELEGRAM_BOT_TOKEN is not configured')
+    return verifyTelegramInitData(initData, token).user
+  }
+  if (browserGuest) return browserGuestUser(browserGuest)
+  if (DEV_AUTH) return devUser(typeof devSeed === 'string' ? devSeed : process.env.DEV_TELEGRAM_NAME)
+  throw new Error('Telegram initData hash is missing')
 }
 
 function publicState(state: MultiplayerGameState): MultiplayerGameState {
@@ -159,8 +170,8 @@ app.get('/health', (_req, res) => {
 app.post('/api/create-room', (req, res) => {
   try {
     if (!store.hasQuestions()) throw new Error('Банк вопросов для игры с друзьями ещё не подключён.')
-    const { initData } = initDataSchema.parse(req.body)
-    const created = store.createRoom(authenticate(initData, req.query.devUser))
+    const { initData, browserGuest } = initDataSchema.parse(req.body)
+    const created = store.createRoom(authenticate(initData, req.query.devUser, browserGuest))
     log(created.state.roomId, `Создана комната ${created.state.roomCode}`)
     res.json({ roomCode: created.state.roomCode, playerId: created.playerId, state: publicState(created.state) })
   } catch (error) {
@@ -170,8 +181,8 @@ app.post('/api/create-room', (req, res) => {
 
 app.post('/api/join-room', (req, res) => {
   try {
-    const { roomCode, initData } = joinRoomSchema.parse(req.body)
-    const joined = store.joinRoom(roomCode, authenticate(initData, req.query.devUser), null)
+    const { roomCode, initData, browserGuest } = joinRoomSchema.parse(req.body)
+    const joined = store.joinRoom(roomCode, authenticate(initData, req.query.devUser, browserGuest), null)
     log(joined.state.roomId, `Игрок вошел по коду ${roomCode}`)
     res.json({ playerId: joined.playerId, state: publicState(joined.state) })
   } catch (error) {
@@ -185,8 +196,8 @@ io.on('connection', (socket) => {
   socket.on('join_room', (payload, ack) => {
     acknowledge(ack, () => {
       rateLimit(socket.id)
-      const { roomCode, initData } = joinRoomSchema.parse(payload)
-      const user = authenticate(initData, socket.handshake.query.devUser)
+      const { roomCode, initData, browserGuest } = joinRoomSchema.parse(payload)
+      const user = authenticate(initData, socket.handshake.query.devUser, browserGuest)
       const joined = store.joinRoom(roomCode, user, socket.id)
       socket.data.roomId = joined.state.roomId
       socket.data.playerId = joined.playerId

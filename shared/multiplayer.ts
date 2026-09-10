@@ -17,6 +17,16 @@ export type TelegramUser = {
   photo_url?: string
 }
 
+export type BrowserGuest = {
+  id: string
+  name: string
+}
+
+export type MultiplayerAuthPayload = {
+  initData: string
+  browserGuest?: BrowserGuest
+}
+
 export type PublicQuestion = {
   id: string
   category: string
@@ -76,7 +86,7 @@ export type MultiplayerGameState = {
 }
 
 export type ClientToServerEvents = {
-  join_room: (payload: { roomCode: string; initData: string }, ack: SocketAck<JoinRoomResponse>) => void
+  join_room: (payload: MultiplayerAuthPayload & { roomCode: string }, ack: SocketAck<JoinRoomResponse>) => void
   room_settings_updated: (payload: { roomId: string; settings: MultiplayerRoomSettings }, ack: SocketAck<void>) => void
   game_started: (payload: { roomId: string }, ack: SocketAck<void>) => void
   answer_submitted: (payload: { roomId: string; answer: number | number[] }, ack: SocketAck<void>) => void
