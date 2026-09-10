@@ -11,17 +11,12 @@ const DIRECTIONS: [number, number][] = [
   [0, 1],
 ]
 
-export function createArena(radius = ARENA_RADIUS, players: PlayerId[] = ['you', 'alex', 'marina']): ArenaCell[] {
+export function createArena(radius = ARENA_RADIUS, _players: PlayerId[] = ['you', 'alex', 'marina']): ArenaCell[] {
   const cells: ArenaCell[] = []
   for (let row = -radius; row <= radius; row += 1) {
     for (let col = -radius; col <= radius; col += 1) {
       if (Math.abs(row + col) > radius) continue
-
-      let owner: PlayerId | null = null
-      if (row === 0 && col === -radius) owner = 'you'
-      if (row === -radius && col === radius) owner = 'alex'
-      if (row === radius && col === 0) owner = 'marina'
-      cells.push({ row, col, owner: owner && players.includes(owner) ? owner : null })
+      cells.push({ row, col, owner: null })
     }
   }
   return cells

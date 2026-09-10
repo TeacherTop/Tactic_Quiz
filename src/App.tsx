@@ -14,7 +14,6 @@ import {
   createArena,
   getAttackTargets,
   getAvailableCells,
-  isExpansionBreakthrough,
 } from './game/arena'
 import { botAnswerDelayMs, botNumericGuess, botQuizChoice } from './game/bots'
 import { emptyScores, pickRandom, QUIZ_TIME_MS, SCORE_VALUES } from './game/engine'
@@ -968,8 +967,6 @@ export default function App() {
       {paused ? <PauseOverlay onResume={togglePause} /> : null}
       {timeline.resultVisible && completedRoundResult?.kind === 'quiz' ? <RoundResultOverlay result={completedRoundResult} humanCorrect={match?.expansionAnswers.you === completedRoundResult.question.correctIndex} /> : null}
       {roundResult ? <RoundResultOverlay result={roundResult} /> : null}
-      {phase === 'expansion-capture' && match?.pendingCapture === 'you' ? <section className="panel"><p className="kicker">Завоевание · правильный ответ</p><h2>{isExpansionBreakthrough(match.arena, 'you') ? 'Прорыв блокады: выбери любую свободную соту' : 'Выбери свободную соседнюю соту'}</h2><p className="hint">{isExpansionBreakthrough(match.arena, 'you') ? 'Твоя территория окружена. Десант можно высадить в любой свободной точке карты.' : 'Только соседняя свободная сота доступна для расширения.'}</p></section> : null}
-      {phase === 'expansion-capture' && match?.pendingCapture && match.pendingCapture !== 'you' ? <section className="panel"><p className="kicker">Завоевание · правильный ответ</p><h2>{PLAYER_BY_ID[match.pendingCapture].name} выбирает территорию</h2><p className="hint">Следи за картой: захваты ботов теперь проходят по очереди.</p></section> : null}
       {phase === 'expansion-between' ? <section className="panel transition-panel"><p className="kicker">Переход</p><h2>Следующий раунд скоро начнется</h2><PauseProgress progress={timeline.progress} /><div className="transition-dots" aria-hidden="true"><i /><i /><i /></div></section> : null}
       {phase === 'battle-select' && match && match.attacker === 'you' ? <p className="map-instruction">Выбери подсвеченную вражескую соту на карте</p> : null}
       {phase === 'results' && match ? <FinalResultsScreen players={match.playerIds.map((playerId) => ({
@@ -989,9 +986,10 @@ export default function App() {
 function MapActionBanner({ phase, match }: { phase: Phase; match: Match }) {
   if (phase === 'expansion-capture' && match.pendingCapture) {
     const player = PLAYER_BY_ID[match.pendingCapture]
+    const pendingPlayerHasTerritory = match.arena.some((cell) => cell.owner === match.pendingCapture)
     return <div className="map-action-banner" style={{ ['--accent' as string]: player.accent }}>
       <span>{player.name.slice(0, 1)}</span>
-      <div><strong>{match.pendingCapture === 'you' ? 'Твой захват' : `${player.name} выбирает соту`}</strong><small>{match.pendingCapture === 'you' ? 'Выбери подсвеченную соседнюю территорию' : 'Граница карты меняется прямо сейчас'}</small></div>
+      <div><strong>{match.pendingCapture === 'you' ? 'Твой захват' : `${player.name} выбирает соту`}</strong><small>{match.pendingCapture === 'you' ? pendingPlayerHasTerritory ? 'Выбери подсвеченную соседнюю территорию' : 'Поставь первую соту в любом месте карты' : pendingPlayerHasTerritory ? 'Граница карты меняется прямо сейчас' : 'Игрок ставит первую соту на пустой карте'}</small></div>
     </div>
   }
   if (phase === 'battle-select') {

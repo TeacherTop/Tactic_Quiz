@@ -2,7 +2,7 @@ import type { Guess, NumericRanking, PlayerId } from './types'
 import { PLAYERS } from './players'
 
 export const NUMERIC_TIME_MS = 25_000
-export const QUIZ_TIME_MS = 25_000
+export const QUIZ_TIME_MS = 20_000
 export const QUIZ_PER_MATCH = 5
 
 export const SCORE_VALUES = {

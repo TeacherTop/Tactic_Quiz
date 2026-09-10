@@ -17,13 +17,13 @@ describe('Bot settings and arena rules', () => {
   })
   it('uses distinctly increasing skills', () => { expect(BOT_SKILL.easy).toBeLessThan(BOT_SKILL.medium); expect(BOT_SKILL.medium).toBeLessThan(BOT_SKILL.hard) })
   for (const size of [7, 19, 37] as const) for (const opponents of [1, 2] as const) {
-    it(`creates ${size} cells with ${opponents} opponent(s), with no off-board moves`, () => {
+    it(`creates ${size} empty cells with ${opponents} opponent(s), with no off-board moves`, () => {
       const settings = { ...defaultBotSettings([]), arenaSize: size, opponents }
       const players = botPlayerIds(settings)
       let cells = createArena(arenaRadius(size), players)
       expect(cells).toHaveLength(size)
-      expect(cells.filter(c => c.owner)).toHaveLength(opponents + 1)
-      expect(new Set(cells.filter(c => c.owner).map(c => c.owner))).toEqual(new Set(players))
+      expect(cells.filter(c => c.owner)).toHaveLength(0)
+      for (const player of players) expect(getAvailableCells(cells, player).size).toBe(size)
       // Fill every cell, ensuring frontier expansion works on small and large boards.
       let turn = 0
       while (cells.some(c => !c.owner)) {
@@ -50,9 +50,9 @@ describe('Bot settings and arena rules', () => {
     expect(questionsForTopics(questions, [])).toEqual([])
   })
   it('lets an eliminated player attack any opponent territory', () => {
-    const cells = createArena(1, ['you', 'alex']).map(cell => ({
+    const cells = createArena(1, ['you', 'alex']).map((cell, index) => ({
       ...cell,
-      owner: cell.owner === 'you' ? 'alex' : cell.owner,
+      owner: index < 3 ? 'alex' as const : null,
     }))
     expect(cells.filter(cell => (cell.owner as PlayerId | null) === 'you')).toHaveLength(0)
     const targets = getAttackTargets(cells, 'you')
