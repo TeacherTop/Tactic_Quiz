@@ -3,7 +3,9 @@ export function numericDuel(attacker: number | null, defender: number | null, an
   const a = attacker !== null && Number.isFinite(attacker) ? Math.abs(attacker - answer) : Infinity
   const d = defender !== null && Number.isFinite(defender) ? Math.abs(defender - answer) : Infinity
   return {
-    replay: a === 0 && d === 0,
+    // Equal answers are a tie at any distance. Keep the same territory and
+    // ask another numeric question until one player is closer.
+    replay: a === d,
     winner: a < d ? 'attacker' as const : d < a ? 'defender' as const : null,
     attackerExact: a === 0,
     defenderExact: d === 0,

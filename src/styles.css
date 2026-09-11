@@ -778,9 +778,16 @@ button {
   background:#e6ddc8;
   border-color:#b7a477;
 }
-.podium-medal {
-  font-size:30px;
+.podium-rank {
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  color:var(--accent);
+  border-bottom:1px solid color-mix(in srgb,var(--accent) 35%,transparent);
+  padding-bottom:8px;
 }
+.podium-rank span { font:800 30px/1 var(--serif); letter-spacing:-.06em; }
+.podium-rank small { font:800 9px/1 var(--sans); letter-spacing:.16em; }
 .podium-player {
   display:flex;
   justify-content:center;
@@ -1295,7 +1302,7 @@ button {
     grid-column:2;
     font-size:10px;
   }
-  .podium-territory {
+.podium-territory {
     grid-column:2/4;
     font-size:10px;
   }

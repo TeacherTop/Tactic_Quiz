@@ -2,21 +2,22 @@ vi.mock('@twa-dev/sdk', () => ({default:{}}))
 import {expect,it,vi} from 'vitest'
 import {reducer} from '../App'
 import {defaultBotSettings} from './botSettings'
-it('replays an exact numeric tie with the same territory and attack in bot mode', () => {
+it.each([[42, 42], [41, 43]])('replays a tied numeric duel (%i, %i) in bot mode', (attackerAnswer, defenderAnswer) => {
  let state = reducer({phase:'home',match:null,completedRoundResult:null},{type:'start',settings:defaultBotSettings([]),questions:[{id:'test',prompt:'Test',options:['a','b','c','d'],correctIndex:0}]})
  const match = state.match!
  match.attacker = 'you'; match.defender = 'alex'; match.target = {row:1,col:0,owner:'alex'}
  match.numericQuestion = {id:'n1',prompt:'One',answer:42}
  match.numericQuestions = [{id:'n1',prompt:'One',answer:42},{id:'n2',prompt:'Two',answer:50}]
- match.numericAnswers = {you:42,alex:42,marina:null}
+ match.numericAnswers = {you:attackerAnswer,alex:defenderAnswer,marina:null}
  state = reducer({...state,phase:'battle-number'},{type:'finish-number'})
  expect(state.phase).toBe('battle-number')
  expect(state.match?.numericQuestion.id).toBe('n2')
  expect(state.match?.numericAnswers).toEqual({you:null,alex:null,marina:null})
  expect(state.match?.battleRound).toBe(match.battleRound)
  expect(state.match?.arena).toEqual(match.arena)
- expect(state.match?.scores.you).toBe(match.scores.you + 5)
- expect(state.match?.scores.alex).toBe(match.scores.alex + 5)
+ const bonus = attackerAnswer === 42 ? 5 : 0
+ expect(state.match?.scores.you).toBe(match.scores.you + bonus)
+ expect(state.match?.scores.alex).toBe(match.scores.alex + bonus)
 })
 
 it.each([1,2] as const)('finishes the bot match with %i opponents using regular captures and battle animations', opponents => {

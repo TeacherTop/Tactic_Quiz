@@ -603,7 +603,8 @@ function resolveNumber(match: Match): State {
     const alternatives = match.numericQuestions.filter(question => question.id !== match.numericQuestion.id)
     const pool = alternatives.length ? alternatives : LOCALIZED_NUMERIC_QUESTIONS.filter(question => question.id !== match.numericQuestion.id)
     const numericQuestion = pickUnusedNumericQuestion(match.usedNumericQuestionIds, pool.length ? pool : match.numericQuestions)
-    return { phase: 'battle-number', match: { ...match, numericQuestion, numericAnswers: blankAnswers(), usedNumericQuestionIds: [...match.usedNumericQuestionIds, numericQuestion.id], scores: addScores(match.scores, { [match.attacker]: SCORE_VALUES.numericExactBonus, [match.defender]: SCORE_VALUES.numericExactBonus }) }, completedRoundResult }
+    const tieBonus = decision.attackerExact && decision.defenderExact ? SCORE_VALUES.numericExactBonus : 0
+    return { phase: 'battle-number', match: { ...match, numericQuestion, numericAnswers: blankAnswers(), usedNumericQuestionIds: [...match.usedNumericQuestionIds, numericQuestion.id], scores: addScores(match.scores, { [match.attacker]: tieBonus, [match.defender]: tieBonus }) }, completedRoundResult }
   }
   let arena = match.arena
   let scores = { ...match.scores }
@@ -1148,16 +1149,17 @@ function FinalResultsScreen({ players, onMenu }: { players: FinalResultPlayer[];
     if (rightAccuracy !== leftAccuracy) return rightAccuracy - leftAccuracy
     return right.hexCount - left.hexCount
   })
-  const medals = ['🥇', '🥈', '🥉']
   return <motion.section className="final-results-screen" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
     <ConfettiBurst />
+    <p className="results-kicker">Матч завершён</p>
     <h2>РЕЗУЛЬТАТЫ МАТЧА</h2>
+    <p className="results-subtitle">Итоговый счёт, точность и контроль территории</p>
     <div className="winner-podium">
       {ordered.map((player, index) => {
         const accuracy = mcAccuracy(player)
         const reason = tieReason(player, ordered[index - 1])
         return <motion.article key={player.playerId} className={`podium-card place-${index + 1}`} style={{ ['--accent' as string]: player.color }} initial={{ opacity: 0, y: 30, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.5, delay: index * 0.2 }}>
-          <div className="podium-medal" aria-hidden="true">{medals[index]}</div>
+          <div className="podium-rank" aria-label={`${index + 1} место`}><span>{String(index + 1).padStart(2, '0')}</span><small>МЕСТО</small></div>
           <header className="podium-player">
             <span className="podium-avatar" aria-hidden="true">{player.name.slice(0, 1)}</span>
             <div>
@@ -1196,8 +1198,8 @@ function StatsScreen({ stats, onBack, onHistory }: { stats: PveStats; onBack: ()
     </section>
     <div className="stats-dashboard">
       <section className="stats-block stats-pve"><p className="stats-block-kicker">Активный режим · Игра с ботами</p><div className="stats-columns"><StatsColumn title="Дуэль · 1 бот" rows={[['Игр', String(stats.games)], ['Побед', String(stats.wins)], ['% правильных MC', mcAccuracy === null ? '0%' : `${mcAccuracy}%`]]} /><StatsColumn title="Троица · 2 бота" rows={[['1-е места', String(stats.wins)], ['Всего игр', String(stats.games)], ['Точность числовых', numericAccuracy === null ? '—' : `${numericAccuracy}%`]]} /></div></section>
-      <section className="stats-block stats-pvp"><p className="stats-block-kicker">Блок A · Рейтинговые игры (PvP)</p><div className="stats-columns"><StatsColumn title="Дуэль · 1v1" rows={[['Побед', '0'], ['Поражений', '0'], ['% правильных MC', '0%']]} /><StatsColumn title="Троица · 1v1v1" rows={[['1-е места', '0 🥇'], ['2-е места', '0 🥈'], ['3-е места', '0 🥉'], ['% правильных MC', '0%']]} /></div><p className="stats-empty-note">Рейтинговый режим пока не подключён</p></section>
-      <section className="stats-block stats-friends"><p className="stats-block-kicker">Блок C · Игра с друзьями</p><div className="stats-columns"><StatsColumn title="Дуэль · 1v1" rows={[['Побед', '0'], ['Поражений', '0'], ['% правильных MC', '0%']]} /><StatsColumn title="Троица · 1v1v1" rows={[['1-е места', '0 🥇'], ['2-е места', '0 🥈'], ['3-е места', '0 🥉'], ['% правильных MC', '0%']]} /></div><p className="stats-empty-note">Статистика игр с друзьями появится после первых завершённых матчей</p></section>
+      <section className="stats-block stats-pvp"><p className="stats-block-kicker">Раздел · Рейтинговые игры</p><div className="stats-columns"><StatsColumn title="Дуэль · 1v1" rows={[['Побед', '0'], ['Поражений', '0'], ['% правильных MC', '0%']]} /><StatsColumn title="Троица · 1v1v1" rows={[['1-е места', '0'], ['2-е места', '0'], ['3-е места', '0'], ['% правильных MC', '0%']]} /></div><p className="stats-empty-note">Рейтинговый режим пока не подключён</p></section>
+      <section className="stats-block stats-friends"><p className="stats-block-kicker">Раздел · Игра с друзьями</p><div className="stats-columns"><StatsColumn title="Дуэль · 1v1" rows={[['Побед', '0'], ['Поражений', '0'], ['% правильных MC', '0%']]} /><StatsColumn title="Троица · 1v1v1" rows={[['1-е места', '0'], ['2-е места', '0'], ['3-е места', '0'], ['% правильных MC', '0%']]} /></div><p className="stats-empty-note">Статистика игр с друзьями появится после первых завершённых матчей</p></section>
     </div>
     <p className="menu-version">Данные хранятся на этом устройстве · v1.0</p>
   </section>
@@ -1565,7 +1567,7 @@ function MenuScreen({
       <button type="button" className="wood-plaque plaque-light" onClick={onStart}><i className="mode-icon" aria-hidden="true">⬡</i><span>Битва умов<small>Захватывай территорию с ботами</small></span><b aria-hidden="true">↗</b></button>
       <button type="button" className="wood-plaque plaque-light" onClick={onFriends}><i className="mode-icon" aria-hidden="true">⌘</i><span>С друзьями<small>Собери свою компанию</small></span><b aria-hidden="true">↗</b></button>
     </div>
-    <button type="button" className="stats-link" onClick={onStats}>Моя статистика →</button>
+    <button type="button" className="stats-link" onClick={onStats}><span className="stats-link-icon" aria-hidden="true">↗</span><span><b>Моя статистика</b><small>Результаты, точность и история матчей</small></span><strong aria-hidden="true">→</strong></button>
     {notice ? <p className="menu-notice">{notice}</p> : null}
     <p className="menu-version">v1.0</p>
   </section>

@@ -326,3 +326,22 @@ it('starts a fresh numeric question when both opponents are exact, regardless of
  expect(room.scores[guest.playerId]).toBe(before[guest.playerId]+5)
  expect(room.timerEndsAt! - Date.now()).toBe(20000)
 })
+
+it('starts battle immediately after the final expansion capture in a duel', () => {
+  const store = new GameRoomStore()
+  const { state: room } = store.createRoom(user(91))
+  const guest = store.joinRoom(room.roomCode, user(92), 'last-cell')
+  store.startGame(room.roomId)
+  room.arena = room.arena.map((cell, index) => ({ ...cell, ownerId: index === 0 ? room.hostPlayerId : index === room.arena.length - 1 ? null : guest.playerId }))
+  room.phase = 'expansion-capture'
+  room.turnQueue = [room.hostPlayerId]
+  room.activePlayerId = room.hostPlayerId
+  room.availableHexes = [`${room.arena.at(-1)!.row}:${room.arena.at(-1)!.col}`]
+  const last = room.arena.at(-1)!
+  store.selectHex(room.roomId, room.hostPlayerId, last.row, last.col)
+  expect(room.phase).toBe('expansion-between')
+  room.timerEndsAt = Date.now() - 1
+  const next = store.completeCapturePause(room.roomId)
+  expect(next.phase).toBe('battle-select')
+  expect(next.arena.every(cell => cell.ownerId)).toBe(true)
+})
